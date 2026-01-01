@@ -1,5 +1,4 @@
 
-flake.lock
 .chezmoidata.local.yaml
 .env
 .env.*
