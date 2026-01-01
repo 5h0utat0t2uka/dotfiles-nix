@@ -1,0 +1,35 @@
+[user]
+  name = {{ .gitUserName }}
+  email = {{ .gitUserEmail }}
+
+[init]
+  defaultBranch = main
+
+[push]
+  autoSetupRemote = true
+
+[diff]
+  tool = difftastic
+  external = difft
+
+[difftool]
+  prompt = false
+
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+  difftool = true
+
+[ghq]
+  user = 5h0utat0t2uka
+  root = {{ .ghqRoot }}
+
+[ghq "https://github.com/you-ec"]
+  root = {{ .ghqRoot }}
+
+[ghq "https://github.com/witomteam"]
+  root = {{ .ghqRoot }}
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/

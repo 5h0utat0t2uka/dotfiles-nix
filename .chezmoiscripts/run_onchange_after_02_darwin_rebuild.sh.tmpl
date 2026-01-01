@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+
+# nixコマンドが見えない場合の保険
+if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
+
+REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+HOSTNAME="$(scutil --get LocalHostName 2>/dev/null || hostname -s)"
+
+# nix-darwin を flake 経由で実行（新ボリューム側でのみ実行する想定）
+nix run github:LnL7/nix-darwin -- switch --flake "$REPO_DIR#$HOSTNAME"
