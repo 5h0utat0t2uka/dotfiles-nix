@@ -1,0 +1,4 @@
+# ghostty
+# google-chrome
+# visual-studio-code
+# zed

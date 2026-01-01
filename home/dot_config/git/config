@@ -1,0 +1,22 @@
+[user]
+  name = shouta totsuka
+  email = 5h0utat0t2uka@gmail.com
+
+[init]
+  defaultBranch = main
+
+[push]
+  autoSetupRemote = true
+
+[ghq]
+  user = 5h0utat0t2uka
+  root = ~/Development/repositories
+
+[ghq "https://github.com/you-ec"]
+  root = ~/Development/repositories
+
+[ghq "https://github.com/witomteam"]
+  root = ~/Development/repositories
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/

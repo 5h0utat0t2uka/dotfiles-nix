@@ -1,15 +1,3 @@
-# ghq
-ghqRoot: ~/Development/repositories
-
-# git
-gitUserName: shouta totsuka
-gitUserEmail: 5h0utat0t2uka@gmail.com
-
-# system
-hostname: A3112
 username: shouta
+hostname: A3112
 system: aarch64-darwin
-
-# flags
-isWork: false
-isPrivate: true

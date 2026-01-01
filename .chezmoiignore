@@ -1,0 +1,8 @@
+README.md
+flake.nix
+nix-config/
+scripts/
+config/
+.gitignore
+.git/
+.DS_Store
