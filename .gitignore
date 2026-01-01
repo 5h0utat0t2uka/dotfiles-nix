@@ -1,4 +1,4 @@
-config/identity.nix
+
 flake.lock
 .chezmoidata.local.yaml
 .env
