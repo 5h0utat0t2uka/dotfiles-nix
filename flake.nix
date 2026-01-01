@@ -1,3 +1,4 @@
+# flake.nix
 {
   description = "dotfiles-nix";
 
@@ -15,29 +16,53 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, darwin, ... }:
-  let
-    identity = import ./config/identity.nix;
-    system = identity.system;
-    username = identity.username;
-  in {
-    homeConfigurations.${username} =　home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs { inherit system; };
-      modules = [ ./nix-config/darwin/home.nix ];
-    };
+  outputs = inputs@{ self, nixpkgs, home-manager, darwin, ... }:
+    let
+      # identity.nix は Git 管理している前提（flake evaluation で必須）
+      identity = import ./config/identity.nix;
 
-    darwinConfigurations.default =　darwin.lib.darwinSystem {
-      inherit system;
-      modules = [
-        ./nix-config/darwin/default.nix
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.${username} =
-            import ./nix-config/darwin/home.nix;
-        }
-      ];
+      system = identity.system;
+      username = identity.username;
+      hostname = identity.hostname;
+
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
+    {
+      # --- Phase B: home-manager (CLI only) ---
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { inherit identity; };
+
+        modules = [
+          ./nix-config/darwin/home.nix
+        ];
+      };
+
+      # --- Phase C+: nix-darwin (optional / last) ---
+      # 推奨: hostname をキーにする（例: A3112）
+      darwinConfigurations.${hostname} = darwin.lib.darwinSystem {
+        inherit system;
+        specialArgs = { inherit identity; };
+
+        modules = [
+          ./nix-config/darwin/default.nix
+
+          home-manager.darwinModules.home-manager
+          {
+            nixpkgs = { inherit pkgs; };
+
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit identity; };
+            home-manager.users.${username} = import ./nix-config/darwin/home.nix;
+          }
+        ];
+      };
+
+      # 互換: 以前の default を使いたい場合
+      darwinConfigurations.default = self.darwinConfigurations.${hostname};
     };
-  };
 }

@@ -1,4 +1,4 @@
 [data]
-username = "{{ .username }}"
-hostname = "{{ .hostname }}"
-system = "{{ .system }}"
+username = "{{ .chezmoi.username }}"
+hostname = "{{ .chezmoi.hostname }}"
+system = "{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
