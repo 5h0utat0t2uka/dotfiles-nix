@@ -1,0 +1,25 @@
+[user]
+  name = {{ .git.name | quote }}
+  email = {{ .git.email | quote }}
+
+[core]
+  editor = vim
+
+[init]
+  defaultBranch = main
+
+[push]
+  autoSetupRemote = true
+
+[ghq]
+  user = {{ .ghq.user | quote }}
+  root = {{ .ghq.root | quote }}
+
+[ghq "https://github.com/you-ec"]
+  root = {{ .ghq.root | quote }}
+
+[ghq "https://github.com/witomteam"]
+  root = {{ .ghq.root | quote }}
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/

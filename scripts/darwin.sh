@@ -1,5 +1,8 @@
 #!/bin/sh
 set -eu
+. "$(dirname "$0")/common.sh"
+
+ensure_nix || { echo "nix not found"; exit 1; }
 
 if [ "${DOTFILES_NIX_ENABLE_DARWIN:-}" != "1" ]; then
   echo "nix-darwin disabled. Run with DOTFILES_NIX_ENABLE_DARWIN=1"

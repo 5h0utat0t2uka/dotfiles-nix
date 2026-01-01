@@ -1,5 +1,8 @@
 #!/bin/sh
 set -eu
+. "$(dirname "$0")/common.sh"
+
+ensure_nix || echo "nix not yet installed"
 
 REPO_DIR="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 BOOTSTRAP_CHEZMOI="$HOME/.local/bin/chezmoi"
