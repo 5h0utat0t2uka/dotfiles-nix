@@ -13,9 +13,9 @@
 
   outputs = { self, nixpkgs, darwin, home-manager, ... }:
     let
-      system = "aarch64-darwin";
-      username = "shouta";
-      hostname = "A3112";
+      system = "{{ .system }}";
+      username = "{{ .username }}";
+      hostname = "{{ .hostname }}";
     in
     {
       darwinConfigurations.${hostname} = darwin.lib.darwinSystem {
