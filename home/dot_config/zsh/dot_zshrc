@@ -1,3 +1,0 @@
-export PATH="$HOME/.nix-profile/bin:/opt/homebrew/bin:$HOME/.local/bin:$PATH"
-autoload -Uz compinit
-compinit
