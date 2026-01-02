@@ -19,8 +19,6 @@
     # bootstrap / dotfile 運用
     chezmoi
     just
-
-    # 開発用CLI（user層）
     git
     gh
     ghq
