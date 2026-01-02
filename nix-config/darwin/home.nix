@@ -34,6 +34,10 @@
     bat
     eza
     zoxide
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-completions
+    tree-sitter
     tree
     wget
     lazygit

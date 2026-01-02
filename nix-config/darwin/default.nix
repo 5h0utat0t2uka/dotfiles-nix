@@ -87,6 +87,7 @@ in
     # 管理対象のGUIアプリ, フォント一覧
     casks = [
       "ghostty"
+      "google-chrome"
       "karabiner-elements"
       "zed"
       "font-udev-gothic-nf"

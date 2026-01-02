@@ -16,7 +16,6 @@ mkdir -p "$SHELL_SESSIONS_DIR"
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
 
-
 # Homebrew検出とPATH設定
 BREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
 typeset -U path
@@ -24,7 +23,6 @@ path=(
   "$HOME/.local/bin"(N-/)
   $path
 )
-
 
 # 履歴関連とオプション
 HISTFILE="$CACHE_DIR/.zsh_history"
@@ -39,6 +37,34 @@ setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 setopt INTERACTIVE_COMMENTS
 setopt HIST_IGNORE_SPACE
+
+# Completions
+typeset -U fpath
+[[ -d "$BREW_PREFIX/share/zsh-completions" ]] && fpath=("$BREW_PREFIX/share/zsh-completions" $fpath)
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$CACHE_DIR/.zcompcache"
+autoload -Uz compinit
+
+dump="$CACHE_DIR/.zcompdump-${ZSH_VERSION}"
+if [[ -f "$dump.zwc" ]] && [[ "$dump.zwc" -nt "$dump" ]]; then
+  compinit -C -d "$dump"
+else
+  compinit -d "$dump"
+  [[ -f "$dump" ]] && zcompile "$dump"
+fi
+
+# zsh-autosuggestions
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=white'
+ZSH_HIGHLIGHT_STYLES[unknown-command]='fg=red,underline'
+ZSH_AUTOSUGGEST_STRATEGY=(history)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=2000
+[[ -r "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# zsh-syntax-highlighting
+if [[ -r "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
 
 # direnv
 if command -v direnv >/dev/null 2>&1; then
