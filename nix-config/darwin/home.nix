@@ -39,7 +39,6 @@ in
   # 重要: dotfile の実体は chezmoi が管理する前提なので HM では生成しない
   programs.zsh.enable = false;
   programs.git.enable = false;
-
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
@@ -76,4 +75,10 @@ in
     zsh-abbr
     zshPluginLinks
   ];
+  home.activation.ensureNbConfig = ''
+    mkdir -p "$HOME/.config/nb"
+    if [ ! -e "$HOME/.config/nb/.nbrc" ]; then
+      : > "$HOME/.config/nb/.nbrc"
+    fi
+  '';
 }

@@ -266,6 +266,32 @@ fzf_ghq() {
 zle -N fzf_ghq
 bindkey '^g' fzf_ghq
 
+fzf_nb() {
+  # ^+N でノート検索
+  setopt localoptions pipefail
+  zle -I
+
+  local selected
+  selected=$(
+    # ID（[数字]）で始まる行をすべて抽出
+    nb ls --no-color | grep -E "^\[[0-9]+\]" | \
+    FZF_DEFAULT_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt)" \
+    $(fzf_command) \
+    --query "$LBUFFER" \
+    --prompt="❯${NBSP}" \
+    --preview "echo {} | tr -d '[]' | awk '{print \$1}' | xargs nb show"
+  )
+
+  [[ -z "$selected" ]] && { zle -R; return 0; }
+
+  # ID抽出（[1] -> 1）
+  local note_id=$(echo "$selected" | tr -d '[]' | awk '{print $1}')
+  BUFFER="nb edit $note_id"
+  zle accept-line
+}
+zle -N fzf_nb
+bindkey '^n' fzf_nb
+
 chpwd() {
   [[ $PWD -ef $HOME ]] && return
   local pattern="/($(IFS='|'; echo "${IGNORE_DIRS[*]}"))"

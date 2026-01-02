@@ -43,7 +43,7 @@
 # resize-overlay-duration = 4s 200ms
 
 theme = nord
-# fullscreen = true
+fullscreen = true
 
 font-size = 14
 font-family = GeistMono Nerd Font Mono
