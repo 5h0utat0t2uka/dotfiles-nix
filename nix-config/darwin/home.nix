@@ -16,6 +16,7 @@
   programs.direnv.nix-direnv.enable = true;
 
   home.packages = with pkgs; [
+    nixd
     nil
     # bootstrap / dotfile 運用
     chezmoi
