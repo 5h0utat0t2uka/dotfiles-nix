@@ -42,7 +42,7 @@
           }
 
           # nix-darwin (system)
-          ./nix-config/darwin/default.nix
+          ./darwin/default.nix
 
           # home-manager を nix-darwin 経由で統合
           home-manager.darwinModules.home-manager
