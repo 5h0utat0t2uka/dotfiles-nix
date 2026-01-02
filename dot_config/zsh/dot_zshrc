@@ -42,7 +42,11 @@ autoload -Uz add-zsh-hook
 
 # Completions
 typeset -U fpath
-[[ -d "$BREW_PREFIX/share/zsh-completions" ]] && fpath=("$BREW_PREFIX/share/zsh-completions" $fpath)
+[[ -d "/etc/profiles/per-user/$USER/share/zsh/site-functions" ]] && fpath=(
+  "/etc/profiles/per-user/$USER/share/zsh/site-functions"
+  $fpath
+)
+# [[ -d "$BREW_PREFIX/share/zsh-completions" ]] && fpath=("$BREW_PREFIX/share/zsh-completions" $fpath)
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$CACHE_DIR/.zcompcache"
 autoload -Uz compinit
@@ -61,7 +65,9 @@ ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=white'
 ZSH_HIGHLIGHT_STYLES[unknown-command]='fg=red,underline'
 ZSH_AUTOSUGGEST_STRATEGY=(history)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=2000
-[[ -r "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
 
 # fzf
 typeset -a IGNORE_DIRS=(
@@ -132,14 +138,20 @@ alias lg='lazygit'
 # abbr
 export ABBR_USER_ABBREVIATIONS_FILE="$ZDOTDIR/abbreviations"
 ABBR_SET_EXPANSION_CURSOR=1
-[[ -r "$BREW_PREFIX/share/zsh-abbr/zsh-abbr.zsh" ]] && source "$BREW_PREFIX/share/zsh-abbr/zsh-abbr.zsh"
-abbr -S -qq gs="git status"
-abbr -S -qq ga="git add ."
-abbr -S -qq gc="git commit -m \"%\""
-abbr -S -qq gp="git push origin HEAD"
-# abbr -S -qq nrd="nr dev"
-# abbr -S -qq nrb="nr build"
-# abbr -S -qq nrs="nr start"
+
+if [[ -r "/etc/profiles/per-user/$USER/share/zsh/zsh-abbr/zsh-abbr.zsh" ]]; then
+  source "/etc/profiles/per-user/$USER/share/zsh/zsh-abbr/zsh-abbr.zsh"
+fi
+
+if typeset -f abbr >/dev/null 2>&1; then
+  abbr -S -qq gs="git status"
+  abbr -S -qq ga="git add ."
+  abbr -S -qq gc='git commit -m "%"'
+  abbr -S -qq gp="git push origin HEAD"
+  # abbr -S -qq nrd="nr dev"
+  # abbr -S -qq nrb="nr build"
+  # abbr -S -qq nrs="nr start"
+fi
 
 # function
 update_zo_opts() {
@@ -268,8 +280,8 @@ chpwd() {
 }
 
 # zsh-syntax-highlighting
-if [[ -r "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-  source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
 # .zshrc, p10kのコンパイル（次回起動時の高速化）
