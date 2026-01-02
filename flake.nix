@@ -18,7 +18,7 @@
   outputs =
     { self, nixpkgs, home-manager, darwin, ... }:
     let
-      identity = import ./config/identity.nix;
+      identity = import ./identity.nix;
 
       system = identity.system;
       username = identity.username;
