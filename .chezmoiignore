@@ -6,3 +6,10 @@ config/
 .gitignore
 .git/
 .DS_Store
+
+/flake.nix
+/flake.lock
+/nix-config/**
+/scripts/**
+/config/**
+/result
