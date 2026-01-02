@@ -1,17 +1,17 @@
 set dotenv-load := false
 
 check:
-  nix flake check ./nix-config
+  nix flake check {{ .just.flake }}
 
 build:
-  sudo darwin-rebuild switch --flake ./nix-config#A3112
+  sudo darwin-rebuild switch --flake {{ .just.flake }}#{{ .just.host }}
 
 only-update:
-  nix flake update ./nix-config
+  nix flake update {{ .just.flake }}
 
 full-update:
-  nix flake update ./nix-config
-  sudo darwin-rebuild switch --flake ./nix-config#A3112
+  nix flake update {{ .just.flake }}
+  sudo darwin-rebuild switch --flake {{ .just.flake }}#{{ .just.host }}
 
 gc:
   nix-collect-garbage -d
