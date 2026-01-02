@@ -12,7 +12,7 @@ export SHELL_SESSIONS_DIR="$XDG_CACHE_HOME/zsh/sessions"
 # nb
 export NBRC_PATH="$XDG_CONFIG_HOME/nb/.nbrc"
 
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ] && \
-   [ -n "${SSH_CONNECTION:-}" ] && [ "${SHLVL:-0}" -eq 1 ]; then
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
+# if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ] && \
+#    [ -n "${SSH_CONNECTION:-}" ] && [ "${SHLVL:-0}" -eq 1 ]; then
+#   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+# fi

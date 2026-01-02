@@ -10,8 +10,12 @@ in
   # nix-darwin 変更対応: homebrew 等の primary-user オプションの適用先
   system.primaryUser = username;
 
+  # Determinate Nix を使う前提
   nix.enable = false;
+
   nixpkgs.config.allowUnfree = true;
+
+  # Determinate で既に有効化済みであることが多いので、必要になったら明示
   # nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   users.users.${username} = {
@@ -21,10 +25,10 @@ in
 
   programs.zsh.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    git
-  ];
+  # Zenn 記事寄せ: system は最小にして、CLI ツール類は home-manager に寄せる
+  environment.systemPackages = [ ];
 
+  # Homebrew は cask のみ
   homebrew = {
     enable = true;
 
