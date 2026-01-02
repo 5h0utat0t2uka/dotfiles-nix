@@ -11,7 +11,13 @@
 # - home-manager は nix-darwin 経由で使用
 # - Homebrew は cask のみを管理
 
-{ config, pkgs, lib, identity, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  identity,
+  ...
+}:
 
 let
   username = identity.username;
@@ -34,8 +40,8 @@ in
 
   # Finder で隠しファイル（ドットファイル）を常に表示
   system.defaults.finder.AppleShowAllFiles = true;
-
-  # defaults 反映後に Finder を再起動
+  # Finder の既定表示をカラム表示にする
+  system.defaults.finder.FXPreferredViewStyle = "clmv";
   system.activationScripts.postActivation.text = lib.mkAfter ''
     /usr/bin/killall Finder >/dev/null 2>&1 || true
   '';
@@ -47,7 +53,7 @@ in
   # macOS 上のユーザー定義
   # dotfiles の中身は chezmoi が管理するため、ここでは最低限のみ
   users.users.${username} = {
-    home  = identity.homeDirectory;
+    home = identity.homeDirectory;
     shell = pkgs.zsh;
   };
 
