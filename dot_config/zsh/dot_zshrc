@@ -41,12 +41,15 @@ setopt HIST_IGNORE_SPACE
 autoload -Uz add-zsh-hook
 
 # Completions
+# typeset -U fpath
+# [[ -d "/etc/profiles/per-user/$USER/share/zsh/site-functions" ]] && fpath=(
+#   "/etc/profiles/per-user/$USER/share/zsh/site-functions"
+#   $fpath
+# )
 typeset -U fpath
-[[ -d "/etc/profiles/per-user/$USER/share/zsh/site-functions" ]] && fpath=(
-  "/etc/profiles/per-user/$USER/share/zsh/site-functions"
-  $fpath
-)
-# [[ -d "$BREW_PREFIX/share/zsh-completions" ]] && fpath=("$BREW_PREFIX/share/zsh-completions" $fpath)
+[[ -d "/etc/profiles/per-user/$USER/share/zsh/site-functions" ]] && fpath=("/etc/profiles/per-user/$USER/share/zsh/site-functions" $fpath)
+[[ -d "$BREW_PREFIX/share/zsh/site-functions" ]] && fpath=("$BREW_PREFIX/share/zsh/site-functions" $fpath)
+
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$CACHE_DIR/.zcompcache"
 autoload -Uz compinit
@@ -138,9 +141,8 @@ alias lg='lazygit'
 # abbr
 export ABBR_USER_ABBREVIATIONS_FILE="$ZDOTDIR/abbreviations"
 ABBR_SET_EXPANSION_CURSOR=1
-
-if [[ -r "/etc/profiles/per-user/$USER/share/zsh/zsh-abbr/zsh-abbr.zsh" ]]; then
-  source "/etc/profiles/per-user/$USER/share/zsh/zsh-abbr/zsh-abbr.zsh"
+if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh" ]]; then
+  source "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh"
 fi
 
 if typeset -f abbr >/dev/null 2>&1; then
@@ -279,11 +281,6 @@ chpwd() {
   command eza -al --color=never -o --time-style=long-iso -F always
 }
 
-# zsh-syntax-highlighting
-if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-  source "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
-
 # .zshrc, p10kのコンパイル（次回起動時の高速化）
 () {
   local zshrc="$ZDOTDIR/.zshrc"
@@ -300,4 +297,9 @@ fi
 # direnv
 if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
+fi
+
+# zsh-syntax-highlighting
+if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi

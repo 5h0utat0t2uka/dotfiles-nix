@@ -1,6 +1,31 @@
 # nix-config/darwin/home.nix
 { pkgs, identity, ... }:
 
+let
+  zshPluginLinks = pkgs.stdenvNoCC.mkDerivation {
+    name = "zsh-plugin-links";
+    dontUnpack = true;
+    installPhase = ''
+      mkdir -p "$out/share/zsh/plugins"
+
+      mkdir -p "$out/share/zsh/plugins/zsh-syntax-highlighting"
+      ln -sf \
+        ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+        "$out/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+      mkdir -p "$out/share/zsh/plugins/zsh-autosuggestions"
+      ln -sf \
+        ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+        "$out/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+      mkdir -p "$out/share/zsh/plugins/zsh-abbr"
+      ln -sf \
+        ${pkgs.zsh-abbr}/share/zsh/zsh-abbr/zsh-abbr.zsh \
+        "$out/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh"
+    '';
+  };
+in
+
 {
   home.username = identity.username;
   home.homeDirectory = identity.homeDirectory;
@@ -46,5 +71,6 @@
     zsh-autosuggestions
     zsh-completions
     zsh-abbr
+    zshPluginLinks
   ];
 }
