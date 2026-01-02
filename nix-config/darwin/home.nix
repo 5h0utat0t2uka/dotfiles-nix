@@ -18,32 +18,33 @@
   home.packages = with pkgs; [
     nixd
     nil
-    # bootstrap / dotfile 運用
-    chezmoi
-    just
+    bat
+    chezmoi # 初回curl経由で入れるので消す予定
+    delta
+    eza
+    fd
+    fzf
     git
     gh
     ghq
-    neovim
-    starship
-    delta
-    ripgrep
-    fd
-    fzf
-    jq
-    bat
-    eza
-    zoxide
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-    zsh-completions
-    tree-sitter
-    tree
-    wget
-    lazygit
     gnupg
+    just
+    jq
+    lazygit
+    neovim
+    nb
     pass
     passExtensions.pass-otp
     pinentry_mac
+    ripgrep
+    starship
+    zoxide
+    tree-sitter
+    tree
+    wget
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-completions
+    zsh-abbr
   ];
 }

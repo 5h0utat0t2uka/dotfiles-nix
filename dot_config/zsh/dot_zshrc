@@ -38,6 +38,8 @@ setopt PUSHD_IGNORE_DUPS
 setopt INTERACTIVE_COMMENTS
 setopt HIST_IGNORE_SPACE
 
+autoload -Uz add-zsh-hook
+
 # Completions
 typeset -U fpath
 [[ -d "$BREW_PREFIX/share/zsh-completions" ]] && fpath=("$BREW_PREFIX/share/zsh-completions" $fpath)
@@ -61,10 +63,227 @@ ZSH_AUTOSUGGEST_STRATEGY=(history)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=2000
 [[ -r "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
+# fzf
+typeset -a IGNORE_DIRS=(
+  .git node_modules vendor .venv venv
+  dist build .cache .next target .terraform
+)
+typeset -a IGNORE_FILES=(
+  .DS_Store "*.pyc" "*.swp" Thumbs.db
+  "*.log" "*.tmp" ".env*"
+)
+typeset -a IGNORE_PATTERNS=(
+  $IGNORE_DIRS
+  $IGNORE_FILES
+)
+typeset -a FZF_BASE_OPTS
+typeset -a FZF_FILE_OPTS
+typeset -g NBSP=$'\u00A0'
+typeset -g FZF_PREVIEW_SWITCH_COLS=120
+
+fzf_preview_window_opt() {
+  if (( COLUMNS < FZF_PREVIEW_SWITCH_COLS )); then
+    echo "--preview-window=down,50%,border-rounded"
+  else
+    echo "--preview-window=right,50%,border-rounded"
+  fi
+}
+
+# 共通オプションを配列として定義（重要：配列のまま維持）
+typeset -a FZF_BASE_OPTS=(
+  "--color=fg:#6b7994,bg:#2e3440,hl:#b48ead"
+  "--color=fg+:#d8dee9,bg+:#2e3440,hl+:#b48ead"
+  "--color=info:#8fbcbb,prompt:#8fbcbb,pointer:#8fbcbb"
+  "--color=marker:#8fbcbb,spinner:#5e81ac,header:#81a1c1"
+  "--color=border:#4c566a"
+  "--border=rounded"
+  "--info=default"
+  "--height=50%"
+  "--layout=reverse"
+  "--pointer=❯"
+  "--no-separator"
+  "--no-scrollbar"
+  "--prompt=❯${NBSP}"
+)
+typeset -a FZF_FILE_OPTS=(
+  "--preview"
+  "'bat --style=numbers,changes --color=always --paging=never {}'"
+)
+
+# zoxide
+typeset -a _ZO_ADDITIONAL_OPTS=(
+  "--no-sort"
+  "--exit-0"
+  "--select-1"
+  "--preview='eza -al --color=always --group-directories-first -T -L 2 -I \"${(j:|:)IGNORE_PATTERNS}\" -- {2..} 2>/dev/null | { IFS= read -r first_line; echo \"\$first_line\"; echo; cat; }'"
+  "--preview-window=wrap"
+)
+export _ZO_FZF_OPTS="${(j: :)FZF_BASE_OPTS} ${(j: :)_ZO_ADDITIONAL_OPTS}"
+export FZF_DEFAULT_OPTS="${(j: :)FZF_BASE_OPTS}"
+export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --exclude node_modules --type f'
+export FZF_ALT_C_COMMAND='fd --hidden --exclude .git --exclude node_modules --type d'
+
+# alias
+# alias vpn="$HOME/Development/scripts/vpn/vpn.sh"
+alias vim='nvim'
+alias ll='eza -alo --icons --time-style iso'
+alias lg='lazygit'
+
+# abbr
+export ABBR_USER_ABBREVIATIONS_FILE="$ZDOTDIR/abbreviations"
+ABBR_SET_EXPANSION_CURSOR=1
+[[ -r "$BREW_PREFIX/share/zsh-abbr/zsh-abbr.zsh" ]] && source "$BREW_PREFIX/share/zsh-abbr/zsh-abbr.zsh"
+abbr -S -qq gs="git status"
+abbr -S -qq ga="git add ."
+abbr -S -qq gc="git commit -m \"%\""
+abbr -S -qq gp="git push origin HEAD"
+# abbr -S -qq nrd="nr dev"
+# abbr -S -qq nrb="nr build"
+# abbr -S -qq nrs="nr start"
+
+# function
+update_zo_opts() {
+  export _ZO_FZF_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt) ${(j: :)_ZO_ADDITIONAL_OPTS}"
+}
+add-zsh-hook precmd update_zo_opts
+
+after_prompt_once() {
+  command -v mise   >/dev/null 2>&1 && eval "$(command mise activate zsh)"
+  command -v zoxide >/dev/null 2>&1 && eval "$(command zoxide init zsh)"
+  add-zsh-hook -d precmd after_prompt_once
+}
+add-zsh-hook precmd after_prompt_once
+
+tm() {
+  # tmuxセッションのアタッチまたは新規作成
+  local session=${1:-$(printf %08x $RANDOM$RANDOM)}
+  tmux new -s "$session" 2>/dev/null || tmux attach -t "$session"
+}
+
+fzf_command() {
+  if [[ -n "$TMUX" ]] && command -v fzf-tmux >/dev/null 2>&1; then
+    # echo "fzf-tmux -p 85%,70%"
+    echo "fzf-tmux $FZF_TMUX_OPTS"
+  else
+    echo "fzf"
+  fi
+}
+
+fzf_history() {
+  # ^+R でコマンド履歴
+  zle -I
+  local sel
+  sel=$(
+    fc -rl 1 \
+    | perl -ne 'print if !$seen{(/^\s*\d+\s+(.*)$/)[0]}++' \
+    | sed 's/^[ ]*[0-9]*[ ]*//' \
+    | FZF_DEFAULT_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt) --prompt=❯${NBSP}" \
+    $(fzf_command) --query "$LBUFFER"
+  )
+  [[ -z "$sel" ]] && { zle -R; return 0; }
+  BUFFER=$sel
+  CURSOR=$#BUFFER
+  zle redisplay
+}
+zle -N fzf_history
+bindkey '^r' fzf_history
+
+fzf_find() {
+  # ^+F でファイル検索
+  setopt localoptions pipefail
+  zle -I
+  if [[ "$PWD" == "$HOME" ]]; then
+    zle -M "⚠️ Too many files in HOME. Use from a project directory."
+    zle -R
+    return 1
+  fi
+  local -a local_ignore_patterns=(
+    $IGNORE_PATTERNS
+    "*.jpg" "*.jpeg" "*.png" "*.gif" "*.bmp" "*.svg"
+    "*.webp" "*.ico" "*.tiff" "*.tif" "*.heic" "*.heif"
+    "*.raw" "*.cr2" "*.nef" "*.arw" "*.dng"
+  )
+  local -a rg_globs
+  for dir in $local_ignore_patterns; do
+    rg_globs+=("--glob" "!$dir")
+  done
+  local file
+  file=$(
+    rg --files --hidden ${rg_globs[@]} \
+    | FZF_DEFAULT_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt) ${(j: :)FZF_FILE_OPTS}" $(fzf_command)
+  )
+  [[ -z "$file" ]] && { zle -R; return 0; }
+  BUFFER="nvim ${(q)file}"
+  CURSOR=$#BUFFER
+  zle accept-line
+}
+zle -N fzf_find
+bindkey '^f' fzf_find
+
+fzf_ghq() {
+  # ^+G でリポジトリ検索
+  setopt localoptions pipefail
+  zle -I
+  local repo
+  repo=$(
+    ghq list \
+    | FZF_DEFAULT_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt) \
+      --prompt='❯${NBSP}' \
+      --preview='dir=\$(ghq root)/{}; \
+        root=\$(ghq root); \
+        eza -al --color=always --group-directories-first \
+        -T -L 2 -I \"${(j:|:)IGNORE_PATTERNS}\" \
+        \"\$dir\" 2>/dev/null | { \
+          IFS= read -r first_line; \
+          echo \"\$first_line\" | sed \"s|\$root/||g\"; \
+          echo; \
+          cat; \
+        }' \
+      --preview-window=wrap" $(fzf_command)
+  )
+  [[ -z "$repo" ]] && { zle -R; return 0; }
+  BUFFER="cd $(ghq root)/${repo}"
+  CURSOR=$#BUFFER
+  zle accept-line
+}
+zle -N fzf_ghq
+bindkey '^g' fzf_ghq
+
+chpwd() {
+  [[ $PWD -ef $HOME ]] && return
+  local pattern="/($(IFS='|'; echo "${IGNORE_DIRS[*]}"))"
+  [[ $PWD =~ $pattern ]] && return
+
+  # Gitリポジトリのルートディレクトリでのみonefetchを実行
+  # if git rev-parse --is-inside-work-tree &>/dev/null; then
+  #   printf '\n'
+  #   local git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+  #   if [[ "$PWD" == "$git_root" ]] && command -v onefetch &>/dev/null; then
+  #     onefetch --no-art --no-title --no-color-palette --disabled-fields lines-of-code authors churn url last-change
+  #     return
+  #   fi
+  # fi
+  # それ以外はeza
+  command eza -al --color=never -o --time-style=long-iso -F always
+}
+
 # zsh-syntax-highlighting
 if [[ -r "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
   source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
+
+# .zshrc, p10kのコンパイル（次回起動時の高速化）
+() {
+  local zshrc="$ZDOTDIR/.zshrc"
+  local p10k="$ZDOTDIR/.p10k.zsh"
+
+  if [[ -f "$zshrc" && ( ! -f "$zshrc.zwc" || "$zshrc" -nt "$zshrc.zwc" ) ]]; then
+    zcompile "$zshrc"
+  fi
+  if [[ -f "$p10k" && ( ! -f "$p10k.zwc" || "$p10k" -nt "$p10k.zwc" ) ]]; then
+    zcompile "$p10k"
+  fi
+}
 
 # direnv
 if command -v direnv >/dev/null 2>&1; then
