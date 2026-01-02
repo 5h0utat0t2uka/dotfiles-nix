@@ -1,4 +1,36 @@
-# Homebrew (Apple Silicon)
-if [ -d /opt/homebrew/bin ]; then
-  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-fi
+# 非インタラクティブシェルのチェック
+[[ $- != *i* ]] && return
+
+# キャッシュ関連ディレクトリ
+CACHE_DIR="${XDG_CACHE_HOME}/zsh"
+mkdir -p "$CACHE_DIR"
+mkdir -p "$SHELL_SESSIONS_DIR"
+
+# Instant Prompt (P10k)
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
+
+# Homebrew検出とPATH設定
+BREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
+typeset -U path
+path=(
+  "$HOME/.local/bin"(N-/)
+  $path
+)
+
+
+# 履歴関連とオプション
+HISTFILE="$CACHE_DIR/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt SHARE_HISTORY
+setopt HIST_VERIFY
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt INTERACTIVE_COMMENTS
+setopt HIST_IGNORE_SPACE
