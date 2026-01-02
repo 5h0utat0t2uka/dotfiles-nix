@@ -33,6 +33,9 @@ in
   # HM の互換性基準（固定）
   home.stateVersion = "25.11";
 
+  # Issue (https://github.com/nix-community/home-manager/issues/7935)
+  manual.manpages.enable = false;
+
   # 重要: dotfile の実体は chezmoi が管理する前提なので HM では生成しない
   programs.zsh.enable = false;
   programs.git.enable = false;

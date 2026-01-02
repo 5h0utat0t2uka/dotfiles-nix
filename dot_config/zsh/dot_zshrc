@@ -17,12 +17,18 @@ mkdir -p "$SHELL_SESSIONS_DIR"
 # fi
 
 # Homebrew検出とPATH設定
-BREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
-typeset -U path
-path=(
-  "$HOME/.local/bin"(N-/)
-  $path
-)
+# BREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
+# typeset -U path
+# path=(
+#   "$HOME/.local/bin"(N-/)
+#   $path
+# )
+
+BREW_PREFIX=/opt/homebrew
+typeset -U fpath
+[[ -d "/etc/profiles/per-user/$USER/share/zsh/site-functions" ]] && fpath=("/etc/profiles/per-user/$USER/share/zsh/site-functions" $fpath)
+[[ -d "$BREW_PREFIX/share/zsh/site-functions" ]] && fpath=("$BREW_PREFIX/share/zsh/site-functions" $fpath)
+
 
 # 履歴関連とオプション
 HISTFILE="$CACHE_DIR/.zsh_history"
@@ -63,9 +69,6 @@ else
 fi
 
 # zsh-autosuggestions
-typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=white'
-ZSH_HIGHLIGHT_STYLES[unknown-command]='fg=red,underline'
 ZSH_AUTOSUGGEST_STRATEGY=(history)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=2000
 if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
@@ -300,6 +303,9 @@ if command -v direnv >/dev/null 2>&1; then
 fi
 
 # zsh-syntax-highlighting
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=white'
+ZSH_HIGHLIGHT_STYLES[unknown-command]='fg=red,underline'
 if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
   source "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
