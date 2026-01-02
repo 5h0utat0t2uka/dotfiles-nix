@@ -1,6 +1,11 @@
 # 非インタラクティブシェルのチェック
 [[ $- != *i* ]] && return
 
+# Starship
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
 # キャッシュ関連ディレクトリ
 CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 mkdir -p "$CACHE_DIR"
