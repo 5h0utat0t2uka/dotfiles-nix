@@ -53,7 +53,7 @@
             home-manager.extraSpecialArgs = { inherit identity; };
 
             # HM user 定義
-            home-manager.users.${username} = import ./nix-config/darwin/home.nix;
+            home-manager.users.${username} = import ./darwin/home.nix;
           }
         ];
       };
