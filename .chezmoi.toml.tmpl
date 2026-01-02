@@ -4,5 +4,9 @@ hostname = "{{ .chezmoi.hostname }}"
 system = "{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
 
 [edit]
-  command = "zed"
-  args = ["--wait"]
+command = "zed"
+args = ["--wait"]
+
+[data.just]
+host = "{{ .chezmoi.hostname }}"
+flake = "./nix-config"

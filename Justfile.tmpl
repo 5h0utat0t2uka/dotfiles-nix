@@ -1,0 +1,17 @@
+set dotenv-load := false
+
+check:
+  nix flake check {{ .just.flake }}
+
+build:
+  sudo darwin-rebuild switch --flake {{ .just.flake }}#{{ .just.host }}
+
+only-update:
+  nix flake update {{ .just.flake }}
+
+full-update:
+  nix flake update {{ .just.flake }}
+  sudo darwin-rebuild switch --flake {{ .just.flake }}#{{ .just.host }}
+
+gc:
+  nix-collect-garbage -d
