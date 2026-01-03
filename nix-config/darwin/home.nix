@@ -22,6 +22,10 @@ let
       ln -sf \
         ${pkgs.zsh-abbr}/share/zsh/zsh-abbr/zsh-abbr.zsh \
         "$out/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh"
+
+      ln -sfn \
+        ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k \
+        "$out/share/zsh/plugins/powerlevel10k"
     '';
   };
 in
@@ -60,11 +64,13 @@ in
     lazygit
     neovim
     nb
+    nodejs_24
+    pnpm
     pass
     passExtensions.pass-otp
     pinentry_mac
     ripgrep
-    starship
+    # starship
     zoxide
     tree-sitter
     tree
@@ -74,6 +80,7 @@ in
     zsh-autosuggestions
     zsh-completions
     zsh-abbr
+    zsh-powerlevel10k
     zshPluginLinks
   ];
   home.activation.ensureNbConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
