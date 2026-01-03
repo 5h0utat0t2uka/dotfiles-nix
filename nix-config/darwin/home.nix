@@ -1,5 +1,5 @@
 # nix-config/darwin/home.nix
-{ pkgs, identity, ... }:
+{ pkgs, lib, identity, ... }:
 
 let
   zshPluginLinks = pkgs.stdenvNoCC.mkDerivation {
@@ -75,7 +75,7 @@ in
     zsh-abbr
     zshPluginLinks
   ];
-  home.activation.ensureNbConfig = ''
+  home.activation.ensureNbConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p "$HOME/.config/nb"
     if [ ! -e "$HOME/.config/nb/.nbrc" ]; then
       : > "$HOME/.config/nb/.nbrc"

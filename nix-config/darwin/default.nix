@@ -68,6 +68,12 @@ in
   # CLI ツール類は home-manager 側で管理する
   environment.systemPackages = [ ];
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.geist-mono
+    source-han-code-jp
+  ];
+
+
   # ============================================================
   # Homebrew (GUI Apps Only)
   # ============================================================
@@ -90,9 +96,9 @@ in
       "google-chrome"
       "karabiner-elements"
       "zed"
-      "font-udev-gothic-nf"
-      "font-geist-mono-nerd-font"
-      "font-source-han-code-jp"
+      # "font-udev-gothic-nf"
+      # "font-geist-mono-nerd-font"
+      # "font-source-han-code-jp"
     ];
   };
 }

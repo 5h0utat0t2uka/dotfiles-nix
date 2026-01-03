@@ -47,9 +47,11 @@ fullscreen = true
 
 font-size = 14
 font-family = GeistMono Nerd Font Mono
-font-family = UDEV Gothic 35NF
+# font-family = UDEV Gothic NF
+font-family = Source Han Code JP
 font-family-bold = GeistMono Nerd Font Mono
-font-family-bold = UDEV Gothic 35NF
+# font-family-bold = UDEV Gothic NF
+font-family-bold = Source Han Code JP
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
