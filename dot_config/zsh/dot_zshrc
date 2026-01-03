@@ -6,6 +6,11 @@
 #   eval "$(starship init zsh)"
 # fi
 
+# Instant Prompt (P10k)
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # キャッシュ関連ディレクトリ
 CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 mkdir -p "$CACHE_DIR"
@@ -14,10 +19,6 @@ mkdir -p "$SHELL_SESSIONS_DIR"
 export POWERLEVEL9K_INSTANT_PROMPT_DIR="$CACHE_DIR"
 export POWERLEVEL9K_DUMP_DIR="$CACHE_DIR"
 
-# Instant Prompt (P10k)
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 # Homebrew検出とPATH設定
 # BREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
@@ -65,13 +66,15 @@ fi
 
 BREW_PREFIX=/opt/homebrew
 typeset -U fpath
-[[ -d "/etc/profiles/per-user/$USER/share/zsh/site-functions" ]] && fpath=("/etc/profiles/per-user/$USER/share/zsh/site-functions" $fpath)
-[[ -d "$BREW_PREFIX/share/zsh/site-functions" ]] && fpath=("$BREW_PREFIX/share/zsh/site-functions" $fpath)
+local -a new_fpath=(
+  "/etc/profiles/per-user/$USER/share/zsh/site-functions"(N-/)
+  "$BREW_PREFIX/share/zsh/site-functions"(N-/)
+)
+[[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
 
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$CACHE_DIR/.zcompcache"
 autoload -Uz compinit
-
 dump="$CACHE_DIR/.zcompdump-${ZSH_VERSION}"
 if [[ -f "$dump.zwc" ]] && [[ "$dump.zwc" -nt "$dump" ]]; then
   compinit -C -d "$dump"
@@ -81,9 +84,6 @@ else
 fi
 
 # Powerlevel10k
-# export POWERLEVEL9K_INSTANT_PROMPT_DIR="$CACHE_DIR"
-# export POWERLEVEL9K_DUMP_DIR="$CACHE_DIR"
-
 if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
   source "/etc/profiles/per-user/$USER/share/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
 fi
@@ -165,20 +165,17 @@ alias ll='eza -alo --icons --time-style iso'
 alias lg='lazygit'
 
 # abbr
-export ABBR_USER_ABBREVIATIONS_FILE="$ZDOTDIR/abbreviations"
-ABBR_SET_EXPANSION_CURSOR=1
+export ABBR_SET_EXPANSION_CURSOR=1
+export ABBR_USER_ABBREVIATIONS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/zsh-abbr/user-abbreviations"
 if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh" ]]; then
   source "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh"
 fi
-
-if typeset -f abbr >/dev/null 2>&1; then
-  abbr -S -qq gs="git status"
-  abbr -S -qq ga="git add ."
-  abbr -S -qq gc='git commit -m "%"'
-  abbr -S -qq gp="git push origin HEAD"
-  # abbr -S -qq nrd="nr dev"
-  # abbr -S -qq nrb="nr build"
-  # abbr -S -qq nrs="nr start"
+if [[ ! -f "$ZDOTDIR/.abbr_initialized" ]]; then
+  abbr gs="git status"
+  abbr ga="git add ."
+  abbr gc='git commit -m "%"'
+  abbr gp="git push origin HEAD"
+  touch "$ZDOTDIR/.abbr_initialized"
 fi
 
 # function
