@@ -68,6 +68,7 @@ in
     zoxide
     tree-sitter
     tree
+    tmux
     wget
     zsh-syntax-highlighting
     zsh-autosuggestions

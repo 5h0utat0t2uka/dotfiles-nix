@@ -46,6 +46,16 @@ setopt HIST_IGNORE_SPACE
 
 autoload -Uz add-zsh-hook
 
+if [[ -n "$TMUX" ]]; then
+  export FZF_TMUX=1
+  export FZF_TMUX_OPTS="-p 80%,70% --margin=0,1"
+
+  tmux_update_pane() {
+    tmux refresh-client -S
+  }
+  add-zsh-hook precmd tmux_update_pane
+fi
+
 # Completions
 # typeset -U fpath
 # [[ -d "/etc/profiles/per-user/$USER/share/zsh/site-functions" ]] && fpath=(
@@ -179,7 +189,6 @@ tm() {
 
 fzf_command() {
   if [[ -n "$TMUX" ]] && command -v fzf-tmux >/dev/null 2>&1; then
-    # echo "fzf-tmux -p 85%,70%"
     echo "fzf-tmux $FZF_TMUX_OPTS"
   else
     echo "fzf"
