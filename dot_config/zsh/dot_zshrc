@@ -175,6 +175,11 @@ if [[ ! -f "$ZDOTDIR/.abbr_initialized" ]]; then
   abbr ga="git add ."
   abbr gc='git commit -m "%"'
   abbr gp="git push origin HEAD"
+  abbr nii="ni"
+  abbr nif="ni --frozen"
+  abbr nid="nr dev"
+  abbr nib="nr build"
+  abbr nis="nr start"
   touch "$ZDOTDIR/.abbr_initialized"
 fi
 
@@ -196,6 +201,16 @@ tm() {
   local session=${1:-$(printf %08x $RANDOM$RANDOM)}
   tmux new -s "$session" 2>/dev/null || tmux attach -t "$session"
 }
+
+dot() {
+  # chezmoiの短縮
+  if [[ "$1" == "cd" ]]; then
+    cd "$(chezmoi source-path)"
+  else
+    chezmoi "$@"
+  fi
+}
+compdef dot=chezmoi
 
 fzf_command() {
   if [[ -n "$TMUX" ]] && command -v fzf-tmux >/dev/null 2>&1; then
@@ -317,14 +332,14 @@ chpwd() {
   [[ $PWD =~ $pattern ]] && return
 
   # Gitリポジトリのルートディレクトリでのみonefetchを実行
-  # if git rev-parse --is-inside-work-tree &>/dev/null; then
-  #   printf '\n'
-  #   local git_root=$(git rev-parse --show-toplevel 2>/dev/null)
-  #   if [[ "$PWD" == "$git_root" ]] && command -v onefetch &>/dev/null; then
-  #     onefetch --no-art --no-title --no-color-palette --disabled-fields lines-of-code authors churn url last-change
-  #     return
-  #   fi
-  # fi
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    printf '\n'
+    local git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [[ "$PWD" == "$git_root" ]] && command -v onefetch &>/dev/null; then
+      onefetch --no-art --no-title --no-color-palette --disabled-fields lines-of-code authors churn url last-change
+      return
+    fi
+  fi
   # それ以外はeza
   command eza -al --color=never -o --time-style=long-iso -F always
 }

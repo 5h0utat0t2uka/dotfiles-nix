@@ -64,13 +64,14 @@ in
     lazygit
     neovim
     nb
+    ni
     nodejs_24
+    onefetch
     pnpm
     pass
     passExtensions.pass-otp
     pinentry_mac
     ripgrep
-    # starship
     zoxide
     tree-sitter
     tree
