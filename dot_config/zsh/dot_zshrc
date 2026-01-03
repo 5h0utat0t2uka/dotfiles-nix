@@ -201,7 +201,7 @@ tm() {
 dot() {
   # chezmoiの短縮
   if [[ "$1" == "cd" ]]; then
-    cd "$(chezmoi source-path)"
+    chezmoi cd
   else
     chezmoi "$@"
   fi
