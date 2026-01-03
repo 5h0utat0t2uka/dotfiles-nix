@@ -45,7 +45,7 @@
 theme = nord
 fullscreen = true
 
-font-size = 14
+font-size = 14.4
 font-family = GeistMono Nerd Font Mono
 # font-family = UDEV Gothic NF
 font-family = Source Han Code JP
