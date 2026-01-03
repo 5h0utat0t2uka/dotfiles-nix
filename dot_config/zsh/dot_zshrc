@@ -1,11 +1,6 @@
 # 非インタラクティブシェルのチェック
 [[ $- != *i* ]] && return
 
-# Starship
-# if command -v starship >/dev/null 2>&1; then
-#   eval "$(starship init zsh)"
-# fi
-
 # Instant Prompt (P10k)
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -170,7 +165,7 @@ export ABBR_USER_ABBREVIATIONS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/zsh-abbr/
 if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh" ]]; then
   source "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh"
 fi
-if [[ ! -f "$ZDOTDIR/.abbr_initialized" ]]; then
+if [[ ! -f "$HOME/.config/zsh-abbr/.abbr_initialized" ]]; then
   abbr gs="git status"
   abbr ga="git add ."
   abbr gc='git commit -m "%"'
@@ -180,7 +175,7 @@ if [[ ! -f "$ZDOTDIR/.abbr_initialized" ]]; then
   abbr nid="nr dev"
   abbr nib="nr build"
   abbr nis="nr start"
-  touch "$ZDOTDIR/.abbr_initialized"
+  touch "$HOME/.config/zsh-abbr/.abbr_initialized"
 fi
 
 # function
