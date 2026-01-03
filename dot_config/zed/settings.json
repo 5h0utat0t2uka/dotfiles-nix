@@ -62,7 +62,7 @@
     ]
   },
   "format_on_save": "off",
-  "icon_theme": "Colored Zed Icons Theme Dark",
+  // "icon_theme": "Colored Zed Icons Theme Dark",
   // "icon_theme": {
   //   "mode": "dark",
   //   "dark": "Zed (Default)",
@@ -72,7 +72,7 @@
   "ui_font_family": ".ZedMono",
   "ui_font_weight": 300,
   "buffer_font_family": "Source Han Code JP",
-  "buffer_font_size": 13,
+  "buffer_font_size": 13.5,
   "buffer_font_weight": 300,
   "tab_size": 2,
   "cursor_shape": "block",
