@@ -11,6 +11,3 @@ export SHELL_SESSIONS_DIR="$XDG_CACHE_HOME/zsh/sessions"
 
 # nb
 export NBRC_PATH="$XDG_CONFIG_HOME/nb/.nbrc"
-
-# starship
-# export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"

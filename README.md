@@ -5,12 +5,8 @@
   />
 </div>
 
----
-
-<div align="center">
+<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
   <img alt="nix" src="https://img.shields.io/badge/nix-5277C3?style=for-the-badge&logo=nixos&logoColor=white"/> <img alt="macOS" src="https://img.shields.io/badge/macOS-222222?style=for-the-badge&logo=apple&logoColor=white"/>
 </div>
-
----
 
 ## 設定
