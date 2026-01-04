@@ -4,9 +4,13 @@ return {
   opts = {
     highlight = { enable = true },
     indent = { enable = true },
-    ensure_installed = { "lua", "vim", "vimdoc", "bash", "tsx", "json", "html", "typescript", "javascript" },
+    ensure_installed = {
+      "lua", "vim", "vimdoc", "bash",
+      "tsx", "json", "html", "typescript", "javascript"
+    },
   },
   config = function(_, opts)
-    require("nvim-treesitter.configs").setup(opts)
+    -- 修正: configs を削除
+    require("nvim-treesitter").setup(opts)
   end,
 }
