@@ -5,6 +5,6 @@
   />
 </div>
 
-<div align="center">
-  <img alt="nix" src="https://img.shields.io/badge/nix-5277C3?style=for-the-badge&logo=nixos&logoColor=white"/><img alt="macOS" src="https://img.shields.io/badge/macOS-222222?style=for-the-badge&logo=apple&logoColor=white"/>
+<div align="center" margin="32px auto">
+  <img alt="nix" src="https://img.shields.io/badge/nix-5277C3?style=for-the-badge&logo=nixos&logoColor=white"/> <img alt="macOS" src="https://img.shields.io/badge/macOS-222222?style=for-the-badge&logo=apple&logoColor=white"/>
 </p>
