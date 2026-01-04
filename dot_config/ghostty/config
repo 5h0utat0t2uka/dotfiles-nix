@@ -43,7 +43,8 @@
 # resize-overlay-duration = 4s 200ms
 
 theme = nord
-fullscreen = true
+title = " "
+# fullscreen = true
 
 font-size = 14.4
 font-family = GeistMono Nerd Font Mono
@@ -57,7 +58,6 @@ font-feature = -liga
 font-feature = -dlig
 alpha-blending = native
 
-
 adjust-underline-position = 2%
 cursor-style = block
 cursor-style-blink = true
@@ -65,16 +65,25 @@ cursor-color = #d8dee9
 cursor-opacity = 0.8
 shell-integration-features = no-cursor
 
+window-width = 170
+window-height = 60
 window-padding-x = 10
 window-padding-y = 10
 window-padding-balance = true
 window-colorspace = display-p3
+window-theme = auto
+split-divider-color = #4C566A
 
-macos-titlebar-style = hidden
+# macos-titlebar-style = hidden
 macos-titlebar-proxy-icon = hidden
+macos-titlebar-style = transparent
 macos-window-shadow = false
 macos-window-buttons = hidden
 macos-non-native-fullscreen = visible-menu
 macos-option-as-alt = left
 
-resize-overlay = never
+desktop-notifications = true
+quit-after-last-window-closed = true
+confirm-close-surface = true
+
+# resize-overlay = never

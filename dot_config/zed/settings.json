@@ -68,7 +68,7 @@
   //   "dark": "Zed (Default)",
   //   "light": "Zed (Default)"
   // },
-  "ui_font_size": 15,
+  "ui_font_size": 16,
   "ui_font_family": ".ZedMono",
   "ui_font_weight": 300,
   "buffer_font_family": "Source Han Code JP",
@@ -133,7 +133,7 @@
     "auto_fold_dirs": true,
     "drag_and_drop": true,
     "scrollbar": {
-      "show": null
+      "show": "never",
     },
     "sticky_scroll": false,
     "show_diagnostics": "all",
@@ -157,7 +157,7 @@
     "sort_by_path": false,
     "collapse_untracked_diff": false,
     "scrollbar": {
-      "show": null
+      "show": "never",
     }
   },
   "outline_panel": {
@@ -174,7 +174,7 @@
       "show": "always"
     },
     "scrollbar": {
-      "show": null
+      "show": "never",
     }
   },
   "search": {
