@@ -1,33 +1,54 @@
 # nix-config/darwin/home.nix
 { pkgs, lib, identity, ... }:
 
+# let
+#   zshPluginLinks = pkgs.stdenvNoCC.mkDerivation {
+#     name = "zsh-plugin-links";
+#     dontUnpack = true;
+#     installPhase = ''
+#       mkdir -p "$out/share/zsh/plugins"
+
+#       mkdir -p "$out/share/zsh/plugins/zsh-syntax-highlighting"
+#       ln -sf \
+#         ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+#         "$out/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+#       mkdir -p "$out/share/zsh/plugins/zsh-autosuggestions"
+#       ln -sf \
+#         ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+#         "$out/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+#       mkdir -p "$out/share/zsh/plugins/zsh-abbr"
+#       ln -sf \
+#         ${pkgs.zsh-abbr}/share/zsh/zsh-abbr/zsh-abbr.zsh \
+#         "$out/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh"
+
+#       ln -sfn \
+#         ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k \
+#         "$out/share/zsh/plugins/powerlevel10k"
+#     '';
+#   };
+# in
+
 let
-  zshPluginLinks = pkgs.stdenvNoCC.mkDerivation {
-    name = "zsh-plugin-links";
-    dontUnpack = true;
-    installPhase = ''
-      mkdir -p "$out/share/zsh/plugins"
-
-      mkdir -p "$out/share/zsh/plugins/zsh-syntax-highlighting"
-      ln -sf \
-        ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
-        "$out/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-      mkdir -p "$out/share/zsh/plugins/zsh-autosuggestions"
-      ln -sf \
-        ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
-        "$out/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-
-      mkdir -p "$out/share/zsh/plugins/zsh-abbr"
-      ln -sf \
-        ${pkgs.zsh-abbr}/share/zsh/zsh-abbr/zsh-abbr.zsh \
-        "$out/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh"
-
-      ln -sfn \
-        ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k \
-        "$out/share/zsh/plugins/powerlevel10k"
-    '';
-  };
+  zshPluginLinks = pkgs.linkFarm "zsh-plugin-links" [
+    {
+      name = "share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
+      path = "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
+    }
+    {
+      name = "share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh";
+      path = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+    }
+    {
+      name = "share/zsh/plugins/zsh-abbr/zsh-abbr.zsh";
+      path = "${pkgs.zsh-abbr}/share/zsh/zsh-abbr/zsh-abbr.zsh";
+    }
+    {
+      name = "share/zsh/plugins/powerlevel10k";
+      path = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k";
+    }
+  ];
 in
 
 {
@@ -49,6 +70,7 @@ in
   home.packages = with pkgs; [
     nixd
     nil
+    # affinity
     bat
     chezmoi # 初回curl経由で入れるので消す予定
     delta
@@ -76,6 +98,7 @@ in
     tree-sitter
     tree
     tmux
+    uv
     wget
     zsh-syntax-highlighting
     zsh-autosuggestions
