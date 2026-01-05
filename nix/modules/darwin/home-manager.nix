@@ -64,9 +64,9 @@ in
       nodejs_24
       onefetch
       pnpm
-      (pass.withExtensions (exts: [ exts.pass-otp ]))
-      # pass
-      # passExtensions.pass-otp
+      (pass.withExtensions (exts: [
+        exts.pass-otp
+      ]))
       pinentry_mac
       ripgrep
       zoxide

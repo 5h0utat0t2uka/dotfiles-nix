@@ -8,7 +8,6 @@ in
   # nix-darwin
   # ============================================================
   nix.enable = false;
-  nixpkgs.config.allowUnfree = true;
 
   # ============================================================
   # macOS
@@ -78,6 +77,7 @@ in
         TrackpadRightClick = true;
       };
       screencapture = {
+        # スクリーンショットのサムネイル無効
         show-thumbnail = false;
         disable-shadow = true;
       };

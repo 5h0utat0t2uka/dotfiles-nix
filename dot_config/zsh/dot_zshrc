@@ -50,19 +50,18 @@ if [[ -n "$TMUX" ]]; then
 fi
 
 # Completions
-# typeset -U fpath
-# [[ -d "/etc/profiles/per-user/$USER/share/zsh/site-functions" ]] && fpath=(
-#   "/etc/profiles/per-user/$USER/share/zsh/site-functions"
-#   $fpath
-# )
-# typeset -U fpath
-# [[ -d "/etc/profiles/per-user/$USER/share/zsh/site-functions" ]] && fpath=("/etc/profiles/per-user/$USER/share/zsh/site-functions" $fpath)
-# [[ -d "$BREW_PREFIX/share/zsh/site-functions" ]] && fpath=("$BREW_PREFIX/share/zsh/site-functions" $fpath)
-
 BREW_PREFIX=/opt/homebrew
+ZSH_PLUGIN_DIR="${NIX_PROFILE_PREFIX:-}/share/zsh/plugins"
+# typeset -U fpath
+# local -a new_fpath=(
+#   "/etc/profiles/per-user/$USER/share/zsh/site-functions"(N-/)
+#   "$BREW_PREFIX/share/zsh/site-functions"(N-/)
+# )
+# [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
+
 typeset -U fpath
 local -a new_fpath=(
-  "/etc/profiles/per-user/$USER/share/zsh/site-functions"(N-/)
+  "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
   "$BREW_PREFIX/share/zsh/site-functions"(N-/)
 )
 [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
@@ -79,8 +78,8 @@ else
 fi
 
 # Powerlevel10k
-if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
-  source "/etc/profiles/per-user/$USER/share/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
+if [[ -r "$ZSH_PLUGIN_DIR/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+  source "$ZSH_PLUGIN_DIR/powerlevel10k/powerlevel10k.zsh-theme"
 fi
 if [[ -f "$ZDOTDIR/.p10k.zsh" ]]; then
   source "$ZDOTDIR/.p10k.zsh"
@@ -89,8 +88,8 @@ fi
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_STRATEGY=(history)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=2000
-if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
-  source "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [[ -r "$ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "$ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
 
 # fzf
@@ -166,8 +165,8 @@ alias lg='lazygit'
 # abbr
 export ABBR_SET_EXPANSION_CURSOR=1
 export ABBR_USER_ABBREVIATIONS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/zsh-abbr/user-abbreviations"
-if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh" ]]; then
-  source "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh"
+if [[ -r "$ZSH_PLUGIN_DIR/zsh-abbr/zsh-abbr.zsh" ]]; then
+  source "$ZSH_PLUGIN_DIR/zsh-abbr/zsh-abbr.zsh"
 fi
 if [[ ! -f "$HOME/.config/zsh-abbr/.abbr_initialized" ]]; then
   abbr gs="git status"
@@ -365,6 +364,6 @@ fi
 typeset -A ZSH_HIGHLIGHT_STYLES
 # ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=white'
 # ZSH_HIGHLIGHT_STYLES[unknown-command]='fg=red,underline'
-if [[ -r "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-  source "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [[ -r "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
