@@ -1,17 +1,21 @@
 set dotenv-load := false
+set shell := ["bash", "-euo", "pipefail", "-c"]
+
+flake := "{{ .chezmoi.sourceDir }}/nix"
+hostname := `scutil --get LocalHostName 2>/dev/null || hostname -s`
 
 check:
-  nix flake check {{ .just.flake }}
+  nix flake check {{ "{{flake}}" }}
 
 build:
-  sudo darwin-rebuild switch --flake {{ .just.flake }}#{{ .just.host }}
+  sudo darwin-rebuild switch --flake {{ "{{flake}}" }}#{{ "{{hostname}}" }}
 
 only-update:
-  nix flake update {{ .just.flake }}
+  nix flake update {{ "{{flake}}" }}
 
 full-update:
-  nix flake update {{ .just.flake }}
-  sudo darwin-rebuild switch --flake {{ .just.flake }}#{{ .just.host }}
+  nix flake update {{ "{{flake}}" }}
+  sudo darwin-rebuild switch --flake {{ "{{flake}}" }}#{{ "{{hostname}}" }}
 
 gc:
   nix-collect-garbage -d
