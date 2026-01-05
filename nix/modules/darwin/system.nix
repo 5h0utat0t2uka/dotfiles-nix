@@ -5,7 +5,7 @@ let
 in
 {
   # ============================================================
-  # nix-darwin / macOS 基本設定
+  # nix-darwin
   # ============================================================
   nix.enable = false;
   nixpkgs.config.allowUnfree = true;
@@ -91,7 +91,6 @@ in
   # ============================================================
   # User / Shell
   # ============================================================
-
   users.users.${username} = {
     home = identity.homeDirectory;
     shell = pkgs.zsh;
@@ -104,7 +103,6 @@ in
   # ============================================================
   # System Packages
   # ============================================================
-
   environment.systemPackages = [ ];
 
   fonts.packages = with pkgs; [
