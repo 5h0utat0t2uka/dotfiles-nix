@@ -16,7 +16,7 @@
   };
 
   outputs =
-    { self, nixpkgs, home-manager, darwin, ... }@inputs:
+    { self, nixpkgs, home-manager, darwin, ... } @inputs:
     let
       hostKey = "A3112";
       identity = import ./hosts/darwin/${hostKey}/identity.nix;
