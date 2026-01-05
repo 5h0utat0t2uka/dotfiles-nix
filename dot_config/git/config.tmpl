@@ -1,6 +1,6 @@
 [user]
-  name = shouta totsuka
-  email = 5h0utat0t2uka@gmail.com
+  name = {{ .git.name }}
+  email = {{ .git.email }}
 
 [core]
   editor = vim
@@ -11,15 +11,9 @@
 [push]
   autoSetupRemote = true
 
-[ghq]
-  user = 5h0utat0t2uka
-  root = ~/Development/repositories
-
-[ghq "https://github.com/you-ec"]
-  root = ~/Development/repositories
-
-[ghq "https://github.com/witomteam"]
-  root = ~/Development/repositories
-
 [url "git@github.com:"]
   insteadOf = https://github.com/
+
+[ghq]
+  user = {{ .ghq.user }}
+  root = {{ .ghq.root }}
