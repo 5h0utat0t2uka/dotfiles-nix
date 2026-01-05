@@ -21,6 +21,10 @@ in
         "com.apple.desktopservices" = {
           DSDontWriteNetworkStores = true;
         };
+        # "com.apple.screencapture" = {
+        #   location = "~/Documents";
+        #   type = "png";
+        # };
       };
       NSGlobalDomain = {
         "com.apple.swipescrolldirection" = false;
@@ -72,6 +76,10 @@ in
       trackpad = {
         # トラックパッドの右クリックを有効にする
         TrackpadRightClick = true;
+      };
+      screencapture = {
+        show-thumbnail = false;
+        disable-shadow = true;
       };
       # keyboard = {
       #   enableKeyMapping = true;
