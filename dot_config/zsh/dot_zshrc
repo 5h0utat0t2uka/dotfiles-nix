@@ -155,6 +155,8 @@ export FZF_ALT_C_COMMAND='fd --hidden --exclude .git --exclude node_modules --ty
 
 # alias
 # alias vpn="$HOME/Development/scripts/vpn/vpn.sh"
+[[ -x "$BREW_PREFIX/bin/zed" ]] && alias zed="$BREW_PREFIX/bin/zed"
+[[ -x "$BREW_PREFIX/bin/code" ]] && alias code="$BREW_PREFIX/bin/code"
 alias ..='cd ..'
 alias vim='nvim'
 alias ll='eza -alo --icons --time-style iso'
