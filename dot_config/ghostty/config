@@ -44,9 +44,9 @@
 
 theme = nord
 title = " "
-# fullscreen = true
+fullscreen = true
 
-font-size = 14.4
+font-size = 14.5
 font-family = GeistMono Nerd Font Mono
 # font-family = UDEV Gothic NF
 font-family = Source Han Code JP
@@ -65,8 +65,8 @@ cursor-color = #d8dee9
 cursor-opacity = 0.8
 shell-integration-features = no-cursor
 
-window-width = 170
-window-height = 60
+# window-width = 170
+# window-height = 60
 window-padding-x = 10
 window-padding-y = 10
 window-padding-balance = true
@@ -84,6 +84,4 @@ macos-option-as-alt = left
 
 desktop-notifications = true
 quit-after-last-window-closed = true
-confirm-close-surface = true
-
-# resize-overlay = never
+resize-overlay = never
