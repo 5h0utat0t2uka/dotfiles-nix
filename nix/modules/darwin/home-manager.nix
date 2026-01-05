@@ -66,7 +66,7 @@ in
       pnpm
       (pass.withExtensions (exts: [ exts.pass-otp ]))
       # pass
-      passExtensions.pass-otp
+      # passExtensions.pass-otp
       pinentry_mac
       ripgrep
       zoxide
