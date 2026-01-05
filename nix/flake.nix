@@ -16,24 +16,24 @@
   };
 
   outputs =
-    { self, nixpkgs, home-manager, darwin, ... }:
+    { self, nixpkgs, home-manager, darwin, ... }@inputs:
     let
-      identity = import ./identity.nix;
+      hostKey = "A3112";
+      identity = import ./hosts/darwin/${hostKey}/identity.nix;
 
       system = identity.system;
       username = identity.username;
       hostname = identity.hostname;
     in
     {
-      # nix-darwin 経由で home-manager を使う（standalone を outputs に出さない）
       darwinConfigurations.${hostname} = darwin.lib.darwinSystem {
         inherit system;
 
-        # module 側から identity を参照できるようにする
-        specialArgs = { inherit identity; };
+        # modules 側でも identity を参照できるようにする
+        specialArgs = { inherit identity inputs; };
 
         modules = [
-          # nixpkgs 設定（allowUnfree など）を darwin 側へ注入
+          # nixpkgs 設定（allowUnfree など）
           {
             nixpkgs = {
               inherit system;
@@ -41,24 +41,22 @@
             };
           }
 
-          # nix-darwin (system)
-          ./darwin/default.nix
-
           # home-manager を nix-darwin 経由で統合
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
+            # home-manager 側にも identity を渡す（あなたの既存 home-manager.nix が identity を要求）
             home-manager.extraSpecialArgs = { inherit identity; };
 
-            # HM user 定義
-            home-manager.users.${username} = import ./darwin/home.nix;
+            # HM user 定義（home-manager.nix 側で home.username 等を設定）
+            home-manager.users.${username} = import ./modules/darwin/home-manager.nix;
           }
+
+          # ホスト入口（imports で system/homebrew を読む）
+          ./hosts/darwin/${hostKey}/default.nix
         ];
       };
-
-      # darwin.sh が "#default" を叩く前提を維持
-      # default = self.darwinConfigurations.${hostname};
     };
 }
