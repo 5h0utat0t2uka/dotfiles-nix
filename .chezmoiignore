@@ -1,7 +1,6 @@
 README.md
 /flake.nix
 /flake.lock
-/nix-config/**
 /nix/**
 /scripts/**
 /config/**

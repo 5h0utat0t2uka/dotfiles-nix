@@ -1,0 +1,4 @@
+*.toml linguist-language=TOML linguist-detectable=true
+*.toml.tmpl linguist-language=TOML linguist-detectable=true
+
+Justfile.tmpl linguist-language=Makefile
