@@ -168,16 +168,17 @@ export ABBR_USER_ABBREVIATIONS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/zsh-abbr/
 if [[ -r "$ZSH_PLUGIN_DIR/zsh-abbr/zsh-abbr.zsh" ]]; then
   source "$ZSH_PLUGIN_DIR/zsh-abbr/zsh-abbr.zsh"
 fi
+# abbrの追加編集など行った場合は .abbr_initialized を削除する
 if [[ ! -f "$HOME/.config/zsh-abbr/.abbr_initialized" ]]; then
   abbr gs="git status"
   abbr ga="git add ."
   abbr gc='git commit -m "%"'
   abbr gp="git push origin HEAD"
-  abbr nii="ni"
-  abbr nif="ni --frozen"
-  abbr nid="nr dev"
-  abbr nib="nr build"
-  abbr nis="nr start"
+  abbr nri="ni"
+  abbr nrf="ni --frozen"
+  abbr nrd="nr dev"
+  abbr nrb="nr build"
+  abbr nrs="nr start"
   touch "$HOME/.config/zsh-abbr/.abbr_initialized"
 fi
 
