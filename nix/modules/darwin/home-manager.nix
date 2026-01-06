@@ -73,8 +73,9 @@ in
       tree-sitter
       tree
       tmux
-      uv
+      # uv
       wget
+      zbar
       zsh-syntax-highlighting
       zsh-autosuggestions
       zsh-completions
