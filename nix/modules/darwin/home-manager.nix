@@ -44,7 +44,6 @@ in
     packages = with pkgs; [
       nixd
       nil
-      # affinity
       bat
       chezmoi # 初回curl経由で入れるので消す予定
       delta

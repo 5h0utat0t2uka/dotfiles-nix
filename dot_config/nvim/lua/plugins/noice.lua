@@ -52,7 +52,8 @@ return {
     "rcarriga/nvim-notify",
     lazy = true,
     opts = {
-      -- 任意
+      stages = "static",
+      timeout = 3000,
     },
   },
 }

@@ -135,6 +135,7 @@ in
 
   # ============================================================
   # Automatic Garbage Collection (launchd, root)
+  # 毎週日曜日にAM3:00に`gc`
   # sudo tail -n 200 /var/log/nix-gc.log 2>/dev/null || true
   # ============================================================
   launchd.daemons.nix-gc = {
@@ -155,6 +156,7 @@ in
 
   # ============================================================
   # Nix Store Optimization (hard-link identical files)
+  # 毎週日曜日にAM4:00に`optimise`
   # sudo tail -n 200 /var/log/nix-optimise.log 2>/dev/null || true
   # ============================================================
   launchd.daemons.nix-optimise = {

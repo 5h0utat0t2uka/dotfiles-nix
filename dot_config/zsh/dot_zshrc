@@ -153,8 +153,8 @@ export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --exclude node_modules --
 export FZF_ALT_C_COMMAND='fd --hidden --exclude .git --exclude node_modules --type d'
 
 # alias
-# alias vpn="$HOME/Development/scripts/vpn/vpn.sh"
 alias ..='cd ..'
+alias vpn="$HOME/Development/scripts/vpn/connect.sh"
 alias vim='nvim'
 alias ll='eza -alo --icons --time-style iso'
 alias lg='lazygit'

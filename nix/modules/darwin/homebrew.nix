@@ -12,6 +12,7 @@
     };
 
     casks = [
+      # "affinity"
       "ghostty"
       "google-chrome"
       "karabiner-elements"
