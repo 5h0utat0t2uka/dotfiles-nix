@@ -116,5 +116,6 @@ in
   fonts.packages = with pkgs; [
     nerd-fonts.geist-mono
     source-han-code-jp
+    udev-gothic
   ];
 }
