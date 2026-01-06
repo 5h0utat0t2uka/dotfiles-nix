@@ -18,21 +18,26 @@ in
     defaults = {
       CustomUserPreferences = {
         "com.apple.desktopservices" = {
+          # .DS_Storeファイルを書き込まない
           DSDontWriteNetworkStores = true;
+          DSDontWriteUSBStores = true;
+        };
+        "com.apple.inputmethod.Kotoeri" = {
+          # ライブ変換無効
+          JIMPrefLiveConversionKey = 0;
+          JIMPrefAutocorrectionKey = 0;
         };
         # "com.apple.screencapture" = {
         #   location = "~/Documents";
         #   type = "png";
         # };
+        # NSGlobalDomain = {
+        #   WebKitDeveloperExtras = true;
+        # };
       };
       NSGlobalDomain = {
+        # トラックパッドのスクロール方向
         "com.apple.swipescrolldirection" = false;
-      };
-      CustomUserPreferences = {
-        NSGlobalDomain = {
-          # Safariの開発者ツール
-          WebKitDeveloperExtras = true;
-        };
       };
       dock = {
         # 自動非表示を有効にする
