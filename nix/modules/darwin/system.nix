@@ -2,6 +2,7 @@
 
 let
   username = identity.username;
+  nixBin = "/nix/var/nix/profiles/default/bin";
 in
 {
   # ============================================================
@@ -27,17 +28,27 @@ in
           JIMPrefLiveConversionKey = 0;
           JIMPrefAutocorrectionKey = 0;
         };
+        "com.apple.screensaver" = {
+          # スクリーンセーバー開始後パスワード要求
+          askForPassword = 1;
+          askForPasswordDelay = 0;
+        };
         # "com.apple.screencapture" = {
         #   location = "~/Documents";
         #   type = "png";
         # };
-        # NSGlobalDomain = {
-        #   WebKitDeveloperExtras = true;
-        # };
+        NSGlobalDomain = {
+          WebKitDeveloperExtras = true;
+        };
       };
       NSGlobalDomain = {
         # トラックパッドのスクロール方向
         "com.apple.swipescrolldirection" = false;
+        NSAutomaticCapitalizationEnabled = false;
+        NSAutomaticDashSubstitutionEnabled = false;
+        NSAutomaticPeriodSubstitutionEnabled = false;
+        NSAutomaticQuoteSubstitutionEnabled = false;
+        NSAutomaticSpellingCorrectionEnabled = false;
       };
       dock = {
         # 自動非表示を有効にする
@@ -86,10 +97,6 @@ in
         show-thumbnail = false;
         disable-shadow = true;
       };
-      # keyboard = {
-      #   enableKeyMapping = true;
-      #   remapCapsLockToControl = true;
-      # };
     };
   };
   # system.stateVersion = 5;
@@ -100,6 +107,8 @@ in
   # system.activationScripts.postActivation.text = lib.mkAfter ''
   #   /usr/bin/killall Finder >/dev/null 2>&1 || true
   # '';
+
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # ============================================================
   # User / Shell
@@ -123,4 +132,44 @@ in
     source-han-code-jp
     udev-gothic-nf
   ];
+
+  # ============================================================
+  # Automatic Garbage Collection (launchd, root)
+  # sudo tail -n 200 /var/log/nix-gc.log 2>/dev/null || true
+  # ============================================================
+  launchd.daemons.nix-gc = {
+    command = "${nixBin}/nix-collect-garbage --delete-older-than 14d";
+    serviceConfig = {
+      RunAtLoad = false;
+      StartCalendarInterval = [
+        {
+          Weekday = 0;
+          Hour = 3;
+          Minute = 0;
+        }
+      ];
+      StandardOutPath = "/var/log/nix-gc.log";
+      StandardErrorPath = "/var/log/nix-gc.log";
+    };
+  };
+
+  # ============================================================
+  # Nix Store Optimization (hard-link identical files)
+  # sudo tail -n 200 /var/log/nix-optimise.log 2>/dev/null || true
+  # ============================================================
+  launchd.daemons.nix-optimise = {
+    command = "${nixBin}/nix store optimise";
+    serviceConfig = {
+      RunAtLoad = false;
+      StartCalendarInterval = [
+        {
+          Weekday = 0;
+          Hour = 4;
+          Minute = 0;
+        }
+      ];
+      StandardOutPath = "/var/log/nix-optimise.log";
+      StandardErrorPath = "/var/log/nix-optimise.log";
+    };
+  };
 }
