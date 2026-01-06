@@ -30,19 +30,72 @@ return {
         },
       },
       sections = {
-        lualine_a = { "mode" },
-        lualine_b = {},
-        --[[
+        lualine_a = {
+          {
+            "mode",
+            fmt = function(str)
+              local map = {
+                NORMAL  = "N",
+                INSERT  = "I",
+                VISUAL  = "V",
+                VLINE   = "VL",
+                VBLOCK  = "VB",
+                REPLACE = "R",
+                COMMAND = "C",
+                TERMINAL= "T",
+              }
+              return map[str] or str
+            end,
+            color = {
+              gui = "none",
+            },
+          },
+        },
+        -- lualine_a = {
+        --   {
+        --     "mode",
+        --     color = {
+        --       gui = "none",
+        --     },
+        --   },
+        -- },
         lualine_b = {
-          { "branch", icon = "" },
+          {
+            "branch",
+            icons_enabled = false,
+            color = {
+              fg = "#81A1C1",
+              bg = "#3B4252",
+            }
+          },
           { "diff", symbols = {added = ' ', modified = ' ', removed = ' '} },
           { "diagnostics", symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '} }
         },
-        ]]
-        lualine_c = { "filename" },
+        lualine_c = {
+          {
+            "filename",
+            file_status = true,
+            newfile_status = true,
+            path = 1,
+            shorting_target = 40,
+            symbols = { unnamed = "[Unnamed]" },
+            color = {
+              fg = "#81A1C1",
+              bg = "#2E3440",
+            }
+          }
+        },
         lualine_x = {},
         lualine_y = {},
-        lualine_z = {},
+        lualine_z = {
+          {
+            "location",
+            color = {
+              fg = "#81A1C1",
+              bg = "#2E3440",
+            }
+          }
+        },
       },
     })
   end,
