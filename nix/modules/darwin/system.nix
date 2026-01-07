@@ -33,6 +33,10 @@ in
           askForPassword = 1;
           askForPasswordDelay = 0;
         };
+        "com.apple.screencapture" = {
+          location = "~/Desktop";
+          type = "png";
+        };
         "com.apple.Spotlight" = {
           orderedItems = [
             { enabled = 1; name = "APPLICATIONS"; }
@@ -76,6 +80,7 @@ in
         NSAutomaticPeriodSubstitutionEnabled = false;
         NSAutomaticQuoteSubstitutionEnabled = false;
         NSAutomaticSpellingCorrectionEnabled = false;
+        AppleShowAllExtensions = true;
       };
       dock = {
         # 自動非表示を有効にする
