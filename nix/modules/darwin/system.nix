@@ -141,6 +141,7 @@ in
   # '';
 
   security.pam.services.sudo_local.touchIdAuth = true;
+  security.pam.services.sudo_local.reattach = true;
 
   # ============================================================
   # User / Shell
@@ -157,7 +158,9 @@ in
   # ============================================================
   # System Packages
   # ============================================================
-  environment.systemPackages = [ ];
+  environment.systemPackages = [
+    pkgs.pam-reattach
+  ];
 
   fonts.packages = with pkgs; [
     nerd-fonts.geist-mono
