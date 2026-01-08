@@ -40,6 +40,9 @@
                 nixpkgs = {
                   system = identity.system;
                   config.allowUnfree = true;
+                  overlays = [
+                    (import ./overlays/soroit.nix)
+                  ];
                 };
               }
 

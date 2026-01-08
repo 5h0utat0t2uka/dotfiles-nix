@@ -72,6 +72,11 @@
   "ui_font_family": ".ZedMono",
   "ui_font_weight": 300,
   "buffer_font_family": "Source Han Code JP",
+  "show_whitespaces": "selection",
+  "whitespace_map": {
+    "space": "•",
+    "tab": "→"
+  },
   "buffer_font_size": 13.5,
   "buffer_font_weight": 300,
   "tab_size": 2,
@@ -80,7 +85,7 @@
   "scroll_beyond_last_line": "off",
   "scroll_sensitivity": 1.2,
   "fast_scroll_sensitivity": 8.0,
-  "show_whitespaces": "selection",
+  // "show_whitespaces": "selection",
   "extend_comment_on_newline": false,
   "soft_wrap": "editor_width",
   "line_indicator_format": "long",

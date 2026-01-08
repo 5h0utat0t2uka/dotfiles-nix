@@ -166,6 +166,7 @@ in
     nerd-fonts.geist-mono
     source-han-code-jp
     udev-gothic-nf
+    soroit-loose-lg
   ];
 
   # ============================================================

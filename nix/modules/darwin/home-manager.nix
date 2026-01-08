@@ -42,8 +42,6 @@ in
     username = identity.username;
     homeDirectory = identity.homeDirectory;
     packages = with pkgs; [
-      nixd
-      nil
       bat
       chezmoi # 初回curl経由で入れるので消す予定
       delta
@@ -60,6 +58,8 @@ in
       neovim
       nb
       ni
+      nixd
+      nil
       nodejs_24
       onefetch
       pnpm
