@@ -41,7 +41,7 @@
                   system = identity.system;
                   config.allowUnfree = true;
                   overlays = [
-                    (import ./overlays/soroit.nix)
+                    (import ./overlays/shcode-jp-zen-haku.nix)
                   ];
                 };
               }

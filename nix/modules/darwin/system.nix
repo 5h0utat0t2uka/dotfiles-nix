@@ -165,8 +165,8 @@ in
   fonts.packages = with pkgs; [
     nerd-fonts.geist-mono
     source-han-code-jp
+    shcode-jp-zen-haku
     udev-gothic-nf
-    soroit-loose-lg
   ];
 
   # ============================================================
