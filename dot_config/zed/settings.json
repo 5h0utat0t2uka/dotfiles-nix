@@ -72,6 +72,7 @@
   "ui_font_family": ".ZedMono",
   "ui_font_weight": 300,
   "buffer_font_family": "Source Han Code JP",
+  // "buffer_font_family": "SoroitLoose BSLG",
   "show_whitespaces": "selection",
   "whitespace_map": {
     "space": "•",

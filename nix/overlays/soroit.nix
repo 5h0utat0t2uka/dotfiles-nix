@@ -10,7 +10,6 @@ final: prev: {
     };
 
     nativeBuildInputs = [ prev.unzip ];
-
     dontConfigure = true;
     dontBuild = true;
 
@@ -37,7 +36,6 @@ final: prev: {
         find source -maxdepth 3 -type f -print >&2
         exit 1
       fi
-
       runHook postInstall
     '';
 
@@ -45,7 +43,6 @@ final: prev: {
       description = "Soroit (Loose LG) font";
       homepage = "https://github.com/omonomo/Soroit";
       platforms = platforms.darwin ++ platforms.linux;
-      # license は正確に把握できないため未記載（必要ならリポジトリの LICENSE を確認して追記）
     };
   });
 }
