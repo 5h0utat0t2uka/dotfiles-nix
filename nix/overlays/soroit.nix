@@ -3,7 +3,6 @@ final: prev: {
   soroit-loose-lg = prev.stdenvNoCC.mkDerivation (finalAttrs: {
     pname = "soroit-loose-lg";
     version = "1.4.3";
-
     src = prev.fetchurl {
       url = "https://github.com/omonomo/Soroit/releases/download/v${finalAttrs.version}/SoroitLooseLG_v${finalAttrs.version}.zip";
       sha256 = "8b3787e3672a1fcb553d4e656c33a98b2ec7267c8ce2f8bc10f705435652ea5a";
@@ -24,7 +23,6 @@ final: prev: {
       runHook preInstall
       mkdir -p $out/share/fonts
 
-      # zip 内のフォントを階層問わず拾う
       found=0
       while IFS= read -r -d "" f; do
         found=1
