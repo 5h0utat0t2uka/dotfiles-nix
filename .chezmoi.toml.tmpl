@@ -6,3 +6,7 @@ system = "{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
 [edit]
 command = "/opt/homebrew/bin/zed"
 args = ["--wait"]
+
+[git]
+autoCommit = true
+autoPush = false
