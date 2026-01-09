@@ -2,10 +2,10 @@
 
 let
   zshPluginLinks = pkgs.linkFarm "zsh-plugin-links" [
-    # {
-    #   name = "share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
-    #   path = "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
-    # }
+    {
+      name = "share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
+      path = "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
+    }
     {
       name = "share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh";
       path = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
@@ -75,8 +75,8 @@ in
       # uv
       wget
       zbar
-      # zsh-syntax-highlighting
-      zsh-fast-syntax-highlighting
+      zsh-syntax-highlighting
+      # zsh-fast-syntax-highlighting
       zsh-autosuggestions
       zsh-completions
       zsh-abbr
