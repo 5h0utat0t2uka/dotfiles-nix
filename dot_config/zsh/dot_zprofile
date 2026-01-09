@@ -34,7 +34,9 @@ fi
 # Keep Nix paths ahead of Homebrew to avoid priority inversion.
 # Ensure NIX_PROFILE_PREFIX/bin is the first entry if NIX_PROFILE_PREFIX is set.
 if [[ -n "${NIX_PROFILE_PREFIX:-}" && -d "${NIX_PROFILE_PREFIX}/bin" ]]; then
-  path=("${NIX_PROFILE_PREFIX}/bin" "${path[@]:#${NIX_PROFILE_PREFIX}/bin}")
+  # Remove any existing occurrences first, then prepend.
+  path=("${path[@]:#${NIX_PROFILE_PREFIX}/bin}")
+  path=("${NIX_PROFILE_PREFIX}/bin" $path)
 fi
 
 export PATH
