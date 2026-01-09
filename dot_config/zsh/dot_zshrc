@@ -86,8 +86,6 @@ fi
 
 [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
 
-print -l -- $fpath | nl -ba | sed -n '1,80p' >&2
-
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$CACHE_DIR/.zcompcache"
 autoload -Uz compinit
