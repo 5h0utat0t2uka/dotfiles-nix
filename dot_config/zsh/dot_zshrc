@@ -50,20 +50,35 @@ if [[ -n "$TMUX" ]]; then
 fi
 
 # Completions
-BREW_PREFIX=/opt/homebrew
-ZSH_PLUGIN_DIR="${NIX_PROFILE_PREFIX:-}/share/zsh/plugins"
+# BREW_PREFIX=/opt/homebrew
+# ZSH_PLUGIN_DIR="${NIX_PROFILE_PREFIX:-}/share/zsh/plugins"
+
 # typeset -U fpath
 # local -a new_fpath=(
-#   "/etc/profiles/per-user/$USER/share/zsh/site-functions"(N-/)
+#   "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
 #   "$BREW_PREFIX/share/zsh/site-functions"(N-/)
 # )
 # [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
 
+# Completions
+
+# Prefer brew that is actually available; do not assume a fixed prefix.
+local BREW_PREFIX=""
+if command -v brew >/dev/null 2>&1; then
+  BREW_PREFIX="$(brew --prefix 2>/dev/null)"
+elif [[ -x /opt/homebrew/bin/brew ]]; then
+  BREW_PREFIX="$(/opt/homebrew/bin/brew --prefix 2>/dev/null)"
+fi
+
+ZSH_PLUGIN_DIR="${NIX_PROFILE_PREFIX:-}/share/zsh/plugins"
+
 typeset -U fpath
 local -a new_fpath=(
   "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
-  "$BREW_PREFIX/share/zsh/site-functions"(N-/)
 )
+if [[ -n "$BREW_PREFIX" ]]; then
+  new_fpath+=("$BREW_PREFIX/share/zsh/site-functions"(N-/))
+fi
 [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
 
 zstyle ':completion:*' use-cache on
