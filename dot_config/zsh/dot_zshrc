@@ -78,8 +78,6 @@ local -a new_fpath=(
   "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
 )
 
-# Add Homebrew site-functions only if _brew ultimately resolves to a real file.
-# This avoids compinit failures when a symlink exists but its target is missing.
 if [[ -n "$BREW_PREFIX" ]]; then
   if [[ -e "$BREW_PREFIX/share/zsh/site-functions/_brew" && -e "$BREW_PREFIX/completions/zsh/_brew" ]]; then
     new_fpath+=("$BREW_PREFIX/share/zsh/site-functions"(N-/))
@@ -87,6 +85,8 @@ if [[ -n "$BREW_PREFIX" ]]; then
 fi
 
 [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
+
+print -l -- $fpath | nl -ba | sed -n '1,80p' >&2
 
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$CACHE_DIR/.zcompcache"
