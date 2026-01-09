@@ -3,4 +3,5 @@
   hostname = "A3112";
   username = "shouta";
   homeDirectory = "/Users/shouta";
+  hasExistingHomebrew = true;
 }
