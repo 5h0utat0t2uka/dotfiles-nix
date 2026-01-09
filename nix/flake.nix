@@ -48,24 +48,15 @@
               }
 
               nix-homebrew.darwinModules.nix-homebrew
-              ({ config, ... }:
-                let
-                  identity = config._module.args.identity;
-                in
-                {
-                  nix-homebrew = {
-                    enable = true;
-                    # Apple Silicon で x86_64（Rosetta）側も使うなら true
-                    enableRosetta = true;
-                    # brew を使うユーザー
-                    user = identity.username;
-                    # 既存 Homebrew があるホストだけ移行を有効化
-                    autoMigrate = identity.hasExistingHomebrew or false;
-                    # 最初は taps を mutable のままにしておくのが安全
-                    # （後で immutable にして flake inputs 管理に寄せられる）
-                    mutableTaps = true;
-                  };
-                })
+              ({ identity, ... }: {
+                nix-homebrew = {
+                  enable = true;
+                  enableRosetta = false;
+                  user = identity.username;
+                  autoMigrate = identity.hasExistingHomebrew or false;
+                  mutableTaps = true;
+                };
+              })
 
               # home-manager を nix-darwin 経由で統合
               home-manager.darwinModules.home-manager
