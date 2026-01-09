@@ -158,12 +158,9 @@ in
   # ============================================================
   # System Packages
   # ============================================================
-  environment.etc."zshrc" = {
-    target = "static/zshrc";
-    source = builtins.path {
-      path = ../../assets/etc/zshrc;
-      name = "zshrc";
-    };
+  environment.etc."static/zshrc".source = builtins.path {
+    path = ../../assets/etc/zshrc;
+    name = "zshrc";
   };
   environment.systemPackages = [
     pkgs.pam-reattach
