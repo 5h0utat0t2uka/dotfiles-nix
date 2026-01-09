@@ -6,10 +6,6 @@ let
     #   name = "share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
     #   path = "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
     # }
-    # {
-    #   name = "share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh";
-    #   path = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh";
-    # }
     {
       name = "share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh";
       path = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
