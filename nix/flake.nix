@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,7 +14,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, ... } @inputs:
+  outputs = { self, nixpkgs, home-manager, darwin, nix-homebrew, ... } @inputs:
     let
       lib = nixpkgs.lib;
 
@@ -45,6 +46,26 @@
                   ];
                 };
               }
+
+              nix-homebrew.darwinModules.nix-homebrew
+              ({ config, ... }:
+                let
+                  identity = config._module.args.identity;
+                in
+                {
+                  nix-homebrew = {
+                    enable = true;
+                    # Apple Silicon で x86_64（Rosetta）側も使うなら true
+                    enableRosetta = true;
+                    # brew を使うユーザー
+                    user = identity.username;
+                    # 既存 Homebrew があるホストだけ移行を有効化
+                    autoMigrate = identity.hasExistingHomebrew or false;
+                    # 最初は taps を mutable のままにしておくのが安全
+                    # （後で immutable にして flake inputs 管理に寄せられる）
+                    mutableTaps = true;
+                  };
+                })
 
               # home-manager を nix-darwin 経由で統合
               home-manager.darwinModules.home-manager
