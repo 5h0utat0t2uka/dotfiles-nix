@@ -158,6 +158,9 @@ in
   # ============================================================
   # System Packages
   # ============================================================
+  environment.etc."zshrc" = {
+    source = ../assets/etc/zshrc;
+  };
   environment.systemPackages = [
     pkgs.pam-reattach
   ];
