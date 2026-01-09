@@ -158,7 +158,7 @@ in
   # ============================================================
   # System Packages
   # ============================================================
-  environment.etc."static/zshrc".source = builtins.path {
+  environment.etc."zshrc".source = builtins.path {
     path = ../../assets/etc/zshrc;
     name = "zshrc";
   };
@@ -173,6 +173,10 @@ in
     udev-gothic-nf
   ];
 
+  system.activationScripts.fixEtcZshrc.text = lib.mkBefore ''
+    # One-time cleanup: remove existing /etc/zshrc symlink so etc-setup can recreate it cleanly
+    rm -f /etc/zshrc
+  '';
   # ============================================================
   # Automatic Garbage Collection (launchd, root)
   # 毎週日曜日にAM3:00に`gc`
