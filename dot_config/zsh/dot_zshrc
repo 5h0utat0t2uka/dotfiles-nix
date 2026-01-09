@@ -63,6 +63,7 @@ fi
 # Completions
 
 # Prefer brew that is actually available; do not assume a fixed prefix.
+
 local BREW_PREFIX=""
 if command -v brew >/dev/null 2>&1; then
   BREW_PREFIX="$(brew --prefix 2>/dev/null)"
@@ -76,9 +77,15 @@ typeset -U fpath
 local -a new_fpath=(
   "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
 )
+
+# Add Homebrew site-functions only if _brew ultimately resolves to a real file.
+# This avoids compinit failures when a symlink exists but its target is missing.
 if [[ -n "$BREW_PREFIX" ]]; then
-  new_fpath+=("$BREW_PREFIX/share/zsh/site-functions"(N-/))
+  if [[ -e "$BREW_PREFIX/share/zsh/site-functions/_brew" && -e "$BREW_PREFIX/completions/zsh/_brew" ]]; then
+    new_fpath+=("$BREW_PREFIX/share/zsh/site-functions"(N-/))
+  fi
 fi
+
 [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
 
 zstyle ':completion:*' use-cache on
