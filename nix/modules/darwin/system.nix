@@ -161,7 +161,7 @@ in
   environment.etc."zshrc" = {
     target = "static/zshrc";
     source = builtins.path {
-      path = ../assets/etc/zshrc;
+      path = ../../assets/etc/zshrc;
       name = "zshrc";
     };
   };
