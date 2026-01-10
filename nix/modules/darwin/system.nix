@@ -131,14 +131,6 @@ in
       };
     };
   };
-  # system.stateVersion = 5;
-  # system.primaryUser = username;
-
-  # system.defaults.finder.AppleShowAllFiles = true;
-  # system.defaults.finder.FXPreferredViewStyle = "clmv";
-  # system.activationScripts.postActivation.text = lib.mkAfter ''
-  #   /usr/bin/killall Finder >/dev/null 2>&1 || true
-  # '';
 
   security.pam.services.sudo_local.touchIdAuth = true;
   security.pam.services.sudo_local.reattach = true;

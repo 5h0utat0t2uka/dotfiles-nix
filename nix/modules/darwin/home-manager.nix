@@ -27,7 +27,7 @@ in
     manpages.enable = false;
   };
 
-  # 重要: dotfile の実体は chezmoi が管理する前提なので HM では生成しない
+  # ドットファイルの実体は chezmoi で管理する前提なので home-manager では生成しない
   programs = {
     zsh.enable = false;
     git.enable = false;
