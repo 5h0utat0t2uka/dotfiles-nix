@@ -150,10 +150,14 @@ in
   # ============================================================
   # System Packages
   # ============================================================
-  environment.etc."zshrc".source = builtins.path {
+  # environment.etc."zshrc".source = builtins.path {
+  #   path = ../../assets/etc/zshrc;
+  #   name = "zshrc";
+  # };
+  environment.etc."zshrc".source = lib.mkForce (builtins.path {
     path = ../../assets/etc/zshrc;
     name = "zshrc";
-  };
+  });
   environment.systemPackages = [
     pkgs.pam-reattach
   ];
