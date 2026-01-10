@@ -17,6 +17,9 @@
 ```sh
 # 設定と確認
 sudo scutil --set LocalHostName <hostKey>
+sudo scutil --set ComputerName <hostKey>
+sudo scutil --set HostName <hostKey>
+
 scutil --get LocalHostName
 
 # インストールと確認
