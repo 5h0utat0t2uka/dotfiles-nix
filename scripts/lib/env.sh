@@ -1,26 +1,53 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-detect_repo_root() {
-  REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-  NIX_DIR="$REPO_ROOT/nix"
-  export REPO_ROOT NIX_DIR
+# Exports:
+#  - HOSTKEY
+#  - FLAKE_DIR
+#  - CHEZMOI_DIR
+#  - USERNAME
+
+detect_chezmoi_dir() {
+  # If chezmoi exists, ask it. Otherwise assume canonical path.
+  if command -v chezmoi >/dev/null 2>&1; then
+    CHEZMOI_DIR="$(chezmoi source-path 2>/dev/null || true)"
+  fi
+  : "${CHEZMOI_DIR:=${HOME}/.local/share/chezmoi}"
+  export CHEZMOI_DIR
+}
+
+detect_flake_dir() {
+  FLAKE_DIR="${CHEZMOI_DIR}/nix"
+  export FLAKE_DIR
 }
 
 detect_hostkey() {
   HOSTKEY="$(scutil --get LocalHostName 2>/dev/null || true)"
-  [[ -n "$HOSTKEY" ]] || die "LocalHostName is not set. Run: sudo scutil --set LocalHostName <key>"
+  [[ -n "${HOSTKEY}" ]] || return 1
   export HOSTKEY
 }
 
-# detect_ssh_setup
-# sets:
-#   SSH_GH_OK=1 if ssh -T git@github.com succeeds (non-interactive)
+detect_username() {
+  USERNAME="${USER}"
+  export USERNAME
+}
+
 detect_ssh_setup() {
-  SSH_GH_OK=0
-  if command -v ssh >/dev/null 2>&1; then
-    if ssh -o BatchMode=yes -o ConnectTimeout=5 -T git@github.com >/dev/null 2>&1; then
-      SSH_GH_OK=1
-    fi
+  # "Stage0 is done?" lightweight check:
+  # - ssh executable exists
+  # - at least one key exists OR ssh-agent has keys
+  local ok=0
+  command -v ssh >/dev/null 2>&1 || return 1
+
+  if compgen -G "${HOME}/.ssh/id_*" >/dev/null 2>&1; then
+    ok=1
   fi
-  export SSH_GH_OK
+
+  # If agent has keys, also OK
+  if ssh-add -L >/dev/null 2>&1; then
+    ok=1
+  fi
+
+  (( ok )) || return 1
+  return 0
 }

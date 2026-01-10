@@ -1,34 +1,44 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-ensure_host_config_exists() {
-  local host_dir="$NIX_DIR/hosts/darwin/$HOSTKEY"
-  [[ -d "$host_dir" ]] || die "Host config not found: nix/hosts/darwin/$HOSTKEY
-Create it, commit/push, then re-run."
+# Requires: log.sh for run/capture/die
+
+is_determinate_nix() {
+  # Heuristic: Determinate installs nix under /nix/var/nix/profiles/default/bin
+  local nix_path=""
+  nix_path="$(command -v nix 2>/dev/null || true)"
+  [[ "${nix_path}" == "/nix/var/nix/profiles/default/bin/nix" ]]
 }
 
-install_determinate_nix_if_needed() {
-  if command -v nix >/dev/null 2>&1; then
-    log_info "Nix already installed: $(command -v nix)"
-    return 0
-  fi
-
-  log_step "Installing Determinate Nix"
-  # Determinate installer (interactive parts are handled by the installer)
-  run curl -fsSL https://install.determinate.systems/nix
-  if [[ "${DRY_RUN:-0}" == "1" ]]; then
-    log_info "[dry-run] curl ... | sh -s -- install"
-  else
-    curl -fsSL https://install.determinate.systems/nix | sh -s -- install
-  fi
+ensure_nix_present() {
+  command -v nix >/dev/null 2>&1 || return 1
+  return 0
 }
 
-run_darwin_rebuild() {
-  log_step "Running darwin-rebuild switch"
+install_determinate_nix() {
+  # Minimal, non-interactive install. (You can adjust later if you want prompts.)
+  # Official installer endpoint:
+  # https://install.determinate.systems/nix
+  #
+  # NOTE: this runs as root via the installer script.
+  run sh -c 'curl -fsSL https://install.determinate.systems/nix | sh -s -- install --no-confirm'
+}
 
+darwin_switch_first_time() {
+  # Use nix run for first-time switch (works even if darwin-rebuild not in PATH yet)
+  # Usage: darwin_switch_first_time <flakeDir> <hostKey>
+  local flake_dir="$1"
+  local hostkey="$2"
+  run nix run github:LnL7/nix-darwin -- switch --flake "${flake_dir}#${hostkey}"
+}
+
+darwin_switch_normal() {
+  # Usage: darwin_switch_normal <flakeDir> <hostKey>
+  local flake_dir="$1"
+  local hostkey="$2"
   if command -v darwin-rebuild >/dev/null 2>&1; then
-    run darwin-rebuild switch --flake "$NIX_DIR#$HOSTKEY"
+    run sudo darwin-rebuild switch --flake "${flake_dir}#${hostkey}"
   else
-    # first-time bootstrap
-    run nix run github:LnL7/nix-darwin -- switch --flake "$NIX_DIR#$HOSTKEY"
+    darwin_switch_first_time "${flake_dir}" "${hostkey}"
   fi
 }

@@ -1,73 +1,111 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
-LIB_DIR="$SCRIPT_DIR/lib"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+LIB_DIR="${SCRIPT_DIR}/lib"
 
-# shellcheck source=/dev/null
-. "$LIB_DIR/log.sh"
-. "$LIB_DIR/env.sh"
-. "$LIB_DIR/nix.sh"
+source "${LIB_DIR}/log.sh"
+source "${LIB_DIR}/env.sh"
+source "${LIB_DIR}/nix.sh"
+source "${LIB_DIR}/summary.sh"
 
 usage() {
-  cat <<'EOF'
-Usage: ./setup.sh [--dry-run]
+  cat <<'USAGE'
+Usage: ./scripts/setup.sh [--dry-run] [--json] [--log <path>]
 
-Stage0 (manual):
-  - Set HostName
-  - Install CLT
-  - Prepare SSH key (generate or securely migrate) so repo access works
-EOF
+--dry-run   Print commands without executing
+--json      Print summary JSON at the end (in addition to normal summary)
+--log PATH  Save output to PATH (append)
+USAGE
 }
 
-DRY_RUN=0
-case "${1:-}" in
-  --dry-run) DRY_RUN=1 ;;
-  "" ) ;;
-  -h|--help) usage; exit 0 ;;
-  *) die "Unknown option: $1" ;;
-esac
-export DRY_RUN
+PRINT_JSON=0
 
-log_step "Starting setup"
-detect_repo_root
-detect_hostkey
-detect_ssh_setup
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --dry-run) DRY_RUN=1; shift ;;
+    --json) PRINT_JSON=1; shift ;;
+    --log) LOG_FILE="${2:-}"; [[ -n "${LOG_FILE}" ]] || die "--log requires a path"; shift 2 ;;
+    -h|--help) usage; exit 0 ;;
+    *) die "Unknown arg: $1" ;;
+  esac
+done
 
-log_step "Check env"
-command -v git >/dev/null 2>&1 || die "git not found (install CLT)"
-command -v ssh >/dev/null 2>&1 || die "ssh not found (install CLT)"
-if [[ "${SSH_GH_OK:-0}" == "1" ]]; then
-  log_info "SSH to GitHub looks OK (BatchMode)"
-else
-  log_warn "SSH to GitHub not confirmed. If repo access fails, fix SSH key / known_hosts."
-fi
+main() {
+  detect_chezmoi_dir
+  detect_flake_dir
+  detect_username
 
-ensure_host_config_exists
-install_determinate_nix_if_needed
-run_darwin_rebuild
-
-log_step "Summary"
-log_info "HOSTKEY: $HOSTKEY"
-log_info "flake:   $NIX_DIR#$HOSTKEY"
-
-if command -v nix >/dev/null 2>&1; then
-  log_info "nix:     $(command -v nix)"
-fi
-
-if command -v darwin-rebuild >/dev/null 2>&1; then
-  log_info "darwin-rebuild: $(command -v darwin-rebuild)"
-fi
-
-if command -v brew >/dev/null 2>&1; then
-  log_info "brew:    $(command -v brew)"
-  # dry-run でもこの2つは安全に読めるが、brewが対話するケースはゼロではないので抑制
-  if [[ "${DRY_RUN:-0}" != "1" ]]; then
-    log_info "prefix:  $(brew --prefix 2>/dev/null || echo "<failed>")"
-    log_info "brew -v: $(brew --version 2>/dev/null | head -n 1 || echo "<failed>")"
+  if ! detect_hostkey; then
+    _add_fail "LocalHostName is not set (Stage0 required): sudo scutil --set LocalHostName <hostKey>"
+    print_summary
+    exit 1
   fi
-else
-  log_warn "brew not found after rebuild (check nix-homebrew/homebrew module config)"
-fi
+  _add_ok "Detected hostKey: ${HOSTKEY}"
 
-log_success "Done"
+  local host_dir="${FLAKE_DIR}/hosts/darwin/${HOSTKEY}"
+  if [[ ! -d "${host_dir}" ]]; then
+    _add_fail "Missing host directory: ${host_dir}"
+    print_summary
+    exit 1
+  fi
+  _add_ok "Host directory exists: ${host_dir}"
+
+  # Stage0 checks (soft)
+  if xcode-select -p >/dev/null 2>&1; then
+    _add_ok "CLT installed (xcode-select -p)"
+  else
+    _add_warn "CLT not detected (run: xcode-select --install)"
+  fi
+
+  if detect_ssh_setup; then
+    _add_ok "SSH setup looks present (key or agent)"
+  else
+    _add_warn "SSH setup not detected (key/agent) - repo access may fail"
+  fi
+
+  # Ensure nix
+  if ensure_nix_present; then
+    _add_ok "nix is present"
+  else
+    _add_warn "nix not found - will install Determinate Nix"
+    install_determinate_nix
+  fi
+
+  # Switch
+  darwin_switch_normal "${FLAKE_DIR}" "${HOSTKEY}"
+  _add_ok "darwin switch executed"
+
+  # Post checks
+  if command -v brew >/dev/null 2>&1; then
+    _add_ok "brew is available"
+  else
+    _add_warn "brew not found after switch (check nix-homebrew config)"
+  fi
+
+  # /etc/zshrc contamination guard
+  if [[ -r /etc/zshrc ]] && rg -n 'brew shellenv' /etc/zshrc >/dev/null 2>&1; then
+    _add_warn "/etc/zshrc contains 'brew shellenv' (should be absent in this setup)"
+  else
+    _add_ok "/etc/zshrc has no 'brew shellenv'"
+  fi
+
+  if [[ -r /etc/zshrc ]] && rg -n 'promptinit|prompt suse' /etc/zshrc >/dev/null 2>&1; then
+    _add_warn "/etc/zshrc sets prompt (should be absent / minimal)"
+  else
+    _add_ok "/etc/zshrc does not set prompt"
+  fi
+
+  if [[ -r /etc/zshrc ]] && rg -n 'autoload -U compinit|compinit' /etc/zshrc >/dev/null 2>&1; then
+    _add_warn "/etc/zshrc runs compinit (your user zshrc should own it)"
+  else
+    _add_ok "/etc/zshrc does not run compinit"
+  fi
+
+  print_summary
+  if (( PRINT_JSON )); then
+    print_summary_json
+  fi
+}
+
+main "$@"
