@@ -43,7 +43,7 @@ in
     homeDirectory = identity.homeDirectory;
     packages = with pkgs; [
       bat
-      chezmoi # 初回curl経由で入れるので消す予定
+      # chezmoi
       delta
       eza
       fd
