@@ -221,15 +221,14 @@ tm() {
   tmux new -s "$session" 2>/dev/null || tmux attach -t "$session"
 }
 
-dot() {
-  # chezmoiの短縮
-  if [[ "$1" == "cd" ]]; then
-    chezmoi cd
-  else
-    chezmoi "$@"
-  fi
-}
-compdef dot=chezmoi
+# dot() {
+#   if [[ "$1" == "cd" ]]; then
+#     chezmoi cd
+#   else
+#     chezmoi "$@"
+#   fi
+# }
+# compdef dot=chezmoi
 
 fzf_command() {
   if [[ -n "$TMUX" ]] && command -v fzf-tmux >/dev/null 2>&1; then
