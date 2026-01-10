@@ -1,0 +1,21 @@
+Include /Users/shouta/.config/colima/ssh_config
+
+IgnoreUnknown UseKeychain
+
+Host *
+  UseKeychain yes
+  AddKeysToAgent yes
+  # IdentityFile ~/.ssh/id_ed25519
+
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_github
+  AddKeysToAgent yes
+  UseKeychain yes
+
+Host vultr
+  HostName 45.76.203.82
+  User shouta
+  IdentityFile ~/.ssh/id_ed25519_vultr
+  IdentitiesOnly yes
