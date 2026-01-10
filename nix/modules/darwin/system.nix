@@ -142,10 +142,16 @@ in
     home = identity.homeDirectory;
     shell = pkgs.zsh;
   };
-  programs = {
-    zsh.enable = true;
-  };
+  # programs = {
+  #   zsh.enable = true;
+  # };
   # programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    promptInit = "";
+    enableCompletion = false;
+    enableGlobalCompInit = false;
+  };
 
   # ============================================================
   # System Packages
