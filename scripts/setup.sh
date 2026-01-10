@@ -34,6 +34,7 @@ done
 main() {
   detect_chezmoi_dir
   detect_flake_dir
+  detect_zshenv_conflict
   detect_username
 
   if ! detect_hostkey; then

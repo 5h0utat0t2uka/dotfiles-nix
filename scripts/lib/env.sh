@@ -51,3 +51,22 @@ detect_ssh_setup() {
   (( ok )) || return 1
   return 0
 }
+
+detect_zshenv_conflict() {
+  local f="/etc/zshenv"
+  local backup="/etc/zshenv.before-nix-darwin"
+
+  [[ -e "$f" ]] || return 0
+
+  # nix 管理のリンクならOK（環境によりパスは変わるので readlink 成功時のみ判定）
+  if [[ -L "$f" ]]; then
+    local t; t="$(readlink "$f" || true)"
+    [[ "$t" == *"/nix/store/"* ]] && return 0
+  fi
+
+  # 既に退避済みなら何もしない
+  [[ -e "$backup" ]] && return 0
+
+  sudo mv "$f" "$backup"
+  echo "moved $f -> $backup"
+}
