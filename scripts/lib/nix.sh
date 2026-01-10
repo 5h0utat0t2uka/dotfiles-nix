@@ -5,9 +5,10 @@ set -euo pipefail
 
 is_determinate_nix() {
   # Heuristic: Determinate installs nix under /nix/var/nix/profiles/default/bin
-  local nix_path=""
-  nix_path="$(command -v nix 2>/dev/null || true)"
-  [[ "${nix_path}" == "/nix/var/nix/profiles/default/bin/nix" ]]
+  # local nix_path=""
+  # nix_path="$(command -v nix 2>/dev/null || true)"
+  # [[ "${nix_path}" == "/nix/var/nix/profiles/default/bin/nix" ]]
+  nix --version 2>/dev/null | rg -q 'Determinate Nix'
 }
 
 ensure_nix_present() {
@@ -29,16 +30,28 @@ darwin_switch_first_time() {
   # Usage: darwin_switch_first_time <flakeDir> <hostKey>
   local flake_dir="$1"
   local hostkey="$2"
-  run nix run github:LnL7/nix-darwin -- switch --flake "${flake_dir}#${hostkey}"
+  run sudo nix run github:LnL7/nix-darwin -- switch --flake "${flake_dir}#${hostkey}"
 }
 
 darwin_switch_normal() {
   # Usage: darwin_switch_normal <flakeDir> <hostKey>
   local flake_dir="$1"
   local hostkey="$2"
+
   if command -v darwin-rebuild >/dev/null 2>&1; then
     run sudo darwin-rebuild switch --flake "${flake_dir}#${hostkey}"
   else
-    darwin_switch_first_time "${flake_dir}" "${hostkey}"
+    run sudo nix run github:LnL7/nix-darwin -- switch --flake "${flake_dir}#${hostkey}"
+  fi
+}
+
+load_nix_profile() {
+  # Determinate / multi-user nix の典型
+  if [[ -r /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
+    # shellcheck disable=SC1091
+    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  elif [[ -r /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]]; then
+    # shellcheck disable=SC1091
+    . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
   fi
 }

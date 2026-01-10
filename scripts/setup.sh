@@ -70,6 +70,15 @@ main() {
   else
     _add_warn "nix not found - will install Determinate Nix"
     install_determinate_nix
+    load_nix_profile
+
+    if ensure_nix_present; then
+      _add_ok "nix is present (after install)"
+    else
+      _add_fail "nix still not found after install (open a new terminal once, or check Determinate install)"
+      print_summary
+      exit 1
+    fi
   fi
 
   # Switch
@@ -78,7 +87,9 @@ main() {
 
   # Post checks
   if command -v brew >/dev/null 2>&1; then
-    _add_ok "brew is available"
+    _add_ok "brew is available: $(command -v brew)"
+    _add_ok "brew prefix: $(brew --prefix 2>/dev/null || true)"
+    _add_ok "brew candidates: $(type -a brew | tr '\n' ';' | sed 's/;*$//')"
   else
     _add_warn "brew not found after switch (check nix-homebrew config)"
   fi

@@ -9,6 +9,7 @@ typeset -U path
 # Seed PATH (keep it minimal; further ordering is enforced at the end)
 path=(
   "$HOME/.local/bin"
+  "$HOME/bin"
   "/etc/profiles/per-user/$USER/bin"
   "/run/current-system/sw/bin"
   $path
