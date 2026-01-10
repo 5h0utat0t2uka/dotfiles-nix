@@ -12,3 +12,31 @@
 </div>
 
 ## 設定
+
+1. ホスト名の設定と`CLT`のインストールから`ssh`のキー生成もしくは復元  
+```sh
+# 設定と確認
+sudo scutil --set LocalHostName <hostKey>
+scutil --get LocalHostName
+
+# インストールと確認
+xcode-select --install
+xcode-select -p
+```
+> [!IMPORTANT]
+> `hostKey`は`nix/hosts/darwin/<hostKey>`のフォルダ名と一致してる必要があります  
+
+2. `chezmoi`の初期化をしてドットファイルの展開  
+```sh
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply <repository-url>
+```
+
+3. セットアップ  
+```sh
+cd ~/.local/share/chezmoi/scripts
+
+# 確認
+./setup.sh --dry-run
+# 実行
+./setup.sh
+```

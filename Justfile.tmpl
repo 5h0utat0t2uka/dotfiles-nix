@@ -2,7 +2,7 @@ set dotenv-load := false
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
 flake := "{{ .chezmoi.sourceDir }}/nix"
-hostname := `scutil --get LocalHostName 2>/dev/null || hostname -s`
+hostname := `scutil --get LocalHostName 2>/dev/null`
 
 check:
   nix flake check {{ "{{flake}}" }}

@@ -1,0 +1,32 @@
+name: nix-check
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  check:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Determinate Nix installer (recommended on macOS CI too)
+      - uses: DeterminateSystems/nix-installer-action@v10
+
+      # Optional: make sure flakes are enabled (usually already enabled)
+      - name: Nix info
+        run: nix --version
+
+      - name: flake check
+        run: |
+          cd nix
+          nix flake check
+
+      - name: eval each darwin host
+        run: |
+          cd nix
+          for h in $(ls -1 hosts/darwin | sed '/^\./d'); do
+            echo "==> evaluating $h"
+            nix eval ".#darwinConfigurations.${h}.config.system.build.toplevel" >/dev/null
+          done
