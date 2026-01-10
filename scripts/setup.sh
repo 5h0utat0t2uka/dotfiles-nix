@@ -11,11 +11,10 @@ source "${LIB_DIR}/summary.sh"
 
 usage() {
   cat <<'USAGE'
-Usage: ./scripts/setup.sh [--dry-run] [--json] [--log <path>]
-
---dry-run   Print commands without executing
---json      Print summary JSON at the end (in addition to normal summary)
---log PATH  Save output to PATH (append)
+Usage: ./scripts/setup.sh [--dry-run] [--json] [--log PATH]
+  --dry-run   Print commands without executing
+  --json      Print summary JSON at the end (in addition to normal summary)
+  --log PATH  Save output to PATH (append)
 USAGE
 }
 
@@ -25,7 +24,11 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --dry-run) DRY_RUN=1; shift ;;
     --json) PRINT_JSON=1; shift ;;
-    --log) LOG_FILE="${2:-}"; [[ -n "${LOG_FILE}" ]] || die "--log requires a path"; shift 2 ;;
+    --log)
+      LOG_FILE="${2:-}"
+      [[ -n "${LOG_FILE}" ]] || die "--log requires a path"
+      shift 2
+      ;;
     -h|--help) usage; exit 0 ;;
     *) die "Unknown arg: $1" ;;
   esac
@@ -65,21 +68,17 @@ main() {
     _add_warn "SSH setup not detected (key/agent) - repo access may fail"
   fi
 
-  # Ensure nix
+  # Ensure nix (NO AUTO-INSTALL)
   if ensure_nix_present; then
     _add_ok "nix is present"
   else
-    _add_warn "nix not found - will install Determinate Nix"
-    install_determinate_nix
-    load_nix_profile
-
-    if ensure_nix_present; then
-      _add_ok "nix is present (after install)"
+    if detect_nix_store_volume; then
+      _add_fail "nix not found, but APFS volume 'Nix Store' exists. Install Determinate Nix via Determinate.pkg. If the installer fails due to store/keychain mismatch, delete the 'Nix Store' volume first, then re-run the pkg installer."
     else
-      _add_fail "nix still not found after install (open a new terminal once, or check Determinate install)"
-      print_summary
-      exit 1
+      _add_fail "nix not found. Install Determinate Nix via Determinate.pkg, then re-run ./scripts/setup.sh"
     fi
+    print_summary
+    exit 1
   fi
 
   # Switch

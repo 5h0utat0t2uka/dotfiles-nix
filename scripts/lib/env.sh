@@ -2,10 +2,10 @@
 set -euo pipefail
 
 # Exports:
-#  - HOSTKEY
-#  - FLAKE_DIR
-#  - CHEZMOI_DIR
-#  - USERNAME
+# - HOSTKEY
+# - FLAKE_DIR
+# - CHEZMOI_DIR
+# - USERNAME
 
 detect_chezmoi_dir() {
   # If chezmoi exists, ask it. Otherwise assume canonical path.
@@ -53,20 +53,29 @@ detect_ssh_setup() {
 }
 
 detect_zshenv_conflict() {
+  # nix-darwin activation fails if /etc/zshenv exists but is not managed by nix.
+  # We move it aside idempotently.
   local f="/etc/zshenv"
   local backup="/etc/zshenv.before-nix-darwin"
 
   [[ -e "$f" ]] || return 0
 
-  # nix 管理のリンクならOK（環境によりパスは変わるので readlink 成功時のみ判定）
+  # If it's already a nix store symlink, it's fine.
   if [[ -L "$f" ]]; then
-    local t; t="$(readlink "$f" || true)"
+    local t
+    t="$(readlink "$f" || true)"
     [[ "$t" == *"/nix/store/"* ]] && return 0
   fi
 
-  # 既に退避済みなら何もしない
+  # Already backed up → do nothing
   [[ -e "$backup" ]] && return 0
 
   sudo mv "$f" "$backup"
   echo "moved $f -> $backup"
+}
+
+detect_nix_store_volume() {
+  # Returns 0 if an APFS volume named "Nix Store" exists.
+  # We intentionally do NOT assume it's mounted.
+  diskutil apfs list 2>/dev/null | grep -qE 'APFS Volume[[:space:]].*Nix Store|Name:[[:space:]]*Nix Store'
 }
