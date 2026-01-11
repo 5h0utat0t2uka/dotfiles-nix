@@ -185,6 +185,9 @@ in
 
   fonts.packages = with pkgs; [
     nerd-fonts.geist-mono
+    # nerd-fonts.iosevka
+    # nerd-fonts.iosevka-term
+    # nerd-fonts.iosevka-term-slab
     source-han-code-jp
     shcode-jp-zen-haku
     udev-gothic-nf

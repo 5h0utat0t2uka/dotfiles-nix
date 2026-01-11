@@ -43,7 +43,6 @@ in
     homeDirectory = identity.homeDirectory;
     packages = with pkgs; [
       bat
-      # chezmoi
       delta
       eza
       fd
