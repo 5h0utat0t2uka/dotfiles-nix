@@ -18,9 +18,9 @@ in
     primaryUser = username;
     defaults = {
       CustomUserPreferences = {
-        NSGlobalDomain = {
-          WebKitDeveloperExtras = true;
-        };
+        # NSGlobalDomain = {
+        #   WebKitDeveloperExtras = true;
+        # };
         "com.apple.desktopservices" = {
           # .DS_Storeファイルを書き込まない
           DSDontWriteNetworkStores = true;
@@ -63,17 +63,10 @@ in
         #   location = "~/Documents";
         #   type = "png";
         # };
-        # Safari Developer設定
         "com.apple.Safari" = {
-          # Developメニューを有効化（"Show features for web developers"）
           IncludeDevelopMenu = true;
-
-          # Web Inspector有効化
           WebKitDeveloperExtrasEnabledPreferenceKey = true;
-          "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" = true;
-
-          # （オプション）Internal Debug Menuも有効化したい場合
-          # IncludeInternalDebugMenu = true;
+          WebContinuousSpellCheckingEnabled = true;
         };
       };
       NSGlobalDomain = {
@@ -89,7 +82,7 @@ in
         NSAutomaticQuoteSubstitutionEnabled = false;
         NSAutomaticSpellingCorrectionEnabled = false;
         AppleShowAllExtensions = true;
-        # WebKitDeveloperExtras = true;
+        WebKitDeveloperExtras = true;
         # キーリピート速度（最速）
         # 範囲: 120（遅い） ~ 2（最速）
         # UIでは6段階: 120, 90, 60, 30, 12, 6, 2
