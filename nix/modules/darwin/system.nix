@@ -28,60 +28,66 @@ in
           JIMPrefLiveConversionKey = 0;
           JIMPrefAutocorrectionKey = 0;
         };
-        "com.apple.screensaver" = {
-          # スクリーンセーバー開始後パスワード要求
-          askForPassword = 1;
-          askForPasswordDelay = 0;
-        };
-        "com.apple.screencapture" = {
-          location = "~/Desktop";
-          type = "png";
-        };
-        "com.apple.Spotlight" = {
+
+        "com.apple.spotlight" = {
           orderedItems = [
-            { enabled = 1; name = "APPLICATIONS"; }
-            { enabled = 1; name = "SHORTCUTS"; }
+            { enabled = true; name = "APPLICATIONS"; }
+            { enabled = true; name = "SHORTCUTS"; }
             # 以下、不要な項目をすべて無効化
-            { enabled = 0; name = "ACTIONS"; }
-            { enabled = 0; name = "CLIPBOARD"; }
-            { enabled = 0; name = "DIRECTORIES"; }
-            { enabled = 0; name = "DOCUMENTS"; }
-            { enabled = 0; name = "PDF"; }
-            { enabled = 0; name = "MESSAGES"; }
-            { enabled = 0; name = "CONTACT"; }
-            { enabled = 0; name = "EVENT_TODO"; }
-            { enabled = 0; name = "IMAGES"; }
-            { enabled = 0; name = "BOOKMARKS"; }
-            { enabled = 0; name = "MUSIC"; }
-            { enabled = 0; name = "MOVIES"; }
-            { enabled = 0; name = "PRESENTATIONS"; }
-            { enabled = 0; name = "SPREADSHEETS"; }
-            { enabled = 0; name = "SOURCE"; }
-            { enabled = 0; name = "MENU_DEFINITION"; }
-            { enabled = 0; name = "MENU_OTHER"; }
-            { enabled = 0; name = "MENU_CONVERSION"; }
-            { enabled = 0; name = "MENU_EXPRESSION"; }
-            { enabled = 0; name = "MENU_SPOTLIGHT_SUGGESTIONS"; }
+            { enabled = false; name = "ACTIONS"; }
+            { enabled = false; name = "CLIPBOARD"; }
+            { enabled = false; name = "DIRECTORIES"; }
+            { enabled = false; name = "DOCUMENTS"; }
+            { enabled = false; name = "PDF"; }
+            { enabled = false; name = "MESSAGES"; }
+            { enabled = false; name = "CONTACT"; }
+            { enabled = false; name = "EVENT_TODO"; }
+            { enabled = false; name = "IMAGES"; }
+            { enabled = false; name = "BOOKMARKS"; }
+            { enabled = false; name = "MUSIC"; }
+            { enabled = false; name = "MOVIES"; }
+            { enabled = false; name = "PRESENTATIONS"; }
+            { enabled = false; name = "SPREADSHEETS"; }
+            { enabled = false; name = "SOURCE"; }
+            { enabled = false; name = "MENU_DEFINITION"; }
+            { enabled = false; name = "MENU_OTHER"; }
+            { enabled = false; name = "MENU_CONVERSION"; }
+            { enabled = false; name = "MENU_EXPRESSION"; }
+            { enabled = false; name = "MENU_SPOTLIGHT_SUGGESTIONS"; }
           ];
         };
         # "com.apple.screencapture" = {
         #   location = "~/Documents";
         #   type = "png";
         # };
-        NSGlobalDomain = {
-          WebKitDeveloperExtras = true;
-        };
       };
       NSGlobalDomain = {
         # トラックパッドのスクロール方向
         "com.apple.swipescrolldirection" = false;
+        # トラックパッドのスピード
+        # 範囲: 0.0 ~ 3.0
+        # デフォルト: 1.0
+        "com.apple.trackpad.scaling" = 2.5;
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticDashSubstitutionEnabled = false;
         NSAutomaticPeriodSubstitutionEnabled = false;
         NSAutomaticQuoteSubstitutionEnabled = false;
         NSAutomaticSpellingCorrectionEnabled = false;
         AppleShowAllExtensions = true;
+        WebKitDeveloperExtras = true;
+        # キーリピート速度（最速）
+        # 範囲: 120（遅い） ~ 2（最速）
+        # UIでは6段階: 120, 90, 60, 30, 12, 6, 2
+        # 最速 = 2
+        KeyRepeat = 2;
+
+        # キーリピート開始までの遅延（最速）
+        # 範囲: 120（長い） ~ 15（短い）
+        # UIでは6段階: 120, 94, 68, 35, 25, 15
+        # 最速 = 15
+        InitialKeyRepeat = 15;
       };
+
       dock = {
         # 自動非表示を有効にする
         autohide = true;
@@ -93,13 +99,14 @@ in
         static-only = true;
         # ホットコーナー(左下)でスクリーンセーバ
         wvous-bl-corner = 5;
-        # ホットコーナー(右下)でデスクトップ表示
-        wvous-br-corner = 4;
+        # ホットコーナー(右下)未指定
+        wvous-br-corner = 1;
         # ホットコーナー(左上)未指定
         wvous-tl-corner = 1;
-        # ホットコーナー(右上)でミッションコントロール
-        wvous-tr-corner = 2;
+        # ホットコーナー(右上)でデスクトップ表示
+        wvous-tr-corner = 4;
       };
+
       finder = {
         # 拡張子を常に表示する
         AppleShowAllExtensions = true;
@@ -108,6 +115,7 @@ in
         # カラム表示
         FXPreferredViewStyle = "clmv";
       };
+
       menuExtraClock = {
         # メニューバーの時計を24時間表示にする
         Show24Hour = true;
@@ -120,12 +128,16 @@ in
         # 秒は表示しない
         ShowSeconds = false;
       };
+
       trackpad = {
         # トラックパッドの右クリックを有効にする
         TrackpadRightClick = true;
       };
+
       screencapture = {
         # スクリーンショットのサムネイル無効
+        location = "~/Desktop";
+        type = "png";
         show-thumbnail = false;
         disable-shadow = true;
       };
