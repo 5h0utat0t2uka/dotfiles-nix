@@ -32,6 +32,7 @@ xcode-select -p
 2. `chezmoi`の初期化をしてドットファイルの展開  
 ```sh
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply <repository-url>
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin" "$HOME/.local/bin/chezmoi" init --apply <repository-url>
 ```
 
 3. `Nix`を未インストールの場合は [Determinate](https://docs.determinate.systems) からインストールして確認  
