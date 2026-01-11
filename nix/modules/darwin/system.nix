@@ -60,10 +60,10 @@ in
         #   location = "~/Documents";
         #   type = "png";
         # };
-        "com.apple.Safari" = {
-          IncludeDevelopMenu = true;
-          WebKitDeveloperExtrasEnabledPreferenceKey = true;
-        };
+        # "com.apple.Safari" = {
+        #   IncludeDevelopMenu = true;
+        #   WebKitDeveloperExtrasEnabledPreferenceKey = true;
+        # };
       };
       NSGlobalDomain = {
         # トラックパッドのスクロール方向
