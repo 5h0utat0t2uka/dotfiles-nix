@@ -34,7 +34,13 @@ xcode-select -p
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply <repository-url>
 ```
 
-3. セットアップ  
+3. `Nix`を未インストールの場合は [Determinate](https://docs.determinate.systems) からインストールして確認  
+```sh
+nix --version
+# nix (Determinate Nix 3.15.1) 2.33.0
+```
+
+4. セットアップ  
 ```sh
 cd ~/.local/share/chezmoi/scripts
 
