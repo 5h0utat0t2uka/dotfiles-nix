@@ -18,9 +18,6 @@ in
     primaryUser = username;
     defaults = {
       CustomUserPreferences = {
-        # NSGlobalDomain = {
-        #   WebKitDeveloperExtras = true;
-        # };
         "com.apple.desktopservices" = {
           # .DS_Storeファイルを書き込まない
           DSDontWriteNetworkStores = true;
@@ -66,7 +63,6 @@ in
         "com.apple.Safari" = {
           IncludeDevelopMenu = true;
           WebKitDeveloperExtrasEnabledPreferenceKey = true;
-          WebContinuousSpellCheckingEnabled = true;
         };
       };
       NSGlobalDomain = {
@@ -82,7 +78,6 @@ in
         NSAutomaticQuoteSubstitutionEnabled = false;
         NSAutomaticSpellingCorrectionEnabled = false;
         AppleShowAllExtensions = true;
-        WebKitDeveloperExtras = true;
         # キーリピート速度（最速）
         # 範囲: 120（遅い） ~ 2（最速）
         # UIでは6段階: 120, 90, 60, 30, 12, 6, 2
