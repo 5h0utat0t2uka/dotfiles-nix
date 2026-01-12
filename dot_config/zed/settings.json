@@ -73,15 +73,8 @@
   "ui_font_weight": 300,
 
   // "buffer_font_family": "Source Han Code JP",
-  // "buffer_font_family": "SHCode JP Zen Haku",
-
-  // "buffer_font_family": "Iosevka Nerd Font Mono",
-  "buffer_font_family": "IosevkaTerm Nerd Font",
-  "buffer_font_features": {
-    "extended": true
-  },
-  "buffer_font_weight": 400,
-  // "buffer_font_weight": 300,
+  "buffer_font_family": "SHCode JP Zen Haku",
+  "buffer_font_weight": 300,
   "buffer_font_size": 13.8,
   "tab_size": 2,
   "colorize_brackets": false,
