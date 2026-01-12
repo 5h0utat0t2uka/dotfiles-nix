@@ -2,6 +2,7 @@
 
 let
   username = identity.username;
+  userShell = "${pkgs.zsh}/bin/zsh";
   nixBin = "/nix/var/nix/profiles/default/bin";
 in
 {
@@ -159,7 +160,8 @@ in
   # };
   users.users.${username} = {
     home = identity.homeDirectory;
-    shell = "${pkgs.zsh}/bin/zsh";
+    # shell = "${pkgs.zsh}/bin/zsh";
+    shell = userShell;
   };
 
   programs.zsh = {
@@ -172,6 +174,9 @@ in
   # ============================================================
   # System Packages
   # ============================================================
+  environment.etc."shells".text = lib.mkAfter ''
+    ${userShell}
+  '';
   environment.etc."zshrc".source = lib.mkForce (builtins.path {
     path = ../../assets/etc/zshrc;
     name = "zshrc";
