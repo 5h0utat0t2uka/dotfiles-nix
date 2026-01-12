@@ -153,14 +153,15 @@ in
   # ============================================================
   # User / Shell
   # ============================================================
+  # users.users.${username} = {
+  #   home = identity.homeDirectory;
+  #   shell = pkgs.zsh;
+  # };
   users.users.${username} = {
     home = identity.homeDirectory;
-    shell = pkgs.zsh;
+    shell = "${pkgs.zsh}/bin/zsh";
   };
-  # programs = {
-  #   zsh.enable = true;
-  # };
-  # programs.zsh.enable = true;
+
   programs.zsh = {
     enable = true;
     promptInit = "";
@@ -171,10 +172,6 @@ in
   # ============================================================
   # System Packages
   # ============================================================
-  # environment.etc."zshrc".source = builtins.path {
-  #   path = ../../assets/etc/zshrc;
-  #   name = "zshrc";
-  # };
   environment.etc."zshrc".source = lib.mkForce (builtins.path {
     path = ../../assets/etc/zshrc;
     name = "zshrc";
