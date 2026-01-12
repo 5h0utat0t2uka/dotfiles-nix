@@ -75,7 +75,8 @@
   // "buffer_font_family": "Source Han Code JP",
   // "buffer_font_family": "SHCode JP Zen Haku",
 
-  "buffer_font_family": "Iosevka Nerd Font Mono",
+  // "buffer_font_family": "Iosevka Nerd Font Mono",
+  "buffer_font_family": "IosevkaTerm Nerd Font",
   "buffer_font_features": {
     "extended": true
   },
