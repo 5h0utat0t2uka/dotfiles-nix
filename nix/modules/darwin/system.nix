@@ -160,7 +160,6 @@ in
   # };
   users.users.${username} = {
     home = identity.homeDirectory;
-    # shell = "${pkgs.zsh}/bin/zsh";
     shell = userShell;
   };
 
@@ -174,9 +173,9 @@ in
   # ============================================================
   # System Packages
   # ============================================================
-  environment.etc."shells".text = lib.mkAfter ''
-    ${userShell}
-  '';
+  environment.shells = [
+    pkgs.zsh
+  ];
   environment.etc."zshrc".source = lib.mkForce (builtins.path {
     path = ../../assets/etc/zshrc;
     name = "zshrc";
