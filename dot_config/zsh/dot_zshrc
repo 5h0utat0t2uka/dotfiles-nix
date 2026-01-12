@@ -221,15 +221,6 @@ tm() {
   tmux new -s "$session" 2>/dev/null || tmux attach -t "$session"
 }
 
-# dot() {
-#   if [[ "$1" == "cd" ]]; then
-#     chezmoi cd
-#   else
-#     chezmoi "$@"
-#   fi
-# }
-# compdef dot=chezmoi
-
 fzf_command() {
   if [[ -n "$TMUX" ]] && command -v fzf-tmux >/dev/null 2>&1; then
     echo "fzf-tmux $FZF_TMUX_OPTS"
@@ -379,11 +370,6 @@ chpwd() {
 if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
-
-# zsh-syntax-highlighting (https://github.com/zdharma-continuum/fast-syntax-highlighting)
-# if [[ -r "$ZSH_PLUGIN_DIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ]]; then
-#   source "$ZSH_PLUGIN_DIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-# fi
 
 if [[ -r "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
   source "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

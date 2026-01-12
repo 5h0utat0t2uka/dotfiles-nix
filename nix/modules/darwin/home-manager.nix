@@ -50,6 +50,7 @@ in
       git
       gh
       ghq
+      glow
       gnupg
       just
       jq
