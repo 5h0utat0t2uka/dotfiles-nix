@@ -154,10 +154,6 @@ in
   # ============================================================
   # User / Shell
   # ============================================================
-  # users.users.${username} = {
-  #   home = identity.homeDirectory;
-  #   shell = pkgs.zsh;
-  # };
   users.users.${username} = {
     home = identity.homeDirectory;
     shell = userShell;

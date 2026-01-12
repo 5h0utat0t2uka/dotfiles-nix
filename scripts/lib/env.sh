@@ -79,3 +79,48 @@ detect_nix_store_volume() {
   # We intentionally do NOT assume it's mounted.
   diskutil apfs list 2>/dev/null | grep -qE 'APFS Volume[[:space:]].*Nix Store|Name:[[:space:]]*Nix Store'
 }
+
+get_current_usershell() {
+  # prints current login shell (e.g. /bin/zsh)
+  dscl . -read "/Users/${USER}" UserShell 2>/dev/null | awk '{print $2}'
+}
+
+ensure_login_shell_zsh() {
+  local desired="/run/current-system/sw/bin/zsh"
+  local current
+  current="$(get_current_usershell || true)"
+
+  if [[ -z "${current}" ]]; then
+    _add_warn "Could not read UserShell via dscl (skipping login shell check)"
+    return 0
+  fi
+
+  if [[ "${current}" == "${desired}" ]]; then
+    _add_ok "UserShell already set: ${current}"
+    return 0
+  fi
+
+  if [[ ! -x "${desired}" ]]; then
+    _add_warn "Desired shell not found/executable: ${desired} (skipping chsh)"
+    return 0
+  fi
+
+  # /etc/shells must include desired path for chsh to succeed
+  if ! grep -q -F "${desired}" /etc/shells 2>/dev/null; then
+    _add_warn "Missing ${desired} in /etc/shells (cannot chsh automatically)"
+    _add_warn "Run: sudo darwin-rebuild switch, then ensure /etc/shells contains it"
+    return 0
+  fi
+
+  if [[ "${DRY_RUN:-0}" -eq 1 ]]; then
+    _add_ok "DRY-RUN: would run: chsh -s ${desired}"
+    return 0
+  fi
+
+  # chsh prompts for password (expected). We treat failure as warning to keep setup running.
+  if chsh -s "${desired}"; then
+    _add_ok "Changed UserShell to: ${desired}"
+  else
+    _add_warn "Failed to run chsh (you may need to run manually): chsh -s ${desired}"
+  fi
+}

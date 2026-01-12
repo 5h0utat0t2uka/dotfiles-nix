@@ -85,6 +85,9 @@ main() {
   darwin_switch_normal "${FLAKE_DIR}" "${HOSTKEY}"
   _add_ok "darwin switch executed"
 
+  # Ensure login shell (UserShell) uses nix-darwin zsh
+  ensure_login_shell_zsh
+
   # Post checks
   if command -v brew >/dev/null 2>&1; then
     _add_ok "brew is available: $(command -v brew)"
@@ -101,13 +104,13 @@ main() {
     _add_ok "/etc/zshrc has no 'brew shellenv'"
   fi
 
-  if [[ -r /etc/zshrc ]] && rg -n 'promptinit|prompt suse' /etc/zshrc >/dev/null 2>&1; then
-    _add_warn "/etc/zshrc sets prompt (should be absent / minimal)"
+  if [[ -r /etc/zshrc ]] && rg -n '^\s*[^#].*\bpromptinit\b' /etc/zshrc >/dev/null 2>&1; then
+    _add_warn "/etc/zshrc runs promptinit (should be absent / minimal)"
   else
-    _add_ok "/etc/zshrc does not set prompt"
+    _add_ok "/etc/zshrc does not run promptinit"
   fi
 
-  if [[ -r /etc/zshrc ]] && rg -n 'autoload -U compinit|compinit' /etc/zshrc >/dev/null 2>&1; then
+  if [[ -r /etc/zshrc ]] && rg -n '^\s*[^#].*\bcompinit\b' /etc/zshrc >/dev/null 2>&1; then
     _add_warn "/etc/zshrc runs compinit (your user zshrc should own it)"
   else
     _add_ok "/etc/zshrc does not run compinit"
