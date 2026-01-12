@@ -42,7 +42,7 @@
                   system = identity.system;
                   config.allowUnfree = true;
                   overlays = [
-                    (import ./overlays/shcode-jp-zen-haku.nix)
+                    (import ./overlays/fonts/shcode-jp-zen-haku.nix)
                   ];
                 };
               }
