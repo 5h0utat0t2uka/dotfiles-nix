@@ -319,7 +319,7 @@ fzf_nb() {
     $(fzf_command) \
     --query "$LBUFFER" \
     --prompt="❯${NBSP}" \
-    --preview 'CLICOLOR_FORCE=1 COLORTERM=truecolor nb show $(echo {} | tr -d "[]" | awk "{print \$1}") --no-color | glow -s dark'
+    --preview 'CLICOLOR_FORCE=1 COLORTERM=truecolor glow -s dark <(nb show $(echo {} | tr -d "[]" | awk "{print \$1}") --no-color)'
   )
   [[ -z "$selected" ]] && { zle -R; return 0; }
   local note_id=$(echo "$selected" | tr -d '[]' | awk '{print $1}')
