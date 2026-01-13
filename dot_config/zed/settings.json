@@ -69,7 +69,8 @@
   //   "light": "Zed (Default)"
   // },
   "ui_font_size": 16,
-  "ui_font_family": ".ZedMono",
+  // "ui_font_family": ".ZedMono",
+  "ui_font_family": "GeistMono Nerd Font Mono",
   "ui_font_weight": 300,
 
   // "buffer_font_family": "Source Han Code JP",
