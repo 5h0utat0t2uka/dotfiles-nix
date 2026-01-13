@@ -61,6 +61,7 @@ in
       nixd
       nil
       nodejs_24
+      npm-check-updates
       onefetch
       pnpm
       (pass.withExtensions (exts: [
