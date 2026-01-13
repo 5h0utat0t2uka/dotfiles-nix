@@ -44,6 +44,7 @@ in
     packages = with pkgs; [
       bat
       delta
+      devbox
       eza
       fd
       fzf
@@ -61,7 +62,6 @@ in
       nixd
       nil
       nodejs_24
-      npm-check-updates
       onefetch
       pnpm
       (pass.withExtensions (exts: [
