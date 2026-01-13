@@ -34,7 +34,6 @@
     # =========================[ Line #1 ]=========================
     # os_icon               # os identifier
     host
-    custom_devbox
     dir                     # current directory
     vcs                     # git status
     # =========================[ Line #2 ]=========================
@@ -374,10 +373,11 @@
   typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
 
   # devbox
-  function prompt_custom_devbox() {
-    [[ "${DEVBOX_SHELL_ENABLED-}" == "1" ]] || return
-    p10k segment -f 6 -t '[devbox]'
-  }
+  # function prompt_custom_devbox() {
+  #   [[ "${DEVBOX_SHELL_ENABLED-}" == "1" ]] || return
+  #   p10k segment -f 6 -t '[devbox]'
+  # }
+
   # Formatter for Git status.
   #
   # Example output: master wip 4242 *42 merge ~42 +42 !42 ?42.
