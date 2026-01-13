@@ -77,7 +77,7 @@ return {
             },
             color = {
               fg = "#81A1C1",
-              bg = "#3B4252",
+              bg = "#2E3440",
             }
           },
           { "diagnostics", symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '} }
