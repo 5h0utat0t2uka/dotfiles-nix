@@ -329,23 +329,22 @@ fzf_nb() {
 zle -N fzf_nb
 bindkey '^n' fzf_nb
 
-chpwd() {
-  [[ $PWD -ef $HOME ]] && return
-  local pattern="/($(IFS='|'; echo "${IGNORE_DIRS[*]}"))"
-  [[ $PWD =~ $pattern ]] && return
+# Gitリポジトリのルートディレクトリでのみonefetchそれ以外はeza
+# chpwd() {
+#   [[ $PWD -ef $HOME ]] && return
+#   local pattern="/($(IFS='|'; echo "${IGNORE_DIRS[*]}"))"
+#   [[ $PWD =~ $pattern ]] && return
 
-  # Gitリポジトリのルートディレクトリでのみonefetchを実行
-  if git rev-parse --is-inside-work-tree &>/dev/null; then
-    printf '\n'
-    local git_root=$(git rev-parse --show-toplevel 2>/dev/null)
-    if [[ "$PWD" == "$git_root" ]] && command -v onefetch &>/dev/null; then
-      onefetch --no-art --no-title --no-color-palette --disabled-fields lines-of-code authors churn url last-change
-      return
-    fi
-  fi
-  # それ以外はeza
-  command eza -al --color=never -o --time-style=long-iso -F always
-}
+#   if git rev-parse --is-inside-work-tree &>/dev/null; then
+#     printf '\n'
+#     local git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+#     if [[ "$PWD" == "$git_root" ]] && command -v onefetch &>/dev/null; then
+#       onefetch --no-art --no-title --no-color-palette --disabled-fields lines-of-code authors churn url last-change
+#       return
+#     fi
+#   fi
+#   command eza -al --color=never -o --time-style=long-iso -F always
+# }
 
 # .zshrc, p10kのコンパイル（次回起動時の高速化）
 () {
