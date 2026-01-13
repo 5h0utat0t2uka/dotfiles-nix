@@ -47,7 +47,7 @@ return {
               return map[str] or str
             end,
             color = {
-              gui = "none",
+              gui = "bold",
             },
           },
         },
@@ -68,8 +68,19 @@ return {
               bg = "#3B4252",
             }
           },
-          { "diff", symbols = {added = ' ', modified = ' ', removed = ' '} },
-          { "diagnostics", symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '} }
+          {
+            "diff",
+            symbols = {
+              added = ' ',
+              modified = ' ',
+              removed = ' ',
+            },
+            color = {
+              fg = "#81A1C1",
+              bg = "#3B4252",
+            }
+          },
+          { "diagnostics", symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '} }
         },
         lualine_c = {
           {
