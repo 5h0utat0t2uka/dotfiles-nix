@@ -55,15 +55,11 @@
       assert (identity.hostname == hostKey);
 
       {
-        # darwinConfigurations の attr 名
         name = identity.hostname;
-        # 実体：nix-darwin のシステム定義
+        # nix-darwin のシステム定義
         value = darwin.lib.darwinSystem {
-          # aarch64-darwin など
           system = identity.system;
-          # modules 側で参照したい引数（identity や inputs）を渡す
           specialArgs = { inherit identity inputs; };
-
           modules = [
             # ----------------------------------------------------
             # nixpkgs 設定
@@ -72,7 +68,7 @@
               nixpkgs = {
                 system = identity.system;
                 config.allowUnfree = true;
-                # 直接インストールが必要なフォント等の overlay をここで注入
+                # 直接インストールが必要なパッケージの overlay をここで追加
                 overlays = [
                   (import ./overlays/fonts/shcode-jp-zen-haku.nix)
                 ];
