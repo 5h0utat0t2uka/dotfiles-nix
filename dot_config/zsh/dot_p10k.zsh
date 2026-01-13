@@ -375,7 +375,7 @@
 
   # devbox
   function prompt_custom_devbox() {
-    [[ -n "${DEVBOX_SHELL-}" ]] || return
+    [[ "${DEVBOX_SHELL_ENABLED-}" == "1" ]] || return
     p10k segment -f 6 -t '[devbox]'
   }
   # Formatter for Git status.
