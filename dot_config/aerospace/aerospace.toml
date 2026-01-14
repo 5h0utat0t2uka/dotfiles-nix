@@ -26,6 +26,7 @@ run = 'move-node-to-workspace 1'
 [[on-window-detected]]
 if.app-id = 'dev.zed.Zed'
 run = 'move-node-to-workspace 2'
+run = 'macos-native-fullscreen'
 
 # 3: Ghostty
 [[on-window-detected]]
