@@ -11,10 +11,10 @@ build:
   sudo darwin-rebuild switch --flake {{ "{{flake}}" }}#{{ "{{hostname}}" }}
 
 only-update:
-  nix flake update {{ "{{flake}}" }}
+  cd {{ "{{flake}}" }} && nix flake update
 
 full-update:
-  nix flake update {{ "{{flake}}" }}
+  cd {{ "{{flake}}" }} && nix flake update
   sudo darwin-rebuild switch --flake {{ "{{flake}}" }}#{{ "{{hostname}}" }}
 
 gc:
