@@ -1,0 +1,49 @@
+# Start AeroSpace at login
+start-at-login = false
+
+
+# デフォルトを floating
+[layout]
+default = "floating"
+
+[gaps]
+inner.horizontal = 0
+inner.vertical =   0
+outer.left =       0
+outer.bottom =     0
+outer.top =        0
+outer.right =      0
+
+# --- workspaces ---
+[workspaces]
+1 = {}
+2 = {}
+3 = {}
+4 = {}
+
+# --- keybindings: workspace switch ---
+[keybindings]
+"cmd-1" = "workspace 1"
+"cmd-2" = "workspace 2"
+"cmd-3" = "workspace 3"
+"cmd-4" = "workspace 4"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Safari"
+run = ["move-node-to-workspace 1", "layout floating"]
+
+[[on-window-detected]]
+if.app-id = "com.apple.finder"
+run = ["move-node-to-workspace 1", "layout floating"]
+
+[[on-window-detected]]
+if.app-id = "dev.zed.Zed"
+run = ["move-node-to-workspace 2", "layout floating"]
+
+[[on-window-detected]]
+if.app-id = "com.mitchellh.ghostty"
+run = ["move-node-to-workspace 3", "layout floating"]
+
+[[on-window-detected]]
+if.app-id = "com.apple.mail"
+run = ["move-node-to-workspace 4", "layout floating"]
