@@ -13,6 +13,7 @@
 
     casks = [
       # "affinity"
+      "aerospace"
       "ghostty"
       "google-chrome"
       "karabiner-elements"
