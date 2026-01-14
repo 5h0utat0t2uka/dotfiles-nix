@@ -1,49 +1,45 @@
-# Start AeroSpace at login
+# ~/.config/aerospace/aerospace.toml
+
+# 設定互換バージョン
+config-version = 2
+
+# 自動起動しない
 start-at-login = false
 
+# --- すべてのウィンドウをデフォルトで floating（通常の macOS の配置感） ---
+[[on-window-detected]]
+check-further-callbacks = true
+run = 'layout floating'
 
-# デフォルトを floating
-[layout]
-default = "floating"
+# --- アプリごとに workspace へ振り分け（あなたの 1〜4 構成） ---
 
-[gaps]
-inner.horizontal = 0
-inner.vertical =   0
-outer.left =       0
-outer.bottom =     0
-outer.top =        0
-outer.right =      0
-
-# --- workspaces ---
-[workspaces]
-1 = {}
-2 = {}
-3 = {}
-4 = {}
-
-# --- keybindings: workspace switch ---
-[keybindings]
-"cmd-1" = "workspace 1"
-"cmd-2" = "workspace 2"
-"cmd-3" = "workspace 3"
-"cmd-4" = "workspace 4"
+# 1: Safari / Finder
+[[on-window-detected]]
+if.app-id = 'com.apple.Safari'
+run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
-if.app-id = "com.apple.Safari"
-run = ["move-node-to-workspace 1", "layout floating"]
+if.app-id = 'com.apple.finder'
+run = 'move-node-to-workspace 1'
 
+# 2: Zed
 [[on-window-detected]]
-if.app-id = "com.apple.finder"
-run = ["move-node-to-workspace 1", "layout floating"]
+if.app-id = 'dev.zed.Zed'
+run = 'move-node-to-workspace 2'
 
+# 3: Ghostty
 [[on-window-detected]]
-if.app-id = "dev.zed.Zed"
-run = ["move-node-to-workspace 2", "layout floating"]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'move-node-to-workspace 3'
 
+# 4: Mail（必要な時だけ起動する想定）
 [[on-window-detected]]
-if.app-id = "com.mitchellh.ghostty"
-run = ["move-node-to-workspace 3", "layout floating"]
+if.app-id = 'com.apple.mail'
+run = 'move-node-to-workspace 4'
 
-[[on-window-detected]]
-if.app-id = "com.apple.mail"
-run = ["move-node-to-workspace 4", "layout floating"]
+# --- キー割当（例：⌘1〜⌘4 で workspace 切替） ---
+[mode.main.binding]
+cmd-1 = 'workspace 1'
+cmd-2 = 'workspace 2'
+cmd-3 = 'workspace 3'
+cmd-4 = 'workspace 4'
