@@ -13,7 +13,7 @@
     taps = [];
     casks = [
       # "affinity"
-      "nikitabobko/tap/aerospace"
+      # "nikitabobko/tap/aerospace"
       "ghostty"
       "google-chrome"
       "karabiner-elements"
