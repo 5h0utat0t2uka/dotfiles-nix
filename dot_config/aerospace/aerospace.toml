@@ -1,17 +1,12 @@
 # ~/.config/aerospace/aerospace.toml
 
-# 設定互換バージョン
-config-version = 2
 
-# 自動起動しない
+config-version = 2
 start-at-login = false
 
-# --- すべてのウィンドウをデフォルトで floating（通常の macOS の配置感） ---
 [[on-window-detected]]
 check-further-callbacks = true
 run = 'layout floating'
-
-# --- アプリごとに workspace へ振り分け（あなたの 1〜4 構成） ---
 
 # 1: Safari / Finder
 [[on-window-detected]]
@@ -26,14 +21,13 @@ run = 'move-node-to-workspace 1'
 [[on-window-detected]]
 if.app-id = 'dev.zed.Zed'
 run = 'move-node-to-workspace 2'
-run = 'macos-native-fullscreen'
 
 # 3: Ghostty
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
 run = 'move-node-to-workspace 3'
 
-# 4: Mail（必要な時だけ起動する想定）
+# 4: Mail
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
 run = 'move-node-to-workspace 4'
@@ -44,3 +38,10 @@ cmd-1 = 'workspace 1'
 cmd-2 = 'workspace 2'
 cmd-3 = 'workspace 3'
 cmd-4 = 'workspace 4'
+
+inner.horizontal = 10
+inner.vertical =   10
+outer.left =       10
+outer.bottom =     10
+outer.top =        10
+outer.right =      10
