@@ -10,10 +10,10 @@
       upgrade = true;
       cleanup = "zap";
     };
-
+    taps = [];
     casks = [
       # "affinity"
-      "aerospace"
+      "nikitabobko/tap/aerospace"
       "ghostty"
       "google-chrome"
       "karabiner-elements"
