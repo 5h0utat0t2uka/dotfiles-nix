@@ -43,6 +43,7 @@ in
     homeDirectory = identity.homeDirectory;
     packages = with pkgs; [
       bat
+      claude-code
       delta
       devbox
       eza
