@@ -194,7 +194,7 @@
     "center_on_match": false
   },
   "tabs": {
-    "close_position": "right",
+    "close_position": "left",
     "file_icons": false,
     "git_status": true,
     "activate_on_close": "history",
