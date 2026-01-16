@@ -48,6 +48,7 @@ in
       devbox
       eza
       fd
+      filetree
       fzf
       git
       gh
