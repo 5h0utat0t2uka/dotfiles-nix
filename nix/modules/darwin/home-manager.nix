@@ -56,7 +56,6 @@ in
       gnupg
       just
       jq
-      keifu
       lazygit
       neovim
       nb

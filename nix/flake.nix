@@ -73,7 +73,6 @@
                 # 直接インストールが必要なパッケージの overlay をここで追加
                 overlays = [
                   (import ./overlays/fonts/shcode-jp-zen-haku.nix)
-                  (import ./overlays/tools/keifu.nix {})
                   (import ./overlays/tools/claude-code.nix { inherit inputs; })
                 ];
               };
