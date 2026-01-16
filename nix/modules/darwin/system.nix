@@ -73,6 +73,13 @@ in
         # 範囲: 0.0 ~ 3.0
         # デフォルト: 1.0
         "com.apple.trackpad.scaling" = 2.5;
+        # フォーカスリング
+        NSUseAnimatedFocusRing = true;
+        # 保存ダイアログ
+        NSNavPanelExpandedStateForSaveMode = true;
+        NSNavPanelExpandedStateForSaveMode2 = true;
+
+        # 入力補完
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticDashSubstitutionEnabled = false;
         NSAutomaticPeriodSubstitutionEnabled = false;
@@ -101,6 +108,8 @@ in
         show-recents = false;
         # 開いているアプリケーションのみを表示する
         static-only = true;
+        # エフェクト
+        mineffect = "scale";
         # ホットコーナー(左下)でスクリーンセーバ
         wvous-bl-corner = 5;
         # ホットコーナー(右下)未指定
@@ -118,6 +127,8 @@ in
         AppleShowAllFiles = true;
         # カラム表示
         FXPreferredViewStyle = "clmv";
+        # 新規ウィンドウのデフォルトパス
+        NewWindowTarget = "Home";
       };
 
       menuExtraClock = {
@@ -144,6 +155,10 @@ in
         type = "png";
         show-thumbnail = false;
         disable-shadow = true;
+      };
+
+      WindowManager = {
+        GloballyEnabled = false;
       };
     };
   };
