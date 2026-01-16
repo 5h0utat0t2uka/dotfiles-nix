@@ -2,7 +2,7 @@
 final: prev:
 let
   pname = "filetree";
-  version = "0.3.2"; # GitHub Releases のタグに合わせる :contentReference[oaicite:1]{index=1}
+  version = "0.3.2"; # GitHub Releases のタグに合わせる
 in
 {
   filetree = prev.rustPlatform.buildRustPackage {
@@ -12,10 +12,10 @@ in
       owner = "nyanko3141592";
       repo  = "filetree";
       rev   = "v${version}";
-      hash  = prev.lib.fakeHash;   # ← 後で埋める
+      hash  = "sha256-lm//C1xXxhWiaAwaE031au2nj+OxbNGYGiKks8/Llzw=";
     };
 
-    cargoHash = prev.lib.fakeHash; # ← 後で埋める
+    cargoHash = "lib.fakeSha256";
 
     meta = with prev.lib; {
       description = "TUI file tree explorer (ft)";
