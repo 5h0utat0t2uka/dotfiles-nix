@@ -102,13 +102,12 @@ if [[ -r "$ZSH_PLUGIN_DIR/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
   source "$ZSH_PLUGIN_DIR/powerlevel10k/powerlevel10k.zsh-theme"
 fi
 
-echo "DEBUG: Before p10k.zsh source" >&2  # 追加
-
-if [[ -f "$ZDOTDIR/.p10k.zsh" ]]; then
-  source "$ZDOTDIR/.p10k.zsh"
+# if [[ -f "$ZDOTDIR/.p10k.zsh" ]]; then
+#   source "$ZDOTDIR/.p10k.zsh"
+# fi
+if [[ -f "$HOME/.config/zsh/.p10k.zsh" ]]; then
+  source "$HOME/.config/zsh/.p10k.zsh"
 fi
-
-echo "DEBUG: After p10k.zsh source" >&2  # 追加
 
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_STRATEGY=(history)
