@@ -10,12 +10,10 @@ in {
       owner = "trasta298";
       repo  = "keifu";
       rev   = "v${version}";
-      # 初めは placeholder（誤設定で失敗し、got: が出る）
-      hash  = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      hash  = "sha256-AesG7d0FO+Oo+l+XqU4hDZM1w+L9e1ifcM0ohs+wHlY=";
     };
 
-    cargoHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # まずダミー
-
+    cargoHash = "sha256-1FS75+O+HH3xqWGMa/RCvdZZ1jxRoEXgc3BTZ/Zux+Y=";
     meta = with prev.lib; {
       description = "TUI Git commit graph visualizer";
       license = licenses.mit;
