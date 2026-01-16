@@ -1745,7 +1745,7 @@
 
   function prompt_devbox() {
     [[ -n "$DEVBOX_SHELL_ENABLED" ]] || return
-    p10k segment -t 'in %F{1}devbox%f'
+    p10k segment -t '%F{7}in %F{1}devbox%f'
   }
 
   # instant prompt 用（任意）
