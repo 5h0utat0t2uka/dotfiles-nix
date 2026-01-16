@@ -35,6 +35,7 @@
     # os_icon               # os identifier
     host
     dir                     # current directory
+    devbox                  # 追加: devbox
     vcs                     # git status
     # =========================[ Line #2 ]=========================
     newline                 # \n
@@ -1737,6 +1738,20 @@
   # can slow down prompt by 1-2 milliseconds, so it's better to keep it turned off unless you
   # really need it.
   typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
+
+  # =============================================================================
+  # Devbox indicator segment
+  # =============================================================================
+
+  function prompt_devbox() {
+    [[ -n "$DEVBOX_SHELL_ENABLED" ]] || return
+    p10k segment -t 'in %F{1}devbox%f'
+  }
+
+  # instant prompt 用（任意）
+  function instant_prompt_devbox() {
+    prompt_devbox
+  }
 
   # If p10k is already loaded, reload configuration.
   # This works even with POWERLEVEL9K_DISABLE_HOT_RELOAD=true.
