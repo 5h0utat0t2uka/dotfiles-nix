@@ -14,9 +14,7 @@ in {
       hash  = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
     };
 
-    cargoLock = {
-      lockFile = "Cargo.lock";
-    };
+    cargoHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # まずダミー
 
     meta = with prev.lib; {
       description = "TUI Git commit graph visualizer";
