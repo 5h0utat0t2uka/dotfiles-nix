@@ -48,7 +48,6 @@ in
       devbox
       eza
       fd
-      filetree
       fzf
       git
       gh
@@ -57,6 +56,7 @@ in
       gnupg
       just
       jq
+      keifu
       lazygit
       neovim
       nb
