@@ -15,8 +15,7 @@ in
       hash  = "sha256-lm//C1xXxhWiaAwaE031au2nj+OxbNGYGiKks8/Llzw=";
     };
 
-    cargoHash = "lib.fakeSha256";
-
+    cargoHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
     meta = with prev.lib; {
       description = "TUI file tree explorer (ft)";
       homepage = "https://github.com/nyanko3141592/filetree";
