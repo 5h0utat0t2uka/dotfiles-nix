@@ -47,6 +47,7 @@ in
       delta
       devbox
       eza
+      felix-fm
       fd
       fzf
       git
