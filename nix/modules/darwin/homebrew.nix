@@ -11,6 +11,11 @@
       cleanup = "zap";
     };
     taps = [];
+    brews = [
+      # nixpkgs (darwin) で libsmbclient / dyld が壊れているため brew に逃がす
+      # https://github.com/nixos/nixpkgs/issues/476308
+      "termscp"
+    ];
     casks = [
       # "affinity"
       # "nikitabobko/tap/aerospace"

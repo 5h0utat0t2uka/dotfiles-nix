@@ -70,7 +70,7 @@ in
       ]))
       pinentry_mac
       ripgrep
-      termscp
+      # termscp
       zoxide
       tree-sitter
       tree
