@@ -43,12 +43,10 @@ in
     homeDirectory = identity.homeDirectory;
     packages = with pkgs; [
       bat
-      broot
       claude-code
       delta
       devbox
       eza
-      # felix-fm
       fd
       fzf
       git
@@ -66,7 +64,6 @@ in
       nixd
       nil
       nodejs_24
-      # onefetch
       pnpm
       (pass.withExtensions (exts: [
         exts.pass-otp
@@ -80,7 +77,6 @@ in
       tmux
       # uv
       wget
-      # xplr
       zbar
       zsh-syntax-highlighting
       # zsh-fast-syntax-highlighting

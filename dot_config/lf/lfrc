@@ -1,0 +1,23 @@
+set drawbox
+set roundbox
+set icons
+set preview true
+set previewer ~/.config/lf/pv.sh
+set borderfmt "\033[90m"
+
+map e $sh -lc 'nvim "$f"'
+
+set promptfmt "\033[34;1m%d\033[0m\033[1m%f\033[0m"
+
+set cursorpreviewfmt "\033[0m"
+
+cmd open ${{
+  case "$(file --mime-type -Lb "$f")" in
+    text/*|application/json|application/xml|application/javascript)
+      sh -lc 'nvim "$f"'
+      ;;
+    *)
+      "$OPENER" "$f"
+      ;;
+  esac
+}}
