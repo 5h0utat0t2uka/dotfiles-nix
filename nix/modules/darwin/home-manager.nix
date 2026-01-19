@@ -47,7 +47,7 @@ in
       delta
       devbox
       eza
-      felix-fm
+      # felix-fm
       fd
       fzf
       git
@@ -78,6 +78,7 @@ in
       tmux
       # uv
       wget
+      xplr
       zbar
       zsh-syntax-highlighting
       # zsh-fast-syntax-highlighting
