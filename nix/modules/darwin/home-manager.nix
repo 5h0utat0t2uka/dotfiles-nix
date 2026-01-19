@@ -43,6 +43,7 @@ in
     homeDirectory = identity.homeDirectory;
     packages = with pkgs; [
       bat
+      broot
       claude-code
       delta
       devbox
@@ -58,7 +59,6 @@ in
       just
       jq
       lazygit
-      mc
       neovim
       nb
       ni
