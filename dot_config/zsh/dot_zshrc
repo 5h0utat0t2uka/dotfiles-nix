@@ -207,10 +207,10 @@ if [[ ! -f "$HOME/.config/zsh-abbr/.abbr_initialized" ]]; then
 fi
 
 # function
-lfcd () {
-  tmp="$(mktemp)"
-  lf -last-dir-path="$tmp" "$@"
-  [ -f "$tmp" ] && cd "$(cat "$tmp")"
+lfcd() {
+  local dir
+  dir="$(command lf -print-last-dir "$@")" || return
+  [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
 }
 
 update_zo_opts() {
