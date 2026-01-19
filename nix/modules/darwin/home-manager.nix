@@ -58,6 +58,7 @@ in
       gnupg
       just
       jq
+      lf
       lazygit
       neovim
       nb
