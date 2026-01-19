@@ -58,6 +58,7 @@ in
       just
       jq
       lazygit
+      mc
       neovim
       nb
       ni
@@ -71,7 +72,6 @@ in
       ]))
       pinentry_mac
       ripgrep
-      superfile
       # termscp
       zoxide
       tree-sitter
@@ -80,7 +80,6 @@ in
       # uv
       wget
       # xplr
-      yazi
       zbar
       zsh-syntax-highlighting
       # zsh-fast-syntax-highlighting
