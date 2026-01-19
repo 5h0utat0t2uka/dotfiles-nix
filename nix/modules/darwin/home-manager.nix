@@ -80,6 +80,7 @@ in
       # uv
       wget
       # xplr
+      yazi
       zbar
       zsh-syntax-highlighting
       # zsh-fast-syntax-highlighting
