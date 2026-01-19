@@ -210,12 +210,9 @@ fi
 lfcd () {
   tmp="$(mktemp)"
   lf -last-dir-path="$tmp" "$@"
-  if [ -f "$tmp" ]; then
-    dir="$(cat "$tmp")"
-    rm -f "$tmp"
-    [ -d "$dir" ] && cd "$dir"
-  fi
+  [ -f "$tmp" ] && cd "$(cat "$tmp")"
 }
+
 update_zo_opts() {
   export _ZO_FZF_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt) ${(j: :)_ZO_ADDITIONAL_OPTS}"
 }
