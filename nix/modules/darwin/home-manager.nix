@@ -63,7 +63,6 @@ in
       ni
       nixd
       nil
-      nnn
       nodejs_24
       # onefetch
       pnpm
@@ -72,6 +71,7 @@ in
       ]))
       pinentry_mac
       ripgrep
+      superfile
       # termscp
       zoxide
       tree-sitter
