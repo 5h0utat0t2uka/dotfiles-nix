@@ -63,8 +63,9 @@ in
       ni
       nixd
       nil
+      nnn
       nodejs_24
-      onefetch
+      # onefetch
       pnpm
       (pass.withExtensions (exts: [
         exts.pass-otp
@@ -78,7 +79,7 @@ in
       tmux
       # uv
       wget
-      xplr
+      # xplr
       zbar
       zsh-syntax-highlighting
       # zsh-fast-syntax-highlighting
