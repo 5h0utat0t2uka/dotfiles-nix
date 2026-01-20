@@ -47,6 +47,13 @@ if [[ -n "$TMUX" ]]; then
     tmux refresh-client -S
   }
   add-zsh-hook precmd tmux_update_pane
+
+  if [ -n "$DEVBOX_SHELL_ENABLED" ]; then
+    tmux set-environment -g DEVBOX_SHELL_ENABLED "$DEVBOX_SHELL_ENABLED"
+  fi
+  if [ -z "$DEVBOX_SHELL_ENABLED" ]; then
+    tmux set-environment -gu DEVBOX_SHELL_ENABLED 2>/dev/null
+  fi
 fi
 
 # Completions
