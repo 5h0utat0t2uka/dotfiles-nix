@@ -1673,9 +1673,9 @@
   # Custom icon.
   typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION=
   # Custom prefix.
-  # typeset -g POWERLEVEL9K_TIME_PREFIX='%F{black}at %f'
+  typeset -g POWERLEVEL9K_TIME_PREFIX='%F{black}at %f'
   # typeset -g POWERLEVEL9K_TIME_PREFIX='%f󱑺 '
-  typeset -g POWERLEVEL9K_TIME_PREFIX='%fat '
+  # typeset -g POWERLEVEL9K_TIME_PREFIX='%fat '
   # typeset -g POWERLEVEL9K_TIME_PREFIX='%f '
   # typeset -g POWERLEVEL9K_TIME_PREFIX=
 
