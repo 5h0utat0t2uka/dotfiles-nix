@@ -19,11 +19,8 @@ nord10="$(tmux show-environment -g nord10 2>/dev/null | sed 's/^nord10=//')"
 
 # devbox環境変数をチェック
 DEVBOX_STATUS="$(tmux show-environment -g DEVBOX_SHELL_ENABLED 2>/dev/null | sed 's/^DEVBOX_SHELL_ENABLED=//')"
-
-# devbox中の場合のみDEVBOXを表示
 if [ "$DEVBOX_STATUS" = "1" ]; then
   printf '#[fg=%s,bg=%s,bold]%s %s#[default]' "$nord0" "$nord2" " DEVBOX"
 fi
 
-# printf '#[fg=%s,bg=%s,bold]%s %s#[default]' "$nord0" "$nord10" "" "$upper_branch"
 printf '#[fg=%s,bg=%s,bold]%s %s#[default]' "$nord0" "$nord10" " $upper_branch"
