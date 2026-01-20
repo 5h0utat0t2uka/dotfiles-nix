@@ -25,5 +25,5 @@ if [ "$DEVBOX_STATUS" = "1" ]; then
   printf '#[fg=%s,bg=%s,bold]%s %s#[default]' "$nord0" "$nord2" " DEVBOX"
 fi
 
-printf '#[fg=%s,bg=%s,bold]%s %s#[default]' "$nord0" "$nord10" "" "$upper_branch"
-# printf '#[fg=%s,bg=%s,bold]%s %s#[default]' "$nord0" "$nord10" " $upper_branch"
+# printf '#[fg=%s,bg=%s,bold]%s %s#[default]' "$nord0" "$nord10" "" "$upper_branch"
+printf '#[fg=%s,bg=%s,bold]%s %s#[default]' "$nord0" "$nord10" " $upper_branch"
