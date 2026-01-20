@@ -44,16 +44,15 @@ if [[ -n "$TMUX" ]]; then
   export FZF_TMUX_OPTS="-p 80%,70% --margin=0,1"
 
   tmux_update_pane() {
+    # devbox環境変数の状態を毎回同期
+    if [ -n "$DEVBOX_SHELL_ENABLED" ]; then
+      tmux set-environment -g DEVBOX_SHELL_ENABLED "$DEVBOX_SHELL_ENABLED"
+    else
+      tmux set-environment -gu DEVBOX_SHELL_ENABLED 2>/dev/null
+    fi
     tmux refresh-client -S
   }
   add-zsh-hook precmd tmux_update_pane
-
-  if [ -n "$DEVBOX_SHELL_ENABLED" ]; then
-    tmux set-environment -g DEVBOX_SHELL_ENABLED "$DEVBOX_SHELL_ENABLED"
-  fi
-  if [ -z "$DEVBOX_SHELL_ENABLED" ]; then
-    tmux set-environment -gu DEVBOX_SHELL_ENABLED 2>/dev/null
-  fi
 fi
 
 # Completions
