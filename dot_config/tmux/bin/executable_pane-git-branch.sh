@@ -19,7 +19,7 @@ nord3="$(tmux show-environment -g nord3 2>/dev/null | sed 's/^nord3=//')"
 nord0="$(tmux show-environment -g nord0 2>/dev/null | sed 's/^nord0=//')"
 
 # printf '#[fg=%s,bg=%s]%s %s#[default]' "$nord3" "$nord0" " $upper_branch"
-printf '%s#[default]' " DEVBOX "
+printf '%s#[default]' "[DEVBOX] "
 printf '#[fg=%s,bg=%s]%s %s#[default]' "$nord0" "$nord2" " $upper_branch"
 # printf '%s#[default]' " 󰊢 $branch"
 # printf '#[fg=%s,bg=%s]%s %s#[default]' "$nord9" "$nord1" " $repo_dir_name" "[$branch] "
