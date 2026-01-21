@@ -58,6 +58,7 @@ in
       jq
       lf
       lazygit
+      mise
       neovim
       nb
       ni
@@ -71,13 +72,13 @@ in
       pinentry_mac
       ripgrep
       # termscp
-      zoxide
       tree-sitter
       tree
       tmux
       # uv
       wget
       zbar
+      zoxide
       zsh-syntax-highlighting
       # zsh-fast-syntax-highlighting
       zsh-autosuggestions
