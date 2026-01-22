@@ -56,6 +56,7 @@ in
       gnupg
       just
       jq
+      libwebp
       lf
       lazygit
       mise
