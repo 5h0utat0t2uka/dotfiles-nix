@@ -185,6 +185,7 @@ export FZF_ALT_C_COMMAND='fd --hidden --exclude .git --exclude node_modules --ty
 # alias
 alias ..='cd ..'
 alias vpn="$HOME/Development/scripts/vpn/connect.sh"
+alias webp="$HOME/Development/scripts/webp.sh"
 alias vim='nvim'
 alias ll='eza -alo --icons --time-style iso'
 alias lg='lazygit'
