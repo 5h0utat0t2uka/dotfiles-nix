@@ -102,6 +102,8 @@ in
       dock = {
         # 自動非表示を有効にする
         autohide = true;
+        # アイコンのサイズ
+        tilesize = 50;
         # ホバー時の拡大を無効
         magnification = false;
         # 最近使用したアプリケーションを表示しない
