@@ -118,6 +118,18 @@ in
         wvous-tl-corner = 1;
         # ホットコーナー(右上)でデスクトップ表示
         wvous-tr-corner = 4;
+        # Downloadsフォルダを常駐させる
+        persistent-others = [
+          # または詳細設定
+          {
+            folder = {
+              path = "/Users/${username}/Downloads";
+              showas = "list";
+              displayas = "folder";
+              arrangement = "date-added";
+            };
+          }
+        ];
       };
 
       finder = {
