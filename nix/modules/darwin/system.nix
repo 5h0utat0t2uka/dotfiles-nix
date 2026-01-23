@@ -107,7 +107,7 @@ in
         # 最近使用したアプリケーションを表示しない
         show-recents = false;
         # 開いているアプリケーションのみを表示する
-        static-only = true;
+        # static-only = true;
         # エフェクト
         mineffect = "scale";
         # ホットコーナー(左下)でスクリーンセーバ
