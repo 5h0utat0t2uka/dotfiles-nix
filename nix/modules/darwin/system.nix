@@ -111,6 +111,7 @@ in
         # 開いているアプリケーションのみを表示する
         static-only = true;
         # エフェクト
+        launchanim = false;
         mineffect = "scale";
         # ホットコーナー(左下)でスクリーンセーバ
         wvous-bl-corner = 5;
