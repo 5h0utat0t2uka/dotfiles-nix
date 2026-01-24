@@ -121,6 +121,8 @@ in
         wvous-tl-corner = 1;
         # ホットコーナー(右上)でデスクトップ表示
         wvous-tr-corner = 4;
+        # Mission Control の並び替え無効
+        mru-spaces = false;
         # 常駐アプリ
         persistent-apps = [
           # 空の配列にすることでFinder以外の常駐アプリを表示しない
