@@ -122,7 +122,9 @@ in
         # ホットコーナー(右上)でデスクトップ表示
         wvous-tr-corner = 4;
         # 常駐アプリ
-        persistent-apps = [];
+        persistent-apps = [
+          # 空の配列にすることでFinder以外の常駐アプリを表示しない
+        ];
         # Downloadsフォルダを常駐させる
         persistent-others = [
           {
