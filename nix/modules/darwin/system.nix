@@ -122,9 +122,7 @@ in
         # ホットコーナー(右上)でデスクトップ表示
         wvous-tr-corner = 4;
         # 常駐アプリ
-        persistent-apps = [
-          { app = "/System/Applications/System Settings.app"; }
-        ];
+        persistent-apps = [];
         # Downloadsフォルダを常駐させる
         persistent-others = [
           {
