@@ -56,7 +56,6 @@ in
       gnupg
       just
       jq
-      kitty
       libwebp
       lf
       lazygit
@@ -78,6 +77,7 @@ in
       tree
       tmux
       # uv
+      viu
       wget
       zbar
       zoxide
