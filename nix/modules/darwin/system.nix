@@ -109,7 +109,7 @@ in
         # 最近使用したアプリケーションを表示しない
         show-recents = false;
         # 開いているアプリケーションのみを表示する
-        static-only = true;
+        # static-only = true;
         # エフェクト
         launchanim = false;
         mineffect = "scale";
@@ -121,6 +121,10 @@ in
         wvous-tl-corner = 1;
         # ホットコーナー(右上)でデスクトップ表示
         wvous-tr-corner = 4;
+        # 常駐アプリ
+        persistent-apps = [
+          { app = "/System/Applications/Finder.app"; }
+        ];
         # Downloadsフォルダを常駐させる
         persistent-others = [
           {
