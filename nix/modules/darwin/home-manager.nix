@@ -56,6 +56,7 @@ in
       gnupg
       just
       jq
+      kitty
       libwebp
       lf
       lazygit
