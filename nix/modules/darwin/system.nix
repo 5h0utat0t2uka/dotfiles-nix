@@ -123,7 +123,7 @@ in
         wvous-tr-corner = 4;
         # 常駐アプリ
         persistent-apps = [
-          { app = "/System/Applications/Finder.app"; }
+          { app = "/System/Applications/System Settings.app"; }
         ];
         # Downloadsフォルダを常駐させる
         persistent-others = [
@@ -131,7 +131,7 @@ in
             folder = {
               path = "/Users/${username}/Downloads";
               showas = "list";
-              displayas = "folder";
+              displayas = "stack";
               arrangement = "date-added";
             };
           }
