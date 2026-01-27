@@ -33,6 +33,7 @@
       // ]
     }
   },
+  "auto_update": false,
   // "disable_ai": true,
   "features": {
     "edit_prediction_provider": "zed"
