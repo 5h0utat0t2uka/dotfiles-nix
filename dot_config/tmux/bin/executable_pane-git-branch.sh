@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# dir="$1"
-# cd "$dir" 2>/dev/null || exit 0
+
+dir="$1"
+cd "$dir" 2>/dev/null || exit 0
 # git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 # repo_dir_name="$(basename -- "$dir")"
 # branch="$(git branch --show-current 2>/dev/null)"
@@ -20,11 +21,8 @@
 # if [ "$DEVBOX_STATUS" = "1" ]; then
 #   printf '#[fg=%s,bg=%s,bold]%s %s#[default]' "$nord0" "$nord3" " DEVBOX"
 # fi
-
 # printf '#[fg=%s,bg=%s,bold]%s %s#[default]' "$nord0" "$nord10" " $upper_branch"
 
-dir="$1"
-cd "$dir" 2>/dev/null || exit 0
 
 # tmux.conf で定義したカラースキーマ
 nord3="$(tmux show-environment -g nord3 2>/dev/null | sed 's/^nord3=//')"
