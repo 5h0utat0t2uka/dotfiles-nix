@@ -50,18 +50,20 @@
   //  },
   //  "model_parameters": []
   // },
-  "agent": {
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4"
-    },
-    "inline_alternatives": [
-      {
-        "provider": "zed.dev",
-        "model": "gpt-5-nano"
-      }
-    ]
-  },
+
+  // "agent": {
+  //   "default_model": {
+  //     "provider": "zed.dev",
+  //     "model": "claude-sonnet-4"
+  //   },
+  //   "inline_alternatives": [
+  //     {
+  //       "provider": "zed.dev",
+  //       "model": "gpt-5-nano"
+  //     }
+  //   ]
+  // },
+
   "format_on_save": "off",
   // "icon_theme": "Colored Zed Icons Theme Dark",
   // "icon_theme": {
