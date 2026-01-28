@@ -49,9 +49,9 @@ fullscreen = true
 auto-update = off
 
 font-size = 14.6
-# font-family = GeistMono Nerd Font Mono
+font-family = GeistMono Nerd Font Mono
 font-family = UDEV Gothic 35 NF
-# font-family-bold = GeistMono Nerd Font Mono
+font-family-bold = GeistMono Nerd Font Mono
 font-family-bold = UDEV Gothic 35 NF
 
 font-feature = -calt
