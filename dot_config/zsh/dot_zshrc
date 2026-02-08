@@ -43,6 +43,12 @@ if [[ -n "$TMUX" ]]; then
   export FZF_TMUX=1
   export FZF_TMUX_OPTS="-p 80%,70% --margin=0,1"
 
+  tp() {
+    tmux popup \
+      -w 80% -h 70% -x C -y C \
+      -d "#{pane_current_path}" \
+      -E "${SHELL:-/bin/zsh} -l"
+  }
   tmux_update_pane() {
     # devbox環境変数の状態を毎回同期
     if [ -n "$DEVBOX_SHELL_ENABLED" ]; then
