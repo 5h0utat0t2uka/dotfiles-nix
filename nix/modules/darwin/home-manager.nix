@@ -65,6 +65,7 @@ in
       ni
       nixd
       nil
+      nmap
       nodejs_24
       pnpm
       (pass.withExtensions (exts: [
