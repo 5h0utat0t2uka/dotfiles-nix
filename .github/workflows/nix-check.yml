@@ -1,28 +1,24 @@
 name: nix-check
-
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   check:
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
-
-      - uses: DeterminateSystems/nix-installer-action@v10
-
-      - name: Nix info
-        run: nix --version
-
+      - uses: DeterminateSystems/determinate-nix-action@v3
+        with:
+          kvm: false
+      - run: nix --version
       - name: flake check
         shell: bash
         run: |
           set -euo pipefail
           cd nix
           nix flake check
-
       - name: eval each darwin host
         shell: bash
         run: |
