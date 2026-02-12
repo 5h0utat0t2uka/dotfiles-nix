@@ -229,6 +229,8 @@ in
   });
   environment.systemPackages = [
     pkgs.pam-reattach
+    pkgs.firefox-devedition
+    pkgs.google-chrome
   ];
 
   fonts.packages = with pkgs; [
