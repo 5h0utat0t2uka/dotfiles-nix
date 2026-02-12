@@ -22,6 +22,9 @@ in
         "com.google.Keystone.Agent" = {
           checkInterval = 0;
         };
+        "com.Google.Chrome" = {
+          checkInterval = 0;
+        };
         "com.apple.desktopservices" = {
           # .DS_Storeファイルを書き込まない
           DSDontWriteNetworkStores = true;
