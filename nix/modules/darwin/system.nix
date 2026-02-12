@@ -25,6 +25,16 @@ in
         "com.Google.Chrome" = {
           checkInterval = 0;
         };
+        "com.google.Keystone" = {
+          updatePolicies = {
+            global = {
+              UpdateDefault = 3;
+            };
+            "com.google.Chrome" = {
+              UpdateDefault = 3;
+            };
+          };
+        };
         "com.apple.desktopservices" = {
           # .DS_Storeファイルを書き込まない
           DSDontWriteNetworkStores = true;
