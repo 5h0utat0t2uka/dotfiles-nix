@@ -229,7 +229,7 @@ in
   });
   environment.systemPackages = [
     pkgs.pam-reattach
-    pkgs.firefox-devedition
+    # pkgs.firefox-devedition
     pkgs.google-chrome
   ];
 
