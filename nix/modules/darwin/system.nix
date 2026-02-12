@@ -230,6 +230,7 @@ in
   environment.systemPackages = [
     pkgs.pam-reattach
     # pkgs.firefox-devedition
+    pkgs.firefox
     pkgs.google-chrome
   ];
 
