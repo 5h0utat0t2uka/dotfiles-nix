@@ -19,6 +19,9 @@ in
     primaryUser = username;
     defaults = {
       CustomUserPreferences = {
+        "com.google.Keystone.Agent" = {
+          checkInterval = 0;
+        };
         "com.apple.desktopservices" = {
           # .DS_Storeファイルを書き込まない
           DSDontWriteNetworkStores = true;
