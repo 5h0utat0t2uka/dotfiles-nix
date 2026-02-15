@@ -25,8 +25,8 @@ return {
       },
     })
 
-    -- vim.schedule(function()
-    --   require("hlchunk").enable()
-    -- end)
+    vim.schedule(function()
+      require("hlchunk").enable()
+    end)
   end
 }
