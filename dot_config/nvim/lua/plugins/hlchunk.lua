@@ -6,7 +6,7 @@ return {
       chunk = {
         enable = true,
         style = {
-          { fg = "#81A1C1" },
+          { fg = "#4C566A" },
           { fg = "#D08770" },
         },
         chars = {
