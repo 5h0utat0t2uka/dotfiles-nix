@@ -1,20 +1,23 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  lazy = false,  -- lazy-loadingはサポートされていない
+  lazy = false,
   build = ":TSUpdate",
   config = function()
-    require("nvim-treesitter").setup({
-      install_dir = vim.fn.stdpath("data") .. "/site",
-    })
-    require("nvim-treesitter").install({
-      "lua", "vim", "vimdoc", "bash",
-      "typescript", "tsx", "json", "html", "javascript"
+    local treesitter = require("nvim-treesitter")
+    treesitter.setup()
+    treesitter.install({
+      "lua", "vim", "vimdoc", "query",
+      "typescript", "tsx", "json", "javascript", "html"
     })
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "json", "typescript", "javascript", "tsx", "html" },
+      pattern = {
+        "lua", "vim", "typescript", "tsx",
+        "json", "javascript", "html"
+      },
       callback = function()
         vim.treesitter.start()
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end,
     })
-  end,
+  end
 }
