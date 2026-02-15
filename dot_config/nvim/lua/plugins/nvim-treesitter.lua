@@ -10,6 +10,7 @@ return {
         "lua", "vim", "vimdoc", "bash",
         "tsx", "json", "html", "typescript", "javascript"
       },
+      auto_install = true
     })
 
     vim.api.nvim_create_autocmd("FileType", {
