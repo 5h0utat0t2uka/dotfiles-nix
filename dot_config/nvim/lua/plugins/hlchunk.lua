@@ -20,7 +20,7 @@ return {
       indent = {
         enable = true,
         chars = { "│" },
-        style = { { fg = "#81A1C1" } },
+        style = { { fg = "#3B4252" } },
       },
     })
   end
