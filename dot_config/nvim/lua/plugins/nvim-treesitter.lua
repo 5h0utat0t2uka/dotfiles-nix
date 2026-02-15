@@ -10,7 +10,6 @@ return {
     },
   },
   config = function(_, opts)
-    -- 修正: configs を削除
-    require("nvim-treesitter").setup(opts)
+    require("nvim-treesitter.configs").setup(opts)
   end,
 }
