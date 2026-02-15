@@ -109,6 +109,8 @@ return {
         defaults = {
           border = true,
           winblend = 10,
+          prompt_prefix = "❯ ",
+          selection_caret = "❯ ",
           layout_strategy = "horizontal",
           layout_config = {
             width = 0.90,

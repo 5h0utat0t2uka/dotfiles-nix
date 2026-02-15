@@ -1,6 +1,7 @@
 return {
   {
     "nvimdev/dashboard-nvim",
+    enabled = false,
     init = function()
       local uv = vim.uv or vim.loop
       vim.g.__nvim_start_hrtime = uv.hrtime()
