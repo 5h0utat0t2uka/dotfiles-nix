@@ -5,6 +5,7 @@ return {
     require("hlchunk").setup({
       chunk = {
         enable = true,
+        use_treesitter = true,
         style = {
           { fg = "#81A1C1" },
           { fg = "#bf616a" },
@@ -23,5 +24,9 @@ return {
         style = { { fg = "#434C5E" } },
       },
     })
+
+    -- vim.schedule(function()
+    --   require("hlchunk").enable()
+    -- end)
   end
 }
