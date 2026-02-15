@@ -27,6 +27,7 @@
 -- }
 return {
   "shellRaining/hlchunk.nvim",
+  commit = "3bc2bd7",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     -- chunk を個別に設定
