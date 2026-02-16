@@ -42,6 +42,7 @@ in
     username = identity.username;
     homeDirectory = identity.homeDirectory;
     packages = with pkgs; [
+      age
       bat
       claude-code
       delta
