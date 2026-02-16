@@ -42,7 +42,7 @@ in
     username = identity.username;
     homeDirectory = identity.homeDirectory;
     packages = with pkgs; [
-      agenix
+      age
       bat
       claude-code
       delta
