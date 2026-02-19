@@ -147,6 +147,14 @@ in
         persistent-others = [
           {
             folder = {
+              path = "/Users/${username}/Desktop";
+              showas = "list";
+              displayas = "stack";
+              arrangement = "date-added";
+            };
+          }
+          {
+            folder = {
               path = "/Users/${username}/Downloads";
               showas = "list";
               displayas = "stack";
