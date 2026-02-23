@@ -236,10 +236,8 @@ in
     path = ../../assets/etc/zshrc;
     name = "zshrc";
   });
-  environment.systemPackages = [
-    pkgs.pam-reattach
-    pkgs.firefox-devedition
-    pkgs.google-chrome
+  environment.systemPackages = with pkgs; [
+    pam-reattach
   ];
 
   fonts.packages = with pkgs; [
