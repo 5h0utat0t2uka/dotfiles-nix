@@ -15,7 +15,15 @@ Host github.com
   UseKeychain yes
 
 Host vultr
-  HostName 45.76.203.82
+  HostName 66.42.45.103
+  Port 2222
   User shouta
   IdentityFile ~/.ssh/id_ed25519_vultr
+  IdentitiesOnly yes
+
+Host vultr-root
+  HostName 66.42.45.103
+  Port 2222
+  User root
+  IdentityFile ~/.ssh/id_ed25519_vultr-root
   IdentitiesOnly yes
