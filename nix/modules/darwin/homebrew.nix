@@ -19,9 +19,7 @@
     casks = [
       # "affinity"
       # "nikitabobko/tap/aerospace"
-      # "firefox@developer-edition"
       "ghostty"
-      # "google-chrome"
       "karabiner-elements"
       "zed"
     ];

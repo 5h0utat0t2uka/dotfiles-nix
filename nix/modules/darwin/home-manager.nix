@@ -84,7 +84,6 @@ in
       zbar
       zoxide
       zsh-syntax-highlighting
-      # zsh-fast-syntax-highlighting
       zsh-autosuggestions
       zsh-completions
       zsh-abbr
