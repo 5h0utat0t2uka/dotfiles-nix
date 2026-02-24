@@ -249,6 +249,18 @@ in
     udev-gothic-nf
   ];
 
+  launchd.daemons.limit-maxfiles = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/bin/launchctl"
+        "limit"
+        "maxfiles"
+        "65536"
+        "524288"
+      ];
+      RunAtLoad = true;
+    };
+  };
   # ============================================================
   # Automatic Garbage Collection (launchd, root)
   # 毎週日曜日にAM3:00に`gc`
