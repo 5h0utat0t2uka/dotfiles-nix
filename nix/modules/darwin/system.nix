@@ -249,6 +249,10 @@ in
     udev-gothic-nf
   ];
 
+  # ============================================================
+  # OSのファイルディスクリプタ上限に達して`nix flake update`がロックファイルを作れずエラーになるので
+  # 明示的に`max open files`を増やす
+  # ============================================================
   launchd.daemons.limit-maxfiles = {
     serviceConfig = {
       ProgramArguments = [
@@ -261,6 +265,7 @@ in
       RunAtLoad = true;
     };
   };
+
   # ============================================================
   # Automatic Garbage Collection (launchd, root)
   # 毎週日曜日にAM3:00に`gc`
