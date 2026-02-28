@@ -78,7 +78,6 @@ in
       tree-sitter
       tree
       tmux
-      tuios
       # uv
       viu
       wget
