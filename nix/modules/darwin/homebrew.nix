@@ -10,14 +10,11 @@
       upgrade = true;
       cleanup = "zap";
     };
-    taps = [
-      "sinelaw/fresh"
-    ];
+    taps = [];
     brews = [
       # nixpkgs (darwin) で libsmbclient / dyld が壊れているため brew に逃がす
       # https://github.com/nixos/nixpkgs/issues/476308
       "termscp"
-      "fresh-editor"
     ];
     casks = [
       # "affinity"
