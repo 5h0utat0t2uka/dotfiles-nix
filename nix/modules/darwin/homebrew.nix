@@ -10,7 +10,9 @@
       upgrade = true;
       cleanup = "zap";
     };
-    taps = [];
+    taps = [
+      "sinelaw/fresh"
+    ];
     brews = [
       # nixpkgs (darwin) で libsmbclient / dyld が壊れているため brew に逃がす
       # https://github.com/nixos/nixpkgs/issues/476308
