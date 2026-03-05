@@ -173,7 +173,7 @@ in
         FXPreferredViewStyle = "clmv";
         # 新規ウィンドウのデフォルトパス
         NewWindowTarget = "Home";
-        CreateDesktop = false;
+        # CreateDesktop = false;
       };
 
       menuExtraClock = {
