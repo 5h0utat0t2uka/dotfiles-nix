@@ -242,7 +242,6 @@ in
 
   fonts.packages = with pkgs; [
     nerd-fonts.geist-mono
-    nerd-fonts.monaspace
     # nerd-fonts.noto
     # nerd-fonts.iosevka
     # source-han-code-jp
