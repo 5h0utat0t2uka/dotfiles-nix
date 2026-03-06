@@ -8,11 +8,8 @@
   description = "dotfiles-nix";
 
   inputs = {
-    # nixpkgs（unstable）
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nix-homebrew（nix 経由で Homebrew を管理）
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    # home-manager（nixpkgs は flake の nixpkgs に追従させる）
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
