@@ -231,7 +231,7 @@ if [[ -n "$TMUX" ]]; then
     tmp="$(mktemp)"
     # popup内でlfを起動し、終了ディレクトリをtmpに書き出す
     tmux popup \
-      -w 80% -h 70% -x C -y C \
+      -w 80% -h 80% -x C -y C \
       -d "#{pane_current_path}" \
       -E "lf -last-dir-path='$tmp' $(printf '%q ' "$@")"
     # popup終了後にtmpを読んでcd
