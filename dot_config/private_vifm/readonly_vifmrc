@@ -307,7 +307,7 @@ fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 filetype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.webp,*.xpm},<image/*>
        \ open -a Preview.app,
 fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.webp,*.xpm},<image/*>
-         \ viu %c
+         \ viu --no-sixel --blocks %c
 " MD5
 filetype *.md5
        \ {Check MD5 hash sum}
