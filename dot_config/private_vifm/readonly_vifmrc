@@ -382,15 +382,15 @@ fileviewer {*.docx},
            \vnd.openxmlformats-officedocument.wordprocessingml.document>
          \ docx2txt.pl %f -
 
-fileviewer *.ts,*.tsx,*.js,*.jsx bat --color=always %c
-fileviewer *.json bat --color=always --language=json %c
-fileviewer *.nix bat --color=always --language=nix %c
-fileviewer *.md bat --color=always --language=markdown %c
-fileviewer *.sh,*.bash,*.zsh bat --color=always --language=sh %c
-fileviewer *.yaml,*.yml bat --color=always --language=yaml %c
-fileviewer *.toml bat --color=always --language=toml %c
-fileviewer *.css,*.scss bat --color=always --language=css %c
-fileviewer *[^/] bat --color=always %c
+fileviewer *.ts,*.tsx,*.js,*.jsx bat --color=always --style=plain %c
+fileviewer *.json bat --color=always --style=plain --language=json %c
+fileviewer *.nix bat --color=always --style=plain --language=nix %c
+fileviewer *.md bat --color=always --style=plain --language=markdown %c
+fileviewer *.sh,*.bash,*.zsh bat --color=always --style=plain --language=sh %c
+fileviewer *.yaml,*.yml bat --color=always --style=plain --language=yaml %c
+fileviewer *.toml bat --color=always --style=plain --language=toml %c
+fileviewer *.css,*.scss bat --color=always --style=plain --language=css %c
+fileviewer *[^/] bat --color=always --style=plain %c
 
 " Syntax highlighting in preview
 "
