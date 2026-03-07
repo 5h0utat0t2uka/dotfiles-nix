@@ -44,7 +44,6 @@ in
     packages = with pkgs; [
       age
       bat
-      chafa
       claude-code
       delta
       devbox
