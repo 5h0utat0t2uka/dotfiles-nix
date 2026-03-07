@@ -4,7 +4,7 @@
 highlight clear
 
 highlight Border      cterm=none	ctermfg=default ctermbg=default
-highlight TopLine     cterm=none	ctermfg=110	ctermbg=236
+highlight TopLine     cterm=none	ctermfg=110	ctermbg=default
 highlight TopLineSel	cterm=bold	ctermfg=110 ctermbg=237
 
 highlight Win         cterm=none	ctermfg=7	ctermbg=default
