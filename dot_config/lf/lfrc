@@ -1,6 +1,8 @@
 set drawbox
 set roundbox
 set icons
+set dircounts true
+set hidden true
 set preview true
 set previewer ~/.config/lf/pv.sh
 set borderfmt "\033[90m"
