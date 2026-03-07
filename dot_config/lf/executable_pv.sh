@@ -10,4 +10,4 @@ width="${2:-80}"
 BAT="$(command -v bat 2>/dev/null || command -v batcat 2>/dev/null)"
 [ -n "$BAT" ] || exit 0
 
-exec "$BAT" --color=always --paging=never --terminal-width="$width" -- "$file"
+exec "$BAT" --color=always --style=plain --paging=never --terminal-width="$width" -- "$file"
