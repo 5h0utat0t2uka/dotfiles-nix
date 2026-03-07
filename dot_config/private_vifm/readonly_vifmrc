@@ -408,7 +408,7 @@ fileviewer *[^/] bat --color=always %c
 
 " Displaying pictures in terminal
 " fileviewer *.jpg,*.png shellpic %c
-fileviewer *.png,*.jpg,*.jpeg,*.gif,*.webp viu %c
+" fileviewer *.png,*.jpg,*.jpeg,*.gif,*.webp viu %c
 
 " Open all other files with default system programs (you can also remove all
 " :file[x]type commands above to ensure they don't interfere with system-wide
