@@ -80,6 +80,7 @@ in
       tmux
       # uv
       viu
+      vifm
       wget
       zbar
       zoxide
