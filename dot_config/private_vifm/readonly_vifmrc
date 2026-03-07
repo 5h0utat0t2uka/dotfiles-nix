@@ -393,6 +393,8 @@ fileviewer *.sh,*.bash,*.zsh bat --color=always --style=plain --language=sh %c
 fileviewer *.yaml,*.yml bat --color=always --style=plain --language=yaml %c
 fileviewer *.toml bat --color=always --style=plain --language=toml %c
 fileviewer *.css,*.scss bat --color=always --style=plain --language=css %c
+" fileviewer */,.*/ tree -L 2 --dirsfirst %c
+fileviewer */,.*/ tree -a -L3 -I "\.DS_Store|\.git|node_modules|\.next" %c
 fileviewer *[^/] bat --color=always --style=plain %c
 
 " テキスト/コード系はnvimで開く
