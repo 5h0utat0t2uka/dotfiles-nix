@@ -229,14 +229,18 @@ if [[ -n "$TMUX" ]]; then
   lfcd() {
     local tmp
     tmp="$(mktemp)"
+    # popup内でlfを起動し、終了ディレクトリをtmpに書き出す
     tmux popup \
       -w 80% -h 70% -x C -y C \
       -d "#{pane_current_path}" \
-      -E "lf -last-dir-path='$tmp' $*"
-    local dir
-    dir="$(cat "$tmp")"
-    rm -f "$tmp"
-    [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
+      -E "lf -last-dir-path='$tmp' $(printf '%q ' "$@")"
+    # popup終了後にtmpを読んでcd
+    if [[ -f "$tmp" ]]; then
+      local dir
+      dir="$(<"$tmp")"
+      rm -f "$tmp"
+      [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
+    fi
   }
 else
   lfcd() {
