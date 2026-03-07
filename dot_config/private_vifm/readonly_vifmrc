@@ -36,7 +36,10 @@
 " Mind that due to `filetype * open` below by default the editor won't be used
 " for opening files via l/Enter keys.  Comment that line out to change the
 " behaviour.
+
+set dotfiles
 set vicmd=nvim
+
 " if executable('vim')
 "     set vicmd=vim
 " elseif executable('nvim')
@@ -249,34 +252,34 @@ filetype {*.djvu},<image/vnd.djvu> open -a MacDjView.app
 " Audio
 filetype {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,
          \*.aac,*.mpga},
-        \<audio/*>
-       \ {Open in Music}
-       \ open -a Music.app,
-       \ {Open in QuickTime Player}
-       \ open -a QuickTime\ Player.app,
-       \ {Open in IINA}
-       \ open -a IINA.app,
+         \<audio/*>
+         \ {Open in Music}
+         \ open -a Music.app,
+         \ {Open in QuickTime Player}
+         \ open -a QuickTime\ Player.app,
+         \ {Open in IINA}
+         \ open -a IINA.app,
 fileviewer {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,
            \*.aac,*.mpga},
-          \<audio/*>
-         \ ffprobe -hide_banner -pretty %c 2>&1
+           \<audio/*>
+           \ ffprobe -hide_banner -pretty %c 2>&1
 
 " Video
 filetype {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
          \*.fl[icv],*.m2v,*.mov,*.webm,*.mts,*.m4v,*.r[am],*.qt,*.divx,
          \*.as[fx],*.unknown_video},
-        \<video/*>
-       \ {Open in QuickTime Player}
-       \ open -a QuickTime\ Player.app,
-       \ {Open in IINA}
-       \ open -a IINA.app,
-       \ {Open in VLC}
-       \ open -a VLC.app,
+         \<video/*>
+         \ {Open in QuickTime Player}
+         \ open -a QuickTime\ Player.app,
+         \ {Open in IINA}
+         \ open -a IINA.app,
+         \ {Open in VLC}
+         \ open -a VLC.app,
 fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
            \*.fl[icv],*.m2v,*.mov,*.webm,*.mts,*.m4v,*.r[am],*.qt,*.divx,
            \*.as[fx],*.unknown_video},
-          \<video/*>
-         \ ffprobe -hide_banner -pretty %c 2>&1
+           \<video/*>
+           \ ffprobe -hide_banner -pretty %c 2>&1
 
 " Web
 filetype {*.xhtml,*.html,*.htm},<text/html>
@@ -303,7 +306,7 @@ fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 " fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
 "          \ identify %f
 
-" Image (viu でプレビュー)
+" Image
 filetype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.webp,*.xpm},<image/*>
        \ open -a Preview.app,
 fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.webp,*.xpm},<image/*>
@@ -391,6 +394,12 @@ fileviewer *.yaml,*.yml bat --color=always --style=plain --language=yaml %c
 fileviewer *.toml bat --color=always --style=plain --language=toml %c
 fileviewer *.css,*.scss bat --color=always --style=plain --language=css %c
 fileviewer *[^/] bat --color=always --style=plain %c
+
+" テキスト/コード系はnvimで開く
+filetype {*.ts,*.tsx,*.js,*.jsx,*.json,*.nix,*.md,*.sh,*.bash,*.zsh,
+         \*.yaml,*.yml,*.toml,*.css,*.scss,*.html,*.htm,*.xhtml,
+         \*.txt,*.conf,*.ini,*.env,*.gitignore,*.lock}
+       \ nvim %c
 
 " Syntax highlighting in preview
 "
