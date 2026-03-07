@@ -36,18 +36,19 @@
 " Mind that due to `filetype * open` below by default the editor won't be used
 " for opening files via l/Enter keys.  Comment that line out to change the
 " behaviour.
-if executable('vim')
-    set vicmd=vim
-elseif executable('nvim')
-    set vicmd=nvim
-elseif executable('elvis')
-    set vicmd=elvis\ -G\ termcap
-elseif executable('vile')
-    set vicmd=vile
-elseif $EDITOR != ''
-    echo 'Note: using `'.$EDITOR.'` as an editor'
-    let &vicmd = $EDITOR
-endif
+set vicmd=nvim
+" if executable('vim')
+"     set vicmd=vim
+" elseif executable('nvim')
+"     set vicmd=nvim
+" elseif executable('elvis')
+"     set vicmd=elvis\ -G\ termcap
+" elseif executable('vile')
+"     set vicmd=vile
+" elseif $EDITOR != ''
+"     echo 'Note: using `'.$EDITOR.'` as an editor'
+"     let &vicmd = $EDITOR
+" endif
 
 " This makes vifm perform file operations on its own instead of relying on
 " standard utilities like `cp`.  While using `cp` and alike is a more universal
@@ -143,7 +144,7 @@ colorscheme nord
 
 " :mark mark /full/directory/path [filename]
 
-mark b ~/bin/
+" mark b ~/bin/
 mark h ~/
 
 " ------------------------------------------------------------------------------
@@ -297,11 +298,16 @@ filetype {*.[1-8]},<text/troff> man ./%c
 fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 
 " Image
-filetype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
-       \ open -a Preview.app,
-fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
-         \ identify %f
+" filetype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
+"        \ open -a Preview.app,
+" fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
+"          \ identify %f
 
+" Image (viu でプレビュー)
+filetype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.webp,*.xpm},<image/*>
+       \ open -a Preview.app,
+fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.webp,*.xpm},<image/*>
+         \ viu %c
 " MD5
 filetype *.md5
        \ {Check MD5 hash sum}
@@ -376,6 +382,16 @@ fileviewer {*.docx},
            \vnd.openxmlformats-officedocument.wordprocessingml.document>
          \ docx2txt.pl %f -
 
+fileviewer *.ts,*.tsx,*.js,*.jsx bat --color=always %c
+fileviewer *.json bat --color=always --language=json %c
+fileviewer *.nix bat --color=always --language=nix %c
+fileviewer *.md bat --color=always --language=markdown %c
+fileviewer *.sh,*.bash,*.zsh bat --color=always --language=sh %c
+fileviewer *.yaml,*.yml bat --color=always --language=yaml %c
+fileviewer *.toml bat --color=always --language=toml %c
+fileviewer *.css,*.scss bat --color=always --language=css %c
+fileviewer *[^/] bat --color=always %c
+
 " Syntax highlighting in preview
 "
 " Explicitly set highlight type for some extensions
@@ -392,6 +408,7 @@ fileviewer {*.docx},
 
 " Displaying pictures in terminal
 " fileviewer *.jpg,*.png shellpic %c
+fileviewer *.png,*.jpg,*.jpeg,*.gif,*.webp viu %c
 
 " Open all other files with default system programs (you can also remove all
 " :file[x]type commands above to ensure they don't interfere with system-wide
