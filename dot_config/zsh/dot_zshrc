@@ -233,7 +233,6 @@ if [[ -n "$TMUX" ]]; then
     tmux popup \
       -w 80% -h 80% -x C -y C \
       -d "#{pane_current_path}" \
-      # -b none \
       -E "lf -last-dir-path='$tmp' $(printf '%q ' "$@")"
     # popup終了後にtmpを読んでcd
     if [[ -f "$tmp" ]]; then
