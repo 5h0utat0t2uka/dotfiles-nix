@@ -220,11 +220,31 @@ if [[ ! -f "$HOME/.config/zsh-abbr/.abbr_initialized" ]]; then
 fi
 
 # function
-lfcd() {
-  local dir
-  dir="$(command lf -print-last-dir "$@")" || return
-  [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
-}
+# lfcd() {
+#   local dir
+#   dir="$(command lf -print-last-dir "$@")" || return
+#   [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
+# }
+if [[ -n "$TMUX" ]]; then
+  lfcd() {
+    local tmp
+    tmp="$(mktemp)"
+    tmux popup \
+      -w 80% -h 70% -x C -y C \
+      -d "#{pane_current_path}" \
+      -E "lf -last-dir-path='$tmp' $*"
+    local dir
+    dir="$(cat "$tmp")"
+    rm -f "$tmp"
+    [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
+  }
+else
+  lfcd() {
+    local dir
+    dir="$(command lf -print-last-dir "$@")" || return
+    [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
+  }
+fi
 
 update_zo_opts() {
   export _ZO_FZF_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt) ${(j: :)_ZO_ADDITIONAL_OPTS}"
