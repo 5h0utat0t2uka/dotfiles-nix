@@ -9,16 +9,13 @@ return {
     vim.g.nord_italic = false
     vim.g.nord_uniform_diff_background = true
     vim.g.nord_bold = true
-
     vim.cmd.colorscheme("nord")
   end,
   config = function()
     local function apply_custom_highlights()
       vim.api.nvim_set_hl(0, "WinBar", { bg = "#2e3440", fg = "#4c566a" })
       vim.api.nvim_set_hl(0, "WinBarNC", { bg = "#2e3440", fg = "#4c566a" })
-
       vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { fg = "#3b4252", bg = "none" })
-
       vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#d8dee9", bg = "none" })
       vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#d8dee9", bg = "none" })
       vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#d8dee9", bg = "none" })
