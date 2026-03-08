@@ -1,5 +1,5 @@
 final: prev: {
-  tree-sitter-cli-0261 = prev.rustPlatform.buildRustPackage rec {
+  tree-sitter-0261 = prev.rustPlatform.buildRustPackage rec {
     pname = "tree-sitter";
     version = "0.26.1";
 
@@ -7,7 +7,7 @@ final: prev: {
       owner = "tree-sitter";
       repo = "tree-sitter";
       tag = "v${version}";
-      hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      hash = "sha256-k8X2qtxUne8C6znYAKeb4zoBf+vffmcJZQHUmBvsilA=";
       fetchSubmodules = true;
     };
 

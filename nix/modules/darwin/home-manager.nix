@@ -76,7 +76,8 @@ in
       pinentry_mac
       ripgrep
       # termscp
-      tree-sitter-0261
+      # tree-sitter
+      pkgs."tree-sitter-0261"
       tree
       tmux
       # uv
