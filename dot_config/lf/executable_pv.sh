@@ -3,7 +3,6 @@
 file="$1"
 width="${2:-80}"
 height="${3:-24}"
-mode="${6:-preview}"
 
 [ -f "$file" ] || exit 0
 
@@ -15,21 +14,20 @@ CHAFA="$(command -v chafa 2>/dev/null)"
 case "$mime" in
   image/*)
     if [ -n "$CHAFA" ]; then
-      # tmux 越しでも安定しやすい文字ベース出力
       exec "$CHAFA" \
+        -f symbols \
         --size="${width}x${height}" \
         --symbols=block,border,space \
         --animate=off \
         --clear \
         --polite=on \
-        -- "$file" || true
+        -- "$file"
     fi
-
-    printf 'No previewer for image: chafa not found\n'
+    printf 'chafa not found\n'
     exit 0
     ;;
 
-  text/*|*/json|*/xml|*/javascript|*/x-shellscript)
+  text/*|application/json|application/xml|application/javascript|application/x-sh|application/x-shellscript)
     if [ -n "$BAT" ]; then
       exec "$BAT" \
         --color=always \
@@ -38,21 +36,10 @@ case "$mime" in
         --terminal-width="$width" \
         -- "$file"
     fi
-
     exec sed -n "1,${height}p" -- "$file"
     ;;
 
   *)
-    # bat があれば一応それで試す。ダメなら file 情報だけ表示
-    if [ -n "$BAT" ]; then
-      exec "$BAT" \
-        --color=always \
-        --style=plain \
-        --paging=never \
-        --terminal-width="$width" \
-        -- "$file" 2>/dev/null || file --brief -- "$file"
-    fi
-
     exec file --brief -- "$file"
     ;;
 esac
