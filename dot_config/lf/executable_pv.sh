@@ -7,7 +7,7 @@ width="${2:-80}"
 [ -f "$file" ] || exit 0
 
 # bat が無い環境向けに batcat もフォールバック
-BAT="$(command -v bat 2>/dev/null || command -v batcat 2>/dev/null)"
-[ -n "$BAT" ] || exit 0
-
-exec "$BAT" --color=always --style=plain --paging=never --terminal-width="$width" -- "$file"
+# BAT="$(command -v bat 2>/dev/null || command -v batcat 2>/dev/null)"
+# [ -n "$BAT" ] || exit 0
+# exec "$BAT" --color=always --style=plain --paging=never --terminal-width="$width" -- "$file"
+exec bat --color=always --style=plain --paging=never --terminal-width="$width" -- "$file"
