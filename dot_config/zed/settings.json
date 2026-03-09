@@ -10,8 +10,11 @@
   "auto_update": false,
   "restore_on_startup": "launchpad",
   // "disable_ai": true,
-  "features": {
-    "edit_prediction_provider": "zed"
+  // "features": {
+  //   "edit_prediction_provider": "zed"
+  // },
+  "edit_predictions": {
+    "provider": "copilot"
   },
   "theme_overrides": {
     "Nord-Custom": {
