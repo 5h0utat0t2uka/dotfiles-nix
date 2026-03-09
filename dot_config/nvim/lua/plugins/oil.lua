@@ -29,6 +29,17 @@ return {
         preview_win = {
           update_on_cursor_moved = true,
           preview_method = "fast_scratch",
+          disable_preview = function(filename)
+          local f = filename:lower()
+          return f:match("%.png$") ~= nil
+            or f:match("%.jpe?g$") ~= nil
+            or f:match("%.webp$") ~= nil
+            or f:match("%.gif$") ~= nil
+            or f:match("%.avif$") ~= nil
+            or f:match("%.svg$") ~= nil
+            or f:match("%.bmp$") ~= nil
+            or f:match("%.ico$") ~= nil
+          end,
           -- win_options = {
           --   winhighlight = "WinSeparator:OilPreviewSeparator",
           -- },
