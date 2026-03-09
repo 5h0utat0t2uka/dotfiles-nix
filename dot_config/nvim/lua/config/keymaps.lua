@@ -17,7 +17,7 @@ vim.keymap.set("n", "<Esc>", function()
 end, { desc = "Clear search highlight or escape" })
 
 -- insert mode keymaps
--- vim.keymap.set('i', '<M-l>', '<End>', { desc = "Move to end of line" })
--- vim.keymap.set('i', '<M-h>', '<Home>', { desc = "Move to sta of line" })
-vim.keymap.set('i', '<M-l>', '<C-Right>', { desc = "Move words to right" })
-vim.keymap.set('i', '<M-h>', '<C-Left>', { desc = "Move words to left" })
+vim.keymap.set('i', '<M-w>', '<C-Right>', { desc = "Move words to right" })
+vim.keymap.set('i', '<M-b>', '<C-Left>', { desc = "Move words to left" })
+vim.keymap.set('i', '<M-l>', '<End>', { desc = "Move to end of line" })
+vim.keymap.set('i', '<M-h>', '<Home>', { desc = "Move to sta of line" })
