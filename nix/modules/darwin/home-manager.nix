@@ -61,6 +61,7 @@ in
       libwebp
       lf
       lazygit
+      macism
       mise
       neovim
       nb
