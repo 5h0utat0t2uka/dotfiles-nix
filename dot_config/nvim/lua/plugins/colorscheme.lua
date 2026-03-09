@@ -16,6 +16,8 @@ return {
       vim.api.nvim_set_hl(0, "WinBar", { bg = "#2e3440", fg = "#4c566a" })
       vim.api.nvim_set_hl(0, "WinBarNC", { bg = "#2e3440", fg = "#4c566a" })
       vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3b4252", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#4c566a", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
       vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { fg = "#3b4252", bg = "none" })
       vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#d8dee9", bg = "none" })
       vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#d8dee9", bg = "none" })
