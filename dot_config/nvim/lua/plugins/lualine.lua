@@ -89,7 +89,7 @@ return {
             newfile_status = true,
             path = 1,
             shorting_target = 40,
-            symbols = { unnamed = "[Unnamed]" },
+            symbols = { unnamed = "[No Name]" },
             color = {
               fg = "#81A1C1",
               bg = "#2E3440",
