@@ -75,6 +75,12 @@ window-colorspace = display-p3
 window-theme = auto
 split-divider-color = #4C566A
 
+# 1.3.0: 検索ハイライト
+search-foreground = #1a1b26
+search-background = #e0af68
+search-selected-foreground = #1a1b26
+search-selected-background = #ff9e64
+
 # macos-titlebar-style = hidden
 macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = transparent
