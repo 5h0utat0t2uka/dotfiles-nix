@@ -49,9 +49,9 @@ fullscreen = non-native
 auto-update = off
 
 font-size = 14.6
-# font-family = GeistMono Nerd Font Mono
+font-family = GeistMono Nerd Font Mono
 font-family = UDEV Gothic 35 NF
-# font-family-bold = GeistMono Nerd Font Mono
+font-family-bold = GeistMono Nerd Font Mono
 font-family-bold = UDEV Gothic 35 NF
 
 font-feature = -calt
@@ -77,9 +77,9 @@ split-divider-color = #4C566A
 
 # 1.3.0: 検索ハイライト
 search-foreground = #2E3440
-search-background = #81A1C1
+search-background = #EBCB8B
 search-selected-foreground = #2E3440
-search-selected-background = #D08770
+search-selected-background = #BF616A
 
 # macos-titlebar-style = hidden
 macos-titlebar-proxy-icon = hidden
