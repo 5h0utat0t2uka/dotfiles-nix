@@ -44,7 +44,7 @@
 
 theme = nord
 title = " "
-fullscreen = true
+fullscreen = non-native
 
 auto-update = off
 
