@@ -92,6 +92,7 @@ in
       zsh-abbr
       zsh-powerlevel10k
       zshPluginLinks
+      lua-language-server
     ];
     activation.ensureNbConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p "$HOME/.config/nb"
