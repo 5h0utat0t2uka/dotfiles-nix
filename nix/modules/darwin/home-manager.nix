@@ -61,6 +61,7 @@ in
       libwebp
       lf
       lazygit
+      lua-language-server
       macism
       mise
       neovim
@@ -92,7 +93,6 @@ in
       zsh-abbr
       zsh-powerlevel10k
       zshPluginLinks
-      lua-language-server
     ];
     activation.ensureNbConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p "$HOME/.config/nb"
