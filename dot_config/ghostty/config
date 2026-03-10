@@ -79,7 +79,7 @@ split-divider-color = #4C566A
 search-foreground = #2E3440
 search-background = #EBCB8B
 search-selected-foreground = #2E3440
-search-selected-background = #BF616A
+search-selected-background = #81A1C1
 
 # macos-titlebar-style = hidden
 macos-titlebar-proxy-icon = hidden
