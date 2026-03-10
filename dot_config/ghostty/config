@@ -80,7 +80,7 @@ macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = transparent
 macos-window-shadow = false
 macos-window-buttons = hidden
-macos-non-native-fullscreen = visible-menu
+macos-non-native-fullscreen = false
 macos-option-as-alt = left
 
 desktop-notifications = true
