@@ -4,6 +4,7 @@ vim.keymap.set("n", "gh", "<Cmd>tabprevious<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "gl", "<Cmd>tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "gj", "<Cmd>tabclose<CR>", { desc = "Close tab" })
 vim.keymap.set("n", "gJ", "<Cmd>tabclose!<CR>", { desc = "Force close tab" })
+vim.keymap.set("n", "U", "<C-r>", { noremap = true, silent = true, desc = "Redo" })
 vim.keymap.set("n", "<leader>tc", "g~iw", { remap = false, desc = "Toggle word case" })
 vim.keymap.set("n", "<Esc>", function()
   if vim.v.hlsearch == 1 then
