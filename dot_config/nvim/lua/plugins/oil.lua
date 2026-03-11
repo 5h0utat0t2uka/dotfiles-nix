@@ -12,9 +12,20 @@ return {
 
       require("oil").setup({
         default_file_explorer = true,
-        columns = { "icon" },
+        columns = {
+          "icon",
+          "permissions",
+          -- "size",
+          -- "mtime",
+        },
         view_options = {
-          show_hidden = false,
+          show_hidden = true,
+          is_always_hidden = function(name, _)
+            return name == "node_modules"
+              or name == ".git"
+              or name == ".next"
+              or name == "dist"
+          end,
         },
         float = {
           padding = 6,
