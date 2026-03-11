@@ -21,11 +21,7 @@ return {
   event = "BufReadPost",
   build = ":Copilot auth",
   opts = {
-    suggestion = {
-      enabled = false,
-    },
-    panel = {
-      enabled = false,
-    },
+    suggestion = { enabled = false },
+    panel = { enabled = false },
   },
 }
