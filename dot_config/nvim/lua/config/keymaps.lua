@@ -17,7 +17,9 @@ vim.keymap.set("n", "<Esc>", function()
     )
   end
 end, { desc = "Clear search highlight or escape" })
-
+-- visual mode keymaps
+vim.keymap.set("x", "<", "<gv", { noremap = true, silent = true })
+vim.keymap.set("x", ">", ">gv", { noremap = true, silent = true })
 -- insert mode keymaps
 vim.keymap.set('i', '<M-w>', '<C-Right>', { desc = "Move words to right" })
 vim.keymap.set('i', '<M-b>', '<C-Left>', { desc = "Move words to left" })
