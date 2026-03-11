@@ -6,7 +6,7 @@ return {
     opts = {
       show = true,
       -- handle = { blend = 50, color = nil },
-      handle = { color = '#3b4252' },
+      handle = { color = '#353B49' },
       marks = {
         Search = { color = "#d08770" },
         Error  = { color = "#bf616a" },
