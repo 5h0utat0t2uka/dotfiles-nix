@@ -33,7 +33,10 @@ return {
       "giuxtaposition/blink-cmp-copilot",
     },
     opts = {
-      keymap = { preset = "default" },
+      keymap = {
+        preset = "default",
+        ["<Tab>"] = { "accept", "fallback" },
+      },
       appearance = {
         nerd_font_variant = "mono",
       },
