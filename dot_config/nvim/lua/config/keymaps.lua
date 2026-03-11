@@ -24,15 +24,15 @@ end, { desc = "Clear search highlight or escape" })
 
 -- insert mode keymaps
 -- 単語の移動
-vim.keymap.set('i', '<M-w>', '<C-Right>', { desc = "Move words to right" })
-vim.keymap.set('i', '<M-b>', '<C-Left>', { desc = "Move words to left" })
-vim.keymap.set('i', '<M-l>', '<End>', { desc = "Move to end of line" })
-vim.keymap.set('i', '<M-h>', '<Home>', { desc = "Move to sta of line" })
+vim.keymap.set('i', '<A-w>', '<C-Right>', { desc = "Move words to right" })
+vim.keymap.set('i', '<A-b>', '<C-Left>', { desc = "Move words to left" })
+vim.keymap.set('i', '<A-l>', '<End>', { desc = "Move to end of line" })
+vim.keymap.set('i', '<A-h>', '<Home>', { desc = "Move to sta of line" })
 
 -- visual mode keymaps
 -- インデント
 vim.keymap.set("x", "<", "<gv", { noremap = true, silent = true })
 vim.keymap.set("x", ">", ">gv", { noremap = true, silent = true })
 -- 選択範囲の移動
-vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv", { silent = true })
-vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set("x", "<A-j>", ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set("x", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true })
