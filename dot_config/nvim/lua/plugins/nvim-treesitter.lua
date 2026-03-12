@@ -9,15 +9,24 @@ return {
       "lua", "vim", "vimdoc", "query",
       "typescript", "tsx", "json", "javascript", "html", "css", "nix"
     })
+
     vim.api.nvim_create_autocmd("FileType", {
       pattern = {
         "lua", "vim", "typescript", "tsx",
-        "json", "javascript", "html", "css", "nix"
+        "json", "javascript", "html", "css"
       },
       callback = function()
         vim.treesitter.start()
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end,
     })
-  end
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "nix",
+      callback = function()
+        vim.treesitter.start()
+        vim.bo.indentexpr = ""
+      end,
+    })
+  end,
 }
