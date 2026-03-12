@@ -1,9 +1,12 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    -- tag = "0.1.8",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+      },
     },
     cmd = "Telescope",
     keys = function()
@@ -20,10 +23,12 @@ return {
         { "<leader>fh", b("help_tags"),                     desc = "Help tags" },
       }
     end,
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      require("telescope").load_extension("fzf")
+    end,
     opts = function()
-      -- opts を関数として定義し、実行時にactionsをrequireする
       local actions = require("telescope.actions")
-
       return {
         defaults = {
           border = true,
@@ -58,7 +63,7 @@ return {
             "--smart-case",
             "-uu",
             "--hidden",
-          }
+          },
         },
         pickers = {
           buffers = {
@@ -67,24 +72,15 @@ return {
             ignore_current_buffer = true,
             mappings = {
               n = {
-                -- ノーマルモードで dd でバッファ削除
                 ["dd"] = actions.delete_buffer,
               },
               i = {
-                -- インサートモードで Ctrl+d で削除
                 ["<C-d>"] = actions.delete_buffer,
-              }
-            }
-          }
+              },
+            },
+          },
         },
       }
-    end
+    end,
   },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
-    config = function()
-      require("telescope").load_extension("fzf")
-    end
-  }
 }
