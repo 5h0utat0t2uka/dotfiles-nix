@@ -261,6 +261,7 @@
     "Lua": {
       "tab_size": 2,
       "hard_tabs": false,
+      "auto_indent": false
     }
   },
   "telemetry": {
