@@ -9,8 +9,8 @@ return {
       vim.api.nvim_set_hl(0, "OilFloat", { link = "Normal" })
       vim.api.nvim_set_hl(0, "OilFloatBorder", { link = "Normal" })
       -- vim.api.nvim_set_hl(0, "OilPreviewSeparator", { fg = "#4C566A" })
-
-      require("oil").setup({
+      local oil = require("oil")
+      oil.setup({
         default_file_explorer = true,
         columns = {
           "icon",
@@ -61,9 +61,25 @@ return {
         },
       })
 
-      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-      vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open Oil" })
-      vim.keymap.set("n", "<leader>E", "<CMD>Oil --float<CR>", { desc = "Open Oil float" })
+      -- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+      -- vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open Oil" })
+      -- vim.keymap.set("n", "<leader>E", "<CMD>Oil --float<CR>", { desc = "Open Oil float" })
+      local preview_opts = {
+        preview = {
+          split = "belowright",
+        },
+      }
+      vim.keymap.set("n", "-", function()
+        oil.open(nil, preview_opts)
+      end, { desc = "Open parent directory with preview" })
+
+      vim.keymap.set("n", "<leader>e", function()
+        oil.open(nil, preview_opts)
+      end, { desc = "Open Oil with preview" })
+
+      vim.keymap.set("n", "<leader>E", function()
+        oil.open_float(nil, preview_opts)
+      end, { desc = "Open Oil float with preview" })
     end,
   },
 }
