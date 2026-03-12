@@ -257,6 +257,10 @@
     },
     "Nix": {
       "language_servers": ["nixd"]
+    },
+    "Lua": {
+      "tab_size": 2,
+      "hard_tabs": false,
     }
   },
   "telemetry": {
