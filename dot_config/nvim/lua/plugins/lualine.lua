@@ -133,7 +133,7 @@ return {
               directory = "",
             },
             buffers_color = {
-              active   = { fg = "#2E3440", bg = "#81A1C1", gui = "bold" }, -- アクティブタブ
+              active   = { fg = "#2E3440", bg = "#5E81AC", gui = "bold" }, -- アクティブタブ
               inactive = { fg = "#4C566A", bg = "#2E3440" }, -- 非アクティブタブ
             },
           }
