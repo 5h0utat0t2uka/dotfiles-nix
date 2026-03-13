@@ -29,6 +29,10 @@ return {
           left = "",
           right = "",
         },
+        component_separators = {
+          left = "",
+          right = "",
+        },
       },
       sections = {
         lualine_a = {
@@ -125,7 +129,7 @@ return {
         lualine_a = {
           {
             "buffers",
-            separator = "",
+            -- separator = "",
             -- separator = { left = "", right = "" },
             show_filename_only = true,
             icons_enabled = false,
