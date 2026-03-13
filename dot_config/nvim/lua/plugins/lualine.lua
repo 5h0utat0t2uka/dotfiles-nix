@@ -23,6 +23,7 @@ return {
 
     require("lualine").setup({
       options = {
+        always_show_tabline = true,
         theme = custom,
         section_separators = {
           left = "",
@@ -114,7 +115,7 @@ return {
             "buffers",
             show_filename_only = true,
             symbols = {
-              modified = " ●",
+              modified = " ",
               alternate_file = "",
               directory = "",
             },
