@@ -134,11 +134,11 @@ return {
             },
             buffers_color = {
               active   = { fg = "#2E3440", bg = "#5E81AC", gui = "bold" }, -- アクティブタブ
-              inactive = { fg = "#4C566A", bg = "#2E3440" }, -- 非アクティブタブ
+              inactive = { fg = "#4C566A", bg = "#3B4252" }, -- 非アクティブタブ
             },
           }
         },
-        lualine_z = { "tabs" },
+        -- lualine_z = { "tabs" },
       }
     })
   end,
