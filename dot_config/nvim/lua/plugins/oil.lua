@@ -55,6 +55,12 @@ return {
           --   winhighlight = "WinSeparator:OilPreviewSeparator",
           -- },
         },
+        confirmation = {
+          border = "single",
+          win_options = {
+            winblend = 0,
+          },
+        },
         keymaps = {
           ["q"] = { "actions.close", mode = "n" },
           ['<C-p>'] = { 'actions.preview', opts = { split = 'belowright' } },
