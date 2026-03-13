@@ -1,11 +1,14 @@
 -- normal mode keymaps
--- タブ関連
+-- バッファ
+vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+-- タブ
 vim.keymap.set("n", "gk", "<Cmd>tabnew<CR>", { desc = "New tab" })
 vim.keymap.set("n", "gh", "<Cmd>tabprevious<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "gl", "<Cmd>tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "gj", "<Cmd>tabclose<CR>", { desc = "Close tab" })
 vim.keymap.set("n", "gJ", "<Cmd>tabclose!<CR>", { desc = "Force close tab" })
--- リドゥ
+
 vim.keymap.set("n", "U", "<C-r>", { noremap = true, silent = true, desc = "Redo" })
 -- 単語の大文字小文字を切り替える
 vim.keymap.set("n", "<leader>tc", "g~iw", { remap = false, desc = "Toggle word case" })
