@@ -132,10 +132,10 @@ return {
               alternate_file = "",
               directory = "",
             },
-            color = {
-              fg = "#81A1C1",
-              bg = "#4C566A",
-            }
+            buffers_color = {
+              active   = { fg = "#81A1C1", bg = "#4C566A" }, -- アクティブタブ
+              inactive = { fg = "#2E3440", bg = "#4C566A" }, -- 非アクティブタブ
+            },
           }
         },
         lualine_z = { "tabs" },
