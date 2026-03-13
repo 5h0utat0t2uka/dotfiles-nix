@@ -126,15 +126,15 @@ return {
           {
             "buffers",
             show_filename_only = true,
-            icons_enabled = true,
+            icons_enabled = false,
             symbols = {
               modified = " ",
               alternate_file = "",
               directory = "",
             },
             buffers_color = {
-              active   = { fg = "#2E3440", bg = "#4C566A", gui = "bold" }, -- アクティブタブ
-              inactive = { fg = "#4C566A", bg = "#2E3440", gui = "bold" }, -- 非アクティブタブ
+              active   = { fg = "#2E3440", bg = "#81A1C1", gui = "bold" }, -- アクティブタブ
+              inactive = { fg = "#4C566A", bg = "#2E3440" }, -- 非アクティブタブ
             },
           }
         },
