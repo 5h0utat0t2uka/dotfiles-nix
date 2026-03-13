@@ -4,7 +4,7 @@ return {
   config = function()
     local custom = vim.deepcopy(require("lualine.themes.nord"))
     local colors = {
-      normal   = "#81a1c1",
+      normal   = "#5E81AC",
       insert   = "#a3be8c",
       visual   = "#b48ead",
       replace  = "#d08770",
@@ -65,7 +65,7 @@ return {
             "branch",
             icons_enabled = false,
             color = {
-              fg = "#81A1C1",
+              fg = "#5E81AC",
               bg = "#3B4252",
             }
           },
@@ -77,7 +77,7 @@ return {
               removed = ' ',
             },
             color = {
-              fg = "#81A1C1",
+              fg = "#5E81AC",
               bg = "#2E3440",
             }
           },
@@ -93,7 +93,7 @@ return {
         --     shorting_target = 40,
         --     symbols = { unnamed = "[No Name]" },
         --     color = {
-        --       fg = "#81A1C1",
+        --       fg = "#5E81AC",
         --       bg = "#2E3440",
         --     }
         --   }
@@ -105,7 +105,7 @@ return {
         --     icons_enabled = false,
         --     colored = false,
         --     color = {
-        --       fg = "#81A1C1",
+        --       fg = "#5E81AC",
         --       bg = "#2E3440",
         --     }
         --   }
@@ -115,7 +115,7 @@ return {
           {
             "location",
             color = {
-              fg = "#81A1C1",
+              fg = "#5E81AC",
               bg = "#2E3440",
             }
           }
