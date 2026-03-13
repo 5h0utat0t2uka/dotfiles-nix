@@ -14,7 +14,7 @@
   //   "edit_prediction_provider": "zed"
   // },
   "edit_predictions": {
-    "provider": "copilot"
+    "provider": "zed"
   },
   "theme_overrides": {
     "Nord-Custom": {
