@@ -108,6 +108,20 @@ return {
           }
         },
       },
+      tabline = {
+        lualine_a = {
+          {
+            "buffers",
+            show_filename_only = true,
+            symbols = {
+              modified = " ●",
+              alternate_file = "",
+              directory = "",
+            },
+          }
+        },
+        lualine_z = { "tabs" },
+      }
     })
   end,
 }
