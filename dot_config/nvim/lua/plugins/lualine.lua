@@ -146,7 +146,7 @@ return {
         lualine_z = {
           {
             "tabs",
-            separator = { left = "", right = "   " },
+            separator = { left = "", right = " " },
           }
         }
       }
