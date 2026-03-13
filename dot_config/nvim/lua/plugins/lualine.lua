@@ -129,7 +129,7 @@ return {
         lualine_a = {
           {
             "buffers",
-            separator = { left = "   ", right = "" },
+            separator = { left = " ", right = "" },
             show_filename_only = true,
             icons_enabled = false,
             symbols = {
