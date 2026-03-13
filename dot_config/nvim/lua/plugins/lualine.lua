@@ -138,17 +138,17 @@ return {
               directory = "",
             },
             buffers_color = {
-              active   = { fg = "#2E3440", bg = "#5E81AC" }, -- アクティブタブ
-              inactive = { fg = "#4C566A", bg = "#2E3440" }, -- 非アクティブタブ
+              active   = { fg = "#2E3440", bg = "#5E81AC" },
+              inactive = { fg = "#4C566A", bg = "#2E3440" },
             },
           }
         },
-        lualine_z = {
-          {
-            "tabs",
-            separator = { left = "", right = " " },
-          }
-        }
+        -- lualine_z = {
+        --   {
+        --     "tabs",
+        --     separator = { left = "", right = " " },
+        --   }
+        -- }
       }
     })
   end,
