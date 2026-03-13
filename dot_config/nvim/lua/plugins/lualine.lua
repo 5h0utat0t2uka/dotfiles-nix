@@ -126,11 +126,16 @@ return {
           {
             "buffers",
             show_filename_only = true,
+            icons_enabled = false,
             symbols = {
               modified = " ",
               alternate_file = "",
               directory = "",
             },
+            color = {
+              fg = "#81A1C1",
+              bg = "#4C566A",
+            }
           }
         },
         lualine_z = { "tabs" },
