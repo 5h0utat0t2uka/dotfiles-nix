@@ -143,7 +143,10 @@ return {
             },
           }
         },
-        -- lualine_z = { "tabs" },
+        lualine_z = {
+          "tabs",
+          separator = { left = "", right = "   " },
+        }
       }
     })
   end,
