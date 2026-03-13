@@ -56,7 +56,9 @@ return {
           -- },
         },
         confirmation = {
-          border = "single",
+          min_width = { 60, 0.5 },
+          min_height = { 8, 0.15 },
+          border = "rounded",
           win_options = {
             winblend = 0,
           },
