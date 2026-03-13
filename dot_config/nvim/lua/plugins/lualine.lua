@@ -101,6 +101,7 @@ return {
         lualine_x = {
           {
             "filetype",
+            icons_enabled = false,
             colored = false,
             color = {
               fg = "#81A1C1",
