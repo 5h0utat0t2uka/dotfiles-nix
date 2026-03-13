@@ -98,17 +98,18 @@ return {
             }
           }
         },
-        lualine_x = {
-          {
-            "filetype",
-            icons_enabled = false,
-            colored = false,
-            color = {
-              fg = "#81A1C1",
-              bg = "#2E3440",
-            }
-          }
-        },
+        lualine_x = {},
+        -- lualine_x = {
+        --   {
+        --     "filetype",
+        --     icons_enabled = false,
+        --     colored = false,
+        --     color = {
+        --       fg = "#81A1C1",
+        --       bg = "#2E3440",
+        --     }
+        --   }
+        -- },
         lualine_y = {},
         lualine_z = {
           {
@@ -120,20 +121,20 @@ return {
           }
         },
       },
-      -- tabline = {
-      --   lualine_a = {
-      --     {
-      --       "buffers",
-      --       show_filename_only = true,
-      --       symbols = {
-      --         modified = " ",
-      --         alternate_file = "",
-      --         directory = "",
-      --       },
-      --     }
-      --   },
-      --   lualine_z = { "tabs" },
-      -- }
+      tabline = {
+        lualine_a = {
+          {
+            "buffers",
+            show_filename_only = true,
+            symbols = {
+              modified = " ",
+              alternate_file = "",
+              directory = "",
+            },
+          }
+        },
+        lualine_z = { "tabs" },
+      }
     })
   end,
 }
