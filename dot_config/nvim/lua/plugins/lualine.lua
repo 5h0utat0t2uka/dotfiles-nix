@@ -98,7 +98,16 @@ return {
             }
           }
         },
-        lualine_x = {},
+        lualine_x = {
+          {
+            "filetype",
+            colored = false,
+            color = {
+              fg = "#81A1C1",
+              bg = "#2E3440",
+            }
+          }
+        },
         lualine_y = {},
         lualine_z = {
           {
