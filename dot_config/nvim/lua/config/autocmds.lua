@@ -9,3 +9,16 @@ vim.api.nvim_create_autocmd("ModeChanged", {
     vim.fn.system({ "macism", english_im })
   end,
 })
+
+vim.o.updatetime = 300
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, {
+      focus = false,
+      scope = "cursor",
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = "rounded",
+      source = "if_many",
+    })
+  end,
+})
