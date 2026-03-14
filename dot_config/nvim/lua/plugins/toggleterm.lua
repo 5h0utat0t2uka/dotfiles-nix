@@ -4,8 +4,14 @@ return {
   config = function()
     require("toggleterm").setup{
       -- size can be a number or function which is passed the current terminal
-      size = 20,
+      -- size = 20,
       -- open_mapping = [[<leader>tt]],
+      size = function(term)
+        if term.direction == "horizontal" then
+          return 15
+        end
+        return 20
+      end,
       open_mapping = [[<c-t>]], -- or { [[<c-\>]], [[<c-¥>]] } if you also use a Japanese keyboard.
       hide_numbers = true, -- hide the number column in toggleterm buffers
       shade_filetypes = {},
@@ -42,6 +48,13 @@ return {
       },
     }
 
+    -- float terminal（既存の <C-t>）
+    vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<CR>", { silent = true })
+    vim.keymap.set("t", "<C-t>", [[<C-\><C-n><cmd>ToggleTerm direction=float<CR>]], { silent = true })
+
+    -- bottom terminal
+    vim.keymap.set("n", "<leader>tb", "<cmd>ToggleTerm size=15 direction=horizontal<CR>", { silent = true })
+    vim.keymap.set("t", "<leader>tb", [[<C-\><C-n><cmd>ToggleTerm size=15 direction=horizontal<CR>]], { silent = true })
     -- lazygit
     local Terminal  = require('toggleterm.terminal').Terminal
     local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
