@@ -53,8 +53,8 @@ return {
     vim.keymap.set("t", "<C-t>", [[<C-\><C-n><cmd>ToggleTerm direction=float<CR>]], { silent = true })
 
     -- bottom terminal
-    vim.keymap.set("n", "<leader>tb", "<cmd>ToggleTerm size=15 direction=horizontal<CR>", { silent = true })
-    vim.keymap.set("t", "<leader>tb", [[<C-\><C-n><cmd>ToggleTerm size=15 direction=horizontal<CR>]], { silent = true })
+    -- vim.keymap.set("n", "<leader>tb", "<cmd>ToggleTerm size=15 direction=horizontal<CR>", { silent = true })
+    -- vim.keymap.set("t", "<leader>tb", [[<C-\><C-n><cmd>ToggleTerm size=15 direction=horizontal<CR>]], { silent = true })
     -- lazygit
     local Terminal  = require('toggleterm.terminal').Terminal
     local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
