@@ -1,4 +1,4 @@
 theme = ""
-visualizer = "Bars"
+visualizer = "Columns"
 repeat = "off"
 shuffle = false
