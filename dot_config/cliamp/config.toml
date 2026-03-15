@@ -1,4 +1,4 @@
 theme = ""
-visualizer = "Bricks"
+visualizer = "Scatter"
 repeat = "off"
 shuffle = false
