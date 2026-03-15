@@ -1,4 +1,4 @@
 theme = ""
-visualizer = "Wave"
+visualizer = "Scatter"
 repeat = "off"
 shuffle = false
