@@ -15,11 +15,11 @@
       # nixpkgs (darwin) で libsmbclient / dyld が壊れているため brew に逃がす
       # https://github.com/nixos/nixpkgs/issues/476308
       "termscp"
+      "cliamp"
     ];
     casks = [
       # "affinity"
       # "nikitabobko/tap/aerospace"
-      "cliamp"
       "ghostty"
       "karabiner-elements"
       "zed"
