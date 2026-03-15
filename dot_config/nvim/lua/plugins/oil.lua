@@ -50,6 +50,7 @@ return {
             or f:match("%.svg$") ~= nil
             or f:match("%.bmp$") ~= nil
             or f:match("%.ico$") ~= nil
+            or f:match("%.ds_store$") ~= nil
           end,
           -- win_options = {
           --   winhighlight = "WinSeparator:OilPreviewSeparator",
