@@ -1,4 +1,4 @@
 theme = ""
-visualizer = "Scatter"
+visualizer = "Bars"
 repeat = "off"
 shuffle = false
