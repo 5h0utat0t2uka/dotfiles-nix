@@ -24,6 +24,7 @@ return {
             return name == "node_modules"
               or name == ".git"
               or name == ".next"
+              or name == ".DS_Store"
               or name == "dist"
           end,
         },
