@@ -43,5 +43,5 @@ vim.keymap.set("x", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true })
 -- command mode keymaps
 vim.keymap.set('c', '<c-a>', '<home>', { desc = 'Emacs like home' })
 vim.keymap.set('c', '<c-e>', '<end>', { desc = 'Emacs like end' })
-vim.keymap.set('c', '<M-Left>', '<S-Left>', { desc = 'Word left in cmdline' })
-vim.keymap.set('c', '<M-Right>', '<S-Right>', { desc = 'Word right in cmdline' })
+vim.keymap.set('c', '<M-b>', '<S-Left>', { desc = 'Word left in cmdline' })
+vim.keymap.set('c', '<M-f>', '<S-Right>', { desc = 'Word right in cmdline' })
