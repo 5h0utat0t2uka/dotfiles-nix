@@ -19,6 +19,7 @@
     casks = [
       # "affinity"
       # "nikitabobko/tap/aerospace"
+      "cliamp"
       "ghostty"
       "karabiner-elements"
       "zed"
