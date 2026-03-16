@@ -18,6 +18,14 @@ let
       name = "share/zsh/plugins/powerlevel10k";
       path = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k";
     }
+    {
+      name = "share/zsh/plugins/zeno.zsh/zeno.zsh";
+      path = "${pkgs.zeno-zsh}/share/zeno.zsh/zeno.zsh";
+    }
+    {
+      name = "share/zsh/plugins/zeno.zsh/zeno-bootstrap.zsh";
+      path = "${pkgs.zeno-zsh}/share/zeno.zsh/zeno-bootstrap.zsh";
+    }
   ];
 in
 {
@@ -47,6 +55,7 @@ in
       chafa
       claude-code
       delta
+      deno
       devbox
       eza
       fd
@@ -88,6 +97,7 @@ in
       wget
       zbar
       zoxide
+      zeno-zsh
       zsh-syntax-highlighting
       zsh-autosuggestions
       zsh-completions
