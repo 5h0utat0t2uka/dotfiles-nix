@@ -69,6 +69,7 @@ return {
           {
             "branch",
             icons_enabled = true,
+            icon = "",
             color = {
               fg = "#5E81AC",
               bg = "#2E3440",
