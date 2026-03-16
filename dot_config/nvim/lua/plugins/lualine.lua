@@ -68,10 +68,11 @@ return {
         lualine_b = {
           {
             "branch",
-            icons_enabled = false,
+            icons_enabled = true,
             color = {
               fg = "#5E81AC",
-              bg = "#3B4252",
+              bg = "#2E3440",
+              -- bg = "#3B4252",
             }
           },
           {
