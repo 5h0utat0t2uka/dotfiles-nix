@@ -10,16 +10,20 @@
       upgrade = true;
       cleanup = "zap";
     };
+
     taps = [];
+
     brews = [
       # nixpkgs (darwin) で libsmbclient / dyld が壊れているため brew に逃がす
       # https://github.com/nixos/nixpkgs/issues/476308
       "termscp"
-      "bjarneo/cliamp/cliamp"
+      {
+        name = "bjarneo/cliamp/cliamp";
+        args = [ "without-yt-dlp" ];
+      }
     ];
+
     casks = [
-      # "affinity"
-      # "nikitabobko/tap/aerospace"
       "ghostty"
       "karabiner-elements"
       "zed"
