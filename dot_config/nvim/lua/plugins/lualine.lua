@@ -36,7 +36,7 @@ return {
       },
       sections = {
         lualine_a = {
-          section_separators = {
+          separators = {
             left = " ",
             right = "",
           },
