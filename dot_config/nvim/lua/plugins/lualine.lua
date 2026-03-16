@@ -52,6 +52,7 @@ return {
               return map[str] or str
             end,
             color = {
+              fg = colors.inactive,
               gui = "bold",
             },
           },
