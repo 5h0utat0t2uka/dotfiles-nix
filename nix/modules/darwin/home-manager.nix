@@ -54,6 +54,7 @@ in
       git
       gh
       ghq
+      gifski
       glow
       gnupg
       just
