@@ -7,13 +7,13 @@ return {
     treesitter.setup()
     treesitter.install({
       "lua", "vim", "vimdoc", "query",
-      "typescript", "tsx", "json", "javascript", "html", "css", "nix"
+      "typescript", "tsx", "json", "javascript", "html", "css", "nix", "astro"
     })
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = {
         "lua", "vim", "typescript", "tsx",
-        "json", "javascript", "html", "css"
+        "json", "javascript", "html", "css", "astro"
       },
       callback = function()
         vim.treesitter.start()
