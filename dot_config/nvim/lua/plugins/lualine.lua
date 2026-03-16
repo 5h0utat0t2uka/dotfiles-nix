@@ -51,6 +51,7 @@ return {
               }
               return map[str] or str
             end,
+            separator = { left = " ", right = "" },
             color = {
               fg = colors.inactive,
               gui = "bold",
