@@ -208,6 +208,7 @@ fi
 # abbrの追加編集など行った場合は .abbr_initialized を削除する
 if [[ ! -f "$HOME/.config/zsh-abbr/.abbr_initialized" ]]; then
   abbr gs="git status"
+  abbr gd="git diff"
   abbr ga="git add ."
   abbr gc='git commit -m "%"'
   abbr gp="git push origin HEAD"
