@@ -108,18 +108,21 @@ return {
         --     }
         --   }
         -- },
-        lualine_x = {},
-        -- lualine_x = {
-        --   {
-        --     "filetype",
-        --     icons_enabled = false,
-        --     colored = false,
-        --     color = {
-        --       fg = "#5E81AC",
-        --       bg = "#2E3440",
-        --     }
-        --   }
-        -- },
+        -- lualine_x = {},
+        lualine_x = {
+          {
+            "filetype",
+            icons_enabled = false,
+            colored = false,
+            fmt = function(str)
+              return string.upper(str)
+            end,
+            color = {
+              fg = "#5E81AC",
+              bg = "#2E3440",
+            }
+          }
+        },
         lualine_y = {},
         lualine_z = {
           {
