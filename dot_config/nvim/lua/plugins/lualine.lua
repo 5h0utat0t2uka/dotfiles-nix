@@ -36,10 +36,6 @@ return {
       },
       sections = {
         lualine_a = {
-          separators = {
-            left = " ",
-            right = "",
-          },
           {
             "mode",
             fmt = function(str)
