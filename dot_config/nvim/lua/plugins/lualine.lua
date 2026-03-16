@@ -54,6 +54,7 @@ return {
             separator = { left = " ", right = "" },
             color = {
               fg = colors.inactive,
+              bg = "#2E3440",
               gui = "bold",
             },
           },
