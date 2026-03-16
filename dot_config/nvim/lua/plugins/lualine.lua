@@ -4,7 +4,7 @@ return {
   config = function()
     local custom = vim.deepcopy(require("lualine.themes.nord"))
     local colors = {
-      normal   = "#81A1C1",
+      normal   = "#5E81AC",
       insert   = "#a3be8c",
       visual   = "#b48ead",
       replace  = "#d08770",
