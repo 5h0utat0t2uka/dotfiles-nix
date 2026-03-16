@@ -55,7 +55,6 @@ in
       chafa
       claude-code
       delta
-      # deno
       devbox
       eza
       fd
