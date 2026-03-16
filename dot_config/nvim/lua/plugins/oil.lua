@@ -28,16 +28,16 @@ return {
               or name == "dist"
           end,
         },
-        float = {
-          padding = 6,
-          max_width = 0.8,
-          max_height = 0.8,
-          border = "single",
-          win_options = {
-            winblend = 0,
-            winhighlight = "NormalFloat:OilFloat,FloatBorder:OilFloatBorder",
-          },
-        },
+        -- float = {
+        --   padding = 6,
+        --   max_width = 0.8,
+        --   max_height = 0.8,
+        --   border = "single",
+        --   win_options = {
+        --     winblend = 0,
+        --     winhighlight = "NormalFloat:OilFloat,FloatBorder:OilFloatBorder",
+        --   },
+        -- },
         preview_win = {
           update_on_cursor_moved = true,
           preview_method = "fast_scratch",
@@ -87,9 +87,9 @@ return {
       --   oil.open(nil, preview_opts)
       -- end, { desc = "Open Oil with preview" })
 
-      vim.keymap.set("n", "<leader>e", function()
-        oil.open_float(nil, preview_opts)
-      end, { desc = "Open Oil float with preview" })
+      -- vim.keymap.set("n", "<leader>e", function()
+      --   oil.open_float(nil, preview_opts)
+      -- end, { desc = "Open Oil float with preview" })
     end,
   },
 }
