@@ -8,7 +8,7 @@ final: prev: {
       owner = "yuki-yano";
       repo = "zeno.zsh";
       rev = "main";
-      hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      hash = "sha256-1vqSLW78/jSEWJB0Ui7Mm4frRpnS8qrfEtnnyd+eX2o=";
     };
 
     dontBuild = true;
