@@ -122,20 +122,10 @@ return {
           --     bg = "#2E3440",
           --   }
           -- }
-          {
-            "encoding",
-            fmt = function(str)
-              return string.upper(str)
-            end,
-            color = {
-              fg = "#5E81AC",
-              bg = "#2E3440",
-            }
-          }
         },
         lualine_y = {
           {
-            "progress",
+            "encoding",
             fmt = function(str)
               return string.upper(str)
             end,
@@ -170,7 +160,7 @@ return {
             },
             buffers_color = {
               active   = { fg = "#2E3440", bg = "#5E81AC" },
-              inactive = { fg = "#4C566A", bg = "#2E3440" },
+              inactive = { fg = "#2E3440", bg = "#4C566A" },
             },
           }
         },
