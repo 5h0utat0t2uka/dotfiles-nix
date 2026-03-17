@@ -24,11 +24,12 @@ return {
       vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3b4252", bg = "NONE" })
       vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#4c566a", bg = "NONE" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
-      vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { fg = "#3b4252", bg = "none" })
-      vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#d8dee9", bg = "none" })
-      vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#d8dee9", bg = "none" })
-      vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#d8dee9", bg = "none" })
-      vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#d8dee9", bg = "none" })
+            -- vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { fg = "#3b4252", bg = "none" })
+
+      -- vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#d8dee9", bg = "none" })
+      -- vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#d8dee9", bg = "none" })
+      -- vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#d8dee9", bg = "none" })
+      -- vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#d8dee9", bg = "none" })
     end
 
     apply_custom_highlights()
@@ -37,6 +38,19 @@ return {
     vim.api.nvim_create_autocmd("ColorScheme", {
       group = group,
       callback = apply_custom_highlights,
+    })
+    vim.api.nvim_create_autocmd("InsertEnter", {
+      group = group,
+      callback = function()
+        vim.api.nvim_set_hl(0, "CursorLine", { bg = "#6C7C6A" })
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("InsertLeave", {
+      group = group,
+      callback = function()
+        vim.api.nvim_set_hl(0, "CursorLine", { bg = "#353B49" })
+      end,
     })
   end,
 }
