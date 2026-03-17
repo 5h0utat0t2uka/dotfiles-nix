@@ -100,14 +100,14 @@ return {
             "mode",
             fmt = function(str)
               local map = {
-                NORMAL  = "NML",
-                INSERT  = "INS",
-                VISUAL  = "VIS",
-                ["V-LINE"]   = "VIS",
-                ["V-BLOCK"]  = "VIS",
-                REPLACE = "REP",
-                COMMAND = "CMD",
-                TERMINAL= "TRM",
+                NORMAL  = "N",
+                INSERT  = "I",
+                VISUAL  = "V",
+                ["V-LINE"]   = "V",
+                ["V-BLOCK"]  = "V",
+                REPLACE = "R",
+                COMMAND = "C",
+                TERMINAL= "T",
               }
               return map[str] or str
             end,
@@ -160,7 +160,7 @@ return {
              -- fmt = function(str)
              --   return string.upper(str)
              -- end,
-            file_status = true,
+            file_status = false,
             newfile_status = true,
             path = 0,
             shorting_target = 40,
