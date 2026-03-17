@@ -108,24 +108,34 @@ return {
         --     }
         --   }
         -- },
-        lualine_x = {},
-        -- lualine_x = {
-        --   {
-        --     "filetype",
-        --     icons_enabled = false,
-        --     colored = false,
-        --     fmt = function(str)
-        --       return string.upper(str)
-        --     end,
-        --     color = {
-        --       fg = "#5E81AC",
-        --       bg = "#2E3440",
-        --     }
-        --   }
-        -- },
-        lualine_y = {
+        -- lualine_x = {},
+        lualine_x = {
+          -- {
+          --   "filetype",
+          --   icons_enabled = false,
+          --   colored = false,
+          --   fmt = function(str)
+          --     return string.upper(str)
+          --   end,
+          --   color = {
+          --     fg = "#5E81AC",
+          --     bg = "#2E3440",
+          --   }
+          -- }
           {
             "encoding",
+            fmt = function(str)
+              return string.upper(str)
+            end,
+            color = {
+              fg = "#5E81AC",
+              bg = "#2E3440",
+            }
+          }
+        },
+        lualine_y = {
+          {
+            "progress",
             fmt = function(str)
               return string.upper(str)
             end,
@@ -139,9 +149,6 @@ return {
         lualine_z = {
           {
             "location",
-            fmt = function(str)
-              return string.upper(str)
-            end,
             color = {
               fg = "#5E81AC",
               bg = "#2E3440",
