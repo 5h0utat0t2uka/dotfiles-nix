@@ -29,7 +29,7 @@ return {
         },
         preview_config = {
           border = 'rounded',
-          style = 'minimal',
+          -- style = 'minimal',
           relative = 'cursor',
           row = 0,
           col = 1,
@@ -43,6 +43,7 @@ return {
           end
 
           map('n', '<leader>hp', gs.preview_hunk, { desc = 'Preview hunk' })
+          map('n', '<leader>hi', gs.preview_hunk_inline, { desc = 'Preview hunk inline' })
         end,
       })
     end,
