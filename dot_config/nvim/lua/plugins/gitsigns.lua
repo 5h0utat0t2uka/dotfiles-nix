@@ -27,6 +27,13 @@ return {
         watch_gitdir = {
           follow_files = true,
         },
+        preview_config = {
+          border = 'rounded',
+          style = 'minimal',
+          relative = 'cursor',
+          row = 0,
+          col = 1,
+        },
         on_attach = function(bufnr)
           local gs = package.loaded.gitsigns
           local function map(mode, lhs, rhs, opts)
