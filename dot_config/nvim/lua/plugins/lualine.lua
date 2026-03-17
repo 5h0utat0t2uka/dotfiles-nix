@@ -100,14 +100,14 @@ return {
             "mode",
             fmt = function(str)
               local map = {
-                NORMAL  = "N",
-                INSERT  = "I",
-                VISUAL  = "V",
-                ["V-LINE"]   = "V",
-                ["V-BLOCK"]  = "V",
-                REPLACE = "R",
-                COMMAND = "C",
-                TERMINAL= "T",
+                NORMAL  = "- N -",
+                INSERT  = "- I -",
+                VISUAL  = "- V -",
+                ["V-LINE"]   = "- VI -",
+                ["V-BLOCK"]  = "- VB -",
+                REPLACE = "- R -",
+                COMMAND = "- C -",
+                TERMINAL= "- T -",
               }
               return map[str] or str
             end,
@@ -130,6 +130,7 @@ return {
             "branch",
             icons_enabled = true,
             icon = "",
+            separator = { left = "", right = "" },
             fmt = function(str)
               return string.upper(str)
             end,
