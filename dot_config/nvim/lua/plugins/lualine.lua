@@ -153,27 +153,30 @@ return {
           },
           { "diagnostics", symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '} }
         },
-        -- lualine_c = {},
-        lualine_c = {
-          {
-            "filetype",
-            -- file_status = true,
-            -- newfile_status = true,
-            -- path = 1,
-            -- shorting_target = 40,
-            -- symbols = { unnamed = "[No Name]" },
-            color = {
-              fg = "#5E81AC",
-              bg = "#2E3440",
-            }
-          }
-        },
+        lualine_c = {},
+        -- lualine_c = {
+        --   {
+        --     "filename",
+        --      fmt = function(str)
+        --        return string.upper(str)
+        --      end,
+        --     file_status = true,
+        --     newfile_status = true,
+        --     path = 1,
+        --     shorting_target = 40,
+        --     symbols = { unnamed = "[No Name]" },
+        --     color = {
+        --       fg = "#5E81AC",
+        --       bg = "#2E3440",
+        --     }
+        --   }
+        -- },
         -- lualine_x = {},
         lualine_x = {
           {
             visual_selection_info,
             color = {
-              fg = "#5E81AC",
+              fg = colors.visual,
               bg = "#2E3440",
             }
           }
