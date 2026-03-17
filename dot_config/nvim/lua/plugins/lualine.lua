@@ -68,7 +68,7 @@ return {
           char_count == 1 and "character" or "characters"
         )
       )
-      return table.concat(parts, ", ")
+      return table.concat(parts, " ")
     end
 
     for mode, sections in pairs(custom) do
@@ -178,7 +178,7 @@ return {
             --   return string.upper(str)
             -- end,
             color = {
-              fg = "#4C566A",
+              fg = "#D8DEE9",
               bg = "#2E3440",
             }
           }
