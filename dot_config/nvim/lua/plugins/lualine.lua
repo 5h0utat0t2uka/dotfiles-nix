@@ -135,16 +135,19 @@ return {
             }
           }
         },
-        lualine_z = {},
-        -- lualine_z = {
-        --   {
-        --     "location",
-        --     color = {
-        --       fg = "#5E81AC",
-        --       bg = "#2E3440",
-        --     }
-        --   }
-        -- },
+        -- lualine_z = {},
+        lualine_z = {
+          {
+            "location",
+            fmt = function(str)
+              return string.upper(str)
+            end,
+            color = {
+              fg = "#5E81AC",
+              bg = "#2E3440",
+            }
+          }
+        },
       },
       tabline = {
         lualine_a = {
