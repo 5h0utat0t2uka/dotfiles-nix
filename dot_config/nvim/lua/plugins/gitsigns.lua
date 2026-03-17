@@ -24,6 +24,7 @@ return {
         numhl = false,
         linehl = false,
         word_diff = false,
+        current_line_blame = true,
         watch_gitdir = {
           follow_files = true,
         },
