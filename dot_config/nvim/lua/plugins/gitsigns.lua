@@ -23,7 +23,7 @@ return {
         signcolumn = true,
         numhl = false,
         linehl = false,
-        word_diff = false,
+        word_diff = true,
       })
     end,
   },
