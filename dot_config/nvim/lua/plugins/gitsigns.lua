@@ -23,7 +23,20 @@ return {
         signcolumn = true,
         numhl = false,
         linehl = false,
-        word_diff = true,
+        word_diff = false,
+        watch_gitdir = {
+          follow_files = true,
+        },
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
+          local function map(mode, lhs, rhs, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, lhs, rhs, opts)
+          end
+
+          map('n', '<leader>hp', gs.preview_hunk, { desc = 'Preview hunk' })
+        end,
       })
     end,
   },
