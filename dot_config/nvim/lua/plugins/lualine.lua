@@ -157,9 +157,9 @@ return {
         lualine_c = {
           {
             "filename",
-             fmt = function(str)
-               return string.upper(str)
-             end,
+             -- fmt = function(str)
+             --   return string.upper(str)
+             -- end,
             file_status = true,
             newfile_status = true,
             path = 1,
