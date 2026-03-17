@@ -53,11 +53,6 @@ return {
 
           map('n', '<leader>hp', gs.preview_hunk, { desc = 'Preview hunk' })
           map('n', '<leader>hi', gs.preview_hunk_inline, { desc = 'Preview hunk inline' })
-          vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", {
-            fg = "#4C566A",
-            bg = "NONE",
-            bold = false,
-          })
         end,
       })
     end,
