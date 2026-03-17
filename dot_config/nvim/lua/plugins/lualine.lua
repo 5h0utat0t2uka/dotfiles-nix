@@ -111,7 +111,7 @@ return {
         -- lualine_x = {},
         lualine_x = {
           {
-            "searchcount",
+            "selectioncount",
             -- icons_enabled = false,
             -- colored = false,
             -- fmt = function(str)
