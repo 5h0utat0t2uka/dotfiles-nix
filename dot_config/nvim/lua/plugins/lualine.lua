@@ -153,24 +153,24 @@ return {
           },
           { "diagnostics", symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '} }
         },
-        lualine_c = {},
-        -- lualine_c = {
-        --   {
-        --     "filename",
-        --      fmt = function(str)
-        --        return string.upper(str)
-        --      end,
-        --     file_status = true,
-        --     newfile_status = true,
-        --     path = 1,
-        --     shorting_target = 40,
-        --     symbols = { unnamed = "[No Name]" },
-        --     color = {
-        --       fg = "#5E81AC",
-        --       bg = "#2E3440",
-        --     }
-        --   }
-        -- },
+        -- lualine_c = {},
+        lualine_c = {
+          {
+            "filename",
+             fmt = function(str)
+               return string.upper(str)
+             end,
+            file_status = true,
+            newfile_status = true,
+            path = 1,
+            shorting_target = 40,
+            symbols = { unnamed = "[No Name]" },
+            color = {
+              fg = "#5E81AC",
+              bg = "#2E3440",
+            }
+          }
+        },
         -- lualine_x = {},
         lualine_x = {
           {
@@ -208,23 +208,23 @@ return {
         },
       },
       tabline = {
-        lualine_a = {
-          {
-            "buffers",
-            separator = { left = " ", right = " " },
-            show_filename_only = true,
-            icons_enabled = false,
-            symbols = {
-              modified = " ",
-              alternate_file = "",
-              directory = "",
-            },
-            buffers_color = {
-              active   = { fg = "#2E3440", bg = "#5E81AC" },
-              inactive = { fg = "#5E81AC", bg = "#2E3440" },
-            },
-          }
-        },
+        -- lualine_a = {
+        --   {
+        --     "buffers",
+        --     separator = { left = " ", right = " " },
+        --     show_filename_only = true,
+        --     icons_enabled = false,
+        --     symbols = {
+        --       modified = " ",
+        --       alternate_file = "",
+        --       directory = "",
+        --     },
+        --     buffers_color = {
+        --       active   = { fg = "#2E3440", bg = "#5E81AC" },
+        --       inactive = { fg = "#5E81AC", bg = "#2E3440" },
+        --     },
+        --   }
+        -- },
         -- lualine_z = {
         --   {
         --     "tabs",
