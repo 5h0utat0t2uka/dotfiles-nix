@@ -140,19 +140,19 @@ return {
               -- bg = "#3B4252",
             }
           },
-          {
-            "diff",
-            symbols = {
-              added = ' ',
-              modified = ' ',
-              removed = ' ',
-            },
-            color = {
-              fg = "#5E81AC",
-              bg = "#2E3440",
-            }
-          },
-          { "diagnostics", symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '} }
+          -- {
+          --   "diff",
+          --   symbols = {
+          --     added = ' ',
+          --     modified = ' ',
+          --     removed = ' ',
+          --   },
+          --   color = {
+          --     fg = "#5E81AC",
+          --     bg = "#2E3440",
+          --   }
+          -- },
+          -- { "diagnostics", symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '} }
         },
         -- lualine_c = {},
         lualine_c = {
@@ -170,7 +170,20 @@ return {
               fg = "#5E81AC",
               bg = "#2E3440",
             }
-          }
+          },
+          {
+            "diff",
+            symbols = {
+              added = ' ',
+              modified = ' ',
+              removed = ' ',
+            },
+            color = {
+              fg = "#5E81AC",
+              bg = "#2E3440",
+            }
+          },
+          { "diagnostics", symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '} }
         },
         -- lualine_x = {},
         lualine_x = {
