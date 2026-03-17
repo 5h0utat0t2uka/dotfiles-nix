@@ -159,8 +159,8 @@ return {
               directory = "",
             },
             buffers_color = {
-              active   = { fg = "#5E81AC", bg = "#2E3440" },
-              inactive = { fg = "#4C566A", bg = "#2E3440" },
+              active   = { fg = "#5E81AC", bg = "#4C566A" },
+              inactive = { fg = "#2E3440", bg = "#4C566A" },
             },
           }
         },
