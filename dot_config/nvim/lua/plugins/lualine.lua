@@ -157,8 +157,8 @@ return {
         lualine_c = {
           {
             "filetype",
-            file_status = true,
-            newfile_status = true,
+            -- file_status = true,
+            -- newfile_status = true,
             -- path = 1,
             -- shorting_target = 40,
             -- symbols = { unnamed = "[No Name]" },
