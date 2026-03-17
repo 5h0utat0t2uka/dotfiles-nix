@@ -172,13 +172,8 @@ return {
         lualine_x = {
           {
             visual_selection_info,
-            -- icons_enabled = false,
-            -- colored = false,
-            -- fmt = function(str)
-            --   return string.upper(str)
-            -- end,
             color = {
-              fg = "#D8DEE9",
+              fg = "#5E81AC",
               bg = "#2E3440",
             }
           }
@@ -199,6 +194,7 @@ return {
         lualine_z = {
           {
             "encoding",
+            "filetype",
             fmt = function(str)
               return string.upper(str)
             end,
