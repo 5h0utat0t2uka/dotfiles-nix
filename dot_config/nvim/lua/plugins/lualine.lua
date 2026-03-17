@@ -110,25 +110,25 @@ return {
         -- },
         -- lualine_x = {},
         lualine_x = {
-          -- {
-          --   "filetype",
-          --   icons_enabled = false,
-          --   colored = false,
-          --   fmt = function(str)
-          --     return string.upper(str)
-          --   end,
-          --   color = {
-          --     fg = "#5E81AC",
-          --     bg = "#2E3440",
-          --   }
-          -- }
+          {
+            "searchcount",
+            -- icons_enabled = false,
+            -- colored = false,
+            -- fmt = function(str)
+            --   return string.upper(str)
+            -- end,
+            color = {
+              fg = "#5E81AC",
+              bg = "#2E3440",
+            }
+          }
         },
         lualine_y = {
           {
-            "encoding",
-            fmt = function(str)
-              return string.upper(str)
-            end,
+            "location",
+            -- fmt = function(str)
+            --   return string.upper(str)
+            -- end,
             color = {
               fg = "#5E81AC",
               bg = "#2E3440",
@@ -138,7 +138,10 @@ return {
         -- lualine_z = {},
         lualine_z = {
           {
-            "location",
+            "encoding",
+            fmt = function(str)
+              return string.upper(str)
+            end,
             color = {
               fg = "#5E81AC",
               bg = "#2E3440",
@@ -159,8 +162,8 @@ return {
               directory = "",
             },
             buffers_color = {
-              active   = { fg = "#D8DEE9", bg = "#4C566A" },
-              inactive = { fg = "#2E3440", bg = "#4C566A" },
+              active   = { fg = "#2E3440", bg = "#5E81AC" },
+              inactive = { fg = "#5E81AC", bg = "#2E3440" },
             },
           }
         },
