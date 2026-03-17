@@ -1,7 +1,7 @@
 return {
   {
     "emmanueltouzery/key-menu.nvim",
-    enabled = false,
+    enabled = true,
     config = function()
       vim.o.timeoutlen = 300
       vim.api.nvim_set_hl(0, "KeyMenuNormal", { fg = "#4C566A", bg = "#2E3440" })
