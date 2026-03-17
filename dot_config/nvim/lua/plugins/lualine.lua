@@ -150,7 +150,7 @@ return {
         lualine_a = {
           {
             "buffers",
-            separator = { left = " ", right = "" },
+            separator = { left = " ", right = " " },
             show_filename_only = true,
             icons_enabled = false,
             symbols = {
@@ -159,7 +159,7 @@ return {
               directory = "",
             },
             buffers_color = {
-              active   = { fg = "#5E81AC", bg = "#4C566A" },
+              active   = { fg = "#D8DEE9", bg = "#4C566A" },
               inactive = { fg = "#2E3440", bg = "#4C566A" },
             },
           }
