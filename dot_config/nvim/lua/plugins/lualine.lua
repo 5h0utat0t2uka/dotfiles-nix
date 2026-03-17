@@ -100,14 +100,14 @@ return {
             "mode",
             fmt = function(str)
               local map = {
-                NORMAL  = "NORMAL",
-                INSERT  = "INSERT",
-                VISUAL  = "VISUAL",
-                ["V-LINE"]   = "VISUAL",
-                ["V-BLOCK"]  = "VISUAL",
-                REPLACE = "REPLACE",
-                COMMAND = "COMMAND",
-                TERMINAL= "TERMINAL",
+                NORMAL  = "NML",
+                INSERT  = "INS",
+                VISUAL  = "VIS",
+                ["V-LINE"]   = "VIS",
+                ["V-BLOCK"]  = "VIS",
+                REPLACE = "REP",
+                COMMAND = "CMD",
+                TERMINAL= "TRM",
               }
               return map[str] or str
             end,
