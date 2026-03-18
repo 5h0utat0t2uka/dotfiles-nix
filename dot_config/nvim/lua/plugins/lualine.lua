@@ -178,7 +178,7 @@ return {
               bg = "#2E3440",
               -- fg = "#2E3440",
               -- bg = "#4C566A",
-              gui = "bold",
+              -- gui = "bold",
             }
           },
         },
