@@ -130,7 +130,7 @@ return {
             "branch",
             icons_enabled = true,
             icon = "",
-            separator = { left = "", right = " " },
+            separator = { left = "", right = "" },
             fmt = function(str)
               return string.upper(str)
             end,
@@ -156,16 +156,16 @@ return {
         },
         -- lualine_c = {},
         lualine_c = {
-          -- {
-          --   "filetype",
-          --   icon_only = true,
-          --   colored = false,
-          --   padding = { left = 1, right = 0 },
-          --   color = {
-          --     fg = "#5E81AC",
-          --     bg = "#2E3440",
-          --   },
-          -- },
+          {
+            "filetype",
+            icon_only = true,
+            colored = false,
+            padding = { left = 1, right = 1 },
+            color = {
+              fg = "#5E81AC",
+              bg = "#2E3440",
+            },
+          },
           {
             "filename",
             file_status = false,
