@@ -152,20 +152,10 @@ return {
               bg = "#2E3440",
             }
           },
-          { "diagnostics", symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '} }
-        },
-        -- lualine_c = {},
-        lualine_c = {
-          -- {
-          --   "filetype",
-          --   icon_only = true,
-          --   colored = false,
-          --   padding = { left = 1, right = 1 },
-          --   color = {
-          --     fg = "#5E81AC",
-          --     bg = "#2E3440",
-          --   },
-          -- },
+          {
+            "diagnostics",
+            symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+          },
           {
             "filename",
             file_status = false,
@@ -179,10 +169,38 @@ return {
               fg = "#2E3440",
               bg = "#4C566A",
               gui = "bold",
-              -- fg = "#5E81AC",
-              -- bg = "#2E3440",
             }
           },
+        },
+        -- lualine_c = {},
+        lualine_c = {
+          -- {
+          --   "filetype",
+          --   icon_only = true,
+          --   colored = false,
+          --   padding = { left = 1, right = 1 },
+          --   color = {
+          --     fg = "#5E81AC",
+          --     bg = "#2E3440",
+          --   },
+          -- },
+
+          -- {
+          --   "filename",
+          --   file_status = false,
+          --   newfile_status = true,
+          --   path = 0,
+          --   shorting_target = 40,
+          --   symbols = { unnamed = "[No Name]" },
+          --   padding = { left = 1, right = 1 },
+          --   separator = { left = " ", right = " " },
+          --   color = {
+          --     fg = "#2E3440",
+          --     bg = "#4C566A",
+          --     gui = "bold",
+          --   }
+          -- },
+
           -- {
           --   "diff",
           --   symbols = {
