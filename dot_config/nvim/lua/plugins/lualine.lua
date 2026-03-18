@@ -160,7 +160,7 @@ return {
             "filetype",
             icon_only = true,
             colored = false,
-            padding = { left = 0, right = 1 },
+            padding = { left = 1, right = 0 },
             color = {
               fg = "#5E81AC",
               bg = "#2E3440",
@@ -168,9 +168,6 @@ return {
           },
           {
             "filename",
-             -- fmt = function(str)
-             --   return string.upper(str)
-             -- end,
             file_status = false,
             newfile_status = true,
             icons_enabled = true,
