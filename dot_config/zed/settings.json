@@ -10,7 +10,7 @@
   "auto_update": false,
   "restore_on_startup": "launchpad",
   "edit_predictions": {
-    "provider": "copilot"
+    "provider": "zed"
   },
   "edit_predictions_disabled_in": ["comment"],
   "theme_overrides": {
