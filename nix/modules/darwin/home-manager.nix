@@ -93,6 +93,7 @@ in
       tmux
       # uv
       viu
+      vscode-langservers-extracted
       wget
       zbar
       zoxide
