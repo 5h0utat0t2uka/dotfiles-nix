@@ -173,8 +173,8 @@ return {
             path = 0,
             shorting_target = 40,
             symbols = { unnamed = "[No Name]" },
-            padding = { left = 2, right = 1 },
-            separator = { left = "", right = "" },
+            padding = { left = 0, right = 0 },
+            separator = { left = " ", right = " " },
             color = {
               fg = "#2E3440",
               bg = "#4C566A",
