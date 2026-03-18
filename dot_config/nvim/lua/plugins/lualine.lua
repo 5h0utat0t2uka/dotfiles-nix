@@ -111,7 +111,6 @@ return {
               }
               return map[str] or str
             end,
-            padding = { left = 1, right = 2 },
             color = {
               fg = colors.inactive,
               gui = "bold",
@@ -127,6 +126,13 @@ return {
         --   },
         -- },
         lualine_b = {
+          {
+            function()
+              return " "
+            end,
+            color = { bg = "#2E3440", fg = "#2E3440" },
+            padding = { left = 0, right = 0 },
+          },
           {
             "branch",
             icons_enabled = true,
