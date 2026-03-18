@@ -178,6 +178,7 @@ return {
             color = {
               fg = "#2E3440",
               bg = "#4C566A",
+              gui = "bold",
               -- fg = "#5E81AC",
               -- bg = "#2E3440",
             }
