@@ -159,12 +159,12 @@ return {
           {
             "filetype",
             icon_only = true,
-            colored = false,
+            colored = true,
             padding = { left = 1, right = 0 },
-            color = {
-              fg = "#5E81AC",
-              bg = "#2E3440",
-            },
+            -- color = {
+            --   fg = "#5E81AC",
+            --   bg = "#2E3440",
+            -- },
           },
           {
             "filename",
