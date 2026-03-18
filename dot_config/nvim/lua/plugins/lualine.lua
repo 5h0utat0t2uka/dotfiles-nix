@@ -111,6 +111,7 @@ return {
               }
               return map[str] or str
             end,
+            padding = { left = 1, right = 2 },
             color = {
               fg = colors.inactive,
               gui = "bold",
