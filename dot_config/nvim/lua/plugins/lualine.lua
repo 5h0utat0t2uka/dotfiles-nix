@@ -156,16 +156,16 @@ return {
         },
         -- lualine_c = {},
         lualine_c = {
-          {
-            "filetype",
-            icon_only = true,
-            colored = false,
-            padding = { left = 1, right = 1 },
-            color = {
-              fg = "#5E81AC",
-              bg = "#2E3440",
-            },
-          },
+          -- {
+          --   "filetype",
+          --   icon_only = true,
+          --   colored = false,
+          --   padding = { left = 1, right = 1 },
+          --   color = {
+          --     fg = "#5E81AC",
+          --     bg = "#2E3440",
+          --   },
+          -- },
           {
             "filename",
             file_status = false,
