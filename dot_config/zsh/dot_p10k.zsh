@@ -797,7 +797,8 @@
   # typeset -g POWERLEVEL9K_NIX_SHELL_CONTENT_EXPANSION=
 
   # Custom icon.
-  typeset -g POWERLEVEL9K_NIX_SHELL_VISUAL_IDENTIFIER_EXPANSION='󱄅'
+  # typeset -g POWERLEVEL9K_NIX_SHELL_VISUAL_IDENTIFIER_EXPANSION='󱄅'
+  typeset -g POWERLEVEL9K_NIX_SHELL_VISUAL_IDENTIFIER_EXPANSION=''
 
   ##################[ chezmoi_shell: chezmoi shell (https://www.chezmoi.io/) ]##################
   # chezmoi shell color.
@@ -1075,7 +1076,7 @@
   typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION=
+  # typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION=
 
   #######################[ go_version: go version (https://golang.org) ]########################
   # Go version color.
