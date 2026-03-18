@@ -130,7 +130,7 @@ return {
             "branch",
             icons_enabled = true,
             icon = "",
-            separator = { left = "", right = "" },
+            separator = { left = "", right = " " },
             fmt = function(str)
               return string.upper(str)
             end,
