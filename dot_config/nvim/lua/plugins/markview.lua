@@ -18,12 +18,15 @@
     config = function(_, opts)
       require("markview").setup(opts)
       vim.api.nvim_set_hl(0, "MarkviewCode", {
-        -- bg = "#353A49",
-        bg = "#3B4252",
+        bg = "#353A49",
+        -- bg = "#3B4252",
       })
       vim.api.nvim_set_hl(0, "MarkviewCodeInfo", {
-        -- bg = "#353A49",
-        bg = "#3B4252",
+        bg = "#353A49",
+        -- bg = "#3B4252",
+      })
+      vim.api.nvim_set_hl(0, "MarkviewInlineCode", {
+        bg = "#353A49",
       })
     end,
   },
