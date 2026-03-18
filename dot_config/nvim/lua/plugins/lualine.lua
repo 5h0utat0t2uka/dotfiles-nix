@@ -163,6 +163,7 @@ return {
              -- end,
             file_status = false,
             newfile_status = true,
+            icons_enabled = true,
             path = 0,
             shorting_target = 40,
             symbols = { unnamed = "[No Name]" },
