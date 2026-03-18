@@ -126,13 +126,13 @@ return {
         --   },
         -- },
         lualine_b = {
-          {
-            function()
-              return " "
-            end,
-            color = { bg = "#2E3440", fg = "#2E3440" },
-            padding = { left = 0, right = 0 },
-          },
+          -- {
+          --   function()
+          --     return " "
+          --   end,
+          --   color = { bg = "#2E3440", fg = "#2E3440" },
+          --   padding = { left = 0, right = 0 },
+          -- },
           {
             "branch",
             icons_enabled = true,
@@ -171,11 +171,13 @@ return {
             path = 0,
             shorting_target = 40,
             symbols = { unnamed = "[No Name]" },
-            padding = { left = 1, right = 1 },
-            separator = { left = " ", right = " " },
+            -- padding = { left = 1, right = 1 },
+            -- separator = { left = " ", right = " " },
             color = {
-              fg = "#2E3440",
-              bg = "#4C566A",
+              fg = "#5E81AC",
+              bg = "#2E3440",
+              -- fg = "#2E3440",
+              -- bg = "#4C566A",
               gui = "bold",
             }
           },
