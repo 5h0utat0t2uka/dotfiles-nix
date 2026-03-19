@@ -21,6 +21,8 @@ return {
         },
         win_options = {
           signcolumn = "yes:2",
+          number = false,
+          relativenumber = false,
         },
         view_options = {
           show_hidden = true,
