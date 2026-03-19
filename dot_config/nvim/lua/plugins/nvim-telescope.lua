@@ -35,6 +35,8 @@ return {
           winblend = 10,
           prompt_prefix = "❯ ",
           selection_caret = "❯ ",
+          color_devicons = false,
+          entry_prefix = "  ",
           layout_strategy = "horizontal",
           layout_config = {
             width = 0.90,
