@@ -12,10 +12,10 @@ final: prev: {
       owner = "tree-sitter";
       repo = "tree-sitter";
       tag = "v${version}";
-      hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      hash = "sha256-O3c2djKhM+vIYunthDApi9sw/gFH/FBME1uR4N+9MFM=";
       fetchSubmodules = true;
     };
-    cargoHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    cargoHash = "sha256-zh6KsnZ7s6VXGCggoYbLGeGnEZ7g7anjkz8C5/L4yXQ=";
     nativeBuildInputs = [ prev.which ];
     doCheck = false;
     meta = with prev.lib; {
