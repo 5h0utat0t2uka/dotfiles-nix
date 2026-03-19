@@ -14,9 +14,9 @@ return {
       oil.setup({
         default_file_explorer = true,
         columns = {
-          "icon",
+          -- "icon",
           "permissions",
-          "size",
+          -- "size",
           "mtime",
         },
         win_options = {
