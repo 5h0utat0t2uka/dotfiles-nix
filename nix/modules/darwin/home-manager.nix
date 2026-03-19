@@ -53,7 +53,7 @@ in
       age
       bat
       chafa
-      claude-code
+      # claude-code
       delta
       devbox
       eza
@@ -88,7 +88,7 @@ in
       ripgrep
       # termscp
       # tree-sitter
-      pkgs."tree-sitter-0261"
+      pkgs."tree-sitter-0267"
       tree
       tmux
       # uv

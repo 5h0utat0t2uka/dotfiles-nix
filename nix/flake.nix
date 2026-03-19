@@ -20,7 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # 最新バージョンのclaude codeを取り込む
-    claude-code.url = "github:sadjow/claude-code-nix";
+    # claude-code.url = "github:sadjow/claude-code-nix";
   };
 
   outputs = { self, nixpkgs, home-manager, darwin, nix-homebrew, ... } @inputs:
@@ -70,9 +70,10 @@
                 # 直接インストールが必要なパッケージの overlay をここで追加
                 overlays = [
                   (import ./overlays/fonts/shcode-jp-zen-haku.nix)
-                  (import ./overlays/tools/tree-sitter-0261.nix)
+                  (import ./overlays/tools/tree-sitter-0267.nix)
+                  # (import ./overlays/tools/tree-sitter-0261.nix)
                   # (import ./overlays/tools/zeno-zsh.nix)
-                  (import ./overlays/tools/claude-code.nix { inherit inputs; })
+                  # (import ./overlays/tools/claude-code.nix { inherit inputs; })
                 ];
               };
             }
