@@ -65,7 +65,7 @@ cursor-style-blink = true
 cursor-color = #d8dee9
 cursor-opacity = 0.8
 # shell-integration-features = no-cursor
-shell-integration-features = ssh-terminfo,ssh-env
+shell-integration-features = no-cursor,ssh-terminfo,ssh-env
 
 # window-width = 170
 # window-height = 60
