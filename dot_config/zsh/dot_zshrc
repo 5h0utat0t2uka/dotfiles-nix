@@ -226,6 +226,27 @@ lfcd() {
   dir="$(command lf -print-last-dir "$@")" || return
   [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
 }
+
+lfpopupcd() {
+  [[ -n "$TMUX" ]] || {
+    lfcd "$@"
+    return
+  }
+  local tmp dir
+  tmp="$(mktemp "${TMPDIR:-/tmp}/lfcd.XXXXXX")" || return
+
+  tmux display-popup \
+    -E \
+    -w 80% \
+    -h 70% \
+    -d "$PWD" \
+    "sh -c 'command lf -print-last-dir \"\$@\" > \"$tmp\"' sh \"$@\"" \
+    "$@"
+  dir="$(cat "$tmp" 2>/dev/null)"
+  rm -f "$tmp"
+  [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
+}
+
 # if [[ -n "$TMUX" ]]; then
 #   lfcd() {
 #     local tmp
