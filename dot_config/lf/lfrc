@@ -6,16 +6,26 @@ set preview true
 set previewer ~/.config/lf/pv.sh
 set borderfmt "\033[90m"
 
-map e $sh -lc 'nvim "$f"'
+cmd edit-on-parent ${{
+  if [ -n "$LF_TMUX_PARENT_PANE" ]; then
+    tmux send-keys -t "$LF_TMUX_PARENT_PANE" "nvim $(printf '%q' "$f")" Enter
+    lf -remote "send $id quit"
+  else
+    nvim "$f"
+  fi
+}}
 
-set promptfmt "\033[34;1m%d\033[0m\033[1m%f\033[0m"
-
-set cursorpreviewfmt "\033[0m"
+map e edit-on-parent
 
 cmd open ${{
   case "$(file --mime-type -Lb "$f")" in
     text/*|application/json|application/xml|application/javascript)
-      sh -lc 'nvim "$f"'
+      if [ -n "$LF_TMUX_PARENT_PANE" ]; then
+        tmux send-keys -t "$LF_TMUX_PARENT_PANE" "nvim $(printf '%q' "$f")" Enter
+        lf -remote "send $id quit"
+      else
+        nvim "$f"
+      fi
       ;;
     *)
       "$OPENER" "$f"
