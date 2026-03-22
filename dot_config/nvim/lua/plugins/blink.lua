@@ -10,6 +10,7 @@ return {
     opts = {
       keymap = {
         preset = "default",
+        ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
         ["<Tab>"] = { "accept", "fallback" },
       },
       appearance = {
