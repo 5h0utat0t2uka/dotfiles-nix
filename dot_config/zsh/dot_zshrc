@@ -227,7 +227,7 @@ lfcd() {
   [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
 }
 
-lfpopupcd() {
+lfp() {
   [[ -n "$TMUX" ]] || {
     lfcd "$@"
     return
@@ -236,6 +236,7 @@ lfpopupcd() {
   tmp="$(mktemp "${TMPDIR:-/tmp}/lfcd.XXXXXX")" || return
 
   tmux display-popup \
+    -B \
     -E \
     -w 80% \
     -h 70% \
