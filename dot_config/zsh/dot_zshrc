@@ -232,42 +232,20 @@ lfp() {
     lfcd "$@"
     return
   }
-
-  local tmp dir parent_pane
+  local tmp dir
   tmp="$(mktemp "${TMPDIR:-/tmp}/lfcd.XXXXXX")" || return
-  parent_pane="$(tmux display-message -p '#{pane_id}')"
 
-  LF_TMUX_PARENT_PANE="$parent_pane" \
-    tmux popup \
+  tmux display-popup \
     -B \
     -E \
     -w 80% \
     -h 70% \
     -d "$PWD" \
-      "sh -lc 'command lf -print-last-dir > \"$tmp\"'"
-
+    "sh -c 'command lf -print-last-dir \"\$@\" > \"$tmp\"' sh \"$@\"" \
+    "$@"
   dir="$(cat "$tmp" 2>/dev/null)"
   rm -f "$tmp"
-
   [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
-  # [[ -n "$TMUX" ]] || {
-  #   lfcd "$@"
-  #   return
-  # }
-  # local tmp dir
-  # tmp="$(mktemp "${TMPDIR:-/tmp}/lfcd.XXXXXX")" || return
-
-  # tmux display-popup \
-  #   -B \
-  #   -E \
-  #   -w 80% \
-  #   -h 70% \
-  #   -d "$PWD" \
-  #   "sh -c 'command lf -print-last-dir \"\$@\" > \"$tmp\"' sh \"$@\"" \
-  #   "$@"
-  # dir="$(cat "$tmp" 2>/dev/null)"
-  # rm -f "$tmp"
-  # [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
 }
 
 # if [[ -n "$TMUX" ]]; then
