@@ -236,7 +236,7 @@ lfp() {
   tmp="$(mktemp "${TMPDIR:-/tmp}/lfcd.XXXXXX")" || return
 
   tmux display-popup \
-    -B \
+    # -B \
     -E \
     -w 80% \
     -h 70% \
