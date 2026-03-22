@@ -1,5 +1,5 @@
 set drawbox true
-set roundbox false
+set roundbox true
 set icons
 set hidden true
 set preview true
