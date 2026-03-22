@@ -22,6 +22,11 @@ return {
       sources = {
         default = { "lsp", "path", "snippets", "buffer", "copilot" },
         providers = {
+          snippets = {
+            opts = {
+              use_label_description = true,
+            },
+          },
           copilot = {
             name = "copilot",
             module = "blink-cmp-copilot",
