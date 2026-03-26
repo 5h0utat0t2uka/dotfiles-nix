@@ -9,7 +9,6 @@ return {
 
       require("key-menu").set("n", "<Space>")
       require("key-menu").set("n", "g")
-      require("key-menu").set("i", "M")
     end,
   },
 }
