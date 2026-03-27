@@ -16,17 +16,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
     vim.fn.matchadd("ErrorMsg", "\\%u200b")
   end,
 })
-vim.api.nvim_create_autocmd("InsertEnter", {
-  callback = function()
-    io.write("\027]12;#BF616A\007")
-  end,
-})
-
-vim.api.nvim_create_autocmd("InsertLeave", {
-  callback = function()
-    io.write("\027]12;#81A1C1\007")
-  end,
-})
 vim.api.nvim_create_autocmd("CursorHold", {
   callback = function()
     vim.diagnostic.open_float(nil, {
