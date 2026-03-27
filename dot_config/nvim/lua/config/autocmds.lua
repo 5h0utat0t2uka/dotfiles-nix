@@ -16,6 +16,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
     vim.fn.matchadd("ErrorMsg", "\\%u200b")
   end,
 })
+vim.api.nvim_create_autocmd("InsertEnter", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "Cursor", { fg = "#2E3440", bg = "#BF616A" })
+  end,
+})
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "Cursor", { fg = "#2E3440", bg = "#81A1C1" })
+  end,
+})
 vim.api.nvim_create_autocmd("CursorHold", {
   callback = function()
     vim.diagnostic.open_float(nil, {
