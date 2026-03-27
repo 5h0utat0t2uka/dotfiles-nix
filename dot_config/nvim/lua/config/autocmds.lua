@@ -11,6 +11,11 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 })
 
 vim.o.updatetime = 300
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.fn.matchadd("ErrorMsg", "\\%u200b")
+  end,
+})
 vim.api.nvim_create_autocmd("CursorHold", {
   callback = function()
     vim.diagnostic.open_float(nil, {
