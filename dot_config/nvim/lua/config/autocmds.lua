@@ -18,13 +18,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 vim.api.nvim_create_autocmd("InsertEnter", {
   callback = function()
-    vim.api.nvim_set_hl(0, "Cursor", { fg = "#2E3440", bg = "#BF616A" })
+    io.write("\027]12;#BF616A\007")
   end,
 })
 
 vim.api.nvim_create_autocmd("InsertLeave", {
   callback = function()
-    vim.api.nvim_set_hl(0, "Cursor", { fg = "#2E3440", bg = "#81A1C1" })
+    io.write("\027]12;#81A1C1\007")
   end,
 })
 vim.api.nvim_create_autocmd("CursorHold", {
