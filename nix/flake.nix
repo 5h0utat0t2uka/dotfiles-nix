@@ -5,7 +5,7 @@
   # - setup.sh / Justfile から `darwin-rebuild` を呼ぶと、対象ホスト名の modules が合成されて switch/build される
   # ============================================================
 
-  description = "dotfiles-nix";
+  description = "macOS dotfiles with nix-darwin";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -19,8 +19,6 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # 最新バージョンのclaude codeを取り込む
-    # claude-code.url = "github:sadjow/claude-code-nix";
   };
 
   outputs = { self, nixpkgs, home-manager, darwin, nix-homebrew, ... } @inputs:
