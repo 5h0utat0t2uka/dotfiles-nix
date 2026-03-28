@@ -98,10 +98,15 @@
             # ----------------------------------------------------
             home-manager.darwinModules.home-manager
             {
+              # home-manager.useGlobalPkgs = true;
+              # home-manager.useUserPackages = true;
+              # home-manager.extraSpecialArgs = { inherit identity; };
+              # home-manager.users.${identity.username} = import ./modules/darwin/home-manager.nix;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit identity; };
-              home-manager.users.${identity.username} = import ./modules/darwin/home-manager.nix;
+              home-manager.users.${identity.username} =
+                import (darwinHostsDir + "/${hostKey}/users/${identity.username}/default.nix");
             }
 
             # ----------------------------------------------------

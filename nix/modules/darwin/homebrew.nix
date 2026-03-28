@@ -1,7 +1,8 @@
-{ identity, ... }:
+{ ... }:
 
 {
-  # Homebrew は GUI アプリ（cask）のみを管理
+  # Homebrew 管理
+  # 現状は cask だけでなく、一部 formula も含む
   homebrew = {
     enable = true;
     onActivation = {
@@ -9,7 +10,6 @@
       upgrade = true;
       cleanup = "zap";
     };
-
     taps = [];
     brews = [
       # nixpkgs (darwin) で libsmbclient / dyld が壊れているため brew に逃がす

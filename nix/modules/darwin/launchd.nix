@@ -1,0 +1,64 @@
+{ ... }:
+
+let
+  nixBin = "/nix/var/nix/profiles/default/bin";
+in
+{
+  # ============================================================
+  # max open files
+  # ============================================================
+  launchd.daemons.limit-maxfiles = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/bin/launchctl"
+        "limit"
+        "maxfiles"
+        "65536"
+        "524288"
+      ];
+      RunAtLoad = true;
+    };
+  };
+
+  # ============================================================
+  # Automatic Garbage Collection (launchd, root)
+  # 毎週日曜日 AM3:00 に gc
+  # ============================================================
+  launchd.daemons.nix-gc = {
+    command = "${nixBin}/nix-collect-garbage --delete-older-than 14d";
+
+    serviceConfig = {
+      RunAtLoad = false;
+      StartCalendarInterval = [
+        {
+          Weekday = 0;
+          Hour = 3;
+          Minute = 0;
+        }
+      ];
+      StandardOutPath = "/var/log/nix-gc.log";
+      StandardErrorPath = "/var/log/nix-gc.log";
+    };
+  };
+
+  # ============================================================
+  # Nix Store Optimization
+  # 毎週日曜日 AM4:00 に optimise
+  # ============================================================
+  launchd.daemons.nix-optimise = {
+    command = "${nixBin}/nix store optimise";
+
+    serviceConfig = {
+      RunAtLoad = false;
+      StartCalendarInterval = [
+        {
+          Weekday = 0;
+          Hour = 4;
+          Minute = 0;
+        }
+      ];
+      StandardOutPath = "/var/log/nix-optimise.log";
+      StandardErrorPath = "/var/log/nix-optimise.log";
+    };
+  };
+}

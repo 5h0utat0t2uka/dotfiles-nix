@@ -29,16 +29,17 @@ let
   ];
 in
 {
-
-  # Issue (https://github.com/nix-community/home-manager/issues/7935)
+  # Issue: https://github.com/nix-community/home-manager/issues/7935
   manual = {
     manpages.enable = false;
   };
 
-  # ドットファイルの実体は chezmoi で管理する前提なので home-manager では生成しない
+  # ドットファイルの実体は chezmoi で管理する前提なので
+  # home-manager では生成しない
   programs = {
     zsh.enable = false;
     git.enable = false;
+
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -49,6 +50,7 @@ in
     stateVersion = "25.11";
     username = identity.username;
     homeDirectory = identity.homeDirectory;
+
     packages = with pkgs; [
       age
       bat
@@ -105,6 +107,7 @@ in
       zsh-powerlevel10k
       zshPluginLinks
     ];
+
     activation.ensureNbConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p "$HOME/.config/nb"
       if [ ! -e "$HOME/.config/nb/.nbrc" ]; then
