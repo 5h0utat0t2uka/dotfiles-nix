@@ -232,10 +232,21 @@ in
   environment.shells = [
     pkgs.zsh
   ];
-  environment.etc."zshrc".source = lib.mkForce (builtins.path {
-    path = ../../assets/etc/zshrc;
-    name = "zshrc";
-  });
+  # environment.etc."zshrc".source = lib.mkForce (builtins.path {
+  #   path = ../../assets/etc/zshrc;
+  #   name = "zshrc";
+  # });
+  environment.etc."zshrc".text = lib.mkForce ''
+    # /etc/zshrc: managed by nix-darwin
+    if [ -n "$__ETC_ZSHRC_SOURCED" -o -n "$NOSYSZSHRC" ]; then
+      return
+    fi
+    __ETC_ZSHRC_SOURCED=1
+
+    if test -f /etc/zshrc.local; then
+      source /etc/zshrc.local
+    fi
+  '';
   environment.systemPackages = with pkgs; [
     pam-reattach
   ];
