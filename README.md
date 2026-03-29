@@ -27,17 +27,17 @@ xcode-select --install
 xcode-select -p
 ```
 > [!IMPORTANT]
-> `hostKey`は`nix/hosts/darwin/<hostKey>`のフォルダ名と一致してる必要があります  
+> `hostKey`は`nix/hosts/darwin/<hostKey>`のフォルダ名と一致してる必要があある  
 
-2. `chezmoi`の初期化をしてドットファイルの展開  
-```sh
-sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin" init --apply <repository-url>
-```
-
-3. `Nix`を未インストールの場合は [Determinate](https://docs.determinate.systems) からインストールして確認  
+2. `Nix`を未インストールの場合は [Determinate](https://docs.determinate.systems) からインストールして確認  
 ```sh
 nix --version
 # nix (Determinate Nix 3.15.1) 2.33.0
+```
+
+3. `chezmoi`の初期化をしてドットファイルの展開  
+```sh
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin" init --apply <repository-url>
 ```
 
 4. セットアップ  
@@ -48,4 +48,92 @@ cd ~/.local/share/chezmoi/scripts
 ./setup.sh --dry-run
 # 実行
 ./setup.sh
+```
+
+## 更新  
+いずれもブランチがクリーンな状態で作業する  
+
+### パッケージの更新
+``` sh
+nix flake update
+
+just check
+just build
+```
+``` sh
+# ロックファイル更新した場合はタグ付けしておく
+git tag -a yyyy-mm-dd -m "Update flake inputs"
+git push origin --tags
+```
+
+### Determinate Nix の更新
+現在のバージョンと更新情報を確認して、更新があれば実行
+
+1. バージョンを確認
+``` sh
+nix --version
+```
+``` sh
+nix (Determinate Nix 3.15.1) 2.33.0
+```
+
+2. 更新を確認
+``` sh
+determinate-nixd version
+```
+``` sh
+Determinate Nixd daemon version: 3.15.1
+Determinate Nixd client version: 3.15.1
+Latest version: 3.17.1
+
+A new version of Determinate Nix is available. Please update Determinate Nix using the command line:
+
+    sudo determinate-nixd upgrade
+
+Or re-run the Determinate package from https://dtr.mn/determinate-nix
+For more information, see: https://dtr.mn/update
+```
+
+3. 更新を実行
+``` sh
+sudo determinate-nixd upgrade
+```
+``` sh
+Upgrading Determinate Nixd... 
+Upgrading Determinate Nix... 
+Upgrading Nix to "/nix/store/rhxidj1q2l9y3v4ssn691l7f69gpayfg-determinate-nix-3.17.1" 
+Restarting Determinate Nixd...
+```
+
+4. チェックとビルド
+```sh
+just check
+just build
+```
+``` sh
+nix flake check /Users/shouta/.local/share/chezmoi/nix 
+✅ formatter.aarch64-darwin (build skipped) 
+✅ darwinConfigurations.A3112 (build skipped)
+```
+
+5. 反映を確認
+``` sh
+nix --version
+```
+``` sh
+nix (Determinate Nix 3.17.1) 2.33.3
+```
+
+``` sh
+determinate-nixd version
+```
+``` sh
+Determinate Nixd daemon version: 3.17.1 
+Determinate Nixd client version: 3.17.1 
+You are running the latest version of Determinate Nix. 
+
+The following features are enabled: 
+* lazy-trees 
+
+Visit https://dtr.mn/features for more information.
 ```
