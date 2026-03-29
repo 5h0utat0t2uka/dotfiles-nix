@@ -11,6 +11,7 @@ vim.opt.tabstop = 2
 vim.opt.showtabline = 1
 vim.opt.shiftwidth = 2
 vim.opt.scrolloff = 5
+vim.opt.winborder = "rounded"
 -- vim.o.winbar = " "
 vim.opt.showmatch = true
 vim.opt.cursorline = true
