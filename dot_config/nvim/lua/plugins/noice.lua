@@ -42,6 +42,7 @@ return {
         },
 
         cmdline_popup = {
+          zindex = 20,
           position = { row = "50%", col = "50%" },
           size = { width = 60, height = "auto" },
           border = {
@@ -53,18 +54,24 @@ return {
             winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
           },
         },
+        popupmenu = {
+          zindex = 21,
+        },
+        confirm = {
+          zindex = 200,
+        },
       },
 
       routes = {
         { view = "split", filter = { event = "msg_show", min_height = 10 } },
         { view = "split", filter = { event = "msg_show", min_length = 200 } },
-        {
-          filter = {
-            event = "msg_show",
-            find = "confirm",
-          },
-          opts = { skip = true },
-        },
+        -- {
+        --   filter = {
+        --     event = "msg_show",
+        --     find = "confirm",
+        --   },
+        --   opts = { skip = true },
+        -- },
       },
     },
   },
