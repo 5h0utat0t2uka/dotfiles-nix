@@ -60,8 +60,8 @@ return {
         { view = "split", filter = { event = "msg_show", min_length = 200 } },
         {
           filter = {
-            event = "notify",
-            find = "File system actions",
+            event = "msg_show",
+            find = "confirm",
           },
           opts = { skip = true },
         },
