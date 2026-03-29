@@ -53,19 +53,9 @@ return {
             winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
           },
         },
-        -- confirm を popup ではなく mini に逃がす専用 view
-        confirm_mini = {
-          backend = "mini",
-          timeout = false,
-          align = "center",
-        },
       },
 
       routes = {
-        {
-          filter = { event = "msg_show", kind = "confirm" },
-          view = "confirm_mini",
-        },
         { view = "split", filter = { event = "msg_show", min_height = 10 } },
         { view = "split", filter = { event = "msg_show", min_length = 200 } },
       },
