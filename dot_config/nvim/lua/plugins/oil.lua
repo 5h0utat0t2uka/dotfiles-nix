@@ -20,9 +20,6 @@ return {
           -- "size",
           "mtime",
         },
-        float = {
-          padding = 2,
-        },
         win_options = {
           signcolumn = "yes:2",
           number = false,
@@ -55,8 +52,10 @@ return {
           end,
         },
         confirmation = {
-          min_width = { 60, 0.5 },
-          min_height = { 8, 0.15 },
+          min_width = { 40, 0.4 },
+          max_width = 0.9,
+          min_height = { 5, 0.1 },
+          max_height = 0.9,
           border = "rounded",
           win_options = {
             winblend = 0,
