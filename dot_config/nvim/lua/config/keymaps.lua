@@ -10,10 +10,10 @@ vim.keymap.set("n", "gl", "<Cmd>tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "gj", "<Cmd>tabclose<CR>", { desc = "Close tab" })
 vim.keymap.set("n", "gJ", "<Cmd>tabclose!<CR>", { desc = "Force close tab" })
 -- LSP
-vim.keymap.set("n", "<Leader>lh", vim.lsp.buf.hover)        -- hover
-vim.keymap.set("n", "<Leader>ld", vim.lsp.buf.definition)   -- definition
-vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.references)   -- references
-vim.keymap.set("n", "<Leader>ln", vim.lsp.buf.rename)       -- rename
+vim.keymap.set("n", "<Leader>lh", vim.lsp.buf.hover, { desc = "LSP Hover" })
+vim.keymap.set("n", "<Leader>ld", vim.lsp.buf.definition, { desc = "LSP Definition" })
+vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.references, { desc = "LSP References" })
+vim.keymap.set("n", "<Leader>ln", vim.lsp.buf.rename, { desc = "LSP Rename" })
 -- 単語の大文字小文字を切り替える
 vim.keymap.set("n", "<leader>tc", "g~iw", { remap = false, desc = "Toggle word case" })
 -- 検索ハイライト解除
