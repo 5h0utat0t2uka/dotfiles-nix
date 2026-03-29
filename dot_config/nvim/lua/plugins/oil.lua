@@ -20,6 +20,9 @@ return {
           -- "size",
           "mtime",
         },
+        float = {
+          padding = 2,
+        },
         win_options = {
           signcolumn = "yes:2",
           number = false,
