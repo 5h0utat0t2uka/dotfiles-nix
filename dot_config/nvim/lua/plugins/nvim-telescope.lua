@@ -40,8 +40,8 @@ return {
           entry_prefix = "  ",
           layout_strategy = "horizontal",
           layout_config = {
-            width = 0.90,
-            height = 0.90,
+            width = 0.80,
+            height = 0.80,
             preview_width = 0.5,
             prompt_position = "bottom",
           },
