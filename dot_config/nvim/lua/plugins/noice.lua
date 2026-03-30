@@ -60,7 +60,7 @@ return {
           size = { width = 60, height = "auto" },
           border = {
             style = "rounded",
-            padding = { 1, 1 },
+            padding = { 2, 2 },
           },
           win_options = {
             winblend = 10,
