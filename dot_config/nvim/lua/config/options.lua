@@ -16,4 +16,5 @@ vim.opt.winborder = "rounded"
 vim.opt.whichwrap = 'b,s,h,l,<,>,[,],~'
 vim.opt.showmatch = true
 vim.opt.cursorline = true
-vim.opt.cmdheight = 0
+-- vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
