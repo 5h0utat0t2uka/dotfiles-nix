@@ -11,6 +11,7 @@ return {
 
     opts = {
       cmdline = {
+        view = "cmdline_popup",
         format = {
           cmdline = { title = "", pattern = "^:", icon = "", lang = "vim" },
           input = { title = "", icon = "", border = { style = "rounded", padding = { 1, 1 } } },
