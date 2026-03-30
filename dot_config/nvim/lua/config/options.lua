@@ -20,6 +20,6 @@ vim.opt.cursorline = true
 vim.opt.cmdheight = 1
 vim.opt.guicursor = table.concat({
   "n-v:block",
-  "i:ver40",
-  "c:hor40",
+  "i:ver50",
+  "c:hor50",
 }, ",")
