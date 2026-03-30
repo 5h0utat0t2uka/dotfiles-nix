@@ -55,18 +55,18 @@ return {
             winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
           },
         },
-        -- confirm = {
-        --   position = { row = "50%", col = "50%" },
-        --   size = { width = 60, height = "auto" },
-        --   border = {
-        --     style = "rounded",
-        --     padding = { 1, 1 },
-        --   },
-        --   win_options = {
-        --     winblend = 10,
-        --     winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-        --   },
-        -- },
+        confirm = {
+          position = { row = "50%", col = "50%" },
+          size = { width = 60, height = "auto" },
+          border = {
+            style = "rounded",
+            padding = { 1, 1 },
+          },
+          win_options = {
+            winblend = 10,
+            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+          },
+        },
       },
 
       routes = {
