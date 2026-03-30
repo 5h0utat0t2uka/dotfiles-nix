@@ -41,7 +41,7 @@ return {
           layout_strategy = "horizontal",
           layout_config = {
             width = 0.80,
-            height = 0.80,
+            height = 0.70,
             preview_width = 0.5,
             prompt_position = "bottom",
           },
