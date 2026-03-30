@@ -71,11 +71,10 @@ return {
       routes = {
         { view = "split", filter = { event = "msg_show", min_height = 10 } },
         { view = "split", filter = { event = "msg_show", min_length = 200 } },
-        -- confirm_subをcmdline_popupにルーティング
-        -- {
-        --   view = "cmdline_popup",
-        --   filter = { event = "msg_show", kind = "confirm_sub" },
-        -- },
+        {
+          view = "confirm",
+          filter = { event = "msg_show", kind = "confirm_sub" },
+        },
       },
     },
   },
