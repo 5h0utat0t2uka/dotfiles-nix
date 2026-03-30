@@ -47,7 +47,9 @@ return {
           },
           file_ignore_patterns = {
             "^.git/",
+            "^.next/",
             "^.cache/",
+            "^.pnpm-store/",
             "^.zsh_sessions/",
             "node_modules/",
             "Library/",
