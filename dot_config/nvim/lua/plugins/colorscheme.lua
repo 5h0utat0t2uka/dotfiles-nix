@@ -25,8 +25,8 @@ return {
       vim.api.nvim_set_hl(0, "MsgArea", { fg = "#81A1C1" })
       vim.api.nvim_set_hl(0, "IncSearch", {
         fg = "#2E3440",
-        bg = "#D08770",
-        bold = true,
+        bg = "#A3BE8C",
+        bold = false,
       })
     end
 
