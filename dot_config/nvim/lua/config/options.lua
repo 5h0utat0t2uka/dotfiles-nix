@@ -13,6 +13,7 @@ vim.opt.shiftwidth = 2
 vim.opt.scrolloff = 5
 vim.opt.winborder = "rounded"
 -- vim.o.winbar = " "
+vim.opt.whichwrap = 'b,s,h,l,<,>,[,],~'
 vim.opt.showmatch = true
 vim.opt.cursorline = true
 vim.opt.cmdheight = 0
