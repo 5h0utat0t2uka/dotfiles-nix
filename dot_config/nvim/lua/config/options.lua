@@ -24,7 +24,7 @@ vim.opt.guicursor = table.concat({
   "c:hor50",
 }, ",")
 
-vim.opt.showcmd = true
-vim.opt.showcmdloc = "statusline"
-vim.opt.laststatus = 3
-vim.opt.statusline = "%=%S"
+-- vim.opt.showcmd = true
+-- vim.opt.showcmdloc = "statusline"
+-- vim.opt.laststatus = 3
+-- vim.opt.statusline = "%=%S"
