@@ -11,10 +11,9 @@ return {
 
     opts = {
       cmdline = {
-        view = "cmdline_popup",
         format = {
           cmdline = { title = "", pattern = "^:", icon = "", lang = "vim" },
-          input = { title = "", icon = "", border = { style = "rounded", padding = { 2, 2 } } },
+          input = { title = "" },
           search_down = { title = "", kind = "search", pattern = "^/", icon = "", lang = "regex" },
           search_up = { title = "", kind = "search", pattern = "^%?", icon = "", lang = "regex" },
           filter = { title = "", pattern = "^:%s*!", icon = "", lang = "bash" },
@@ -55,18 +54,18 @@ return {
             winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
           },
         },
-        -- confirm = {
-        --   position = { row = "50%", col = "50%" },
-        --   size = { width = 60, height = "auto" },
-        --   border = {
-        --     style = "rounded",
-        --     padding = { 2, 2 },
-        --   },
-        --   win_options = {
-        --     winblend = 10,
-        --     winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-        --   },
-        -- },
+        confirm = {
+          position = { row = "50%", col = "50%" },
+          size = { width = 60, height = "auto" },
+          border = {
+            style = "rounded",
+            padding = { 2, 2 },
+          },
+          win_options = {
+            winblend = 10,
+            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+          },
+        },
       },
 
       routes = {
