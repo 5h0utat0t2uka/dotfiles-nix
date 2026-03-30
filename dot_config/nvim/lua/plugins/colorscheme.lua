@@ -15,14 +15,14 @@ return {
       vim.api.nvim_set_hl(0, "CursorLine", { bg = "#353B49" })
       vim.api.nvim_set_hl(0, "Visual", { bg = "#544a59" })
       vim.api.nvim_set_hl(0, "TabLine", { fg = "#4C566A", bg = "#2E3440" })
-      vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#5E81AC", bg = "#2E3440", bold = true })
+      vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#81A1C1", bg = "#2E3440", bold = true })
       vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#2E3440" })
       vim.api.nvim_set_hl(0, "WinBar", { bg = "#2e3440", fg = "#4c566a" })
       vim.api.nvim_set_hl(0, "WinBarNC", { bg = "#2e3440", fg = "#4c566a" })
       vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3b4252", bg = "NONE" })
       vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#4c566a", bg = "NONE" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
-      vim.api.nvim_set_hl(0, "MsgArea", { fg = "#4C566A" })
+      vim.api.nvim_set_hl(0, "MsgArea", { fg = "#81A1C1" })
     end
 
     apply_custom_highlights()
