@@ -21,6 +21,6 @@ vim.opt.cmdheight = 1
 
 vim.opt.guicursor = table.concat({
   "n-v:block",
-  "i:ver25",
-  "c:hor20",
+  "i:ver30",
+  "c:hor30",
 }, ",")
