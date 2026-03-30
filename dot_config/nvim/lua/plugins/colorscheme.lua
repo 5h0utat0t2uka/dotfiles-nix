@@ -26,7 +26,7 @@ return {
       vim.api.nvim_set_hl(0, "IncSearch", {
         fg = "#2E3440",
         bg = "#A3BE8C",
-        bold = false,
+        bold = true,
       })
     end
 
