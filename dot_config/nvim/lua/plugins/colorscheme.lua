@@ -22,7 +22,7 @@ return {
       vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3b4252", bg = "NONE" })
       vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#4c566a", bg = "NONE" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
-      vim.api.nvim_set_hl(0, "MsgArea", { fg = "#88C0D0" })
+      vim.api.nvim_set_hl(0, "MsgArea", { fg = "#81A1C1" })
     end
 
     apply_custom_highlights()
