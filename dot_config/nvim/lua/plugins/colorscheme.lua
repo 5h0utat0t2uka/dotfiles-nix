@@ -23,6 +23,11 @@ return {
       vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#4c566a", bg = "NONE" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
       vim.api.nvim_set_hl(0, "MsgArea", { fg = "#81A1C1" })
+      vim.api.nvim_set_hl(0, "IncSearch", {
+        fg = "#2E3440",
+        bg = "#D08770",
+        bold = true,
+      })
     end
 
     apply_custom_highlights()
