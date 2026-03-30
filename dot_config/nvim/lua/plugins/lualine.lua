@@ -4,7 +4,7 @@ return {
   config = function()
     local custom = vim.deepcopy(require("lualine.themes.nord"))
     local colors = {
-      normal   = "#5E81AC",
+      normal   = "#81A1C1",
       insert   = "#a3be8c",
       visual   = "#b48ead",
       replace  = "#d08770",
@@ -143,7 +143,7 @@ return {
               return string.upper(str)
             end,
             color = {
-              fg = "#5E81AC",
+              fg = "#81A1C1",
               bg = "#2E3440",
               -- bg = "#3B4252",
             }
@@ -156,7 +156,7 @@ return {
               removed = ' ',
             },
             color = {
-              fg = "#5E81AC",
+              fg = "#81A1C1",
               bg = "#2E3440",
             }
           },
@@ -174,7 +174,7 @@ return {
             -- padding = { left = 1, right = 1 },
             -- separator = { left = " ", right = " " },
             color = {
-              fg = "#5E81AC",
+              fg = "#81A1C1",
               bg = "#2E3440",
               -- fg = "#2E3440",
               -- bg = "#4C566A",
@@ -190,7 +190,7 @@ return {
           --   colored = false,
           --   padding = { left = 1, right = 1 },
           --   color = {
-          --     fg = "#5E81AC",
+          --     fg = "#81A1C1",
           --     bg = "#2E3440",
           --   },
           -- },
@@ -219,7 +219,7 @@ return {
           --     removed = ' ',
           --   },
           --   color = {
-          --     fg = "#5E81AC",
+          --     fg = "#81A1C1",
           --     bg = "#2E3440",
           --   }
           -- },
@@ -242,7 +242,7 @@ return {
             --   return string.upper(str)
             -- end,
             color = {
-              fg = "#5E81AC",
+              fg = "#81A1C1",
               bg = "#2E3440",
             }
           }
@@ -255,7 +255,7 @@ return {
               return string.upper(str)
             end,
             color = {
-              fg = "#5E81AC",
+              fg = "#81A1C1",
               bg = "#2E3440",
             }
           }
@@ -274,8 +274,8 @@ return {
         --       directory = "",
         --     },
         --     buffers_color = {
-        --       active   = { fg = "#2E3440", bg = "#5E81AC" },
-        --       inactive = { fg = "#5E81AC", bg = "#2E3440" },
+        --       active   = { fg = "#2E3440", bg = "#81A1C1" },
+        --       inactive = { fg = "#81A1C1", bg = "#2E3440" },
         --     },
         --   }
         -- },
