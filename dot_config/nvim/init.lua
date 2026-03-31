@@ -22,14 +22,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('vim._extui').enable({
-  enable = true,
-  msg = {
-    pos = 'box',
-    box = { timeout = 5000 },
-  },
-})
-
 require('vim._core.ui2').enable({
   enable = true, -- Whether to enable or disable the UI.
   msg = { -- Options related to the message module.
@@ -37,7 +29,7 @@ require('vim._core.ui2').enable({
     ---cmdline or in a separate ephemeral message window.
     ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
     ---or table mapping |ui-messages| kinds and triggers to a target.
-    targets = 'cmd',
+    targets = 'cmd' | 'msg' | 'pager',
     cmd = { -- Options related to messages in the cmdline window.
       height = 0.5 -- Maximum height while expanded for messages beyond 'cmdheight'.
     },
