@@ -47,6 +47,17 @@ require('vim._core.ui2').enable({
   },
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "cmd",
+  callback = function()
+    vim.opt_local.cursorline = false
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.signcolumn = "no"
+    vim.wo.winhighlight = "Normal:Normal,NormalNC:Normal"
+  end,
+})
+
 require("lazy").setup({
   spec = {
     { import = "plugins" },
