@@ -30,19 +30,19 @@ require('vim._core.ui2').enable({
     ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
     ---or table mapping |ui-messages| kinds and triggers to a target.
     -- targets = 'cmd',
-    targets = 'msg',
+    targets = 'cmd',
     cmd = { -- Options related to messages in the cmdline window.
-      height = 0.5 -- Maximum height while expanded for messages beyond 'cmdheight'.
+      height = 1 -- Maximum height while expanded for messages beyond 'cmdheight'.
     },
     dialog = { -- Options related to dialog window.
-      height = 0.5, -- Maximum height.
+      height = 1, -- Maximum height.
     },
     msg = { -- Options related to msg window.
-      height = 0.5, -- Maximum height.
+      height = 1, -- Maximum height.
       timeout = 10000, -- Time a message is visible in the message window.
     },
     pager = { -- Options related to message window.
-      height = 0.5, -- Maximum height.
+      height = 1, -- Maximum height.
     },
   },
 })
@@ -54,16 +54,4 @@ require("lazy").setup({
   lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
   change_detection = { notify = false },
   rocks = { enabled = false, hererocks = false },
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "msg",
-  callback = function()
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
-    vim.opt_local.signcolumn = "no"
-    vim.opt_local.cursorline = false
-    vim.wo.winhighlight =
-      "Normal:Normal,NormalNC:Normal,EndOfBuffer:Normal,CursorLine:Normal"
-  end,
 })
