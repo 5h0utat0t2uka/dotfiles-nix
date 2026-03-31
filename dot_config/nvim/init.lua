@@ -55,3 +55,15 @@ require("lazy").setup({
   change_detection = { notify = false },
   rocks = { enabled = false, hererocks = false },
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "msg",
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.signcolumn = "no"
+    vim.opt_local.cursorline = false
+    vim.wo.winhighlight =
+      "Normal:Normal,NormalNC:Normal,EndOfBuffer:Normal,CursorLine:Normal"
+  end,
+})
