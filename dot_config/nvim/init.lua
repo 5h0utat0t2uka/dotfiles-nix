@@ -29,33 +29,22 @@ require('vim._core.ui2').enable({
     ---cmdline or in a separate ephemeral message window.
     ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
     ---or table mapping |ui-messages| kinds and triggers to a target.
-    targets = 'cmd',
-    -- targets = 'msg',
+    -- targets = 'cmd',
+    targets = 'msg',
     cmd = { -- Options related to messages in the cmdline window.
-      height = 0.5 -- Maximum height while expanded for messages beyond 'cmdheight'.
+      height = 1 -- Maximum height while expanded for messages beyond 'cmdheight'.
     },
     dialog = { -- Options related to dialog window.
-      height = 0.5, -- Maximum height.
+      height = 1, -- Maximum height.
     },
     msg = { -- Options related to msg window.
-      height = 0.5, -- Maximum height.
+      height = 1, -- Maximum height.
       timeout = 4000, -- Time a message is visible in the message window.
     },
     pager = { -- Options related to message window.
       height = 1, -- Maximum height.
     },
   },
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "cmd",
-  callback = function()
-    vim.opt_local.cursorline = false
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
-    vim.opt_local.signcolumn = "no"
-    vim.wo.winhighlight = "Normal:Normal,NormalNC:Normal"
-  end,
 })
 
 require("lazy").setup({
