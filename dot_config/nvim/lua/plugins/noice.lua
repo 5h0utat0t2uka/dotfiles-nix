@@ -13,7 +13,7 @@ return {
       cmdline = {
         format = {
           cmdline = { title = "", pattern = "^:", icon = "", lang = "vim" },
-          -- input = { title = "" },
+          input = { title = "" },
           search_down = { title = "", kind = "search", pattern = "^/", icon = "", lang = "regex" },
           search_up = { title = "", kind = "search", pattern = "^%?", icon = "", lang = "regex" },
           filter = { title = "", pattern = "^:%s*!", icon = "", lang = "bash" },
@@ -47,7 +47,7 @@ return {
           size = { width = 60, height = "auto" },
           border = {
             style = "rounded",
-            padding = { 1, 1 },
+            padding = { 0.5, 0.5 },
           },
           win_options = {
             winblend = 10,        -- 0（不透明）〜 100（完全透明）
