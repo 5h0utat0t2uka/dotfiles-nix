@@ -22,6 +22,14 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require('vim._extui').enable({
+  enable = true,
+  msg = {
+    pos = 'box',
+    box = { timeout = 5000 },
+  },
+})
+
 require('vim._core.ui2').enable({
   enable = true, -- Whether to enable or disable the UI.
   msg = { -- Options related to the message module.
