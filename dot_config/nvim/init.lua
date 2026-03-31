@@ -60,8 +60,10 @@ require("lazy").setup({
 
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "cmd", "msg", "pager", "dialog" },
+  pattern = "msg",
   callback = function(args)
-    print("ui2 filetype:", vim.bo[args.buf].filetype)
+    vim.schedule(function()
+      print("ui2 msg created:", args.buf, vim.api.nvim_win_get_height(0))
+    end)
   end,
 })
