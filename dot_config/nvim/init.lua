@@ -54,3 +54,14 @@ require("lazy").setup({
   change_detection = { notify = false },
   rocks = { enabled = false, hererocks = false },
 })
+
+
+
+
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "cmd", "msg", "pager", "dialog" },
+  callback = function(args)
+    print("ui2 filetype:", vim.bo[args.buf].filetype)
+  end,
+})
