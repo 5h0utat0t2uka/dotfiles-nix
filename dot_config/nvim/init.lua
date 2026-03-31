@@ -29,7 +29,8 @@ require('vim._core.ui2').enable({
     ---cmdline or in a separate ephemeral message window.
     ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
     ---or table mapping |ui-messages| kinds and triggers to a target.
-    targets = 'msg',
+    targets = 'cmd',
+    -- targets = 'msg',
     cmd = { -- Options related to messages in the cmdline window.
       height = 0.5 -- Maximum height while expanded for messages beyond 'cmdheight'.
     },
