@@ -66,16 +66,3 @@ require("lazy").setup({
   change_detection = { notify = false },
   rocks = { enabled = false, hererocks = false },
 })
-
-
-
-
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "msg",
-  callback = function(args)
-    vim.schedule(function()
-      print("ui2 msg created:", args.buf, vim.api.nvim_win_get_height(0))
-    end)
-  end,
-})
