@@ -47,7 +47,7 @@ return {
           size = { width = 60, height = "auto" },
           border = {
             style = "rounded",
-            -- padding = { 1, 1 },
+            padding = { 1, 1 },
           },
           win_options = {
             winblend = 10,        -- 0（不透明）〜 100（完全透明）
