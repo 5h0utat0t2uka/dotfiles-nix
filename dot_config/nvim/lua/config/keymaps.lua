@@ -14,6 +14,10 @@ vim.keymap.set("n", "<Leader>lh", vim.lsp.buf.hover, { desc = "LSP Hover" })
 vim.keymap.set("n", "<Leader>ld", vim.lsp.buf.definition, { desc = "LSP Definition" })
 vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.references, { desc = "LSP References" })
 vim.keymap.set("n", "<Leader>ln", vim.lsp.buf.rename, { desc = "LSP Rename" })
+
+vim.keymap.set("n", "<C-k>", "<C-u>", { remap = true, silent = true, desc = "Half page up" })
+vim.keymap.set("n", "<C-j>", "<C-d>", { remap = true, silent = true, desc = "Half page down" })
+
 -- 単語の大文字小文字を切り替える
 vim.keymap.set("n", "<leader>tc", "g~iw", { remap = false, desc = "Toggle word case" })
 -- 検索ハイライト解除
