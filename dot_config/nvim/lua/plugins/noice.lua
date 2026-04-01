@@ -44,7 +44,7 @@ return {
 
         cmdline_popup = {
           position = { row = "50%", col = "50%" },
-          size = { width = 60, height = "auto" },
+          size = { min_width = 60, width = "auto", height = "auto" },
           border = {
             style = "rounded",
             padding = { 1, 1 },
