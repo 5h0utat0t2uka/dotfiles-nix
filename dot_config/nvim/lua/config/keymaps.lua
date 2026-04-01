@@ -15,10 +15,10 @@ vim.keymap.set("n", "<Leader>ld", vim.lsp.buf.definition, { desc = "LSP Definiti
 vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.references, { desc = "LSP References" })
 vim.keymap.set("n", "<Leader>ln", vim.lsp.buf.rename, { desc = "LSP Rename" })
 
-vim.keymap.set("n", "<A-h>", "w", { remap = true, silent = true, desc = "Move to next word" })
-vim.keymap.set("n", "<A-l>", "b", { remap = true, silent = true, desc = "Move to previous word" })
-vim.keymap.set("n", "<A-k>", "<C-u>", { remap = true, silent = true, desc = "Half page up" })
-vim.keymap.set("n", "<A-j>", "<C-d>", { remap = true, silent = true, desc = "Half page down" })
+vim.keymap.set("n", "<A-h>", "b", { remap = true, silent = true, desc = "Prev word" })
+vim.keymap.set("n", "<A-l>", "w", { remap = true, silent = true, desc = "Next word" })
+vim.keymap.set("n", "<A-k>", "<C-u>", { remap = true, silent = true, desc = "Page up" })
+vim.keymap.set("n", "<A-j>", "<C-d>", { remap = true, silent = true, desc = "Page down" })
 
 -- 単語の大文字小文字を切り替える
 vim.keymap.set("n", "<leader>tc", "g~iw", { remap = false, desc = "Toggle word case" })
