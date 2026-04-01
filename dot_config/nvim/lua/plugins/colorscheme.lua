@@ -23,6 +23,10 @@ return {
       vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#4c566a", bg = "NONE" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
       vim.api.nvim_set_hl(0, "MsgArea", { fg = "#81A1C1", bg = "#2E3440" })
+      vim.api.nvim_set_hl(0, "Pmenu", {
+        bg = "#2E3440",
+        fg = "#D8DEE9",
+      })
       vim.api.nvim_set_hl(0, "IncSearch", {
         fg = "#2E3440",
         bg = "#A3BE8C",
