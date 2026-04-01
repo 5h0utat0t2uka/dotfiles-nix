@@ -174,7 +174,7 @@ return {
             -- padding = { left = 1, right = 1 },
             -- separator = { left = " ", right = " " },
             color = {
-              fg = "#81A1C1",
+              fg = "#4C566A",
               bg = "#2E3440",
               -- fg = "#2E3440",
               -- bg = "#4C566A",
