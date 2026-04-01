@@ -27,13 +27,13 @@ return {
         bg = "#2E3440",
         fg = "#D8DEE9",
       })
-      vim.api.nvim_set_hl(0, "PmenuBorder", {
-        fg = "#4c566a", -- ボーダー色
-        bg = "#4c566a",
-      })
-      vim.api.nvim_set_hl(0, "PmenuThumb", {
-        bg = "#4c566a",
-      })
+vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", {
+  fg = "#81A1C1",
+  bg = "#3B4252",
+})
+      -- vim.api.nvim_set_hl(0, "PmenuThumb", {
+      --   bg = "#4c566a",
+      -- })
       vim.api.nvim_set_hl(0, "IncSearch", {
         fg = "#2E3440",
         bg = "#A3BE8C",
