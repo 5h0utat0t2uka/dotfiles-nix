@@ -27,10 +27,10 @@ return {
         bg = "#2E3440",
         fg = "#D8DEE9",
       })
-vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", {
-  fg = "#81A1C1",
-  bg = "#3B4252",
-})
+      vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", {
+        fg = "#4c566a",
+        bg = "#2E3440",
+      })
       -- vim.api.nvim_set_hl(0, "PmenuThumb", {
       --   bg = "#4c566a",
       -- })
