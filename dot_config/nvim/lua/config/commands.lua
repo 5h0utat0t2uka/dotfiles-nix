@@ -114,7 +114,7 @@ end
 
 local function prompt_and_open_remote_source()
   vim.ui.input({
-    prompt = "URL: ",
+    prompt = "",
   }, function(input)
     if not input or input == "" then
       return
