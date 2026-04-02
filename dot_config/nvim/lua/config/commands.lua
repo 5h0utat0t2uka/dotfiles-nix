@@ -131,7 +131,7 @@ function M.setup()
     desc = "Open a GitHub blob URL or raw URL in a new buffer",
   })
 
-  vim.keymap.set("n", "<leader>gu", prompt_and_open_remote_source, {
+  vim.keymap.set("n", "<leader>git", prompt_and_open_remote_source, {
     desc = "Open remote GitHub source from URL",
   })
 end
