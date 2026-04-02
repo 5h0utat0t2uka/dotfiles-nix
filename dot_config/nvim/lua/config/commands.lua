@@ -132,7 +132,7 @@ function M.setup()
   })
 
   vim.keymap.set("n", "<leader>gu", prompt_and_open_remote_source, {
-    desc = "Open remote source from URL",
+    desc = "Open remote GitHub source from URL",
   })
 end
 
