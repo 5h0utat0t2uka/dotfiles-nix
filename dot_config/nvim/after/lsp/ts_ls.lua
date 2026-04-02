@@ -7,10 +7,9 @@ return {
       "package.json",
       ".git",
     })
-    on_dir(root)
-  end,
 
-  reuse_client = function(client, config)
-    return client.name == config.name
+    if root then
+      on_dir(root)
+    end
   end,
 }
