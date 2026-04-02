@@ -4,21 +4,12 @@ local M = {}
 local function github_blob_to_raw(url)
   -- 行番号アンカー除去: #L10 / #L10-L20
   url = url:gsub("#L%d+%-L%d+$", ""):gsub("#L%d+$", "")
-
-  local owner, repo, ref, path = url:match(
-    "^https://github%.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)$"
-  )
-
+  local owner, repo, ref, path = url:match("^https://github%.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)$")
   if not owner then
     return nil, "GitHub blob URL ではありません"
   end
 
-  return ("https://raw.githubusercontent.com/%s/%s/%s/%s"):format(
-    owner,
-    repo,
-    ref,
-    path
-  )
+  return ("https://raw.githubusercontent.com/%s/%s/%s/%s"):format(owner, repo, ref, path)
 end
 
 local function detect_filetype(path)
@@ -90,14 +81,13 @@ local function open_remote_source(url)
         return
       end
 
-      local status = res and res.status or 0
-      if status < 200 or status >= 300 then
+      if not res or type(res.body) ~= "string" then
         vim.api.nvim_buf_delete(buf, { force = true })
-        vim.notify(("HTTP エラー: %s"):format(status), vim.log.levels.ERROR)
+        vim.notify("HTTP Responce error:", vim.log.levels.ERROR)
         return
       end
 
-      set_buffer_content_from_string(buf, res.body or "")
+      set_buffer_content_from_string(buf, res.body)
 
       local ft = detect_filetype(target_url)
       if ft then
