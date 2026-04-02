@@ -2,14 +2,22 @@
 local M = {}
 
 local function github_blob_to_raw(url)
-  -- 行番号アンカー除去: #L10 / #L10-L20
   url = url:gsub("#L%d+%-L%d+$", ""):gsub("#L%d+$", "")
-  local owner, repo, ref, path = url:match("^https://github%.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)$")
+
+  local owner, repo, ref, path = url:match(
+    "^https://github%.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)$"
+  )
+
   if not owner then
     return nil, "GitHub blob URL ではありません"
   end
 
-  return ("https://raw.githubusercontent.com/%s/%s/%s/%s"):format(owner, repo, ref, path)
+  return ("https://raw.githubusercontent.com/%s/%s/%s/%s"):format(
+    owner,
+    repo,
+    ref,
+    path
+  )
 end
 
 local function detect_filetype(path)
@@ -47,6 +55,11 @@ local function set_buffer_content_from_string(buf, content)
 end
 
 local function open_remote_source(url)
+  if not url or url == "" then
+    vim.notify("URL が空です", vim.log.levels.WARN)
+    return
+  end
+
   local target_url = url
 
   if url:match("^https://github%.com/.+/blob/.+$") then
@@ -74,13 +87,11 @@ local function open_remote_source(url)
       if not vim.api.nvim_buf_is_valid(buf) then
         return
       end
-
       if err then
         vim.api.nvim_buf_delete(buf, { force = true })
         vim.notify(("Failed to fetch: %s"):format(tostring(err)), vim.log.levels.ERROR)
         return
       end
-
       if not res or type(res.body) ~= "string" then
         vim.api.nvim_buf_delete(buf, { force = true })
         vim.notify("HTTP Responce error:", vim.log.levels.ERROR)
@@ -88,7 +99,6 @@ local function open_remote_source(url)
       end
 
       set_buffer_content_from_string(buf, res.body)
-
       local ft = detect_filetype(target_url)
       if ft then
         vim.bo[buf].filetype = ft
@@ -102,12 +112,27 @@ local function open_remote_source(url)
   end)
 end
 
+local function prompt_and_open_remote_source()
+  vim.ui.input({
+    prompt = "URL: ",
+  }, function(input)
+    if not input or input == "" then
+      return
+    end
+    open_remote_source(vim.trim(input))
+  end)
+end
+
 function M.setup()
   vim.api.nvim_create_user_command("OpenGithubSource", function(opts)
     open_remote_source(opts.args)
   end, {
     nargs = 1,
     desc = "Open a GitHub blob URL or raw URL in a new buffer",
+  })
+
+  vim.keymap.set("n", "<leader>gu", prompt_and_open_remote_source, {
+    desc = "Open remote source from URL",
   })
 end
 
