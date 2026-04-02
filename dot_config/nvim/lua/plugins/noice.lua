@@ -13,7 +13,7 @@ return {
       cmdline = {
         format = {
           cmdline = { title = "", pattern = "^:", icon = "", lang = "vim" },
-          input = { title = "" },
+          input = { title = "", icon = "", view = "cmdline_input" },
           search_down = { title = "", kind = "search", pattern = "^/", icon = "", lang = "regex" },
           search_up = { title = "", kind = "search", pattern = "^%?", icon = "", lang = "regex" },
           filter = { title = "", pattern = "^:%s*!", icon = "", lang = "bash" },
