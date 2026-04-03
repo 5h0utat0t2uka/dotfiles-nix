@@ -42,7 +42,7 @@ in
           JIMPrefLiveConversionKey = 0;
           JIMPrefAutocorrectionKey = 0;
         };
-        "com.apple.spotlight" = {
+        "com.apple.Spotlight" = {
           orderedItems = [
             { enabled = true; name = "APPLICATIONS"; }
             { enabled = true; name = "SHORTCUTS"; }
@@ -68,6 +68,7 @@ in
             { enabled = false; name = "MENU_SPOTLIGHT_SUGGESTIONS"; }
           ];
         };
+
         # "com.apple.screencapture" = {
         #   location = "~/Documents";
         #   type = "png";
