@@ -23,7 +23,7 @@
     casks = [
       "ghostty"
       "karabiner-elements"
-      "raycast"
+      # "raycast"
       "zed"
     ];
   };
