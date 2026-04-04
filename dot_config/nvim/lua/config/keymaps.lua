@@ -19,6 +19,17 @@ vim.keymap.set("n", "<A-h>", "b", { remap = true, silent = true, desc = "Prev wo
 vim.keymap.set("n", "<A-l>", "w", { remap = true, silent = true, desc = "Next word" })
 vim.keymap.set("n", "<A-k>", "<C-u>", { remap = true, silent = true, desc = "Page up" })
 vim.keymap.set("n", "<A-j>", "<C-d>", { remap = true, silent = true, desc = "Page down" })
+vim.keymap.set('n', '<leader>yd', function()
+  local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line('.') - 1 })
+  if #diagnostics == 0 then
+    vim.notify('No diagnostics', vim.log.levels.INFO)
+    return
+  end
+  local messages = vim.tbl_map(function(d) return d.message end, diagnostics)
+  local text = table.concat(messages, '\n')
+  vim.fn.setreg('+', text)
+  vim.notify('Yanked: ' .. text)
+end)
 
 -- 単語の大文字小文字を切り替える
 vim.keymap.set("n", "<leader>tc", "g~iw", { remap = false, desc = "Toggle word case" })
