@@ -163,6 +163,10 @@ return {
           {
             "diagnostics",
             symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+            color = {
+              bg = "#2E3440",
+            },
+            always_visible = true
           },
           {
             "filename",
