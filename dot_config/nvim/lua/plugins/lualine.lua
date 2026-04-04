@@ -163,7 +163,7 @@ return {
           {
             "diagnostics",
             -- symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
-            symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
+            symbols = {error = 'E ', warn = 'W ', info = 'I ', hint = 'H '},
             color = {
               bg = "#2E3440",
             },
