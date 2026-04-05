@@ -37,7 +37,7 @@ return {
         bold = true,
       })
       vim.api.nvim_set_hl(0, "ComplHint", {
-        fg = "#A3BE8C",
+        fg = "#4c566a",
       })
       vim.api.nvim_set_hl(0, "ComplHintMore", {
         fg = "#4c566a",
