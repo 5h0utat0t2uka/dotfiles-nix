@@ -14,7 +14,7 @@ return {
         return function() require("telescope.builtin")[fn](opts) end
       end
       return {
-        { "<leader>ff", b("find_files", { hidden = true }), desc = "Find files" },
+        { "<leader>ff", b("find_files", { hidden = false }), desc = "Find files" },
         { "<leader>fg", b("live_grep"),                     desc = "Live grep" },
         { "<leader>fb", b("buffers"),                       desc = "Buffers" },
         { "<leader>gs", b("git_status"),                    desc = "Git status" },
@@ -22,6 +22,13 @@ return {
         { "<leader>gb", b("git_branches"),                  desc = "Git branches" },
         { "<leader>pp", b("registers"),                     desc = "Registers" },
         { "<leader>fh", b("help_tags"),                     desc = "Help tags" },
+        { "<leader>fG", function()
+          require("telescope.builtin").live_grep({
+            additional_args = function()
+              return { "--hidden", "-uu" }
+            end,
+          })
+        end, desc = "Live grep incl. hidden/ignored" },
       }
     end,
     config = function(_, opts)
@@ -66,7 +73,6 @@ return {
             "--line-number",
             "--column",
             "--smart-case",
-            "-uu",
             "--hidden",
           },
         },
