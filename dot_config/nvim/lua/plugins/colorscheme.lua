@@ -36,6 +36,9 @@ return {
         bg = "#A3BE8C",
         bold = true,
       })
+      vim.api.nvim_set_hl(0, "PreInsert", {
+        fg = "#4c566a",
+      })
     end
 
     apply_custom_highlights()
