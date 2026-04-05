@@ -12,6 +12,12 @@ return {
       vim.lsp.enable("eslint")
       vim.lsp.enable("ts_ls")
       vim.lsp.enable("astro")
+      vim.lsp.enable("copilot")
+
+      vim.lsp.inline_completion.enable(true)
+      vim.keymap.set("i", "<M-CR>", function()
+        vim.lsp.inline_completion.get()
+      end, { silent = true, desc = "Copilot inline completion" })
     end,
   },
 }
