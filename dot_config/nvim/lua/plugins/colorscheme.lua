@@ -37,7 +37,7 @@ return {
         bold = true,
       })
       vim.api.nvim_set_hl(0, "PreInsert", {
-        fg = "#4c566a",
+        fg = "#A3BE8C",
       })
     end
 
