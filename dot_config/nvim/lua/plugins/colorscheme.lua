@@ -9,10 +9,23 @@ return {
     vim.g.nord_italic = false
     vim.g.nord_uniform_diff_background = true
     vim.g.nord_bold = true
+    vim.opt.guicursor = table.concat({
+      "n-v-c:block-nCursor",
+      "i-ci-ve:ver25-iCursor",
+      "r-cr:hor20-rCursor",
+      "o:hor50-oCursor",
+    }, ",")
+
     vim.cmd.colorscheme("nord")
 
     local function apply_custom_highlights()
       vim.api.nvim_set_hl(0, "CursorLine", { bg = "#353B49" })
+
+      vim.api.nvim_set_hl(0, "nCursor", { bg = "#81A1C1" })
+      vim.api.nvim_set_hl(0, "iCursor", { bg = "#A3BE8C" })
+      vim.api.nvim_set_hl(0, "rCursor", { bg = "#BF616A" })
+      vim.api.nvim_set_hl(0, "oCursor", { bg = "#EBCB8B" })
+
       vim.api.nvim_set_hl(0, "Visual", { bg = "#544a59" })
       vim.api.nvim_set_hl(0, "TabLine", { fg = "#4C566A", bg = "#2E3440" })
       vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#81A1C1", bg = "#2E3440", bold = true })
