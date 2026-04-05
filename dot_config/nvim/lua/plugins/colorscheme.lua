@@ -13,12 +13,6 @@ return {
 
     local function apply_custom_highlights()
       vim.api.nvim_set_hl(0, "CursorLine", { bg = "#353B49" })
-
-      vim.api.nvim_set_hl(0, "nCursor", { fg = "#2E3440", bg = "#88C0D0" })
-      vim.api.nvim_set_hl(0, "iCursor", { fg = "#2E3440", bg = "#A3BE8C" })
-      vim.api.nvim_set_hl(0, "rCursor", { fg = "#ECEFF4", bg = "#BF616A" })
-      vim.api.nvim_set_hl(0, "oCursor", { fg = "#2E3440", bg = "#EBCB8B" })
-
       vim.api.nvim_set_hl(0, "Visual", { bg = "#544a59" })
       vim.api.nvim_set_hl(0, "TabLine", { fg = "#4C566A", bg = "#2E3440" })
       vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#81A1C1", bg = "#2E3440", bold = true })
@@ -53,6 +47,7 @@ return {
 
     apply_custom_highlights()
 
+
     local group = vim.api.nvim_create_augroup("NordOverrides", { clear = true })
     vim.api.nvim_create_autocmd("ColorScheme", {
       group = group,
@@ -63,6 +58,14 @@ return {
       callback = function(e)
         local bg = e.event == "InsertEnter" and "#2E3440" or "#353B49"
         vim.api.nvim_set_hl(0, "CursorLine", { bg = bg })
+      end,
+    })
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      callback = function()
+        vim.api.nvim_set_hl(0, "nCursor", { fg = "#2E3440", bg = "#88C0D0" })
+        vim.api.nvim_set_hl(0, "iCursor", { fg = "#2E3440", bg = "#A3BE8C" })
+        vim.api.nvim_set_hl(0, "rCursor", { fg = "#ECEFF4", bg = "#BF616A" })
+        vim.api.nvim_set_hl(0, "oCursor", { fg = "#2E3440", bg = "#EBCB8B" })
       end,
     })
   end,
