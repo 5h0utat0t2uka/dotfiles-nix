@@ -15,20 +15,20 @@ return {
       end
       return {
         { "<leader>ff", b("find_files", { hidden = false }), desc = "Find files" },
-        { "<leader>fg", b("live_grep"),                     desc = "Live grep" },
-        { "<leader>fb", b("buffers"),                       desc = "Buffers" },
-        { "<leader>gs", b("git_status"),                    desc = "Git status" },
-        { "<leader>gc", b("git_commits"),                   desc = "Git commits" },
-        { "<leader>gb", b("git_branches"),                  desc = "Git branches" },
-        { "<leader>pp", b("registers"),                     desc = "Registers" },
-        { "<leader>fh", b("help_tags"),                     desc = "Help tags" },
+        { "<leader>fg", b("live_grep"),                      desc = "Live grep" },
+        { "<leader>fb", b("buffers"),                        desc = "Buffers" },
+        { "<leader>gs", b("git_status"),                     desc = "Git status" },
+        { "<leader>gc", b("git_commits"),                    desc = "Git commits" },
+        { "<leader>gb", b("git_branches"),                   desc = "Git branches" },
+        { "<leader>pp", b("registers"),                      desc = "Registers" },
+        { "<leader>fh", b("help_tags"),                      desc = "Help tags" },
         { "<leader>fG", function()
           require("telescope.builtin").live_grep({
             additional_args = function()
               return { "--hidden", "-uu" }
             end,
           })
-        end, desc = "Live grep incl. hidden/ignored" },
+        end, desc = "Live grep includes hidden/ignored" },
       }
     end,
     config = function(_, opts)
