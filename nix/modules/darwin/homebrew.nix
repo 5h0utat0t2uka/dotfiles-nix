@@ -23,6 +23,7 @@
     casks = [
       "ghostty"
       "karabiner-elements"
+      "neovide-app"
       # "raycast"
       "zed"
     ];
