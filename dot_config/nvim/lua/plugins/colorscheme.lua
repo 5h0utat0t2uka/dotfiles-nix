@@ -36,8 +36,12 @@ return {
         bg = "#A3BE8C",
         bold = true,
       })
-      vim.api.nvim_set_hl(0, "PreInsert", {
+      vim.api.nvim_set_hl(0, "ComplHint", {
         fg = "#A3BE8C",
+      })
+      vim.api.nvim_set_hl(0, "ComplHintMore", {
+        fg = "#4c566a",
+        italic = true,
       })
     end
 
