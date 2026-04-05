@@ -56,6 +56,7 @@ in
       bat
       chafa
       # claude-code
+      copilot-language-server
       delta
       devbox
       eza
