@@ -5,7 +5,7 @@ return {
     event = "InsertEnter",
     dependencies = {
       "rafamadriz/friendly-snippets",
-      "giuxtaposition/blink-cmp-copilot",
+      -- "giuxtaposition/blink-cmp-copilot",
     },
     opts = {
       keymap = {
@@ -20,19 +20,20 @@ return {
         documentation = { auto_show = false },
       },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        -- default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        default = { "lsp", "path", "snippets", "buffer" },
         providers = {
           snippets = {
             opts = {
               use_label_description = true,
             },
           },
-          copilot = {
-            name = "copilot",
-            module = "blink-cmp-copilot",
-            score_offset = 100,
-            async = true,
-          },
+          -- copilot = {
+          --   name = "copilot",
+          --   module = "blink-cmp-copilot",
+          --   score_offset = 100,
+          --   async = true,
+          -- },
         },
       },
       fuzzy = {
