@@ -170,7 +170,7 @@ return {
           },
           {
             "filename",
-            file_status = false,
+            file_status = true,
             newfile_status = true,
             path = 0,
             shorting_target = 40,
