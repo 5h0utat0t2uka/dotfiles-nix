@@ -4,7 +4,7 @@ set icons
 set hidden true
 set preview true
 set previewer ~/.config/lf/pv.sh
-set borderfmt "\033[90m"
+set borderfmt "\033[38;2;59;66;82m"
 
 map e $sh -lc 'nvim "$f"'
 
