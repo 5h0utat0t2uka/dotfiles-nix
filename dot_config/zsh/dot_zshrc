@@ -239,6 +239,7 @@ lfp() {
     -E \
     -w 80% \
     -h 70% \
+    -b rounded \
     -d "$PWD" \
     "sh -c 'command lf -print-last-dir \"\$@\" > \"$tmp\"' sh \"$@\"" \
     "$@"
