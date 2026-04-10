@@ -136,8 +136,7 @@ return {
           {
             "branch",
             icons_enabled = true,
-            icon = "󰘬",
-            -- icon = "",
+            -- icon = "󰘬",
             separator = { left = "", right = "" },
             fmt = function(str)
               return string.upper(str)
