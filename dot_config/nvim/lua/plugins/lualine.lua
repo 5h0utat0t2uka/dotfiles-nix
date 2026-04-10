@@ -137,10 +137,10 @@ return {
             "branch",
             icons_enabled = false,
             -- icon = "󰘬",
-            separator = { left = "", right = "" },
-            fmt = function(str)
-              return string.upper(str)
-            end,
+            separator = { left = "[", right = "]" },
+            -- fmt = function(str)
+            --   return string.upper(str)
+            -- end,
             color = {
               fg = "#81A1C1",
               bg = "#2E3440",
