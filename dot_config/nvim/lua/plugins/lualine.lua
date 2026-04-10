@@ -135,7 +135,7 @@ return {
           -- },
           {
             "branch",
-            icons_enabled = true,
+            icons_enabled = false,
             -- icon = "󰘬",
             separator = { left = "", right = "" },
             fmt = function(str)
