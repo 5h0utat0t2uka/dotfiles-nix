@@ -176,7 +176,8 @@ return {
             shorting_target = 40,
             symbols = { unnamed = "[No Name]" },
             fmt = function(str)
-              return str:gsub("/", "  ")
+              -- return str:gsub("/", "  ")
+              return str:gsub("/", "  ")
             end,
             -- padding = { left = 1, right = 1 },
             -- separator = { left = " ", right = " " },
