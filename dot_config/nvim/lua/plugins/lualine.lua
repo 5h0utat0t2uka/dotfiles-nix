@@ -138,6 +138,7 @@ return {
             icons_enabled = false,
             -- icon = "󰘬",
             separator = { left = "", right = "" },
+            fmt = function(str) return str ~= "" and "[" .. str .. "]" or "" end,
             -- fmt = function(str)
             --   return string.upper(str)
             -- end,
