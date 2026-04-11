@@ -19,6 +19,7 @@ vim.keymap.set("n", "<A-h>", "b", { remap = true, silent = true, desc = "Prev wo
 vim.keymap.set("n", "<A-l>", "w", { remap = true, silent = true, desc = "Next word" })
 vim.keymap.set("n", "<A-k>", "<C-u>", { remap = true, silent = true, desc = "Page up" })
 vim.keymap.set("n", "<A-j>", "<C-d>", { remap = true, silent = true, desc = "Page down" })
+vim.keymap.set("n", "<leader>rw", '"_diwP', { desc = "Replace word with yanked" })
 vim.keymap.set('n', '<leader>yd', function()
   local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line('.') - 1 })
   if #diagnostics == 0 then
@@ -61,6 +62,8 @@ vim.keymap.set("x", ">", ">gv", { noremap = true, silent = true })
 -- 選択範囲の移動
 vim.keymap.set("x", "<A-j>", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("x", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true })
+
+vim.keymap.set("x", "<leader>r", '"_dP', { desc = "Replace selection with yanked" })
 
 -- command mode keymaps
 vim.keymap.set('c', '<c-a>', '<home>', { desc = 'Emacs like home' })
