@@ -5,7 +5,7 @@
       owner = "neovim";
       repo = "neovim";
       rev = "v0.12.1";
-      hash = "sha256-uWhrGAwQ2nnAkyJ46qGkYxJ5K1jtyUIQOAVu3yTlquk=";
+      hash = "sha256-cbFM5TKGmhEDsdhMvGzMyn0Js0MJwdMwXDkzQcdw/TM=";
     };
   });
 })
