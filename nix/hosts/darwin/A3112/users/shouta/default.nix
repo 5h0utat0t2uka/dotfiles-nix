@@ -89,6 +89,7 @@ in
       ]))
       pinentry_mac
       ripgrep
+      # serie
       # termscp
       # tree-sitter
       pkgs."tree-sitter-0267"
