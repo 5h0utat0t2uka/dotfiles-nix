@@ -14,7 +14,7 @@ return {
       "s",
       mode = { "n", "x", "o" },
       function()
-        require("undo-glow").flash_jump()
+        require("undo-glow").flash_jump({})
       end,
       desc = "Flash jump with highlight",
       -- "s",
