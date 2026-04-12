@@ -33,7 +33,7 @@ return {
       })
       vim.api.nvim_set_hl(0, "Search", {
         fg = "#2E3440",
-        bg = "#88C0D0",
+        bg = "#81A1C1",
         bold = true,
       })
       vim.api.nvim_set_hl(0, "CurSearch", {
@@ -43,7 +43,7 @@ return {
       })
       vim.api.nvim_set_hl(0, "IncSearch", {
         fg = "#2E3440",
-        bg = "#A3BE8C",
+        bg = "#BF616A",
         bold = true,
       })
       vim.api.nvim_set_hl(0, "ComplHint", {
