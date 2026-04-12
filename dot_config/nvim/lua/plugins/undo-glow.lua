@@ -15,6 +15,7 @@ return {
       paste = { hl_color = { bg = "#61754e" } },
       comment = { hl_color = { bg = "#4C566A" } },
       search  = { hl_color = { bg = "#8a5c4a" } },
+      cursor  = { hl_color = { bg = "#4C566A" } },
     },
   },
   keys = {
