@@ -32,7 +32,7 @@ return {
         bg = "#2E3440",
       })
       vim.api.nvim_set_hl(0, "Search", {
-        fg = "#D8DEE9",
+        fg = "#2E3440",
         bg = "#5E81AC",
       })
       vim.api.nvim_set_hl(0, "CurSearch", {
