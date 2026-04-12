@@ -51,7 +51,14 @@ return {
           },
           win_options = {
             winblend = 10,        -- 0（不透明）〜 100（完全透明）
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+            -- winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+            winhighlight = {
+              Normal = "NormalFloat",
+              FloatBorder = "FloatBorder",
+              Search = "NormalFloat",
+              CurSearch = "NormalFloat",
+              IncSearch = "NormalFloat",
+            },
           },
         },
         -- confirm = {
