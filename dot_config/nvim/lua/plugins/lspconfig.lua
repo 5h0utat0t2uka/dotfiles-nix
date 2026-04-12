@@ -16,7 +16,7 @@ return {
       vim.lsp.enable("cssls")
 
       vim.lsp.inline_completion.enable(true)
-      vim.keymap.set("i", "<M-Right>", function()
+      vim.keymap.set("i", "<M-CR>", function()
         vim.lsp.inline_completion.get()
       end, { silent = true, desc = "Copilot inline completion" })
     end,
