@@ -43,7 +43,7 @@ return {
       })
       vim.api.nvim_set_hl(0, "IncSearch", {
         fg = "#2E3440",
-        bg = "#BF616A",
+        bg = "#88C0D0",
         bold = true,
       })
       vim.api.nvim_set_hl(0, "ComplHint", {
