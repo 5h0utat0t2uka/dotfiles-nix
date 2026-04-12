@@ -31,6 +31,11 @@ return {
         fg = "#4c566a",
         bg = "#2E3440",
       })
+      vim.api.nvim_set_hl(0, "CurSearch", {
+        fg = "#2E3440",
+        bg = "#D08770",
+        bold = true,
+      })
       vim.api.nvim_set_hl(0, "IncSearch", {
         fg = "#2E3440",
         bg = "#A3BE8C",
