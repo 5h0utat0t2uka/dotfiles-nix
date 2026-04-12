@@ -14,7 +14,7 @@ return {
       yank  = { hl_color = { bg = "#6e596d" } },
       paste = { hl_color = { bg = "#61754e" } },
       comment = { hl_color = { bg = "#4C566A" } },
-      cursor  = { hl_color = { bg = "#8a5c4a" } },
+      search  = { hl_color = { bg = "#8a5c4a" } },
     },
   },
   keys = {
