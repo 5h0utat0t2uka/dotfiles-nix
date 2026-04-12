@@ -6,13 +6,14 @@ return {
       vim.lsp.config("*", {
         capabilities = require("blink.cmp").get_lsp_capabilities(),
       })
-
       vim.lsp.enable("lua_ls")
       vim.lsp.enable("nixd")
       vim.lsp.enable("eslint")
       vim.lsp.enable("ts_ls")
       vim.lsp.enable("astro")
       vim.lsp.enable("copilot")
+      vim.lsp.enable("html")
+      vim.lsp.enable("cssls")
 
       vim.lsp.inline_completion.enable(true)
       vim.keymap.set("i", "<M-CR>", function()
