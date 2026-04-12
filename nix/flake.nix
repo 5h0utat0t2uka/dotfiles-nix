@@ -71,7 +71,6 @@
                   (import ./overlays/tools/tree-sitter-0267.nix)
                   # (import ./overlays/tools/keifu.nix)
                   (import ./overlays/tools/neovim-012.nix)
-                  # (import ./overlays/tools/tree-sitter-0261.nix)
                   # (import ./overlays/tools/zeno-zsh.nix)
                   # (import ./overlays/tools/claude-code.nix { inherit inputs; })
                 ];
