@@ -70,7 +70,7 @@ in
       gnupg
       just
       jq
-      pkgs.keifu
+      # pkgs.keifu
       libwebp
       lf
       lazygit
