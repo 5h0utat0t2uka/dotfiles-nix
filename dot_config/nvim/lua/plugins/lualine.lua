@@ -276,6 +276,13 @@ return {
         },
       },
       tabline = {
+        lualine_z = {
+          {
+            require("noice").api.status.search.get,
+            cond = require("noice").api.status.search.has,
+            color = { fg = "#D08770" },
+          },
+        }
         -- lualine_a = {
         --   {
         --     "buffers",
