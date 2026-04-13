@@ -239,7 +239,7 @@ return {
           {
             require("noice").api.status.search.get,
             cond = require("noice").api.status.search.has,
-            color = { fg = "#ff9e64" },
+            color = { fg = "#D08770" },
           },
           {
             visual_selection_info,
