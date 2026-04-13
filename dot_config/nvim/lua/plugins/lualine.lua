@@ -280,7 +280,7 @@ return {
           {
             require("noice").api.status.search.get,
             cond = require("noice").api.status.search.has,
-            color = { fg = "#D08770" },
+            color = { fg = "#D08770", bg = "#2E3440", },
           },
         }
         -- lualine_a = {
