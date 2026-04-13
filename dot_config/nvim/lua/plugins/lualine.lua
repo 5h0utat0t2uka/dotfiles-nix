@@ -192,6 +192,9 @@ return {
         },
         -- lualine_c = {},
         lualine_c = {
+          require("noice").api.status.search.get,
+          cond = require("noice").api.status.search.has,
+          color = { fg = "#ff9e64" },
           -- {
           --   "filetype",
           --   icon_only = true,
