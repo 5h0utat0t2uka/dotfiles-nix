@@ -13,7 +13,7 @@ return {
       redo  = { hl_color = { bg = "#7a4f3f" } },
       yank  = { hl_color = { bg = "#6e596d" } },
       paste = { hl_color = { bg = "#61754e" } },
-      comment = { hl_color = { bg = "#4C566A" } },
+      comment = { hl_color = { bg = "#3B4252" } },
       search  = { hl_color = { bg = "#8a5c4a" } },
     },
   },
