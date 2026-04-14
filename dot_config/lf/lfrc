@@ -1,6 +1,7 @@
 set drawbox true
 set roundbox true
 set icons
+set info size:perm:time
 set hidden true
 set preview true
 set previewer ~/.config/lf/pv.sh
