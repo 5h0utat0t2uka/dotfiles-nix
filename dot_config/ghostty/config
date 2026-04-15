@@ -44,12 +44,12 @@
 
 theme = nord
 title = " "
-# fullscreen = non-native
-fullscreen = false
+fullscreen = non-native
+# fullscreen = false
 
 auto-update = off
 
-font-size = 14.6
+font-size = 14.8
 font-family = GeistMono Nerd Font Mono
 font-family = UDEV Gothic 35 NF
 font-family-bold = GeistMono Nerd Font Mono
