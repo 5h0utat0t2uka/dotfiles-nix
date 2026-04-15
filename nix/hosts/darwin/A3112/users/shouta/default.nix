@@ -90,7 +90,9 @@ in
     }
     config.window_frame = {
       font = require('wezterm').font 'GeistMono Nerd Font Mono',
-      font_size = 12,
+      font_size = 13,
+      inactive_titlebar_bg = "none",
+      active_titlebar_bg = "none",
     }
     -- config.enable_tab_bar = false
     config.tab_max_width = 16
