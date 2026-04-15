@@ -1,4 +1,4 @@
-{ pkgs, lib, identity, ... }:
+{ pkgs, lib, identity, inputs, ... }:
 
 let
   zshPluginLinks = pkgs.linkFarm "zsh-plugin-links" [
@@ -43,6 +43,11 @@ in
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+    };
+
+    wezterm = {
+      enable = true;
+      package = inputs.wezterm.packages.${pkgs.system}.default;
     };
   };
 

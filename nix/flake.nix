@@ -19,9 +19,13 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wezterm = {
+      url = "github:wezterm/wezterm?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, nix-homebrew, ... } @inputs:
+  outputs = { self, nixpkgs, home-manager, darwin, nix-homebrew, wezterm, ... } @inputs:
   let
     lib = nixpkgs.lib;
     # ------------------------------------------------------------
@@ -103,9 +107,12 @@
               # home-manager.users.${identity.username} = import ./modules/darwin/home-manager.nix;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit identity; };
-              home-manager.users.${identity.username} =
-                import (darwinHostsDir + "/${hostKey}/users/${identity.username}/default.nix");
+              home-manager.extraSpecialArgs = {
+                inherit identity inputs;
+              };
+              home-manager.users.${identity.username} = import (
+                darwinHostsDir + "/${hostKey}/users/${identity.username}/default.nix"
+              );
             }
 
             # ----------------------------------------------------
