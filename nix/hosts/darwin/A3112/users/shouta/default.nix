@@ -67,10 +67,9 @@ in
       local background = "#2E3440"
       local foreground = "#4C566A"
       local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
-
       if tab.is_active then
-        background = "#5E81AC"
-        foreground = "#2E3440"
+        background = "#2E3440"
+        foreground = "#5E81AC"
       end
       return {
         { Background = { Color = background } },
@@ -88,15 +87,16 @@ in
     config.window_background_gradient = {
       colors = { "#2E3440" },
     }
-    -- config.window_frame = {
-    --   inactive_titlebar_bg = "none",
-    --   active_titlebar_bg = "none",
-    -- }
+    config.window_frame = {
+      font = require('wezterm').font 'GeistMono Nerd Font Mono',
+      font_size = 12,
+    }
     -- config.enable_tab_bar = false
     config.tab_max_width = 16
     config.use_fancy_tab_bar = false
     config.show_tabs_in_tab_bar = true
-    config.show_close_tab_button_in_tabs = false
+    config.tab_bar_at_bottom = false
+    config.show_close_tab_button_in_tabs = true
     config.show_new_tab_button_in_tab_bar = false
     config.hide_tab_bar_if_only_one_tab = true
 
