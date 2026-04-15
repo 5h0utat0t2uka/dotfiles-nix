@@ -85,7 +85,7 @@ in
     config.window_decorations = 'RESIZE | MACOS_FORCE_DISABLE_SHADOW'
     config.window_padding = { left = '1cell', right = '1cell', top = '1cell', bottom = '0cell' }
     config.window_background_gradient = {
-      colors = { "#2E3440" },
+      colors = { wezterm.get_builtin_color_schemes()[scheme].background }
     }
     config.window_frame = {
       font = require('wezterm').font 'GeistMono Nerd Font Mono',
@@ -93,7 +93,7 @@ in
     }
     -- config.enable_tab_bar = false
     config.tab_max_width = 16
-    config.use_fancy_tab_bar = false
+    -- config.use_fancy_tab_bar = false
     config.show_tabs_in_tab_bar = true
     config.tab_bar_at_bottom = false
     config.show_close_tab_button_in_tabs = true
