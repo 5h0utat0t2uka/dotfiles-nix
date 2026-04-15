@@ -49,6 +49,20 @@ in
       enable = true;
       package = inputs.wezterm.packages.${pkgs.system}.default;
     };
+    xdg.configFile."wezterm/wezterm.lua".text = ''
+      local wezterm = require("wezterm")
+      local config = wezterm.config_builder()
+      config.color_scheme = "nord"
+      config.enable_tab_bar = false
+      config.default_cursor_style = "BlinkingBlock"
+      config.use_ime = true
+      config.font_size = 14.8
+      config.font = wezterm.font_with_fallback({
+        "GeistMono Nerd Font Mono",
+        "UDEV Gothic 35 NF",
+      })
+      return config
+    '';
   };
 
   home = {
