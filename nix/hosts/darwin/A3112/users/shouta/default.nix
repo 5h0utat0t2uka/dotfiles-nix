@@ -66,6 +66,8 @@ in
     wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
       local background = "#2E3440"
       local foreground = "#4C566A"
+      local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
+
       if tab.is_active then
         background = "#5E81AC"
         foreground = "#2E3440"
@@ -73,6 +75,7 @@ in
       return {
         { Background = { Color = background } },
         { Foreground = { Color = foreground } },
+        { Text = title },
       }
     end)
 
