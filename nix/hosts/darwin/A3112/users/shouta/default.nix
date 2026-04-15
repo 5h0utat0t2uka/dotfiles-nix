@@ -57,9 +57,10 @@ in
     local mux = wezterm.mux
 
     config.native_macos_fullscreen_mode = false
-    wezterm.on("gui-startup", function(cmd)
-      local _, _, window = mux.spawn_window(cmd or {})
-      window:gui_window():toggle_fullscreen()
+    wezterm.on('gui-startup', function(window)
+      local tab, pane, window = mux.spawn_window(cmd or {})
+      local gui_window = window:gui_window();
+      gui_window:maximize()
     end)
 
     config.color_scheme = "nord"
