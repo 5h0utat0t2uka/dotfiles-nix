@@ -57,6 +57,7 @@ in
     local mux = wezterm.mux
 
     config.native_macos_fullscreen_mode = false
+
     wezterm.on('gui-startup', function(window)
       local tab, pane, window = mux.spawn_window(cmd or {})
       local gui_window = window:gui_window();
@@ -69,12 +70,9 @@ in
         background = "#5E81AC"
         foreground = "#2E3440"
       end
-
-      local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
       return {
         { Background = { Color = background } },
         { Foreground = { Color = foreground } },
-        { Text = title },
       }
     end)
 
@@ -84,10 +82,13 @@ in
     config.default_cursor_style = "BlinkingBlock"
     config.window_decorations = 'RESIZE | MACOS_FORCE_DISABLE_SHADOW'
     config.window_padding = { left = '1cell', right = '1cell', top = '1cell', bottom = '0cell' }
-    config.window_frame = {
-      inactive_titlebar_bg = "none",
-      active_titlebar_bg = "none",
+    config.window_background_gradient = {
+      colors = { "#2E3440" },
     }
+    -- config.window_frame = {
+    --   inactive_titlebar_bg = "none",
+    --   active_titlebar_bg = "none",
+    -- }
     -- config.enable_tab_bar = false
     config.tab_max_width = 16
     config.use_fancy_tab_bar = false
@@ -106,6 +107,7 @@ in
     })
     config.colors = {
       tab_bar = {
+        background = "none",
         inactive_tab_edge = "none",
       },
     }
