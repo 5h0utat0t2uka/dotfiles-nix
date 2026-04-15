@@ -65,17 +65,26 @@ in
 
     config.color_scheme = "nord"
     config.use_ime = true
-    config.leader = { key = "`", mods = "CTRL", timeout_milliseconds = 2000 }
+    -- config.leader = { key = "`", mods = "CTRL", timeout_milliseconds = 2000 }
     config.default_cursor_style = "BlinkingBlock"
     config.window_decorations = 'RESIZE | MACOS_FORCE_DISABLE_SHADOW'
     config.window_padding = { left = '1cell', right = '1cell', top = '1cell', bottom = '0cell' }
-    config.enable_tab_bar = false
+    config.window_frame = {
+      inactive_titlebar_bg = "none",
+      active_titlebar_bg = "none",
+    }
+    -- config.enable_tab_bar = false
+    config.tab_max_width = 16
+    config.show_tabs_in_tab_bar = true
+    config.hide_tab_bar_if_only_one_tab = true
+
     config.cursor_blink_rate = 500
     config.animation_fps = 60
+    config.harfbuzz_features = { 'calt = 0', 'clig = 0', 'liga = 0' }
     config.font_size = 14.8
     config.font = wezterm.font_with_fallback({
       "GeistMono Nerd Font Mono",
-      "UDEV Gothic 35 NF",
+      "UDEV Gothic 35NF",
     })
     return config
   '';
