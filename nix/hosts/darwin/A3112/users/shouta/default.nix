@@ -90,18 +90,17 @@ in
     }
     config.window_frame = {
       font = require('wezterm').font 'GeistMono Nerd Font Mono',
-      font_size = 13,
+      font_size = 14,
       inactive_titlebar_bg = "none",
       active_titlebar_bg = "none",
     }
-    -- config.enable_tab_bar = false
     config.tab_max_width = 16
-    -- config.use_fancy_tab_bar = false
+    config.use_fancy_tab_bar = true
     config.show_tabs_in_tab_bar = true
     config.tab_bar_at_bottom = false
     config.show_close_tab_button_in_tabs = true
     config.show_new_tab_button_in_tab_bar = false
-    config.hide_tab_bar_if_only_one_tab = true
+    config.hide_tab_bar_if_only_one_tab = false
 
     config.cursor_blink_rate = 500
     config.animation_fps = 60
