@@ -54,6 +54,7 @@ in
   xdg.configFile."wezterm/wezterm.lua".text = ''
     local wezterm = require("wezterm")
     local config = wezterm.config_builder()
+    local scheme = 'nord'
     local mux = wezterm.mux
 
     config.native_macos_fullscreen_mode = false
@@ -78,11 +79,11 @@ in
       }
     end)
 
-    config.color_scheme = "nord"
+    config.color_scheme = scheme
     config.use_ime = true
     -- config.leader = { key = "`", mods = "CTRL", timeout_milliseconds = 2000 }
     config.default_cursor_style = "BlinkingBlock"
-    config.window_decorations = 'RESIZE | MACOS_FORCE_DISABLE_SHADOW'
+    config.window_decorations = 'RESIZE'
     config.window_padding = { left = '1cell', right = '1cell', top = '1cell', bottom = '0cell' }
     config.window_background_gradient = {
       colors = { wezterm.get_builtin_color_schemes()[scheme].background }
