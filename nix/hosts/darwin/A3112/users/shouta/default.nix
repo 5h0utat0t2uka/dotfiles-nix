@@ -55,8 +55,11 @@ in
     local wezterm = require("wezterm")
     local config = wezterm.config_builder()
     config.color_scheme = "nord"
+    config.window_decorations = "RESIZE"
     config.enable_tab_bar = false
     config.default_cursor_style = "BlinkingBlock"
+    config.cursor_blink_rate = 300
+    config.animation_fps = 60
     config.use_ime = true
     config.font_size = 14.8
     config.font = wezterm.font_with_fallback({
