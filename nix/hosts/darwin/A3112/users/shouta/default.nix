@@ -66,7 +66,7 @@ in
     config.color_scheme = "nord"
     config.use_ime = true
     config.default_cursor_style = "BlinkingBlock"
-    config.window_decorations = "RESIZE"
+    config.window_decorations = 'RESIZE | MACOS_FORCE_DISABLE_SHADOW'
     config.window_padding = { left = '1cell', right = '1cell', top = '1cell', bottom = '1cell' }
     config.enable_tab_bar = false
     config.cursor_blink_rate = 500
