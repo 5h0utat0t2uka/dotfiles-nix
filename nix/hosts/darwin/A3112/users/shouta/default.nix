@@ -54,15 +54,18 @@ in
   xdg.configFile."wezterm/wezterm.lua".text = ''
     local wezterm = require("wezterm")
     local config = wezterm.config_builder()
+
+    config.native_macos_fullscreen_mode = false
     wezterm.on("gui-startup", function(cmd)
       local _, _, window = mux.spawn_window(cmd or {})
-      window:gui_window():maximize()
+      window:gui_window():toggle_fullscreen()
     end)
+
     config.color_scheme = "nord"
     config.use_ime = true
     config.default_cursor_style = "BlinkingBlock"
     config.window_decorations = "RESIZE"
-    config.window_padding = { left = 4, right = 4, top = 4, bottom = 4 }
+    config.window_padding = { left = 0.5cell, right = 0.5cell, top = 0.5cell, bottom = 0.5cell }
     config.enable_tab_bar = false
     config.cursor_blink_rate = 500
     config.animation_fps = 60
