@@ -62,6 +62,21 @@ in
       local gui_window = window:gui_window();
       gui_window:maximize()
     end)
+    wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+      local background = "#2E3440"
+      local foreground = "#4C566A"
+      if tab.is_active then
+        background = "#5E81AC"
+        foreground = "#2E3440"
+      end
+
+      local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
+      return {
+        { Background = { Color = background } },
+        { Foreground = { Color = foreground } },
+        { Text = title },
+      }
+    end)
 
     config.color_scheme = "nord"
     config.use_ime = true
@@ -75,7 +90,10 @@ in
     }
     -- config.enable_tab_bar = false
     config.tab_max_width = 16
+    config.use_fancy_tab_bar = false
     config.show_tabs_in_tab_bar = true
+    config.show_close_tab_button_in_tabs = false
+    config.show_new_tab_button_in_tab_bar = false
     config.hide_tab_bar_if_only_one_tab = true
 
     config.cursor_blink_rate = 500
@@ -86,6 +104,11 @@ in
       "GeistMono Nerd Font Mono",
       "UDEV Gothic 35NF",
     })
+    config.colors = {
+      tab_bar = {
+        inactive_tab_edge = "none",
+      },
+    }
     return config
   '';
 
