@@ -54,13 +54,18 @@ in
   xdg.configFile."wezterm/wezterm.lua".text = ''
     local wezterm = require("wezterm")
     local config = wezterm.config_builder()
+    wezterm.on("gui-startup", function(cmd)
+      local _, _, window = mux.spawn_window(cmd or {})
+      window:gui_window():maximize()
+    end)
     config.color_scheme = "nord"
-    config.window_decorations = "RESIZE"
-    config.enable_tab_bar = false
-    config.default_cursor_style = "BlinkingBlock"
-    config.cursor_blink_rate = 300
-    config.animation_fps = 60
     config.use_ime = true
+    config.default_cursor_style = "BlinkingBlock"
+    config.window_decorations = "RESIZE"
+    config.window_padding = { left = 4, right = 4, top = 4, bottom = 4 }
+    config.enable_tab_bar = false
+    config.cursor_blink_rate = 500
+    config.animation_fps = 60
     config.font_size = 14.8
     config.font = wezterm.font_with_fallback({
       "GeistMono Nerd Font Mono",
