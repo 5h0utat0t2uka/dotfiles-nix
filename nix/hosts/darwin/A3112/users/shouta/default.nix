@@ -58,7 +58,6 @@ in
     local mux = wezterm.mux
 
     config.native_macos_fullscreen_mode = false
-
     wezterm.on('gui-startup', function(window)
       local tab, pane, window = mux.spawn_window(cmd or {})
       local gui_window = window:gui_window();
@@ -84,7 +83,7 @@ in
     -- config.leader = { key = "`", mods = "CTRL", timeout_milliseconds = 2000 }
     config.default_cursor_style = "BlinkingBlock"
     config.window_decorations = 'RESIZE'
-    config.window_padding = { left = '1cell', right = '1cell', top = '1cell', bottom = '0cell' }
+    config.window_padding = { left = '1cell', right = '1cell', top = '1cell', bottom = '0.5cell' }
     config.window_background_gradient = {
       colors = { wezterm.get_builtin_color_schemes()[scheme].background }
     }
@@ -101,7 +100,6 @@ in
     config.show_close_tab_button_in_tabs = true
     config.show_new_tab_button_in_tab_bar = false
     config.hide_tab_bar_if_only_one_tab = false
-
     config.cursor_blink_rate = 500
     config.animation_fps = 60
     config.harfbuzz_features = { 'calt = 0', 'clig = 0', 'liga = 0' }
