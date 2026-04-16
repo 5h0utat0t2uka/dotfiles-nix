@@ -55,8 +55,8 @@ in
     local scheme = 'nord'
     local mux = wezterm.mux
     local act = wezterm.action
-    local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_lower_right_triangle
-    local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_left_half_circle_thick
+    local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_left_half_circle_thick
+    local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_right_half_circle_thick
 
     local function basename(path)
       return path:match("([^/]+)/*$") or path
