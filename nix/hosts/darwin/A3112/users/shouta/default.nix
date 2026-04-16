@@ -39,12 +39,10 @@ in
   programs = {
     zsh.enable = false;
     git.enable = false;
-
     direnv = {
       enable = true;
       nix-direnv.enable = true;
     };
-
     wezterm = {
       enable = true;
       package = inputs.wezterm.packages.${pkgs.system}.default;
@@ -117,6 +115,12 @@ in
       return nil
     end
 
+    wezterm.on('gui-startup', function(window)
+      local tab, pane, window = mux.spawn_window(cmd or {})
+      local gui_window = window:gui_window();
+      gui_window:maximize()
+    end)
+
     wezterm.on("update-right-status", function(window, pane)
       local cwd_uri = pane:get_current_working_dir()
       local cwd = file_path_from_uri(cwd_uri)
@@ -138,12 +142,6 @@ in
       }))
     end)
 
-    wezterm.on('gui-startup', function(window)
-      local tab, pane, window = mux.spawn_window(cmd or {})
-      local gui_window = window:gui_window();
-      gui_window:maximize()
-    end)
-
     wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
       local background = "#2E3440"
       local foreground = "#4C566A"
@@ -160,6 +158,8 @@ in
     end)
 
     config.native_macos_fullscreen_mode = false
+    -- config.initial_cols = 205
+    -- config.initial_rows = 100
     config.color_scheme = scheme
     config.use_ime = true
     config.leader = { key = "'", mods = "CTRL", timeout_milliseconds = 2000 }
@@ -209,6 +209,8 @@ in
       -- shell word movement
       { key = "LeftArrow", mods = "OPT", action = act.SendKey({ key = "b", mods = "ALT" }) },
       { key = "RightArrow", mods = "OPT", action = act.SendKey({ key = "f", mods = "ALT" }) },
+      -- command palette
+      { key = "p", mods = "SUPER", action = act.ActivateCommandPalette },
     }
     return config
   '';
