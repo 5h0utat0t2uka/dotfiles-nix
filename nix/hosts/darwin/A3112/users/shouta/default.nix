@@ -57,7 +57,86 @@ in
     local scheme = 'nord'
     local mux = wezterm.mux
 
-    config.native_macos_fullscreen_mode = false
+    local function basename(path)
+      return path:match("([^/]+)/*$") or path
+    end
+    local function file_path_from_uri(uri)
+      if not uri then
+        return nil
+      end
+      if type(uri) == "userdata" and uri.file_path then
+        return uri.file_path
+      end
+      local s = tostring(uri)
+      local path = s:gsub("^file://[^/]*", "")
+      path = path:gsub("%%20", " ")
+      return path
+    end
+    local function git_branch(cwd)
+      if not cwd or cwd == "" then
+        return nil
+      end
+      local ok_repo, stdout_repo = wezterm.run_child_process({
+        "git",
+        "-C",
+        cwd,
+        "rev-parse",
+        "--is-inside-work-tree",
+      })
+      if not ok_repo or stdout_repo:gsub("%s+", "") ~= "true" then
+        return nil
+      end
+      local ok_branch, stdout_branch = wezterm.run_child_process({
+        "git",
+        "-C",
+        cwd,
+        "branch",
+        "--show-current",
+      })
+      if ok_branch then
+        local branch = stdout_branch:gsub("%s+$", "")
+        if branch ~= "" then
+          return branch
+        end
+      end
+      local ok_head, stdout_head = wezterm.run_child_process({
+        "git",
+        "-C",
+        cwd,
+        "rev-parse",
+        "--short",
+        "HEAD",
+      })
+      if ok_head then
+        local head = stdout_head:gsub("%s+$", "")
+        if head ~= "" then
+          return head
+        end
+      end
+      return nil
+    end
+
+    wezterm.on("update-right-status", function(window, pane)
+      local cwd_uri = pane:get_current_working_dir()
+      local cwd = file_path_from_uri(cwd_uri)
+      if not cwd then
+        window:set_right_status("")
+        return
+      end
+      local branch = git_branch(cwd)
+      if not branch then
+        window:set_right_status("")
+        return
+      end
+      local dir = basename(cwd)
+      window:set_right_status(wezterm.format({
+        { Foreground = { Color = "#5E81AC" } },
+        { Text = " " .. dir .. "  " },
+        { Foreground = { Color = "#5E81AC" } },
+        { Text = " " .. branch .. " " },
+      }))
+    end)
+
     wezterm.on('gui-startup', function(window)
       local tab, pane, window = mux.spawn_window(cmd or {})
       local gui_window = window:gui_window();
@@ -78,6 +157,7 @@ in
       }
     end)
 
+    config.native_macos_fullscreen_mode = false
     config.color_scheme = scheme
     config.use_ime = true
     -- config.leader = { key = "`", mods = "CTRL", timeout_milliseconds = 2000 }
