@@ -131,7 +131,7 @@ in
       local dir = basename(cwd)
       window:set_right_status(wezterm.format({
         { Foreground = { Color = "#5E81AC" } },
-        { Text = " " .. dir .. "  " },
+        { Text = " " .. dir .. "  " },
         { Foreground = { Color = "#5E81AC" } },
         { Text = " " .. branch .. " " },
       }))
@@ -160,7 +160,7 @@ in
     config.native_macos_fullscreen_mode = false
     config.color_scheme = scheme
     config.use_ime = true
-    -- config.leader = { key = "`", mods = "CTRL", timeout_milliseconds = 2000 }
+    config.leader = { key = "'", mods = "CTRL", timeout_milliseconds = 2000 }
     config.default_cursor_style = "BlinkingBlock"
     config.window_decorations = 'RESIZE'
     config.window_padding = { left = '1cell', right = '1cell', top = '1cell', bottom = '0cell' }
@@ -169,7 +169,7 @@ in
     }
     config.window_frame = {
       font = require('wezterm').font 'GeistMono Nerd Font Mono',
-      font_size = 14,
+      font_size = 15,
       inactive_titlebar_bg = "none",
       active_titlebar_bg = "none",
     }
