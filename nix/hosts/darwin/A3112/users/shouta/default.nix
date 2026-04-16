@@ -55,8 +55,6 @@ in
     local scheme = 'nord'
     local mux = wezterm.mux
     local act = wezterm.action
-    local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_left_half_circle_thick
-    local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_right_half_circle_thick
 
     local function basename(path)
       return path:match("([^/]+)/*$") or path
@@ -144,6 +142,8 @@ in
       }))
     end)
 
+    local TAB_L_SEPARATOR = wezterm.nerdfonts.ple_left_half_circle_thick
+    local TAB_R_SEPARATOR = wezterm.nerdfonts.ple_right_half_circle_thick
     wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
       local edge_background = "none"
       local background = "#4C566A"
@@ -154,17 +154,17 @@ in
       end
 
       local edge_foreground = background
-      local title = "  " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "  "
+      local title = " " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. " "
       return {
         { Background = { Color = edge_background } },
         { Foreground = { Color = edge_foreground } },
-        { Text = SOLID_LEFT_ARROW },
+        { Text = TAB_L_SEPARATOR },
         { Background = { Color = background } },
         { Foreground = { Color = foreground } },
         { Text = title },
         { Background = { Color = edge_background } },
         { Foreground = { Color = edge_foreground } },
-        { Text = SOLID_RIGHT_ARROW },
+        { Text = TAB_R_SEPARATOR },
       }
     end)
 
