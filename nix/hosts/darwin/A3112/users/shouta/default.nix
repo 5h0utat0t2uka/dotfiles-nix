@@ -163,12 +163,12 @@ in
     config.leader = { key = "'", mods = "CTRL", timeout_milliseconds = 2000 }
     config.default_cursor_style = "BlinkingBlock"
     config.window_decorations = 'RESIZE'
-    config.window_padding = { left = '1.5cell', right = '1.5cell', top = '1cell', bottom = '0cell' }
+    config.window_padding = { left = '1.5cell', right = '1.5cell', top = '1cell', bottom = '4px' }
     config.window_background_gradient = {
       colors = { wezterm.get_builtin_color_schemes()[scheme].background }
     }
     config.window_frame = {
-      font = require('wezterm').font 'UDEV Gothic 35NF',
+      font = require('wezterm').font 'GeistMono Nerd Font Mono',
       font_size = 15,
       inactive_titlebar_bg = "none",
       active_titlebar_bg = "none",
