@@ -177,7 +177,7 @@ in
     config.use_fancy_tab_bar = true
     config.show_tabs_in_tab_bar = true
     config.tab_bar_at_bottom = false
-    config.show_close_tab_button_in_tabs = true
+    config.show_close_tab_button_in_tabs = false
     config.show_new_tab_button_in_tab_bar = false
     config.hide_tab_bar_if_only_one_tab = false
     config.cursor_blink_rate = 500
