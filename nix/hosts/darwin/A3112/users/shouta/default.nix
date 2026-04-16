@@ -163,7 +163,7 @@ in
     config.leader = { key = "'", mods = "CTRL", timeout_milliseconds = 2000 }
     config.default_cursor_style = "BlinkingBlock"
     config.window_decorations = 'RESIZE'
-    config.window_padding = { left = '1.5cell', right = '1.5cell', top = '1cell', bottom = '4px' }
+    config.window_padding = { left = '1.5cell', right = '1.5cell', top = '1cell', bottom = '0cell' }
     config.window_background_gradient = {
       colors = { wezterm.get_builtin_color_schemes()[scheme].background }
     }
@@ -181,9 +181,9 @@ in
     config.show_new_tab_button_in_tab_bar = false
     config.hide_tab_bar_if_only_one_tab = false
     config.cursor_blink_rate = 500
-    config.animation_fps = 60
+    config.animation_fps = 120
     config.harfbuzz_features = { 'calt = 0', 'clig = 0', 'liga = 0' }
-    config.font_size = 14.8
+    config.font_size = 14.6
     config.font = wezterm.font_with_fallback({
       "GeistMono Nerd Font Mono",
       "UDEV Gothic 35NF",
