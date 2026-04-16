@@ -154,7 +154,7 @@ in
       end
 
       local edge_foreground = background
-      local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
+      local title = "  " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "  "
       return {
         { Background = { Color = edge_background } },
         { Foreground = { Color = edge_foreground } },
@@ -186,7 +186,7 @@ in
       inactive_titlebar_bg = "none",
       active_titlebar_bg = "none",
     }
-    config.command_palette_bg_color = "rgba(46, 52, 64, 0.9)"
+    config.command_palette_bg_color = "rgba(59, 66, 82, 0.9)"
     config.command_palette_fg_color = "rgba(216, 222, 233, 1.0)"
     config.tab_max_width = 16
     config.use_fancy_tab_bar = true
