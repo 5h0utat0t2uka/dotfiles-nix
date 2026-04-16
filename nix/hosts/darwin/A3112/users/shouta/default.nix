@@ -175,6 +175,8 @@ in
       inactive_titlebar_bg = "none",
       active_titlebar_bg = "none",
     }
+    config.command_palette_bg_color = rgba(67, 76, 94, 0.8)
+    config.command_palette_fg_color = rgba(216, 222, 233, 1.0)
     config.tab_max_width = 16
     config.use_fancy_tab_bar = true
     config.show_tabs_in_tab_bar = true
