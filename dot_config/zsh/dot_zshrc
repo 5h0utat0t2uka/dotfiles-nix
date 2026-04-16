@@ -39,6 +39,12 @@ setopt HIST_IGNORE_SPACE
 
 autoload -Uz add-zsh-hook
 
+__wezterm_osc7() {
+  printf '\e]7;file://%s%s\e\\' "$HOST" "$PWD"
+}
+add-zsh-hook chpwd __wezterm_osc7
+add-zsh-hook precmd __wezterm_osc7
+
 if [[ -n "$TMUX" ]]; then
   export FZF_TMUX=1
   export FZF_TMUX_OPTS="-p 80%,70% --margin=0,1"
