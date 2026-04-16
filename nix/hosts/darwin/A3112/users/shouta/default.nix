@@ -163,7 +163,7 @@ in
     config.leader = { key = "'", mods = "CTRL", timeout_milliseconds = 2000 }
     config.default_cursor_style = "BlinkingBlock"
     config.window_decorations = 'RESIZE'
-    config.window_padding = { left = '1cell', right = '1cell', top = '1cell', bottom = '0cell' }
+    config.window_padding = { left = '1cell', right = '1cell', top = '1cell', bottom = '0.25cell' }
     config.window_background_gradient = {
       colors = { wezterm.get_builtin_color_schemes()[scheme].background }
     }

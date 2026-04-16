@@ -39,11 +39,14 @@ setopt HIST_IGNORE_SPACE
 
 autoload -Uz add-zsh-hook
 
-__wezterm_osc7() {
-  printf '\e]7;file://%s%s\e\\' "$HOST" "$PWD"
+__wezterm_set_cwd() {
+  command -v wezterm >/dev/null 2>&1 || return
+  [[ -n "$WEZTERM_PANE" ]] || return
+  wezterm set-working-directory "$PWD" >/dev/null 2>&1
 }
-add-zsh-hook chpwd __wezterm_osc7
-add-zsh-hook precmd __wezterm_osc7
+
+add-zsh-hook chpwd __wezterm_set_cwd
+add-zsh-hook precmd __wezterm_set_cwd
 
 if [[ -n "$TMUX" ]]; then
   export FZF_TMUX=1
