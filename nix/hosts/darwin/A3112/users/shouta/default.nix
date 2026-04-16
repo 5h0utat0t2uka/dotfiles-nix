@@ -221,6 +221,7 @@ in
         mods = "LEADER", key = "j",
         action = act.ActivatePaneDirection("Down"),
       },
+    }
     return config
   '';
 
