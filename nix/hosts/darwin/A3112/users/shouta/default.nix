@@ -181,7 +181,7 @@ in
     config.show_new_tab_button_in_tab_bar = false
     config.hide_tab_bar_if_only_one_tab = false
     config.cursor_blink_rate = 500
-    config.animation_fps = 120
+    config.animation_fps = 60
     config.harfbuzz_features = { 'calt = 0', 'clig = 0', 'liga = 0' }
     config.font_size = 14.8
     config.font = wezterm.font_with_fallback({
