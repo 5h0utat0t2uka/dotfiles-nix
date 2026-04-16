@@ -172,6 +172,7 @@ in
     -- config.initial_cols = 205
     -- config.initial_rows = 100
     config.color_scheme = scheme
+    config.front_end = "WebGpu"
     config.use_ime = true
     config.leader = { key = "'", mods = "CTRL", timeout_milliseconds = 2000 }
     config.default_cursor_style = "BlinkingBlock"
