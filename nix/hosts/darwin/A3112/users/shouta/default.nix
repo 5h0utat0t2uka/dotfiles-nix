@@ -196,7 +196,7 @@ in
     config.show_close_tab_button_in_tabs = true
     config.show_new_tab_button_in_tab_bar = false
     config.hide_tab_bar_if_only_one_tab = false
-    config.cursor_blink_rate = 500
+    -- config.cursor_blink_rate = 500
     config.cursor_blink_ease_in = 'Constant'
     config.cursor_blink_ease_out = 'Constant'
     config.animation_fps = 120
