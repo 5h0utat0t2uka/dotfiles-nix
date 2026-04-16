@@ -56,6 +56,7 @@ in
     local config = wezterm.config_builder()
     local scheme = 'nord'
     local mux = wezterm.mux
+    local act = wezterm.action
 
     local function basename(path)
       return path:match("([^/]+)/*$") or path
@@ -133,7 +134,7 @@ in
         { Foreground = { Color = "#5E81AC" } },
         { Text = "" .. dir .. " " },
         { Foreground = { Color = "#5E81AC" } },
-        { Text = " " .. branch .. "  " },
+        { Text = " " .. branch .. "  " },
       }))
     end)
 
@@ -142,6 +143,7 @@ in
       local gui_window = window:gui_window();
       gui_window:maximize()
     end)
+
     wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
       local background = "#2E3440"
       local foreground = "#4C566A"
@@ -177,7 +179,7 @@ in
     config.use_fancy_tab_bar = true
     config.show_tabs_in_tab_bar = true
     config.tab_bar_at_bottom = false
-    config.show_close_tab_button_in_tabs = false
+    config.show_close_tab_button_in_tabs = true
     config.show_new_tab_button_in_tab_bar = false
     config.hide_tab_bar_if_only_one_tab = false
     config.cursor_blink_rate = 500
@@ -194,6 +196,31 @@ in
         inactive_tab_edge = "none",
       },
     }
+    config.keys = {
+      {
+        mods = "LEADER|SHIFT", key = '"',
+        action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+      },
+      {
+        mods = "LEADER|SHIFT", key = "%",
+        action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+      },
+      {
+        mods = "LEADER", key = "h",
+        action = act.ActivatePaneDirection("Left"),
+      },
+      {
+        mods = "LEADER", key = "l",
+        action = act.ActivatePaneDirection("Right"),
+      },
+      {
+        mods = "LEADER", key = "k",
+        action = act.ActivatePaneDirection("Up"),
+      },
+      {
+        mods = "LEADER", key = "j",
+        action = act.ActivatePaneDirection("Down"),
+      },
     return config
   '';
 
