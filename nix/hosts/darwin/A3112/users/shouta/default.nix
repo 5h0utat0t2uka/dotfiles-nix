@@ -55,6 +55,8 @@ in
     local scheme = 'nord'
     local mux = wezterm.mux
     local act = wezterm.action
+    local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_lower_right_triangle
+    local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_left_half_circle_thick
 
     local function basename(path)
       return path:match("([^/]+)/*$") or path
@@ -143,17 +145,25 @@ in
     end)
 
     wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-      local background = "#2E3440"
-      local foreground = "#4C566A"
-      local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
+      local edge_background = "none"
+      local background = "#4C566A"
+      local foreground = "#2E3440"
       if tab.is_active then
-        background = "#2E3440"
-        foreground = "#5E81AC"
+        background = "#5E81AC"
+        foreground = "#2E3440"
       end
+
+      local edge_foreground = background
+      local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
       return {
+        { Background = { Color = edge_background } },
+        { Foreground = { Color = edge_foreground } },
+        { Text = SOLID_LEFT_ARROW },
         { Background = { Color = background } },
         { Foreground = { Color = foreground } },
         { Text = title },
+        { Foreground = { Color = edge_foreground } },
+        { Text = SOLID_RIGHT_ARROW },
       }
     end)
 
@@ -175,7 +185,7 @@ in
       inactive_titlebar_bg = "none",
       active_titlebar_bg = "none",
     }
-    config.command_palette_bg_color = "rgba(67, 76, 94, 0.8)"
+    config.command_palette_bg_color = "rgba(46, 52, 64, 0.9)"
     config.command_palette_fg_color = "rgba(216, 222, 233, 1.0)"
     config.tab_max_width = 16
     config.use_fancy_tab_bar = true
@@ -185,6 +195,8 @@ in
     config.show_new_tab_button_in_tab_bar = false
     config.hide_tab_bar_if_only_one_tab = false
     config.cursor_blink_rate = 500
+    config.cursor_blink_ease_in = 'Constant'
+    config.cursor_blink_ease_out = 'Constant'
     config.animation_fps = 120
     config.harfbuzz_features = { 'calt = 0', 'clig = 0', 'liga = 0' }
     config.font_size = 14.6
