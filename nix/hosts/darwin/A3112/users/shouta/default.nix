@@ -197,30 +197,18 @@ in
       },
     }
     config.keys = {
-      {
-        mods = "LEADER|SHIFT", key = '"',
-        action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
-      },
-      {
-        mods = "LEADER|SHIFT", key = "%",
-        action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-      },
-      {
-        mods = "LEADER", key = "h",
-        action = act.ActivatePaneDirection("Left"),
-      },
-      {
-        mods = "LEADER", key = "l",
-        action = act.ActivatePaneDirection("Right"),
-      },
-      {
-        mods = "LEADER", key = "k",
-        action = act.ActivatePaneDirection("Up"),
-      },
-      {
-        mods = "LEADER", key = "j",
-        action = act.ActivatePaneDirection("Down"),
-      },
+      -- pane splitting
+      { key = '"', mods = "LEADER|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+      { key = "%", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+      -- pane navigation
+      { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+      { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+      { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+      { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+      { key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
+      -- shell word movement
+      { key = "LeftArrow", mods = "OPT", action = act.SendKey({ key = "b", mods = "ALT" }) },
+      { key = "RightArrow", mods = "OPT", action = act.SendKey({ key = "f", mods = "ALT" }) },
     }
     return config
   '';
