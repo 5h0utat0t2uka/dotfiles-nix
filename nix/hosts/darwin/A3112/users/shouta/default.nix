@@ -116,7 +116,7 @@ in
       return nil
     end
 
-    wezterm.on("update-status", function(window, pane)
+    wezterm.on("update-right-status", function(window, pane)
       local cwd_uri = pane:get_current_working_dir()
       local cwd = file_path_from_uri(cwd_uri)
       if not cwd then
