@@ -137,7 +137,7 @@ in
       local dir = string.upper(basename(cwd))
       window:set_right_status(wezterm.format({
         { Foreground = { Color = "#5E81AC" } },
-        { Text = "" .. dir .. " " },
+        { Text = "" .. dir .. "" },
         { Foreground = { Color = "#5E81AC" } },
         { Text = " [" .. branch .. "]  " },
       }))
