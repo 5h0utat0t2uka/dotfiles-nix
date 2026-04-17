@@ -148,30 +148,49 @@ in
     wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
       local tab_index = tab.tab_index + 1
       local indicator = ""
+      local indicator_foreground = "#2E3440"
       local edge_background = "none"
       local background = "#4C566A"
       local foreground = "#2E3440"
       if tab.is_active then
         indicator = ""
+        local indicator_foreground = "#D08770"
         background = "#5E81AC"
         foreground = "#2E3440"
       end
 
       local edge_foreground = background
-      local raw_title = wezterm.truncate_right(tab.active_pane.title, max_width - 1)
-      -- local title = " " .. string.upper(raw_title) .. " "
-      local title = "" .. indicator .. " " .. tab_index .. " " .. string.upper(raw_title) .. " "
+      local raw_title = wezterm.truncate_right(tab.active_pane.title, max_width - 4)
+      -- local raw_title = wezterm.truncate_right(tab.active_pane.title, max_width - 1)
+      -- local title = "" .. indicator .. " " .. tab_index .. " " .. string.upper(raw_title) .. " "
       return {
         { Background = { Color = edge_background } },
         { Foreground = { Color = edge_foreground } },
         { Text = TAB_L_SEPARATOR },
+
+        { Background = { Color = background } },
+        { Foreground = { Color = indicator_foreground } },
+        { Text = indicator },
+
         { Background = { Color = background } },
         { Foreground = { Color = foreground } },
-        { Text = title },
+        { Text = " " .. tab_index .. " " .. string.upper(raw_title) .. " " },
+
         { Background = { Color = edge_background } },
         { Foreground = { Color = edge_foreground } },
         { Text = TAB_R_SEPARATOR },
       }
+      -- return {
+      --   { Background = { Color = edge_background } },
+      --   { Foreground = { Color = edge_foreground } },
+      --   { Text = TAB_L_SEPARATOR },
+      --   { Background = { Color = background } },
+      --   { Foreground = { Color = foreground } },
+      --   { Text = title },
+      --   { Background = { Color = edge_background } },
+      --   { Foreground = { Color = edge_foreground } },
+      --   { Text = TAB_R_SEPARATOR },
+      -- }
     end)
 
     config.native_macos_fullscreen_mode = false
