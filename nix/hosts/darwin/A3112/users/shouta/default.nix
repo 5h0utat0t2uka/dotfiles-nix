@@ -35,8 +35,8 @@ in
   };
 
   imports = [
-    ../../../../modules/home-manager/ghostty.nix
-    ../../../../modules/home-manager/wezterm.nix
+    ../../../../../modules/home-manager/ghostty.nix
+    ../../../../../modules/home-manager/wezterm.nix
   ];
 
   # ドットファイルの実体は chezmoi で管理する前提なので
