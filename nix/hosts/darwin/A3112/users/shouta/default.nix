@@ -154,15 +154,13 @@ in
       local foreground = "#2E3440"
       if tab.is_active then
         indicator = ""
-        local indicator_foreground = "#D08770"
+        indicator_foreground = "#D08770"
         background = "#5E81AC"
         foreground = "#2E3440"
       end
 
       local edge_foreground = background
       local raw_title = wezterm.truncate_right(tab.active_pane.title, max_width - 4)
-      -- local raw_title = wezterm.truncate_right(tab.active_pane.title, max_width - 1)
-      -- local title = "" .. indicator .. " " .. tab_index .. " " .. string.upper(raw_title) .. " "
       return {
         { Background = { Color = edge_background } },
         { Foreground = { Color = edge_foreground } },
@@ -180,17 +178,6 @@ in
         { Foreground = { Color = edge_foreground } },
         { Text = TAB_R_SEPARATOR },
       }
-      -- return {
-      --   { Background = { Color = edge_background } },
-      --   { Foreground = { Color = edge_foreground } },
-      --   { Text = TAB_L_SEPARATOR },
-      --   { Background = { Color = background } },
-      --   { Foreground = { Color = foreground } },
-      --   { Text = title },
-      --   { Background = { Color = edge_background } },
-      --   { Foreground = { Color = edge_foreground } },
-      --   { Text = TAB_R_SEPARATOR },
-      -- }
     end)
 
     config.native_macos_fullscreen_mode = false
