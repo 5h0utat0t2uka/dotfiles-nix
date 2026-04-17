@@ -43,12 +43,20 @@ in
       enable = true;
       nix-direnv.enable = true;
     };
+    # ghostty = {
+    #   enable = true;
+    #   package = null;
+    # };
     wezterm = {
       enable = true;
       package = inputs.wezterm.packages.${pkgs.system}.default;
     };
   };
-
+  # xdg.configFile."ghostty/config.ghostty".text = ''
+  #   theme = nord
+  #   font-family = GeistMono Nerd Font Mono
+  #   font-size = 14.6
+  # '';
   xdg.configFile."wezterm/wezterm.lua".text = ''
     local wezterm = require("wezterm")
     local config = wezterm.config_builder()
