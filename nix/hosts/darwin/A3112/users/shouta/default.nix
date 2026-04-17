@@ -209,15 +209,15 @@ in
       "UDEV Gothic 35NF",
     })
     config.colors = {
-      split = "#3B4252",
+      split = "#434C5E",
       tab_bar = {
         background = "none",
         inactive_tab_edge = "none",
       },
     }
     config.inactive_pane_hsb = {
-      saturation = 1.0,
-      brightness = 0.7,
+      saturation = 0.3,
+      brightness = 1.0,
     }
     config.keys = {
       -- pane splitting
