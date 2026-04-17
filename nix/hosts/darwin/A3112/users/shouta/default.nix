@@ -1,4 +1,4 @@
-{ pkgs, lib, identity, inputs, ... }:
+{ pkgs, lib, identity, ... }:
 
 let
   zshPluginLinks = pkgs.linkFarm "zsh-plugin-links" [
@@ -39,7 +39,7 @@ in
     ../../../../../modules/home-manager/wezterm.nix
   ];
 
-  # ドットファイルの実体は chezmoi で管理する前提なので
+  # 一部を除いてドットファイルの実体は chezmoi で管理する前提なので
   # home-manager では生成しない
   programs = {
     zsh.enable = false;
@@ -48,10 +48,6 @@ in
       enable = true;
       nix-direnv.enable = true;
     };
-    # wezterm = {
-    #   enable = true;
-    #   package = inputs.wezterm.packages.${pkgs.system}.default;
-    # };
   };
 
   home = {
