@@ -153,7 +153,7 @@ in
       local background = "#4C566A"
       local foreground = "#2E3440"
       if tab.is_active then
-        indicator_foreground = "#BF616A"
+        indicator_foreground = "#A3BE8C"
         background = "#5E81AC"
         foreground = "#2E3440"
       end
