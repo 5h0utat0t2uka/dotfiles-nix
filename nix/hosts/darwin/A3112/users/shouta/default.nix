@@ -56,9 +56,59 @@ in
     local mux = wezterm.mux
     local act = wezterm.action
 
+    local function trim(s)
+      return (s or ""):gsub("^%s+", ""):gsub("%s+$", "")
+    end
+
+    local function parse_uri(uri)
+      if not uri then
+        return nil
+      end
+      local s = tostring(uri)
+      local host = s:match("^file://([^/]+)")
+      local path = s:gsub("^file://[^/]*", "")
+      path = path:gsub("%%20", " ")
+      return {
+        host = host,
+        path = path,
+      }
+    end
+
+    local function git_root_name(cwd)
+      if not cwd or cwd == "" then
+        return nil
+      end
+      local ok_repo, stdout_repo = wezterm.run_child_process({
+        "git",
+        "-C",
+        cwd,
+        "rev-parse",
+        "--is-inside-work-tree",
+      })
+      if not ok_repo or trim(stdout_repo) ~= "true" then
+        return nil
+      end
+      local ok_root, stdout_root = wezterm.run_child_process({
+        "git",
+        "-C",
+        cwd,
+        "rev-parse",
+        "--show-toplevel",
+      })
+      if not ok_root then
+        return nil
+      end
+      local root = trim(stdout_root)
+      if root == "" then
+        return nil
+      end
+      return basename(root)
+    end
+
     local function basename(path)
       return path:match("([^/]+)/*$") or path
     end
+
     local function file_path_from_uri(uri)
       if not uri then
         return nil
@@ -71,6 +121,7 @@ in
       path = path:gsub("%%20", " ")
       return path
     end
+
     local function git_branch(cwd)
       if not cwd or cwd == "" then
         return nil
@@ -123,27 +174,50 @@ in
 
     wezterm.on("update-right-status", function(window, pane)
       local cwd_uri = pane:get_current_working_dir()
-      local cwd = file_path_from_uri(cwd_uri)
+      local parsed = parse_uri(cwd_uri)
+      local cwd = parsed and parsed.path or nil
+
       if not cwd then
         window:set_right_status("")
         return
       end
+
       local branch = git_branch(cwd)
       if not branch then
         window:set_right_status("")
         return
       end
-      local dir = basename(cwd)
+
       window:set_right_status(wezterm.format({
-        { Foreground = { Color = "#5E81AC" } },
-        { Text = "" .. dir .. " " },
         { Foreground = { Color = "#5E81AC" } },
         { Text = " " .. branch .. "  " },
       }))
     end)
 
+    -- wezterm.on("update-right-status", function(window, pane)
+    --   local cwd_uri = pane:get_current_working_dir()
+    --   local cwd = file_path_from_uri(cwd_uri)
+    --   if not cwd then
+    --     window:set_right_status("")
+    --     return
+    --   end
+    --   local branch = git_branch(cwd)
+    --   if not branch then
+    --     window:set_right_status("")
+    --     return
+    --   end
+    --   local dir = basename(cwd)
+    --   window:set_right_status(wezterm.format({
+    --     { Foreground = { Color = "#5E81AC" } },
+    --     { Text = "" .. dir .. " " },
+    --     { Foreground = { Color = "#5E81AC" } },
+    --     { Text = " " .. branch .. "  " },
+    --   }))
+    -- end)
+
     local TAB_L_SEPARATOR = wezterm.nerdfonts.ple_left_half_circle_thick
     local TAB_R_SEPARATOR = wezterm.nerdfonts.ple_right_half_circle_thick
+
     wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
       local edge_background = "none"
       local background = "#4C566A"
@@ -153,8 +227,25 @@ in
         foreground = "#2E3440"
       end
 
+      local cwd_uri = tab.active_pane.current_working_dir
+      local parsed = parse_uri(cwd_uri)
+      local cwd = parsed and parsed.path or nil
+      local host = parsed and parsed.host or nil
+      local title_text = tab.active_pane.title
+
+      if host and host ~= "" and host ~= wezterm.hostname() and host ~= "localhost" then
+        title_text = "SSH"
+      elseif cwd then
+        local project = git_root_name(cwd)
+        if project then
+          title_text = project
+        else
+          title_text = basename(cwd)
+        end
+      end
+
       local edge_foreground = background
-      local raw_title = wezterm.truncate_right(tab.active_pane.title, max_width - 1)
+      local raw_title = wezterm.truncate_right(title_text, max_width - 1)
       local title = " " .. string.upper(raw_title) .. " "
       return {
         { Background = { Color = edge_background } },
@@ -168,6 +259,31 @@ in
         { Text = TAB_R_SEPARATOR },
       }
     end)
+
+    -- wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+    --   local edge_background = "none"
+    --   local background = "#4C566A"
+    --   local foreground = "#2E3440"
+    --   if tab.is_active then
+    --     background = "#5E81AC"
+    --     foreground = "#2E3440"
+    --   end
+
+    --   local edge_foreground = background
+    --   local raw_title = wezterm.truncate_right(tab.active_pane.title, max_width - 1)
+    --   local title = " " .. string.upper(raw_title) .. " "
+    --   return {
+    --     { Background = { Color = edge_background } },
+    --     { Foreground = { Color = edge_foreground } },
+    --     { Text = TAB_L_SEPARATOR },
+    --     { Background = { Color = background } },
+    --     { Foreground = { Color = foreground } },
+    --     { Text = title },
+    --     { Background = { Color = edge_background } },
+    --     { Foreground = { Color = edge_foreground } },
+    --     { Text = TAB_R_SEPARATOR },
+    --   }
+    -- end)
 
     config.native_macos_fullscreen_mode = false
     -- config.initial_cols = 205
