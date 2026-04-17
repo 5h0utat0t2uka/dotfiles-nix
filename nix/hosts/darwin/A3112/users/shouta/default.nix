@@ -147,14 +147,13 @@ in
     local TAB_R_SEPARATOR = wezterm.nerdfonts.ple_right_half_circle_thick
     wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
       local tab_index = tab.tab_index + 1
-      local indicator = ""
+      local indicator = ""
       local indicator_foreground = "#2E3440"
       local edge_background = "none"
       local background = "#4C566A"
       local foreground = "#2E3440"
       if tab.is_active then
-        indicator = ""
-        indicator_foreground = "#D08770"
+        indicator_foreground = "#BF616A"
         background = "#5E81AC"
         foreground = "#2E3440"
       end
