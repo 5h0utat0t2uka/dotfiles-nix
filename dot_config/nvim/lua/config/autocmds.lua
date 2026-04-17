@@ -34,3 +34,10 @@ vim.api.nvim_create_autocmd("CursorHold", {
     })
   end,
 })
+
+vim.api.nvim_create_autocmd("VimLeave", {
+  callback = function()
+    vim.opt.guicursor = "a:ver25-blinkon500-blinkoff500"
+    io.write("\27[0 q")
+  end,
+})
