@@ -128,17 +128,17 @@ in
         window:set_right_status("")
         return
       end
-      local branch = git_branch(cwd)
+      local branch = string.upper(git_branch(cwd))
       if not branch then
         window:set_right_status("")
         return
       end
-      local dir = basename(cwd)
+      local dir = string.upper(basename(cwd))
       window:set_right_status(wezterm.format({
         { Foreground = { Color = "#5E81AC" } },
-        { Text = "" .. dir .. " " },
+        { Text = " " .. branch .. " " },
         { Foreground = { Color = "#5E81AC" } },
-        { Text = " " .. branch .. "  " },
+        { Text = " " .. dir .. "  " },
       }))
     end)
 
@@ -184,7 +184,7 @@ in
     }
     config.window_frame = {
       font = require('wezterm').font 'GeistMono Nerd Font Mono',
-      font_size = 15,
+      font_size = 14,
       inactive_titlebar_bg = "none",
       active_titlebar_bg = "none",
     }
