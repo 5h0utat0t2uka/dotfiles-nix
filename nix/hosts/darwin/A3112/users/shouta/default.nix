@@ -147,10 +147,12 @@ in
     local TAB_R_SEPARATOR = wezterm.nerdfonts.ple_right_half_circle_thick
     wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
       local tab_index = tab.tab_index + 1
+      local indicator = ""
       local edge_background = "none"
       local background = "#4C566A"
       local foreground = "#2E3440"
       if tab.is_active then
+        indicator = ""
         background = "#5E81AC"
         foreground = "#2E3440"
       end
@@ -158,7 +160,7 @@ in
       local edge_foreground = background
       local raw_title = wezterm.truncate_right(tab.active_pane.title, max_width - 1)
       -- local title = " " .. string.upper(raw_title) .. " "
-      local title = "" .. tab_index .. " " .. string.upper(raw_title) .. " "
+      local title = "" .. indicator .. " " .. tab_index .. " " .. string.upper(raw_title) .. " "
       return {
         { Background = { Color = edge_background } },
         { Foreground = { Color = edge_foreground } },
