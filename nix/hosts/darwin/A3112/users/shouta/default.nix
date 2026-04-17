@@ -154,7 +154,8 @@ in
       end
 
       local edge_foreground = background
-      local title = " " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. " "
+      local raw_title = wezterm.truncate_right(tab.active_pane.title, max_width - 1)
+      local title = " " .. string.upper(raw_title) .. " "
       return {
         { Background = { Color = edge_background } },
         { Foreground = { Color = edge_foreground } },
