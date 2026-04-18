@@ -34,15 +34,3 @@ vim.api.nvim_create_autocmd("CursorHold", {
     })
   end,
 })
-
-vim.api.nvim_create_autocmd("VimLeave", {
-  callback = function()
-    local seq = "\x1b[1 q"
-    local out = vim.env.TMUX
-      and ("\x1bPtmux;\x1b" .. seq:gsub("\x1b", "\x1b\x1b") .. "\x1b\\")
-      or seq
-
-    io.stdout:write(out)
-    io.stdout:flush()
-  end,
-})
