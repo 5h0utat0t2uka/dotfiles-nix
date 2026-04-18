@@ -29,7 +29,7 @@
     cursor-color = #d8dee9
     cursor-opacity = 0.8
     shell-integration-features = no-cursor,ssh-terminfo,ssh-env
-    notify-on-command-finish = always
+    notify-on-command-finish = unfocused
     notify-on-command-finish-action = no-bell,notify
     window-padding-x = 10
     window-padding-y = 10
