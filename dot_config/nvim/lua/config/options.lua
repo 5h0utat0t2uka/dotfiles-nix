@@ -24,6 +24,7 @@ vim.opt.guicursor = table.concat({
   "n-v:block",
   "i:ver50",
   "c:hor50",
+  "a:blinkon500-blinkoff500",
 }, ",")
 
 -- vim.opt.showcmd = true
