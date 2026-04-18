@@ -15,10 +15,6 @@
       # nixpkgs (darwin) で libsmbclient / dyld が壊れているため brew に逃がす
       # https://github.com/nixos/nixpkgs/issues/476308
       "termscp"
-      # {
-      #   name = "bjarneo/cliamp/cliamp";
-      #   args = [ "without-yt-dlp" ];
-      # }
     ];
     casks = [
       "karabiner-elements"
