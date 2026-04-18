@@ -44,9 +44,13 @@ __wezterm_set_cwd() {
   [[ -n "$WEZTERM_PANE" ]] || return
   wezterm set-working-directory "$PWD" >/dev/null 2>&1
 }
-
 add-zsh-hook chpwd __wezterm_set_cwd
 add-zsh-hook precmd __wezterm_set_cwd
+
+ghostty_cursor_blink_block() {
+  printf '\e[1 q'
+}
+add-zsh-hook precmd ghostty_cursor_blink_block
 
 if [[ -n "$TMUX" ]]; then
   export FZF_TMUX=1
