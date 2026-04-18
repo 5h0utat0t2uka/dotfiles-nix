@@ -34,3 +34,10 @@ vim.api.nvim_create_autocmd("CursorHold", {
     })
   end,
 })
+
+vim.api.nvim_create_autocmd("VimLeave", {
+  callback = function()
+    io.stdout:write("\x1b[1 q")
+    io.stdout:flush()
+  end,
+})
