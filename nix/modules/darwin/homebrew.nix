@@ -18,7 +18,7 @@
     ];
     casks = [
       "karabiner-elements"
-      "zed"
+      # "zed"
     ];
   };
 }
