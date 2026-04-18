@@ -14,7 +14,7 @@ return {
     },
     ui = {
       title = false,
-      code_action = ''
+      code_action = '',
       expand = "",
       collapse = "",
       lines = { "└", "├", "│", "", "┌" },
