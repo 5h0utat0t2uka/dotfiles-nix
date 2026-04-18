@@ -34,12 +34,3 @@ vim.api.nvim_create_autocmd("CursorHold", {
     })
   end,
 })
-
--- vim.api.nvim_create_autocmd("VimLeave", {
---   callback = function()
---     require("smear_cursor").enabled = false
---     vim.opt.guicursor = ""
---     io.write("\27[2 q")
---     io.write("\27[?12h")
---   end,
--- })
