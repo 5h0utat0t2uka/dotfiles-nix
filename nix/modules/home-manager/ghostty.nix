@@ -1,11 +1,12 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.ghostty = {
     # 本体は nix/modules/darwin/homebrew.nix の casks インストールする
     # https://ghostty.org/docs/install/binary#nix-(macos-binary)
+    # package = null;
     enable = true;
-    package = null;
+    package = pkgs.ghostty-bin;
   };
 
   xdg.configFile."ghostty/config.ghostty".text = ''
