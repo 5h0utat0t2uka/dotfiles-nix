@@ -30,6 +30,7 @@ in
     ../../../../../modules/home-manager/ghostty
     ../../../../../modules/home-manager/wezterm
     ../../../../../modules/home-manager/tmux
+    ../../../../../modules/home-manager/neovim
     ../../../../../modules/home-manager/zed
   ];
 
@@ -75,7 +76,7 @@ in
       lua-language-server
       macism
       mise
-      neovim
+      # neovim
       nb
       ni
       nixd
