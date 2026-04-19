@@ -54,8 +54,6 @@ in
       age
       bat
       chafa
-      # claude-code
-      # copilot-language-server
       delta
       devbox
       eza
@@ -69,18 +67,13 @@ in
       gnupg
       just
       jq
-      # pkgs.keifu
       libwebp
       lf
       lazygit
-      # lua-language-server
       macism
       mise
-      # neovim
       nb
       ni
-      # nixd
-      # nil
       nmap
       nodejs_24
       pnpm
@@ -90,13 +83,10 @@ in
       pinentry_mac
       ripgrep
       # termscp
-      # tree-sitter
       pkgs."tree-sitter-0267"
       tree
-      # tmux
       # uv
       viu
-      # vscode-langservers-extracted
       wget
       zbar
       zoxide
@@ -107,6 +97,12 @@ in
       zsh-abbr
       zsh-powerlevel10k
       zshPluginLinks
+      # LSP
+      nixd
+      nil
+      lua-language-server
+      vscode-langservers-extracted
+      copilot-language-server
     ];
 
     activation.ensureNbConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
