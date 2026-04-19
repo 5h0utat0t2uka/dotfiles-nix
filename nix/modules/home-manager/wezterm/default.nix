@@ -1,9 +1,12 @@
 { inputs, pkgs,... }:
 
+let
+  system = pkgs.stdenv.hostPlatform.system;
+in
 {
   programs.wezterm = {
     enable = true;
-    package = inputs.wezterm.packages.${pkgs.system}.default;
+    package = inputs.wezterm.packages.${system}.default;
   };
 
   xdg.configFile."wezterm/wezterm.lua".text = ''
