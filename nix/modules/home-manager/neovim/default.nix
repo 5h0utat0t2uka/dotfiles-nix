@@ -16,7 +16,7 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    extraLuaConfig = builtins.readFile ./config/init.lua;
+    initLua = builtins.readFile ./config/init.lua;
     extraPackages = with pkgs; [
       lua-language-server
       nixd
