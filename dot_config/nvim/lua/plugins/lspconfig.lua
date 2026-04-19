@@ -6,6 +6,15 @@ return {
       vim.lsp.config("*", {
         capabilities = require("blink.cmp").get_lsp_capabilities(),
       })
+      vim.lsp.config("copilot", {
+        on_attach = function(client)
+          client.request("github.copilot.checkStatus", {}, function(_, result)
+            if not result or not result.user then
+              client.request("github.copilot.signIn", {})
+            end
+          end)
+        end,
+      })
       vim.lsp.enable("lua_ls")
       vim.lsp.enable("nixd")
       vim.lsp.enable("eslint")
