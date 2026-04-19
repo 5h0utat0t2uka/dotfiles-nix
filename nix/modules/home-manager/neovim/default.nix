@@ -16,6 +16,8 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    withPython3 = false;
+    withRuby = false;
     initLua = builtins.readFile ./config/init.lua;
     extraPackages = with pkgs; [
       lua-language-server
