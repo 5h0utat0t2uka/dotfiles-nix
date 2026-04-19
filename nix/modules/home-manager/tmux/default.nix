@@ -1,5 +1,4 @@
 # modules/home-manager/tmux/default.nix
-
 { pkgs, ... }:
 {
   programs.tmux = {
