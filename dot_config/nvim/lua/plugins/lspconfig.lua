@@ -9,12 +9,19 @@ return {
       vim.lsp.config("copilot", {
         on_attach = function(client)
           client.request("github.copilot.checkStatus", {}, function(_, result)
-            if not result or not result.user then
-              client.request("github.copilot.signIn", {})
-            end
+            vim.notify("Copilot status: " .. vim.inspect(result), vim.log.levels.INFO)
           end)
         end,
       })
+      -- vim.lsp.config("copilot", {
+      --   on_attach = function(client)
+      --     client.request("github.copilot.checkStatus", {}, function(_, result)
+      --       if not result or not result.user then
+      --         client.request("github.copilot.signIn", {})
+      --       end
+      --     end)
+      --   end,
+      -- })
       vim.lsp.enable("lua_ls")
       vim.lsp.enable("nixd")
       vim.lsp.enable("eslint")
