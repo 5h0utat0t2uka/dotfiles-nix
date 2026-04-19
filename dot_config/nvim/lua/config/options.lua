@@ -36,8 +36,8 @@ vim.opt.guicursor = table.concat({
 -- vim.opt.laststatus = 3
 -- vim.opt.statusline = "%=%S"
 
-vim.o.pumborder = 'rounded' -- ポップアップメニューに罫線を追加
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'fuzzy', 'popup' } -- popupを入れると候補の説明がプレビューされる
+vim.opt.autocomplete = true
 
 -- LSPの補完を自動で有効化
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -48,3 +48,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
+
