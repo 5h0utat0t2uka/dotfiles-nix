@@ -4,7 +4,7 @@
   programs.zed-editor = {
     enable = true;
     package = pkgs.zed-editor;
-    
+
     # GUI からの設定変更可否
     mutableUserSettings = false;
     mutableUserKeymaps = false;
@@ -15,6 +15,7 @@
       "emmet"
       "git-firefly"
       "html"
+      "just"
       "lua"
       "make"
       "nix"
