@@ -55,7 +55,7 @@ in
       bat
       chafa
       # claude-code
-      copilot-language-server
+      # copilot-language-server
       delta
       devbox
       eza
@@ -73,14 +73,14 @@ in
       libwebp
       lf
       lazygit
-      lua-language-server
+      # lua-language-server
       macism
       mise
       # neovim
       nb
       ni
-      nixd
-      nil
+      # nixd
+      # nil
       nmap
       nodejs_24
       pnpm
@@ -96,7 +96,7 @@ in
       # tmux
       # uv
       viu
-      vscode-langservers-extracted
+      # vscode-langservers-extracted
       wget
       zbar
       zoxide
