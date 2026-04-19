@@ -4,8 +4,7 @@ hostname = "{{ .chezmoi.hostname }}"
 system = "{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
 
 [edit]
-command = "zeditor"
-args = ["--wait"]
+command = "nvim"
 
 [git]
 autoCommit = true
