@@ -88,7 +88,7 @@
     "auto_fold_dirs": true,
     "drag_and_drop": true,
     "scrollbar": {
-      "show": "never",
+      "show": "never"
     },
     "sticky_scroll": false,
     "show_diagnostics": "all",
@@ -112,7 +112,7 @@
     "sort_by_path": false,
     "collapse_untracked_diff": false,
     "scrollbar": {
-      "show": "never",
+      "show": "never"
     }
   },
   "outline_panel": {
@@ -129,7 +129,7 @@
       "show": "always"
     },
     "scrollbar": {
-      "show": "never",
+      "show": "never"
     }
   },
   "search": {
