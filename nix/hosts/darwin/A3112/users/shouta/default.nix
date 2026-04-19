@@ -29,6 +29,7 @@ in
   imports = [
     ../../../../../modules/home-manager/ghostty
     ../../../../../modules/home-manager/wezterm
+    ../../../../../modules/home-manager/tmux
     ../../../../../modules/home-manager/zed
   ];
 
@@ -91,7 +92,7 @@ in
       # tree-sitter
       pkgs."tree-sitter-0267"
       tree
-      tmux
+      # tmux
       # uv
       viu
       vscode-langservers-extracted
