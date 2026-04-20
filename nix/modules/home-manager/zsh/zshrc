@@ -55,7 +55,6 @@ add-zsh-hook precmd ghostty_cursor_blink_block
 if [[ -n "$TMUX" ]]; then
   export FZF_TMUX=1
   export FZF_TMUX_OPTS="-p 80%,70% --margin=0,1"
-
   tp() {
     tmux popup \
       -w 80% -h 70% -x C -y C \
@@ -209,8 +208,8 @@ alias vim='nvim'
 alias ll='eza -alo --icons --time-style iso'
 alias lg='lazygit'
 # brewで入れたGUIアプリ使う場合
-[[ -x "$BREW_PREFIX/bin/zed" ]] && alias zed="$BREW_PREFIX/bin/zed"
-[[ -x "$BREW_PREFIX/bin/code" ]] && alias code="$BREW_PREFIX/bin/code"
+# [[ -x "$BREW_PREFIX/bin/zed" ]] && alias zed="$BREW_PREFIX/bin/zed"
+# [[ -x "$BREW_PREFIX/bin/code" ]] && alias code="$BREW_PREFIX/bin/code"
 
 # abbr
 export ABBR_SET_EXPANSION_CURSOR=1
@@ -258,6 +257,41 @@ lfp() {
   dir="$(cat "$tmp" 2>/dev/null)"
   rm -f "$tmp"
   [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
+}
+
+dff() {
+  # usage:
+  # dff file1.json file2.json, dff app.log app.log.bak
+  emulate -L zsh
+  setopt pipefail
+  local file1="$1"
+  local file2="$2"
+  if [[ -z "$file1" || -z "$file2" ]]; then
+    print -u2 "Usage: dff <file1> <file2>"
+    return 1
+  fi
+  [[ -f "$file1" ]] || { print -u2 "dff: not found: $file1"; return 1; }
+  [[ -f "$file2" ]] || { print -u2 "dff: not found: $file2"; return 1; }
+  local ext1="${file1:e}"
+  local ext2="${file2:e}"
+  local -a out
+  if command -v delta >/dev/null 2>&1; then
+    out=(delta)
+  else
+    out=(cat)
+  fi
+  if [[ "$ext1" == "json" && "$ext2" == "json" ]]; then
+    command -v jq >/dev/null 2>&1 || {
+      print -u2 "dff: jq is required for JSON diff"
+      return 1
+    }
+    diff -u \
+      <(jq --sort-keys . -- "$file1") \
+      <(jq --sort-keys . -- "$file2") \
+      | "${out[@]}"
+  else
+    diff -u -- "$file1" "$file2" | "${out[@]}"
+  fi
 }
 
 # if [[ -n "$TMUX" ]]; then
