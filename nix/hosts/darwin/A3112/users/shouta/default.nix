@@ -31,7 +31,7 @@ in
     ../../../../../modules/home-manager/wezterm
     ../../../../../modules/home-manager/tmux
     ../../../../../modules/home-manager/zsh
-    # ../../../../../modules/home-manager/zed
+    ../../../../../modules/home-manager/zed
     ../../../../../modules/home-manager/neovim
   ];
 
