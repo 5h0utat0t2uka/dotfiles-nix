@@ -7,31 +7,28 @@ on:
 jobs:
   check:
     runs-on: macos-26
-    permissions:
-      contents: read
-      id-token: write
-    defaults:
-      run:
-        shell: bash
-        working-directory: nix
-
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: DeterminateSystems/determinate-nix-action@a18f73c54ca8525de051e73c31512a67f44df919 # v3.17.1
         with:
           kvm: false
 
-      - uses: DeterminateSystems/flakehub-cache-action@77fe95416299b8d1351b57bf10a1042a0ed75708 # v3.17.3
-      - name: flake check (eval only)
-        run: nix flake check --no-build --no-build-output
-
-      - name: eval each darwin host
+      - run: nix --version
+      - name: flake check
+        shell: bash
         run: |
           set -euo pipefail
+          cd nix
+          nix flake check
+
+      - name: eval each darwin host
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd nix
           for h in hosts/darwin/*; do
             [[ -d "$h" ]] || continue
             hn="$(basename "$h")"
             echo "==> evaluating $hn"
-            nix eval --raw ".#darwinConfigurations.${hn}.config.system.name" >/dev/null
-            nix eval ".#darwinConfigurations.${hn}.config.system.build.toplevel.drvPath" >/dev/null
+            nix eval ".#darwinConfigurations.${hn}.config.system.build.toplevel" >/dev/null
           done
