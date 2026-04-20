@@ -1,13 +1,17 @@
 # ~/.config/zsh/.zprofile
 # Purpose:
+# - Add $HOME/.local/bin to PATH (user-local binaries like chezmoi)
 # - Initialize Homebrew env via `brew shellenv`
 # - Enforce PATH order: Nix first, Homebrew later (cask-only policy)
 #
-# Note: Static PATH additions (/etc/profiles/per-user/$USER/bin,
-# /run/current-system/sw/bin, $HOME/.local/bin) are handled by
-# nix-darwin and home-manager automatically.
+# Note: Nix store PATH entries (/etc/profiles/per-user/$USER/bin,
+# /run/current-system/sw/bin) are handled by nix-darwin automatically.
+# We only handle user-local paths and Homebrew here.
 
 typeset -U path
+
+# User-local binaries (e.g. chezmoi installed via install script)
+path=("$HOME/.local/bin" $path)
 
 # NIX_PROFILE_PREFIX is static because zshPluginLinks places plugins
 # under /etc/profiles/per-user/$USER/share/zsh/plugins.
