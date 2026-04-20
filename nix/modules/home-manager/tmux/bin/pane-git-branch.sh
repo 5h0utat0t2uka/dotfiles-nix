@@ -6,7 +6,7 @@ cd "$dir" 2>/dev/null || exit 0
 # tmux.conf で定義したカラースキーマ
 nord3="$(tmux show-environment -g nord3 2>/dev/null | sed 's/^nord3=//')"
 nord0="$(tmux show-environment -g nord0 2>/dev/null | sed 's/^nord0=//')"
-nord10="$(tmux show-environment -g nord10 2>/dev/null | sed 's/^nord10=//')"
+nord9="$(tmux show-environment -g nord9 2>/dev/null | sed 's/^nord9=//')"
 
 # devbox環境変数をチェック（git に関係なく表示）
 DEVBOX_STATUS="$(tmux show-environment -g DEVBOX_SHELL_ENABLED 2>/dev/null | sed 's/^DEVBOX_SHELL_ENABLED=//')"
@@ -22,6 +22,6 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   fi
   if [ -n "$branch" ]; then
     upper_branch="$(printf '%s' "$branch" | tr '[:lower:]' '[:upper:]')"
-    printf '#[fg=%s,bg=%s]%s #[default]' "$nord0" "$nord10" " $upper_branch"
+    printf '#[fg=%s,bg=%s]%s #[default]' "$nord0" "$nord9" " $upper_branch"
   fi
 fi
