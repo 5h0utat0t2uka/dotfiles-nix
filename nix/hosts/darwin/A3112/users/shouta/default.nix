@@ -30,8 +30,9 @@ in
     ../../../../../modules/home-manager/ghostty
     ../../../../../modules/home-manager/wezterm
     ../../../../../modules/home-manager/tmux
+    ../../../../../modules/home-manager/zsh
+    # ../../../../../modules/home-manager/zed
     ../../../../../modules/home-manager/neovim
-    ../../../../../modules/home-manager/zed
   ];
 
   # 一部を除いてドットファイルの実体は chezmoi で管理する前提なので

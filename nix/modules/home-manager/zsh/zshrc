@@ -1,0 +1,449 @@
+# 非インタラクティブシェルのチェック
+[[ $- != *i* ]] && return
+
+# Instant Prompt (P10k)
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# キャッシュ関連ディレクトリ
+CACHE_DIR="${XDG_CACHE_HOME}/zsh"
+mkdir -p "$CACHE_DIR"
+mkdir -p "$SHELL_SESSIONS_DIR"
+
+export POWERLEVEL9K_INSTANT_PROMPT_DIR="$CACHE_DIR"
+export POWERLEVEL9K_DUMP_DIR="$CACHE_DIR"
+
+
+# Homebrew検出とPATH設定
+# BREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
+# typeset -U path
+# path=(
+#   "$HOME/.local/bin"(N-/)
+#   $path
+# )
+
+# 履歴関連とオプション
+HISTFILE="$CACHE_DIR/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt SHARE_HISTORY
+setopt HIST_VERIFY
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt INTERACTIVE_COMMENTS
+setopt HIST_IGNORE_SPACE
+
+autoload -Uz add-zsh-hook
+
+__wezterm_set_cwd() {
+  command -v wezterm >/dev/null 2>&1 || return
+  [[ -n "$WEZTERM_PANE" ]] || return
+  wezterm set-working-directory "$PWD" >/dev/null 2>&1
+}
+add-zsh-hook chpwd __wezterm_set_cwd
+add-zsh-hook precmd __wezterm_set_cwd
+
+ghostty_cursor_blink_block() {
+  printf '\e[1 q'
+}
+add-zsh-hook precmd ghostty_cursor_blink_block
+
+if [[ -n "$TMUX" ]]; then
+  export FZF_TMUX=1
+  export FZF_TMUX_OPTS="-p 80%,70% --margin=0,1"
+
+  tp() {
+    tmux popup \
+      -w 80% -h 70% -x C -y C \
+      -d "#{pane_current_path}" \
+      -E "${SHELL:-/bin/zsh} -l"
+  }
+  tmux_update_pane() {
+    # devbox環境変数の状態を毎回同期
+    if [ -n "$DEVBOX_SHELL_ENABLED" ]; then
+      tmux set-environment -g DEVBOX_SHELL_ENABLED "$DEVBOX_SHELL_ENABLED"
+    else
+      tmux set-environment -gu DEVBOX_SHELL_ENABLED 2>/dev/null
+    fi
+    tmux refresh-client -S
+  }
+  add-zsh-hook precmd tmux_update_pane
+fi
+
+# Completions
+# BREW_PREFIX=/opt/homebrew
+# ZSH_PLUGIN_DIR="${NIX_PROFILE_PREFIX:-}/share/zsh/plugins"
+
+# typeset -U fpath
+# local -a new_fpath=(
+#   "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
+#   "$BREW_PREFIX/share/zsh/site-functions"(N-/)
+# )
+# [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
+
+# Completions
+
+# Prefer brew that is actually available; do not assume a fixed prefix.
+
+local BREW_PREFIX=""
+if command -v brew >/dev/null 2>&1; then
+  BREW_PREFIX="$(brew --prefix 2>/dev/null)"
+elif [[ -x /opt/homebrew/bin/brew ]]; then
+  BREW_PREFIX="$(/opt/homebrew/bin/brew --prefix 2>/dev/null)"
+fi
+
+ZSH_PLUGIN_DIR="${NIX_PROFILE_PREFIX:-}/share/zsh/plugins"
+
+typeset -U fpath
+local -a new_fpath=(
+  "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
+)
+
+if [[ -n "$BREW_PREFIX" ]]; then
+  if [[ -e "$BREW_PREFIX/share/zsh/site-functions/_brew" && -e "$BREW_PREFIX/completions/zsh/_brew" ]]; then
+    new_fpath+=("$BREW_PREFIX/share/zsh/site-functions"(N-/))
+  fi
+fi
+
+[[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
+
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$CACHE_DIR/.zcompcache"
+autoload -Uz compinit
+dump="$CACHE_DIR/.zcompdump-${ZSH_VERSION}"
+if [[ -f "$dump.zwc" ]] && [[ "$dump.zwc" -nt "$dump" ]]; then
+  compinit -C -d "$dump"
+else
+  compinit -d "$dump"
+  [[ -f "$dump" ]] && zcompile "$dump"
+fi
+
+# Powerlevel10k
+if [[ -r "$ZSH_PLUGIN_DIR/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+  source "$ZSH_PLUGIN_DIR/powerlevel10k/powerlevel10k.zsh-theme"
+fi
+
+# if [[ -f "$ZDOTDIR/.p10k.zsh" ]]; then
+#   source "$ZDOTDIR/.p10k.zsh"
+# fi
+if [[ -f "$HOME/.config/zsh/.p10k.zsh" ]]; then
+  source "$HOME/.config/zsh/.p10k.zsh"
+fi
+
+# zsh-autosuggestions
+ZSH_AUTOSUGGEST_STRATEGY=(history)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=2000
+if [[ -r "$ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "$ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+
+# fzf
+typeset -a IGNORE_DIRS=(
+  .git node_modules vendor .venv venv
+  dist build .cache .next target .terraform
+)
+typeset -a IGNORE_FILES=(
+  .DS_Store "*.pyc" "*.swp" Thumbs.db
+  "*.log" "*.tmp" ".env*"
+)
+typeset -a IGNORE_PATTERNS=(
+  $IGNORE_DIRS
+  $IGNORE_FILES
+)
+typeset -a FZF_BASE_OPTS
+typeset -a FZF_FILE_OPTS
+typeset -g NBSP=$'\u00A0'
+typeset -g FZF_PREVIEW_SWITCH_COLS=120
+
+fzf_preview_window_opt() {
+  if (( COLUMNS < FZF_PREVIEW_SWITCH_COLS )); then
+    echo "--preview-window=down,50%,border-rounded"
+  else
+    echo "--preview-window=right,50%,border-rounded"
+  fi
+}
+
+# 共通オプションを配列として定義（重要：配列のまま維持）
+typeset -a FZF_BASE_OPTS=(
+  "--color=fg:#6b7994,bg:#2e3440,hl:#b48ead"
+  "--color=fg+:#d8dee9,bg+:#2e3440,hl+:#b48ead"
+  "--color=info:#8fbcbb,prompt:#8fbcbb,pointer:#8fbcbb"
+  "--color=marker:#8fbcbb,spinner:#5e81ac,header:#81a1c1"
+  "--color=border:#4c566a"
+  "--border=rounded"
+  "--info=default"
+  "--height=50%"
+  "--layout=reverse"
+  "--pointer=❯"
+  "--no-separator"
+  "--no-scrollbar"
+  "--prompt=❯${NBSP}"
+)
+typeset -a FZF_FILE_OPTS=(
+  "--preview"
+  "'bat --style=numbers,changes --color=always --paging=never {}'"
+)
+
+# zoxide
+typeset -a _ZO_ADDITIONAL_OPTS=(
+  "--no-sort"
+  "--exit-0"
+  "--select-1"
+  "--preview='eza -al --color=always --group-directories-first -T -L 2 -I \"${(j:|:)IGNORE_PATTERNS}\" -- {2..} 2>/dev/null | { IFS= read -r first_line; echo \"\$first_line\"; echo; cat; }'"
+  "--preview-window=wrap"
+)
+export _ZO_FZF_OPTS="${(j: :)FZF_BASE_OPTS} ${(j: :)_ZO_ADDITIONAL_OPTS}"
+export FZF_DEFAULT_OPTS="${(j: :)FZF_BASE_OPTS}"
+export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --exclude node_modules --type f'
+export FZF_ALT_C_COMMAND='fd --hidden --exclude .git --exclude node_modules --type d'
+
+# alias
+alias ..='cd ..'
+alias vpn="$HOME/Development/scripts/vpn/connect.sh"
+alias webp="$HOME/Development/scripts/webp.sh"
+alias vim='nvim'
+alias ll='eza -alo --icons --time-style iso'
+alias lg='lazygit'
+# brewで入れたGUIアプリ使う場合
+[[ -x "$BREW_PREFIX/bin/zed" ]] && alias zed="$BREW_PREFIX/bin/zed"
+[[ -x "$BREW_PREFIX/bin/code" ]] && alias code="$BREW_PREFIX/bin/code"
+
+# abbr
+export ABBR_SET_EXPANSION_CURSOR=1
+export ABBR_USER_ABBREVIATIONS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/zsh-abbr/user-abbreviations"
+if [[ -r "$ZSH_PLUGIN_DIR/zsh-abbr/zsh-abbr.zsh" ]]; then
+  source "$ZSH_PLUGIN_DIR/zsh-abbr/zsh-abbr.zsh"
+fi
+# abbrの追加編集など行った場合は .abbr_initialized を削除する
+if [[ ! -f "$HOME/.config/zsh-abbr/.abbr_initialized" ]]; then
+  abbr gs="git status"
+  abbr gd="git diff"
+  abbr ga="git add ."
+  abbr gc='git commit -m "%"'
+  abbr gp="git push origin HEAD"
+  abbr nri="ni"
+  abbr nrf="ni --frozen"
+  abbr nrd="nr dev"
+  abbr nrb="nr build"
+  abbr nrs="nr start"
+  touch "$HOME/.config/zsh-abbr/.abbr_initialized"
+fi
+
+# function
+lfc() {
+  local dir
+  dir="$(command lf -print-last-dir "$@")" || return
+  [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
+}
+
+lfp() {
+  [[ -n "$TMUX" ]] || {
+    lfcd "$@"
+    return
+  }
+  local tmp dir
+  tmp="$(mktemp "${TMPDIR:-/tmp}/lfcd.XXXXXX")" || return
+
+  tmux display-popup \
+    -E \
+    -w 80% \
+    -h 70% \
+    -d "$PWD" \
+    "sh -c 'command lf -print-last-dir \"\$@\" > \"$tmp\"' sh \"$@\"" \
+    "$@"
+  dir="$(cat "$tmp" 2>/dev/null)"
+  rm -f "$tmp"
+  [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
+}
+
+# if [[ -n "$TMUX" ]]; then
+#   lfcd() {
+#     local tmp
+#     tmp="$(mktemp)"
+#     tmux popup \
+#       -w 80% -h 80% -x C -y C \
+#       -d "#{pane_current_path}" \
+#       -E "lf -last-dir-path='$tmp' $(printf '%q ' "$@")"
+#     if [[ -f "$tmp" ]]; then
+#       local dir
+#       dir="$(<"$tmp")"
+#       rm -f "$tmp"
+#       [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
+#     fi
+#   }
+# else
+#   lfcd() {
+#     local dir
+#     dir="$(command lf -print-last-dir "$@")" || return
+#     [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
+#   }
+# fi
+
+update_zo_opts() {
+  export _ZO_FZF_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt) ${(j: :)_ZO_ADDITIONAL_OPTS}"
+}
+add-zsh-hook precmd update_zo_opts
+
+after_prompt_once() {
+  command -v mise   >/dev/null 2>&1 && eval "$(command mise activate zsh)"
+  command -v zoxide >/dev/null 2>&1 && eval "$(command zoxide init zsh)"
+  add-zsh-hook -d precmd after_prompt_once
+}
+add-zsh-hook precmd after_prompt_once
+
+tm() {
+  # tmuxセッションのアタッチまたは新規作成
+  local session=${1:-$(printf %08x $RANDOM$RANDOM)}
+  tmux new -s "$session" 2>/dev/null || tmux attach -t "$session"
+}
+
+fzf_command() {
+  if [[ -n "$TMUX" ]] && command -v fzf-tmux >/dev/null 2>&1; then
+    echo "fzf-tmux $FZF_TMUX_OPTS"
+  else
+    echo "fzf"
+  fi
+}
+
+fzf_history() {
+  # ^+R でコマンド履歴
+  zle -I
+  local sel
+  sel=$(
+    fc -rl 1 \
+    | perl -ne 'print if !$seen{(/^\s*\d+\s+(.*)$/)[0]}++' \
+    | sed 's/^[ ]*[0-9]*[ ]*//' \
+    | FZF_DEFAULT_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt) --prompt=❯${NBSP}" \
+    $(fzf_command) --query "$LBUFFER"
+  )
+  [[ -z "$sel" ]] && { zle -R; return 0; }
+  BUFFER=$sel
+  CURSOR=$#BUFFER
+  zle redisplay
+}
+zle -N fzf_history
+bindkey '^r' fzf_history
+
+fzf_find() {
+  # ^+F でファイル検索
+  setopt localoptions pipefail
+  zle -I
+  if [[ "$PWD" == "$HOME" ]]; then
+    zle -M "⚠️ Too many files in HOME. Use from a project directory."
+    zle -R
+    return 1
+  fi
+  local -a local_ignore_patterns=(
+    $IGNORE_PATTERNS
+    "*.jpg" "*.jpeg" "*.png" "*.gif" "*.bmp" "*.svg"
+    "*.webp" "*.ico" "*.tiff" "*.tif" "*.heic" "*.heif"
+    "*.raw" "*.cr2" "*.nef" "*.arw" "*.dng"
+  )
+  local -a rg_globs
+  for dir in $local_ignore_patterns; do
+    rg_globs+=("--glob" "!$dir")
+  done
+  local file
+  file=$(
+    rg --files --hidden ${rg_globs[@]} \
+    | FZF_DEFAULT_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt) ${(j: :)FZF_FILE_OPTS}" $(fzf_command)
+  )
+  [[ -z "$file" ]] && { zle -R; return 0; }
+  BUFFER="nvim ${(q)file}"
+  CURSOR=$#BUFFER
+  zle accept-line
+}
+zle -N fzf_find
+bindkey '^f' fzf_find
+
+fzf_ghq() {
+  # ^+G でリポジトリ検索
+  setopt localoptions pipefail
+  zle -I
+  local repo
+  repo=$(
+    ghq list \
+    | FZF_DEFAULT_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt) \
+      --prompt='❯${NBSP}' \
+      --preview='dir=\$(ghq root)/{}; \
+        root=\$(ghq root); \
+        eza -al --color=always --group-directories-first \
+        -T -L 2 -I \"${(j:|:)IGNORE_PATTERNS}\" \
+        \"\$dir\" 2>/dev/null | { \
+          IFS= read -r first_line; \
+          echo \"\$first_line\" | sed \"s|\$root/||g\"; \
+          echo; \
+          cat; \
+        }' \
+      --preview-window=wrap" $(fzf_command)
+  )
+  [[ -z "$repo" ]] && { zle -R; return 0; }
+  BUFFER="cd $(ghq root)/${repo}"
+  CURSOR=$#BUFFER
+  zle accept-line
+}
+zle -N fzf_ghq
+bindkey '^g' fzf_ghq
+
+fzf_nb() {
+  setopt localoptions pipefail
+  zle -I
+  local selected
+  selected=$(
+    nb ls --no-color | grep -E "^\[[0-9]+\]" | \
+    FZF_DEFAULT_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt)" \
+    $(fzf_command) \
+    --query "$LBUFFER" \
+    --prompt="❯${NBSP}" \
+    --preview 'CLICOLOR_FORCE=1 COLORTERM=truecolor glow -s dark <(nb show $(echo {} | tr -d "[]" | awk "{print \$1}") --no-color)'
+  )
+  [[ -z "$selected" ]] && { zle -R; return 0; }
+  local note_id=$(echo "$selected" | tr -d '[]' | awk '{print $1}')
+  BUFFER="nb edit $note_id"
+  zle accept-line
+}
+zle -N fzf_nb
+bindkey '^n' fzf_nb
+
+# Gitリポジトリのルートディレクトリでのみonefetchそれ以外はeza
+# chpwd() {
+#   [[ $PWD -ef $HOME ]] && return
+#   local pattern="/($(IFS='|'; echo "${IGNORE_DIRS[*]}"))"
+#   [[ $PWD =~ $pattern ]] && return
+
+#   if git rev-parse --is-inside-work-tree &>/dev/null; then
+#     printf '\n'
+#     local git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+#     if [[ "$PWD" == "$git_root" ]] && command -v onefetch &>/dev/null; then
+#       onefetch --no-art --no-title --no-color-palette --disabled-fields lines-of-code authors churn url last-change
+#       return
+#     fi
+#   fi
+#   command eza -al --color=never -o --time-style=long-iso -F always
+# }
+
+# .zshrc, p10kのコンパイル（次回起動時の高速化）
+() {
+  local zshrc="$ZDOTDIR/.zshrc"
+  local p10k="$ZDOTDIR/.p10k.zsh"
+
+  if [[ -f "$zshrc" && ( ! -f "$zshrc.zwc" || "$zshrc" -nt "$zshrc.zwc" ) ]]; then
+    zcompile "$zshrc"
+  fi
+  if [[ -f "$p10k" && ( ! -f "$p10k.zwc" || "$p10k" -nt "$p10k.zwc" ) ]]; then
+    zcompile "$p10k"
+  fi
+}
+
+# direnv
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
+if [[ -r "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
