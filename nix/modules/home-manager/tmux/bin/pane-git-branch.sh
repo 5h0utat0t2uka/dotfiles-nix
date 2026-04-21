@@ -7,7 +7,7 @@ cd "$dir" 2>/dev/null || exit 0
 nord3="$(tmux show-environment -g nord3 2>/dev/null | sed 's/^nord3=//')"
 nord0="$(tmux show-environment -g nord0 2>/dev/null | sed 's/^nord0=//')"
 nord6="$(tmux show-environment -g nord6 2>/dev/null | sed 's/^nord6=//')"
-nord12="$(tmux show-environment -g nord12 2>/dev/null | sed 's/^nord12=//')"
+orange="$(tmux show-environment -g orange 2>/dev/null | sed 's/^orange=//')"
 
 # devbox環境変数をチェック（git に関係なく表示）
 DEVBOX_STATUS="$(tmux show-environment -g DEVBOX_SHELL_ENABLED 2>/dev/null | sed 's/^DEVBOX_SHELL_ENABLED=//')"
@@ -23,6 +23,6 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   fi
   if [ -n "$branch" ]; then
     upper_branch="$(printf '%s' "$branch" | tr '[:lower:]' '[:upper:]')"
-    printf '#[fg=%s,bg=%s]%s #[default]' "$nord6" "$nord12" " $upper_branch"
+    printf '#[fg=%s,bg=%s]%s #[default]' "$nord6" "$orange" " $upper_branch"
   fi
 fi
