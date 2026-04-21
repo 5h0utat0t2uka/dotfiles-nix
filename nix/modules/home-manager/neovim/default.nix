@@ -1,15 +1,9 @@
 # modules/home-manager/neovim/default.nix
-{ config, pkgs, ... }:
+{ config, pkgs, identity, ... }:
 
-# {
-#   home.packages = with pkgs; [
-#     neovim
-#   ];
-#   xdg.configFile."nvim".source =
-#     config.lib.file.mkOutOfStoreSymlink
-#       "${config.home.homeDirectory}/.local/share/chezmoi/nix/modules/home-manager/neovim/config";
-# }
-
+let
+  configRoot = "${identity.flakeRoot}/modules/home-manager/neovim/config";
+in
 {
   programs.neovim = {
     enable = true;
@@ -23,23 +17,13 @@
   };
 
   xdg.configFile = {
-    "nvim/lua" = {
-      source = ./config/lua;
-      recursive = true;
-    };
-    "nvim/after" = {
-      source = ./config/after;
-      recursive = true;
-    };
-    "nvim/snippets" = {
-      source = ./config/snippets;
-      recursive = true;
-    };
-    "nvim/.luarc.json".source = ./config/.luarc.json;
+    # Nix store の mtime epoch 0 により vim.loader のバイトコードキャッシュが古いままロードされ続ける問題を回避するため、Nix store を経由しない
+    # 直接リンク（mkOutOfStoreSymlink）で配置するので、設定変更は darwin-rebuild switch なしで即反映されるようになる
+    "nvim/lua".source = config.lib.file.mkOutOfStoreSymlink "${configRoot}/lua";
+    "nvim/after".source = config.lib.file.mkOutOfStoreSymlink "${configRoot}/after";
+    "nvim/snippets".source = config.lib.file.mkOutOfStoreSymlink "${configRoot}/snippets";
+    "nvim/.luarc.json".source = config.lib.file.mkOutOfStoreSymlink "${configRoot}/.luarc.json";
 
-    # lazy-lock.json は書き込み可能にする
-    "nvim/lazy-lock.json".source =
-      config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/.local/share/chezmoi/nix/modules/home-manager/neovim/config/lazy-lock.json";
+    "nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${configRoot}/lazy-lock.json";
   };
 }
