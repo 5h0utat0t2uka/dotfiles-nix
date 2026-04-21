@@ -3,7 +3,7 @@ return {
     "stevearc/oil.nvim",
     enabled = true,
     dependencies = {
-      { "nvim-mini/mini.icons", opts = {} },
+      -- { "nvim-mini/mini.icons", opts = {} },
       { "refractalize/oil-git-status.nvim" },
     },
     lazy = false,
