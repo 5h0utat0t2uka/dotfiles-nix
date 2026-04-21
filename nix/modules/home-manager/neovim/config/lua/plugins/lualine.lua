@@ -151,9 +151,9 @@ return {
           {
             "diff",
             symbols = {
-              added = ' ',
-              modified = ' ',
-              removed = ' ',
+              added = '+ ',
+              modified = '~ ',
+              removed = '- ',
             },
             color = {
               fg = "#81A1C1",
