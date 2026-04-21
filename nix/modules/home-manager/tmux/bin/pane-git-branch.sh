@@ -24,6 +24,6 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   if [ -n "$branch" ]; then
     upper_branch="$(printf '%s' "$branch" | tr '[:lower:]' '[:upper:]')"
     # printf '#[fg=%s,bg=%s]%s #[default]' "$nord6" "$nord12" " $upper_branch"
-    printf '#[fg=%s,bg=%s]%s #[default]' "$nord12" "$nord0" " [${upper_branch}]"
+    printf '#[fg=%s,bg=%s]%s #[default]' "$nord12" "$nord0" "[${upper_branch}]"
   fi
 fi
