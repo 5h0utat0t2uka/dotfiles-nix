@@ -5,7 +5,6 @@ return {
       '<C-u>', '<C-d>',
       '<C-b>', '<C-f>',
       '<C-y>', '<C-e>',
-      'zt', 'zz', 'zb',
     },
     easing = "quadratic",
     duration_multiplier = 0.5,
