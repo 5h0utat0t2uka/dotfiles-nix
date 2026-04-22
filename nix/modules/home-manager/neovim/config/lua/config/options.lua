@@ -8,6 +8,13 @@ vim.opt.pumblend = 10
 -- vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'fuzzy', 'popup' }
 -- vim.opt.autocomplete = true
 vim.opt.number = true
+vim.opt.showcmd = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+
 vim.opt.signcolumn = "yes"
 vim.opt.expandtab = true
 vim.opt.wildmenu = true
