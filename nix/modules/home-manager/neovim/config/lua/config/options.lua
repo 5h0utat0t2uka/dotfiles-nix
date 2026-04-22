@@ -5,6 +5,7 @@ vim.opt.swapfile = false
 vim.opt.wildmode = { "list", "full" }
 vim.opt.pumborder = "rounded"
 vim.opt.pumblend = 10
+vim.opt.winblend = 10
 -- vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'fuzzy', 'popup' }
 -- vim.opt.autocomplete = true
 vim.opt.number = true
