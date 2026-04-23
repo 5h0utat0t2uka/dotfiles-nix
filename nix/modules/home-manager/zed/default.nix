@@ -11,7 +11,7 @@ let
       repo = "zed";
       rev = rev;
       # 1回目のビルドエラーから正しい値に置き換える
-      hash = lib.fakeHash;
+      hash = "sha256-VdCnZpNvjv9Soldpz7ZlnI6Lp6uFZqF6zVVo4+jcu/o=";
     };
     # 2回目のビルドエラーから正しい値に置き換える
     cargoHash = lib.fakeHash;
