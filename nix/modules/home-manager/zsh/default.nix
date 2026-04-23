@@ -23,7 +23,6 @@ in
 {
   xdg.enable = true;
 
-  # Stage 4b: programs.zsh.enable = true に切り替え。
   # - HM が ~/.zshenv(エントリポイント) と $ZDOTDIR/.zshenv を生成。
   # - envExtra: $ZDOTDIR/.zshenv に埋め込まれる。
   # - profileExtra: $ZDOTDIR/.zprofile に埋め込まれる。
