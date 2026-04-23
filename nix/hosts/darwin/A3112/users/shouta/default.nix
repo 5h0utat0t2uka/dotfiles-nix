@@ -1,31 +1,11 @@
 { pkgs, lib, identity, ... }:
 
-# let
-#   zshPluginDir = "share/zsh/plugins";
-#   zshPluginLinks = pkgs.linkFarm "zsh-plugin-links" [
-#     {
-#       name = "${zshPluginDir}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
-#       path = "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
-#     }
-#     {
-#       name = "${zshPluginDir}/zsh-autosuggestions/zsh-autosuggestions.zsh";
-#       path = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
-#     }
-#     {
-#       name = "${zshPluginDir}/zsh-abbr/zsh-abbr.zsh";
-#       path = "${pkgs.zsh-abbr}/share/zsh/zsh-abbr/zsh-abbr.zsh";
-#     }
-#     {
-#       name = "${zshPluginDir}/powerlevel10k";
-#       path = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k";
-#     }
-#   ];
-# in
 {
   # Issue: https://github.com/nix-community/home-manager/issues/7935
   manual = {
     manpages.enable = false;
   };
+
   # 一部を除いてドットファイルの実体は chezmoi で管理する前提なので
   # home-manager では生成しない
   programs = {
@@ -50,7 +30,6 @@
     stateVersion = "25.11";
     username = identity.username;
     homeDirectory = identity.homeDirectory;
-
     packages = with pkgs; [
       age
       bat
@@ -91,13 +70,6 @@
       wget
       zbar
       zoxide
-      # zeno-zsh
-      # zsh-syntax-highlighting
-      # zsh-autosuggestions
-      # zsh-abbr
-      # zsh-powerlevel10k
-      # zsh-completions
-      # zshPluginLinks
       # LSP
       nixd
       nil

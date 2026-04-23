@@ -17,10 +17,10 @@ return {
         { "<leader>ff", b("find_files", { hidden = false }), desc = "Find files" },
         { "<leader>fg", b("live_grep"),                      desc = "Live grep" },
         { "<leader>fb", b("buffers"),                        desc = "Buffers" },
+        { "<leader>fr", b("registers"),                      desc = "Registers" },
         { "<leader>gs", b("git_status"),                     desc = "Git status" },
         { "<leader>gc", b("git_commits"),                    desc = "Git commits" },
         { "<leader>gb", b("git_branches"),                   desc = "Git branches" },
-        { "<leader>pp", b("registers"),                      desc = "Registers" },
         { "<leader>fh", b("help_tags"),                      desc = "Help tags" },
         { "<leader>fG", function()
           require("telescope.builtin").live_grep({
@@ -77,6 +77,9 @@ return {
           },
         },
         pickers = {
+          find_files = {
+            initial_mode = "normal",
+          },
           buffers = {
             initial_mode = "normal",
             sort_mru = true,
@@ -87,6 +90,21 @@ return {
               },
               i = {
                 ["<C-d>"] = actions.delete_buffer,
+              },
+            },
+          },
+          registers = {
+            initial_mode = "normal",
+            mappings = {
+              n = {
+                ["dd"] = function(prompt_bufnr)
+                  local action_state = require("telescope.actions.state")
+                  local current_picker = action_state.get_current_picker(prompt_bufnr)
+                  current_picker:delete_selection(function(selection)
+                    vim.fn.setreg(selection.value, "")
+                    vim.cmd("wshada!")
+                  end)
+                end,
               },
             },
           },

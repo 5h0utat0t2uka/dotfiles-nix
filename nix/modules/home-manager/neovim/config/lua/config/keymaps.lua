@@ -14,6 +14,11 @@ vim.keymap.set("n", "gJ", "<Cmd>tabclose!<CR>", { desc = "Force close tab" })
 -- vim.keymap.set("n", "<Leader>ld", vim.lsp.buf.definition, { desc = "LSP Definition" })
 -- vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.references, { desc = "LSP References" })
 -- vim.keymap.set("n", "<Leader>ln", vim.lsp.buf.rename, { desc = "LSP Rename" })
+-- 誤操作防止: q を無効化、Q でマクロ記録
+vim.keymap.set("n", "Q", "q", { desc = "Record macro" })
+vim.keymap.set("n", "q", "<Nop>", { desc = "Disable accidental macro recording" })
+vim.keymap.set({ "n", "x" }, "x", '"_x', { silent = true, desc = "Delete without yank" })
+vim.keymap.set({ "n", "x" }, "X", '"_X', { silent = true, desc = "Delete without yank" })
 
 vim.keymap.set("n", "<A-h>", "b", { remap = true, silent = true, desc = "Prev word" })
 vim.keymap.set("n", "<A-l>", "w", { remap = true, silent = true, desc = "Next word" })
@@ -57,11 +62,11 @@ vim.keymap.set('i', '<A-h>', '<Home>', { desc = "Move to sta of line" })
 
 -- visual mode keymaps
 -- インデント
-vim.keymap.set("x", "<", "<gv", { noremap = true, silent = true })
-vim.keymap.set("x", ">", ">gv", { noremap = true, silent = true })
+vim.keymap.set("x", "<", "<gv", { noremap = true, silent = true }, { desc = "Indent to left" })
+vim.keymap.set("x", ">", ">gv", { noremap = true, silent = true }, { desc = "Indent to right" })
 -- 選択範囲の移動
-vim.keymap.set("x", "<A-j>", ":m '>+1<CR>gv=gv", { silent = true })
-vim.keymap.set("x", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set("x", "<A-j>", ":m '>+1<CR>gv=gv", { silent = true }, { desc = "Move line" })
+vim.keymap.set("x", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true }, { desc = "Move line" })
 
 vim.keymap.set("x", "<leader>r", '"_dP', { desc = "Replace selection with yanked" })
 
