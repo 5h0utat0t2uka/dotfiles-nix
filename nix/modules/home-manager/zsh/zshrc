@@ -65,21 +65,6 @@ if [[ -n "$TMUX" ]]; then
   add-zsh-hook precmd tmux_update_pane
 fi
 
-# Completions
-# BREW_PREFIX=/opt/homebrew
-# ZSH_PLUGIN_DIR="${NIX_PROFILE_PREFIX:-}/share/zsh/plugins"
-
-# typeset -U fpath
-# local -a new_fpath=(
-#   "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
-#   "$BREW_PREFIX/share/zsh/site-functions"(N-/)
-# )
-# [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
-
-# Completions
-
-# Prefer brew that is actually available; do not assume a fixed prefix.
-
 local BREW_PREFIX=""
 if command -v brew >/dev/null 2>&1; then
   BREW_PREFIX="$(brew --prefix 2>/dev/null)"
@@ -117,10 +102,6 @@ fi
 if [[ -r "$ZSH_PLUGIN_DIR/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
   source "$ZSH_PLUGIN_DIR/powerlevel10k/powerlevel10k.zsh-theme"
 fi
-
-# if [[ -f "$ZDOTDIR/.p10k.zsh" ]]; then
-#   source "$ZDOTDIR/.p10k.zsh"
-# fi
 if [[ -f "$HOME/.config/zsh/.p10k.zsh" ]]; then
   source "$HOME/.config/zsh/.p10k.zsh"
 fi
@@ -199,9 +180,6 @@ alias webp="$HOME/Development/scripts/webp.sh"
 alias vim='nvim'
 alias ll='eza -alo --icons --time-style iso'
 alias lg='lazygit'
-# brewで入れたGUIアプリ使う場合
-# [[ -x "$BREW_PREFIX/bin/zed" ]] && alias zed="$BREW_PREFIX/bin/zed"
-# [[ -x "$BREW_PREFIX/bin/code" ]] && alias code="$BREW_PREFIX/bin/code"
 
 # abbr
 export ABBR_SET_EXPANSION_CURSOR=1
@@ -285,29 +263,6 @@ dff() {
     diff -u -- "$file1" "$file2" | "${out[@]}"
   fi
 }
-
-# if [[ -n "$TMUX" ]]; then
-#   lfcd() {
-#     local tmp
-#     tmp="$(mktemp)"
-#     tmux popup \
-#       -w 80% -h 80% -x C -y C \
-#       -d "#{pane_current_path}" \
-#       -E "lf -last-dir-path='$tmp' $(printf '%q ' "$@")"
-#     if [[ -f "$tmp" ]]; then
-#       local dir
-#       dir="$(<"$tmp")"
-#       rm -f "$tmp"
-#       [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
-#     fi
-#   }
-# else
-#   lfcd() {
-#     local dir
-#     dir="$(command lf -print-last-dir "$@")" || return
-#     [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
-#   }
-# fi
 
 update_zo_opts() {
   export _ZO_FZF_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt) ${(j: :)_ZO_ADDITIONAL_OPTS}"
@@ -434,42 +389,3 @@ fzf_nb() {
 }
 zle -N fzf_nb
 bindkey '^n' fzf_nb
-
-# Gitリポジトリのルートディレクトリでのみonefetchそれ以外はeza
-# chpwd() {
-#   [[ $PWD -ef $HOME ]] && return
-#   local pattern="/($(IFS='|'; echo "${IGNORE_DIRS[*]}"))"
-#   [[ $PWD =~ $pattern ]] && return
-
-#   if git rev-parse --is-inside-work-tree &>/dev/null; then
-#     printf '\n'
-#     local git_root=$(git rev-parse --show-toplevel 2>/dev/null)
-#     if [[ "$PWD" == "$git_root" ]] && command -v onefetch &>/dev/null; then
-#       onefetch --no-art --no-title --no-color-palette --disabled-fields lines-of-code authors churn url last-change
-#       return
-#     fi
-#   fi
-#   command eza -al --color=never -o --time-style=long-iso -F always
-# }
-
-# .zshrc, p10kのコンパイル（次回起動時の高速化）
-# Nix store の mtime が epoch 0 に固定されるため、古い .zwc が zsh から「新しい」と誤判定され続けて更新が反映されない
-# () {
-#   local zshrc="$ZDOTDIR/.zshrc"
-#   local p10k="$ZDOTDIR/.p10k.zsh"
-#   if [[ -f "$zshrc" && ( ! -f "$zshrc.zwc" || "$zshrc" -nt "$zshrc.zwc" ) ]]; then
-#     zcompile "$zshrc"
-#   fi
-#   if [[ -f "$p10k" && ( ! -f "$p10k.zwc" || "$p10k" -nt "$p10k.zwc" ) ]]; then
-#     zcompile "$p10k"
-#   fi
-# }
-
-# direnv
-# if command -v direnv >/dev/null 2>&1; then
-#   eval "$(direnv hook zsh)"
-# fi
-
-# if [[ -r "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-#   source "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-# fi
