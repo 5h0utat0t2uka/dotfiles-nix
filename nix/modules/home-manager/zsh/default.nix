@@ -49,12 +49,16 @@ in
     initContent = lib.mkMerge [
       (lib.mkBefore ''
         [[ $- != *i* ]] && return
-
         if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
       '')
       (builtins.readFile ./zshrc-body)
+      (lib.mkAfter ''
+        if [[ -r "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+          source "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+        fi
+      '')
     ];
   };
 
