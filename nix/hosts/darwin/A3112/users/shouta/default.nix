@@ -9,7 +9,8 @@
   # 一部を除いてドットファイルの実体は chezmoi で管理する前提なので
   # home-manager では生成しない
   programs = {
-    zsh.enable = false;
+    # zsh は modules/home-manager/ 配下で Nix 管理
+    # zsh.enable = false;
     git.enable = false;
     direnv = {
       enable = true;
