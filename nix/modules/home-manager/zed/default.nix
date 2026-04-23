@@ -14,7 +14,7 @@ let
       hash = "sha256-VdCnZpNvjv9Soldpz7ZlnI6Lp6uFZqF6zVVo4+jcu/o=";
     };
     # 2回目のビルドエラーから正しい値に置き換える
-    cargoHash = lib.fakeHash;
+    cargoHash = "";
   });
 in
 {
