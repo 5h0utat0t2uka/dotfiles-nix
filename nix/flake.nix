@@ -23,13 +23,21 @@
       url = "github:wezterm/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zed = {
-      url = "github:zed-industries/zed";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # zed = {
+    #   url = "github:zed-industries/zed";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, nix-homebrew, wezterm, zed, ... } @inputs:
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    darwin,
+    nix-homebrew,
+    wezterm,
+    # zed,
+    ... } @inputs:
   let
     lib = nixpkgs.lib;
     # ------------------------------------------------------------
