@@ -1,15 +1,17 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
-  home.sessionVariables.NBRC_PATH = "${config.xdg.configHome}/nb/.nbrc";
-  xdg.configFile = {
-    "nb/.nbrc".text = ''
-      # Managed by Home Manager.
-      # Do not edit with `nb set`, `nb unset`, or `nb settings edit`.
-      export NB_DIR="${config.home.homeDirectory}/Development/repositories/github.com/5h0utat0t2uka/nb"
-      export EDITOR="nvim"
-    '';
+  home.packages = with pkgs; [ nb ];
+  home.sessionVariables = {
+    NBRC_PATH = "${config.xdg.configHome}/nb/.nbrc";
   };
+
+  xdg.configFile."nb/.nbrc".text = ''
+    # The settings are managed on Nix Home Manager.
+    # Do not edit with `nb set`, `nb unset`, or `nb settings edit`.
+    export NB_DIR="${config.home.homeDirectory}/Development/repositories/github.com/5h0utat0t2uka/nb"
+    export EDITOR="nvim"
+  '';
 
   # programs.zsh.initContent = lib.mkAfter ''
   #   nb() {

@@ -1,4 +1,4 @@
-{ pkgs, lib, identity, ... }:
+{ pkgs, identity, ... }:
 
 {
   # Issue: https://github.com/nix-community/home-manager/issues/7935
@@ -56,7 +56,7 @@
       lazygit
       macism
       mise
-      nb
+      # nb
       ni
       nmap
       nodejs_24
