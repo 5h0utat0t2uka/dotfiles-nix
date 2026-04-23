@@ -3,25 +3,27 @@
 {
   programs.git = {
     enable = true;
-    userName = "5h0utat0t2uka";
-    userEmail = "5h0utat0t2uka@gmail.com";
     ignores = [
       ".DS_Store"
       "**/.claude/settings.local.json"
     ];
-    extraConfig = {
+    settings = {
+      user = {
+        name = "5h0utat0t2uka";
+        email = "5h0utat0t2uka@gmail.com";
+      };
       core = {
         editor = "vim";
         pager = "delta";
+      };
+      url."git@github.com:" = {
+        insteadOf = "https://github.com/";
       };
       interactive = { diffFilter = "delta --color-only"; };
       merge = { conflictstyle = "diff3"; };
       diff = { colorMoved = "default"; };
       init = { defaultBranch = "main"; };
       push = { autoSetupRemote = true; };
-      url."git@github.com:" = {
-        insteadOf = "https://github.com/";
-      };
       delta = {
         navigate = true;
         side-by-side = true;
