@@ -15,12 +15,6 @@ return {
       paste = { hl_color = { bg = "#6e596d" } },
       comment = { hl_color = { bg = "#4C566A" } },
       search  = { hl_color = { bg = "#8a5c4a" } },
-      -- undo  = { hl_color = { bg = "#4a7d8f" } },
-      -- redo  = { hl_color = { bg = "#7a4f3f" } },
-      -- yank  = { hl_color = { bg = "#6e596d" } },
-      -- paste = { hl_color = { bg = "#61754e" } },
-      -- comment = { hl_color = { bg = "#3B4252" } },
-      -- search  = { hl_color = { bg = "#8a5c4a" } },
     },
   },
   keys = {
@@ -53,7 +47,6 @@ return {
   },
   config = function(_, opts)
     require("undo-glow").setup(opts)
-
     -- setup() 後にパッチを当てる
     local api = require("undo-glow.api")
     local orig = api.highlight_region_enhanced
@@ -63,11 +56,6 @@ return {
       end
       orig(o)
     end
-    -- vim.api.nvim_create_autocmd("TextYankPost", {
-    --   callback = function()
-    --     require("undo-glow").yank()
-    --   end,
-    -- })
     vim.api.nvim_create_autocmd("TextYankPost", {
       desc = "Highlight when yanking (copying) text",
       callback = function()

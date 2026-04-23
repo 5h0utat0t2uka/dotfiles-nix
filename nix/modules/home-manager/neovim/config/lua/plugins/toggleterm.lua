@@ -3,8 +3,6 @@ return {
   version = "*",
   config = function()
     require("toggleterm").setup{
-      -- size can be a number or function which is passed the current terminal
-      -- size = 20,
       -- open_mapping = [[<leader>tt]],
       size = function(term)
         if term.direction == "horizontal" then
@@ -15,12 +13,7 @@ return {
       open_mapping = [[<c-t>]], -- or { [[<c-\>]], [[<c-¥>]] } if you also use a Japanese keyboard.
       hide_numbers = true, -- hide the number column in toggleterm buffers
       shade_filetypes = {},
-      highlights = {
-        -- FloatBorder = {
-        --   guifg = "#4c566a",
-        --   guibg = "#2e3440",
-        -- },
-      },
+      highlights = {},
       autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
       shade_terminals = false,
       start_in_insert = true,
@@ -31,10 +24,8 @@ return {
       direction = 'float',
       close_on_exit = true, -- close the terminal window when the process exits
       clear_env = false, -- use only environmental variables from `env`, passed to jobstart()
-       -- Change the default shell. Can be a string or a function returning a string
       shell = vim.o.shell,
       auto_scroll = true, -- automatically scroll to the bottom on terminal output
-      -- This field is only relevant if direction is set to 'float'
       float_opts = {
         border = 'curved',
         title_pos = 'center',
@@ -42,20 +33,14 @@ return {
       },
       winbar = {
         enabled = false,
-        name_formatter = function(term) --  term: Terminal
+        name_formatter = function(term)
           return term.name
         end
       },
     }
-
     -- float terminal（既存の <C-t>）
     vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<CR>", { silent = true })
     vim.keymap.set("t", "<C-t>", [[<C-\><C-n><cmd>ToggleTerm direction=float<CR>]], { silent = true })
-
-    -- bottom terminal
-    -- vim.keymap.set("n", "<leader>tb", "<cmd>ToggleTerm size=15 direction=horizontal<CR>", { silent = true })
-    -- vim.keymap.set("t", "<leader>tb", [[<C-\><C-n><cmd>ToggleTerm size=15 direction=horizontal<CR>]], { silent = true })
-    -- lazygit
     local Terminal  = require('toggleterm.terminal').Terminal
     local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
     function _lazygit_toggle()

@@ -12,7 +12,6 @@ return {
       "bash", "zsh", "dockerfile",
       "gitignore", "regex"
     })
-
     vim.api.nvim_create_autocmd("FileType", {
       pattern = {
         "lua", "vim", "vimdoc", "query",

@@ -9,12 +9,7 @@ vim.keymap.set("n", "gh", "<Cmd>tabprevious<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "gl", "<Cmd>tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "gj", "<Cmd>tabclose<CR>", { desc = "Close tab" })
 vim.keymap.set("n", "gJ", "<Cmd>tabclose!<CR>", { desc = "Force close tab" })
--- LSP
--- vim.keymap.set("n", "<Leader>lh", vim.lsp.buf.hover, { desc = "LSP Hover" })
--- vim.keymap.set("n", "<Leader>ld", vim.lsp.buf.definition, { desc = "LSP Definition" })
--- vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.references, { desc = "LSP References" })
--- vim.keymap.set("n", "<Leader>ln", vim.lsp.buf.rename, { desc = "LSP Rename" })
--- 誤操作防止: q を無効化、Q でマクロ記録
+-- q を無効化、Q でマクロ記録
 vim.keymap.set("n", "Q", "q", { desc = "Record macro" })
 vim.keymap.set("n", "q", "<Nop>", { desc = "Disable accidental macro recording" })
 vim.keymap.set({ "n", "x" }, "x", '"_x', { silent = true, desc = "Delete without yank" })
@@ -67,7 +62,6 @@ vim.keymap.set("x", ">", ">gv", { noremap = true, silent = true }, { desc = "Ind
 -- 選択範囲の移動
 vim.keymap.set("x", "<A-j>", ":m '>+1<CR>gv=gv", { silent = true }, { desc = "Move line" })
 vim.keymap.set("x", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true }, { desc = "Move line" })
-
 vim.keymap.set("x", "<leader>r", '"_dP', { desc = "Replace selection with yanked" })
 
 -- command mode keymaps

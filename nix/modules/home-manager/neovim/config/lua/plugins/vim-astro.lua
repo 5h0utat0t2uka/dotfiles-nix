@@ -1,4 +1,3 @@
--- Astroファイルのシンタックスハイライトとインデントを提供するプラグイン
 return {
   {
     "wuelnerdotexe/vim-astro",

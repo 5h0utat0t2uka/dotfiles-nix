@@ -54,7 +54,6 @@ return {
         italic = true,
       })
     end
-
     apply_custom_highlights()
 
     local group = vim.api.nvim_create_augroup("NordOverrides", { clear = true })

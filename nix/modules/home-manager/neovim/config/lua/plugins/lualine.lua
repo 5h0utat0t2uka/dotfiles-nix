@@ -117,35 +117,16 @@ return {
             },
           },
         },
-        -- lualine_a = {
-        --   {
-        --     "mode",
-        --     color = {
-        --       gui = "none",
-        --     },
-        --   },
-        -- },
         lualine_b = {
-          -- {
-          --   function()
-          --     return " "
-          --   end,
-          --   color = { bg = "#2E3440", fg = "#2E3440" },
-          --   padding = { left = 0, right = 0 },
-          -- },
           {
             "branch",
             icons_enabled = false,
             -- icon = "󰘬",
             separator = { left = "", right = "" },
             fmt = function(str) return str ~= "" and "[" .. str .. "]" or "" end,
-            -- fmt = function(str)
-            --   return string.upper(str)
-            -- end,
             color = {
               fg = "#81A1C1",
               bg = "#2E3440",
-              -- bg = "#3B4252",
             }
           },
           {
@@ -162,7 +143,6 @@ return {
           },
           {
             "diagnostics",
-            -- symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
             symbols = {error = 'E ', warn = 'W ', info = 'I ', hint = 'H '},
             color = {
               bg = "#2E3440",
@@ -176,65 +156,15 @@ return {
             shorting_target = 40,
             symbols = { unnamed = "[No Name]" },
             fmt = function(str)
-              -- return str:gsub("/", "  ")
               return str:gsub("/", "  ")
             end,
-            -- padding = { left = 1, right = 1 },
-            -- separator = { left = " ", right = " " },
             color = {
               fg = "#81A1C1",
               bg = "#2E3440",
-              -- fg = "#2E3440",
-              -- bg = "#4C566A",
-              -- gui = "bold",
             }
           },
         },
-        -- lualine_c = {},
-        lualine_c = {
-
-          -- {
-          --   "filetype",
-          --   icon_only = true,
-          --   colored = false,
-          --   padding = { left = 1, right = 1 },
-          --   color = {
-          --     fg = "#81A1C1",
-          --     bg = "#2E3440",
-          --   },
-          -- },
-
-          -- {
-          --   "filename",
-          --   file_status = false,
-          --   newfile_status = true,
-          --   path = 0,
-          --   shorting_target = 40,
-          --   symbols = { unnamed = "[No Name]" },
-          --   padding = { left = 1, right = 1 },
-          --   separator = { left = " ", right = " " },
-          --   color = {
-          --     fg = "#2E3440",
-          --     bg = "#4C566A",
-          --     gui = "bold",
-          --   }
-          -- },
-
-          -- {
-          --   "diff",
-          --   symbols = {
-          --     added = ' ',
-          --     modified = ' ',
-          --     removed = ' ',
-          --   },
-          --   color = {
-          --     fg = "#81A1C1",
-          --     bg = "#2E3440",
-          --   }
-          -- },
-          -- { "diagnostics", symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '} }
-        },
-        -- lualine_x = {},
+        lualine_c = {},
         lualine_x = {
           {
             require("noice").api.status.search.get,
@@ -252,16 +182,12 @@ return {
         lualine_y = {
           {
             "location",
-            -- fmt = function(str)
-            --   return string.upper(str)
-            -- end,
             color = {
               fg = "#81A1C1",
               bg = "#2E3440",
             }
           }
         },
-        -- lualine_z = {},
         lualine_z = {
           {
             "encoding",
@@ -275,31 +201,7 @@ return {
           }
         },
       },
-      tabline = {
-        -- lualine_a = {
-        --   {
-        --     "buffers",
-        --     separator = { left = " ", right = " " },
-        --     show_filename_only = true,
-        --     icons_enabled = false,
-        --     symbols = {
-        --       modified = " ",
-        --       alternate_file = "",
-        --       directory = "",
-        --     },
-        --     buffers_color = {
-        --       active   = { fg = "#2E3440", bg = "#81A1C1" },
-        --       inactive = { fg = "#81A1C1", bg = "#2E3440" },
-        --     },
-        --   }
-        -- },
-        -- lualine_z = {
-        --   {
-        --     "tabs",
-        --     separator = { left = "", right = " " },
-        --   }
-        -- }
-      }
+      tabline = {}
     })
   end,
 }

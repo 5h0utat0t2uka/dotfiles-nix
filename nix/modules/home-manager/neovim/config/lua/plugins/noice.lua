@@ -8,7 +8,6 @@ return {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
-
     opts = {
       cmdline = {
         format = {
@@ -35,13 +34,11 @@ return {
         inc_rename = false,
         lsp_doc_border = true,
       },
-
       views = {
         notify = {
           replace = true,
           merge = true,
         },
-
         cmdline_popup = {
           position = { row = "50%", col = "50%" },
           size = { min_width = 60, width = "auto", height = "auto" },
@@ -61,35 +58,15 @@ return {
             },
           },
         },
-        -- confirm = {
-        --   position = { row = "50%", col = "50%" },
-        --   size = { width = 60, height = "auto" },
-        --   border = {
-        --     style = "rounded",
-        --     padding = { 2, 2 },
-        --   },
-        --   win_options = {
-        --     winblend = 10,
-        --     winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-        --   },
-        -- },
       },
 
       routes = {
         { view = "split", filter = { event = "msg_show", min_height = 10 } },
         { view = "split", filter = { event = "msg_show", min_length = 200 } },
-        {
-          filter = { event = "msg_show", kind = "search_count" },
-          opts = { skip = true },
-        },
-        -- {
-        --   view = "confirm",
-        --   filter = { event = "msg_show", kind = "confirm_sub" },
-        -- },
+        { filter = { event = "msg_show", kind = "search_count" }, opts = { skip = true } },
       },
     },
   },
-
   {
     "rcarriga/nvim-notify",
     lazy = true,

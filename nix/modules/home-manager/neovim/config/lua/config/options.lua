@@ -15,7 +15,6 @@ vim.opt.smartcase = true
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.breakindent = true
-
 vim.opt.signcolumn = "yes"
 vim.opt.expandtab = true
 vim.opt.wildmenu = true
@@ -31,27 +30,9 @@ vim.opt.showmatch = true
 vim.opt.cursorline = true
 vim.opt.cmdheight = 0
 -- vim.opt.cmdheight = 1
-
 vim.opt.guicursor = table.concat({
   "n-v:block",
   "i:ver50",
   "c:hor50",
   "a:blinkon500-blinkoff500",
 }, ",")
-
--- vim.opt.showcmd = true
--- vim.opt.showcmdloc = "statusline"
--- vim.opt.laststatus = 3
--- vim.opt.statusline = "%=%S"
-
--- vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'fuzzy', 'popup' }
--- vim.opt.autocomplete = true
--- vim.api.nvim_create_autocmd('LspAttach', {
---   callback = function(ev)
---     local client = vim.lsp.get_client_by_id(ev.data.client_id)
---     if client and client:supports_method('textDocument/completion') then
---       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
---     end
---   end,
--- })
---
