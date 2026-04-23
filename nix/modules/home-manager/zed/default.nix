@@ -1,38 +1,9 @@
-{ pkgs, ... }:
+{ inputs, system, ... }:
 
-let
-  version = "0.233.6";
-  rev = "6e1c63029035871963113acaa25613f225f48e89";
-
-  zed-latest = pkgs.zed-editor.overrideAttrs (old: {
-    version = version;
-    src = pkgs.fetchFromGitHub {
-      owner = "zed-industries";
-      repo = "zed";
-      rev = rev;
-      # hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-      hash = "sha256-VdCnZpNvjv9Soldpz7ZlnI6Lp6uFZqF6zVVo4+jcu/o=";
-    };
-    cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
-      inherit (old) pname;
-      version = version;
-      src = pkgs.fetchFromGitHub {
-        owner = "zed-industries";
-        repo = "zed";
-        rev = rev;
-        # hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-        hash = "sha256-VdCnZpNvjv9Soldpz7ZlnI6Lp6uFZqF6zVVo4+jcu/o=";
-      };
-      # hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-      hash = "sha256-UZAy22tbLCvc/ZJ0jRMsa43lKmANSm15Cx3Ohy6fFYo=";
-    };
-  });
-in
 {
   programs.zed-editor = {
     enable = true;
-    package = zed-latest;
-    # GUI からの設定変更可否
+    package = inputs.zed.packages.${system}.default;
     mutableUserSettings = false;
     mutableUserKeymaps = false;
     extensions = [
@@ -56,6 +27,7 @@ in
     };
   };
 }
+
 
 # {
 #   programs.zed-editor = {
