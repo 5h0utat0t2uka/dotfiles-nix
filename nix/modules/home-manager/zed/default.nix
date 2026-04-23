@@ -3,7 +3,6 @@
 {
   programs.zed-editor = {
     enable = true;
-    # package = inputs.zed.packages.${system}.default;
     package = inputs.zed.packages.${pkgs.system}.default;
     mutableUserSettings = false;
     mutableUserKeymaps = false;
