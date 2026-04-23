@@ -10,11 +10,19 @@ let
       owner = "zed-industries";
       repo = "zed";
       rev = rev;
-      # 1回目のビルドエラーから正しい値に置き換える
       hash = "sha256-VdCnZpNvjv9Soldpz7ZlnI6Lp6uFZqF6zVVo4+jcu/o=";
     };
-    # 2回目のビルドエラーから正しい値に置き換える
-    cargoHash = "";
+    cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+      inherit (old) pname;
+      version = version;
+      src = pkgs.fetchFromGitHub {
+        owner = "zed-industries";
+        repo = "zed";
+        rev = rev;
+        hash = "sha256-VdCnZpNvjv9Soldpz7ZlnI6Lp6uFZqF6zVVo4+jcu/o=";
+      };
+      hash = "";
+    };
   });
 in
 {
