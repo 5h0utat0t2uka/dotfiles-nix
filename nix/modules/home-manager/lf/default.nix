@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.lf = {
@@ -31,6 +31,6 @@
         }}
       '';
     };
-    previewer.source = ./pv.sh;
+    previewer.source = pkgs.writeShellScript "lf-pv" (builtins.readFile ./pv.sh);
   };
 }
