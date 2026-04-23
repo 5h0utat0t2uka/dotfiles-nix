@@ -25,6 +25,8 @@
     ../../../../../modules/home-manager/zsh
     ../../../../../modules/home-manager/zed
     ../../../../../modules/home-manager/neovim
+    ../../../../../modules/home-manager/bat
+    ../../../../../modules/home-manager/lf
   ];
 
   home = {
@@ -33,7 +35,7 @@
     homeDirectory = identity.homeDirectory;
     packages = with pkgs; [
       age
-      bat
+      # bat
       chafa
       delta
       devbox
@@ -49,7 +51,7 @@
       just
       jq
       libwebp
-      lf
+      # lf
       lazygit
       macism
       mise
