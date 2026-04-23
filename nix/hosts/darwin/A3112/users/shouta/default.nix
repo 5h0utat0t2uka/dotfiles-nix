@@ -25,6 +25,7 @@
     ../../../../../modules/home-manager/zsh
     ../../../../../modules/home-manager/zed
     ../../../../../modules/home-manager/neovim
+    ../../../../../modules/home-manager/aerospace
     ../../../../../modules/home-manager/bat
     ../../../../../modules/home-manager/lf
     ../../../../../modules/home-manager/nb
