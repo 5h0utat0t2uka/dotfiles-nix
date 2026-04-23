@@ -7,6 +7,7 @@
     # package = null;
     enable = true;
     package = pkgs.ghostty-bin;
+    enableZshIntegration = false;
   };
 
   xdg.configFile."ghostty/config.ghostty".text = ''

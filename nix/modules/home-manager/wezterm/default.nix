@@ -7,6 +7,7 @@ in
   programs.wezterm = {
     enable = true;
     package = inputs.wezterm.packages.${system}.default;
+    enableZshIntegration = false;
   };
 
   xdg.configFile."wezterm/wezterm.lua".text = ''
