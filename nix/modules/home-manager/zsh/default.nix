@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-
+{ pkgs, lib, ... }:
 let
   zshPluginDir = "share/zsh/plugins";
   zshPluginLinks = pkgs.linkFarm "zsh-plugin-links" [
@@ -23,26 +22,46 @@ let
 in
 {
   xdg.enable = true;
-  home.file.".zshenv".text = ''
-    # XDG Base Directory Specification
-    export XDG_CONFIG_HOME="''${XDG_CONFIG_HOME:-$HOME/.config}"
-    export XDG_CACHE_HOME="''${XDG_CACHE_HOME:-$HOME/.cache}"
-    export XDG_DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}"
-    # Zsh Configuration Directory
-    export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-    # Zsh Sessions Directory
-    export SHELL_SESSIONS_DIR="$XDG_CACHE_HOME/zsh/sessions"
-    # nb
-    export NBRC_PATH="$XDG_CONFIG_HOME/nb/.nbrc"
-  '';
+
+  # Stage 4b: programs.zsh.enable = true に切り替え。
+  # - HM が ~/.zshenv(エントリポイント) と $ZDOTDIR/.zshenv を生成。
+  # - envExtra: $ZDOTDIR/.zshenv に埋め込まれる。
+  # - profileExtra: $ZDOTDIR/.zprofile に埋め込まれる。
+  # - initContent: $ZDOTDIR/.zshrc に優先度順に展開される。
+  #   - mkBefore (500): p10k instant prompt (HM 自動生成コードより前)
+  #   - 通常 (1000): zshrc-body 本体
+  # - enableCompletion = false: compinit は zshrc-body 側で管理する方針維持。
+  programs.zsh = {
+    enable = true;
+    enableCompletion = false;
+    dotDir = ".config/zsh";
+
+    envExtra = ''
+      export XDG_CONFIG_HOME="''${XDG_CONFIG_HOME:-$HOME/.config}"
+      export XDG_CACHE_HOME="''${XDG_CACHE_HOME:-$HOME/.cache}"
+      export XDG_DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}"
+      export SHELL_SESSIONS_DIR="$XDG_CACHE_HOME/zsh/sessions"
+      export NBRC_PATH="$XDG_CONFIG_HOME/nb/.nbrc"
+    '';
+
+    profileExtra = builtins.readFile ./zprofile;
+
+    initContent = lib.mkMerge [
+      (lib.mkBefore ''
+        [[ $- != *i* ]] && return
+
+        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+        fi
+      '')
+      (builtins.readFile ./zshrc-body)
+    ];
+  };
+
   xdg.configFile = {
-    "zsh/.zprofile".source = ./zprofile;
-    "zsh/.zshrc".source = ./zshrc;
     "zsh/.p10k.zsh".source = ./p10k.zsh;
   };
-  # home.sessionPath は nix-darwin の /etc/zshrc 上書きの影響で zsh に反映されないため .zprofile で直接設定する
 
-  # zsh 関連パッケージはこのモジュールで管理
   home.packages = with pkgs; [
     zsh-completions
     zshPluginLinks
