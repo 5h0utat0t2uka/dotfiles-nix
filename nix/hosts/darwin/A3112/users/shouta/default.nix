@@ -27,6 +27,7 @@
     ../../../../../modules/home-manager/neovim
     ../../../../../modules/home-manager/bat
     ../../../../../modules/home-manager/lf
+    ../../../../../modules/home-manager/nb
   ];
 
   home = {
@@ -81,11 +82,11 @@
       copilot-language-server
     ];
 
-    activation.ensureNbConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      mkdir -p "$HOME/.config/nb"
-      if [ ! -e "$HOME/.config/nb/.nbrc" ]; then
-        : > "$HOME/.config/nb/.nbrc"
-      fi
-    '';
+    # activation.ensureNbConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    #   mkdir -p "$HOME/.config/nb"
+    #   if [ ! -e "$HOME/.config/nb/.nbrc" ]; then
+    #     : > "$HOME/.config/nb/.nbrc"
+    #   fi
+    # '';
   };
 }
