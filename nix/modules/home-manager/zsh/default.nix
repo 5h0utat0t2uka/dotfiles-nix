@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
   zshPluginDir = "share/zsh/plugins";
   zshPluginLinks = pkgs.linkFarm "zsh-plugin-links" [
@@ -34,7 +34,7 @@ in
   programs.zsh = {
     enable = true;
     enableCompletion = false;
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     defaultKeymap = "emacs";
     envExtra = ''
       export XDG_CONFIG_HOME="''${XDG_CONFIG_HOME:-$HOME/.config}"
@@ -45,7 +45,6 @@ in
     '';
 
     profileExtra = builtins.readFile ./zprofile;
-
     initContent = lib.mkMerge [
       (lib.mkBefore ''
         [[ $- != *i* ]] && return
@@ -53,7 +52,7 @@ in
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
       '')
-      (builtins.readFile ./zshrc-body)
+      (builtins.readFile ./zshrc)
       (lib.mkAfter ''
         if [[ -r "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
           source "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
@@ -65,7 +64,6 @@ in
   xdg.configFile = {
     "zsh/.p10k.zsh".source = ./p10k.zsh;
   };
-
   home.packages = with pkgs; [
     zsh-completions
     zshPluginLinks

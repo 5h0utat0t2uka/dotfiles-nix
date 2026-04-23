@@ -1,11 +1,3 @@
-# 非インタラクティブシェルのチェック
-[[ $- != *i* ]] && return
-
-# Instant Prompt (P10k)
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # キャッシュ関連ディレクトリ
 CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 mkdir -p "$CACHE_DIR"
@@ -474,10 +466,10 @@ bindkey '^n' fzf_nb
 # }
 
 # direnv
-if command -v direnv >/dev/null 2>&1; then
-  eval "$(direnv hook zsh)"
-fi
+# if command -v direnv >/dev/null 2>&1; then
+#   eval "$(direnv hook zsh)"
+# fi
 
-if [[ -r "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-  source "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
+# if [[ -r "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+#   source "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# fi
