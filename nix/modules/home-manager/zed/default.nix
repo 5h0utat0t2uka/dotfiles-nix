@@ -10,6 +10,7 @@ let
       owner = "zed-industries";
       repo = "zed";
       rev = rev;
+      # hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
       hash = "sha256-VdCnZpNvjv9Soldpz7ZlnI6Lp6uFZqF6zVVo4+jcu/o=";
     };
     cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
@@ -19,9 +20,11 @@ let
         owner = "zed-industries";
         repo = "zed";
         rev = rev;
+        # hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
         hash = "sha256-VdCnZpNvjv9Soldpz7ZlnI6Lp6uFZqF6zVVo4+jcu/o=";
       };
-      hash = "";
+      # hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      hash = "sha256-UZAy22tbLCvc/ZJ0jRMsa43lKmANSm15Cx3Ohy6fFYo=";
     };
   });
 in
