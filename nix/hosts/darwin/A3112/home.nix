@@ -19,18 +19,18 @@
   };
 
   imports = [
-    ../../../../../modules/home-manager/ghostty
-    ../../../../../modules/home-manager/wezterm
-    ../../../../../modules/home-manager/tmux
-    ../../../../../modules/home-manager/git
-    ../../../../../modules/home-manager/zsh
-    ../../../../../modules/home-manager/zed
-    ../../../../../modules/home-manager/direnv
-    ../../../../../modules/home-manager/neovim
-    ../../../../../modules/home-manager/aerospace
-    ../../../../../modules/home-manager/bat
-    ../../../../../modules/home-manager/lf
-    ../../../../../modules/home-manager/nb
+    ../../../modules/home-manager/ghostty
+    ../../../modules/home-manager/wezterm
+    ../../../modules/home-manager/tmux
+    ../../../modules/home-manager/git
+    ../../../modules/home-manager/zsh
+    ../../../modules/home-manager/zed
+    ../../../modules/home-manager/direnv
+    ../../../modules/home-manager/neovim
+    ../../../modules/home-manager/aerospace
+    ../../../modules/home-manager/bat
+    ../../../modules/home-manager/lf
+    ../../../modules/home-manager/nb
   ];
 
   home = {

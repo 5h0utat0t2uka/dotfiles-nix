@@ -114,7 +114,8 @@
                 inherit identity inputs;
               };
               home-manager.users.${identity.username} = import (
-                darwinHostsDir + "/${hostKey}/users/${identity.username}/default.nix"
+                darwinHostsDir + "/${hostKey}/home.nix"
+                # darwinHostsDir + "/${hostKey}/users/${identity.username}/default.nix"
               );
             }
 
