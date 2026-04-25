@@ -64,6 +64,26 @@ if [[ -n "$TMUX" ]]; then
   add-zsh-hook precmd tmux_update_pane
 fi
 
+# local BREW_PREFIX=""
+# if command -v brew >/dev/null 2>&1; then
+#   BREW_PREFIX="$(brew --prefix 2>/dev/null)"
+# elif [[ -x /opt/homebrew/bin/brew ]]; then
+#   BREW_PREFIX="$(/opt/homebrew/bin/brew --prefix 2>/dev/null)"
+# fi
+
+# typeset -U fpath
+# local -a new_fpath=(
+#   "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
+# )
+
+# if [[ -n "$BREW_PREFIX" ]]; then
+#   if [[ -e "$BREW_PREFIX/share/zsh/site-functions/_brew" && -e "$BREW_PREFIX/completions/zsh/_brew" ]]; then
+#     new_fpath+=("$BREW_PREFIX/share/zsh/site-functions"(N-/))
+#   fi
+# fi
+
+# [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
+
 local BREW_PREFIX=""
 if command -v brew >/dev/null 2>&1; then
   BREW_PREFIX="$(brew --prefix 2>/dev/null)"
@@ -71,19 +91,13 @@ elif [[ -x /opt/homebrew/bin/brew ]]; then
   BREW_PREFIX="$(/opt/homebrew/bin/brew --prefix 2>/dev/null)"
 fi
 
-# ZSH_PLUGIN_DIR="${NIX_PROFILE_PREFIX:-}/share/zsh/plugins"
-
 typeset -U fpath
 local -a new_fpath=(
   "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
 )
-
 if [[ -n "$BREW_PREFIX" ]]; then
-  if [[ -e "$BREW_PREFIX/share/zsh/site-functions/_brew" && -e "$BREW_PREFIX/completions/zsh/_brew" ]]; then
-    new_fpath+=("$BREW_PREFIX/share/zsh/site-functions"(N-/))
-  fi
+  new_fpath+=("$BREW_PREFIX/share/zsh/site-functions"(N-/))
 fi
-
 [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
 
 zstyle ':completion:*' use-cache on
@@ -171,14 +185,6 @@ export _ZO_FZF_OPTS="${(j: :)FZF_BASE_OPTS} ${(j: :)_ZO_ADDITIONAL_OPTS}"
 export FZF_DEFAULT_OPTS="${(j: :)FZF_BASE_OPTS}"
 export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --exclude node_modules --type f'
 export FZF_ALT_C_COMMAND='fd --hidden --exclude .git --exclude node_modules --type d'
-
-# alias
-# alias ..='cd ..'
-# alias vpn="$HOME/Development/scripts/vpn/connect.sh"
-# alias webp="$HOME/Development/scripts/webp.sh"
-# alias vim='nvim'
-# alias ll='eza -alo --icons --time-style iso'
-# alias lg='lazygit'
 
 # abbr
 # export ABBR_SET_EXPANSION_CURSOR=1

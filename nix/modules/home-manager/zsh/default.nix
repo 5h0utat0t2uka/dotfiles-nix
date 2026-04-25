@@ -1,28 +1,6 @@
 { config, pkgs, lib, ... }:
-let
-  # zshPluginDir = "share/zsh/plugins";
-  # zshPluginLinks = pkgs.linkFarm "zsh-plugin-links" [
-  #   {
-  #     name = "${zshPluginDir}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
-  #     path = "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
-  #   }
-  #   {
-  #     name = "${zshPluginDir}/zsh-autosuggestions/zsh-autosuggestions.zsh";
-  #     path = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
-  #   }
-  #   {
-  #     name = "${zshPluginDir}/zsh-abbr/zsh-abbr.zsh";
-  #     path = "${pkgs.zsh-abbr}/share/zsh/zsh-abbr/zsh-abbr.zsh";
-  #   }
-  #   {
-  #     name = "${zshPluginDir}/powerlevel10k";
-  #     path = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k";
-  #   }
-  # ];
-in
 {
   xdg.enable = true;
-
   # - HM が ~/.zshenv(エントリポイント) と $ZDOTDIR/.zshenv を生成。
   # - envExtra: $ZDOTDIR/.zshenv に埋め込まれる。
   # - profileExtra: $ZDOTDIR/.zprofile に埋め込まれる。
@@ -40,8 +18,6 @@ in
       export XDG_CONFIG_HOME="''${XDG_CONFIG_HOME:-$HOME/.config}"
       export XDG_CACHE_HOME="''${XDG_CACHE_HOME:-$HOME/.cache}"
       export XDG_DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}"
-      # export SHELL_SESSIONS_DIR="$XDG_CACHE_HOME/zsh/sessions"
-      # export NBRC_PATH="$XDG_CONFIG_HOME/nb/.nbrc"
     '';
     sessionVariables = {
       SHELL_SESSIONS_DIR = "${config.xdg.cacheHome}/zsh/sessions";
@@ -70,6 +46,7 @@ in
         ga = "git add .";
         gc = ''git commit -m "%"'';
         gp = "git push origin HEAD";
+        gl = "git log --graph --all --decorate --pretty=format:'%C(magenta)%h%Creset %C(blue)%ad%Creset %C(green)%an%Creset %s%C(red)%d%Creset' --date=short";
         nri = "ni";
         nrf = "ni --frozen";
         nrd = "nr dev";
@@ -99,11 +76,6 @@ in
         fi
       ''
       (builtins.readFile ./zshrc)
-      # (lib.mkAfter ''
-      #   if [[ -r "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-      #     source "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-      #   fi
-      # '')
     ];
   };
 
