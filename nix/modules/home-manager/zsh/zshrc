@@ -15,18 +15,17 @@ mkdir -p "$SHELL_SESSIONS_DIR"
 #   $path
 # )
 
-# 履歴関連とオプション
-# HISTFILE="$CACHE_DIR/.zsh_history"
-# HISTSIZE=10000
-# SAVEHIST=10000
+# History
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY
 setopt HIST_IGNORE_SPACE
 setopt SHARE_HISTORY
+# Directory stack
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
+# Shell usability
 setopt INTERACTIVE_COMMENTS
 
 autoload -Uz add-zsh-hook
@@ -72,7 +71,7 @@ elif [[ -x /opt/homebrew/bin/brew ]]; then
   BREW_PREFIX="$(/opt/homebrew/bin/brew --prefix 2>/dev/null)"
 fi
 
-ZSH_PLUGIN_DIR="${NIX_PROFILE_PREFIX:-}/share/zsh/plugins"
+# ZSH_PLUGIN_DIR="${NIX_PROFILE_PREFIX:-}/share/zsh/plugins"
 
 typeset -U fpath
 local -a new_fpath=(
@@ -99,12 +98,12 @@ else
 fi
 
 # Powerlevel10k
-if [[ -r "$ZSH_PLUGIN_DIR/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
-  source "$ZSH_PLUGIN_DIR/powerlevel10k/powerlevel10k.zsh-theme"
-fi
-if [[ -f "$HOME/.config/zsh/.p10k.zsh" ]]; then
-  source "$HOME/.config/zsh/.p10k.zsh"
-fi
+# if [[ -r "$ZSH_PLUGIN_DIR/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+#   source "$ZSH_PLUGIN_DIR/powerlevel10k/powerlevel10k.zsh-theme"
+# fi
+# if [[ -f "$HOME/.config/zsh/.p10k.zsh" ]]; then
+#   source "$HOME/.config/zsh/.p10k.zsh"
+# fi
 
 # zsh-autosuggestions
 # ZSH_AUTOSUGGEST_STRATEGY=(history)
@@ -184,23 +183,23 @@ export FZF_ALT_C_COMMAND='fd --hidden --exclude .git --exclude node_modules --ty
 # abbr
 # export ABBR_SET_EXPANSION_CURSOR=1
 # export ABBR_USER_ABBREVIATIONS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/zsh-abbr/user-abbreviations"
-if [[ -r "$ZSH_PLUGIN_DIR/zsh-abbr/zsh-abbr.zsh" ]]; then
-  source "$ZSH_PLUGIN_DIR/zsh-abbr/zsh-abbr.zsh"
-fi
+# if [[ -r "$ZSH_PLUGIN_DIR/zsh-abbr/zsh-abbr.zsh" ]]; then
+#   source "$ZSH_PLUGIN_DIR/zsh-abbr/zsh-abbr.zsh"
+# fi
 # abbrの追加編集など行った場合は .abbr_initialized を削除する
-if [[ ! -f "$HOME/.config/zsh-abbr/.abbr_initialized" ]]; then
-  abbr gs="git status"
-  abbr gd="git diff"
-  abbr ga="git add ."
-  abbr gc='git commit -m "%"'
-  abbr gp="git push origin HEAD"
-  abbr nri="ni"
-  abbr nrf="ni --frozen"
-  abbr nrd="nr dev"
-  abbr nrb="nr build"
-  abbr nrs="nr start"
-  touch "$HOME/.config/zsh-abbr/.abbr_initialized"
-fi
+# if [[ ! -f "$HOME/.config/zsh-abbr/.abbr_initialized" ]]; then
+#   abbr gs="git status"
+#   abbr gd="git diff"
+#   abbr ga="git add ."
+#   abbr gc='git commit -m "%"'
+#   abbr gp="git push origin HEAD"
+#   abbr nri="ni"
+#   abbr nrf="ni --frozen"
+#   abbr nrd="nr dev"
+#   abbr nrb="nr build"
+#   abbr nrs="nr start"
+#   touch "$HOME/.config/zsh-abbr/.abbr_initialized"
+# fi
 
 # function
 lfc() {

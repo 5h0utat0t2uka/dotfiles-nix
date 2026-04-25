@@ -1,24 +1,24 @@
 { config, pkgs, lib, ... }:
 let
-  zshPluginDir = "share/zsh/plugins";
-  zshPluginLinks = pkgs.linkFarm "zsh-plugin-links" [
-    {
-      name = "${zshPluginDir}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
-      path = "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
-    }
-    {
-      name = "${zshPluginDir}/zsh-autosuggestions/zsh-autosuggestions.zsh";
-      path = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
-    }
-    {
-      name = "${zshPluginDir}/zsh-abbr/zsh-abbr.zsh";
-      path = "${pkgs.zsh-abbr}/share/zsh/zsh-abbr/zsh-abbr.zsh";
-    }
-    {
-      name = "${zshPluginDir}/powerlevel10k";
-      path = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k";
-    }
-  ];
+  # zshPluginDir = "share/zsh/plugins";
+  # zshPluginLinks = pkgs.linkFarm "zsh-plugin-links" [
+  #   {
+  #     name = "${zshPluginDir}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
+  #     path = "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
+  #   }
+  #   {
+  #     name = "${zshPluginDir}/zsh-autosuggestions/zsh-autosuggestions.zsh";
+  #     path = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+  #   }
+  #   {
+  #     name = "${zshPluginDir}/zsh-abbr/zsh-abbr.zsh";
+  #     path = "${pkgs.zsh-abbr}/share/zsh/zsh-abbr/zsh-abbr.zsh";
+  #   }
+  #   {
+  #     name = "${zshPluginDir}/powerlevel10k";
+  #     path = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k";
+  #   }
+  # ];
 in
 {
   xdg.enable = true;
@@ -35,6 +35,7 @@ in
     enableCompletion = false;
     dotDir = "${config.xdg.configHome}/zsh";
     defaultKeymap = "emacs";
+    profileExtra = builtins.readFile ./zprofile;
     envExtra = ''
       export XDG_CONFIG_HOME="''${XDG_CONFIG_HOME:-$HOME/.config}"
       export XDG_CACHE_HOME="''${XDG_CACHE_HOME:-$HOME/.cache}"
@@ -42,7 +43,6 @@ in
       # export SHELL_SESSIONS_DIR="$XDG_CACHE_HOME/zsh/sessions"
       # export NBRC_PATH="$XDG_CONFIG_HOME/nb/.nbrc"
     '';
-    profileExtra = builtins.readFile ./zprofile;
     sessionVariables = {
       SHELL_SESSIONS_DIR = "${config.xdg.cacheHome}/zsh/sessions";
       POWERLEVEL9K_INSTANT_PROMPT_DIR = "${config.xdg.cacheHome}/zsh";
@@ -62,6 +62,21 @@ in
     syntaxHighlighting = {
       enable = true;
     };
+    zsh-abbr = {
+      enable = true;
+      abbreviations = {
+        gs = "git status";
+        gd = "git diff";
+        ga = "git add .";
+        gc = ''git commit -m "%"'';
+        gp = "git push origin HEAD";
+        nri = "ni";
+        nrf = "ni --frozen";
+        nrd = "nr dev";
+        nrb = "nr build";
+        nrs = "nr start";
+      };
+    };
     shellAliases = {
       ".." = "cd ..";
       vpn = "${config.home.homeDirectory}/Development/scripts/vpn/connect.sh";
@@ -77,6 +92,12 @@ in
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
       '')
+      ''
+        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+        if [[ -f "$HOME/.config/zsh/.p10k.zsh" ]]; then
+          source "$HOME/.config/zsh/.p10k.zsh"
+        fi
+      ''
       (builtins.readFile ./zshrc)
       # (lib.mkAfter ''
       #   if [[ -r "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
@@ -91,6 +112,6 @@ in
   };
   home.packages = with pkgs; [
     zsh-completions
-    zshPluginLinks
+    # zshPluginLinks
   ];
 }
