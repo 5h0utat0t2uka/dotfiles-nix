@@ -19,10 +19,6 @@
       export XDG_CACHE_HOME="''${XDG_CACHE_HOME:-$HOME/.cache}"
       export XDG_DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}"
     '';
-    initExtraFirst = ''
-      ABBR_EXPANSION_CURSOR_MARKER='@'
-      ABBR_LINE_CURSOR_MARKER='@'
-    '';
     sessionVariables = {
       SHELL_SESSIONS_DIR = "${config.xdg.cacheHome}/zsh/sessions";
       POWERLEVEL9K_INSTANT_PROMPT_DIR = "${config.xdg.cacheHome}/zsh";
@@ -72,6 +68,8 @@
         if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
+        ABBR_EXPANSION_CURSOR_MARKER='@'
+        ABBR_LINE_CURSOR_MARKER='@'
       '')
       ''
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
