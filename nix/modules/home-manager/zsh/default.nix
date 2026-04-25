@@ -46,7 +46,7 @@
         ga = "git add .";
         gc = ''git commit -m "%"'';
         gp = "git push origin HEAD";
-        gl = ''git log --graph --all --decorate --pretty=format:'%C(magenta)%h%Creset %C(blue)%ad%Creset %C(green)%an%Creset %s%C(red)%d%Creset' --date=short'';
+        gl = "git log --graph --all --decorate --pretty=format:'%%C(magenta)%%h%%Creset %%C(blue)%%ad%%Creset %%C(green)%%an%%Creset %%s%%C(red)%%d%%Creset' --date=short";
         nri = "ni";
         nrf = "ni --frozen";
         nrd = "nr dev";
