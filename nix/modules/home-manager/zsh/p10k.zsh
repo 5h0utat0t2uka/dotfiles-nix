@@ -51,7 +51,6 @@
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
-    direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     # virtualenv            # python virtual environment (https://docs.python.org/3/library/venv.html)
     # anaconda              # conda environment (https://conda.io/)
@@ -61,6 +60,7 @@
     nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
     nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
     node_version            # node.js version
+    direnv                  # direnv status (https://direnv.net/)
     # go_version            # go version (https://golang.org)
     # rust_version          # rustc version (https://www.rust-lang.org)
     # dotnet_version        # .NET version (https://dotnet.microsoft.com)
@@ -591,7 +591,7 @@
 
   #######################[ direnv: direnv status (https://direnv.net/) ]########################
   # Direnv color.
-  typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=3
+  typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=5
   # Custom icon.
   typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION=' direnv'
 
