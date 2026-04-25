@@ -159,44 +159,6 @@ in
   security.pam.services.sudo_local.reattach = true;
 
   # ============================================================
-  # User / Shell
-  # ============================================================
-  # users.users.${username} = {
-  #   home = identity.homeDirectory;
-  #   shell = userShell;
-  # };
-
-  # programs.zsh = {
-  #   enable = true;
-  #   promptInit = "";
-  #   enableCompletion = false;
-  #   enableGlobalCompInit = false;
-  # };
-
-  # environment.shells = [ pkgs.zsh ];
-
-  # /etc/zshrc を最小化して nix-darwin 標準の初期化を無効化する。
-  #
-  # 経緯:
-  # - nix-darwin 標準の /etc/zshrc は prompt / compinit / completion の初期化を含んでおり、これが user 側 .zshrc との責務重複や"compdef: unknown command" などの問題を引き起こしていた。
-  # - 本構成では prompt (Powerlevel10k)、fpath、compinit、plugin のロード全てを user 側の .zshrc で責任を持って初期化している。
-  # - そのため /etc/zshrc は「最小の入口」として固定し、拡張が必要なケースは /etc/zshrc.local で対応する設計。
-  #
-  # 変数の意図:
-  # - __ETC_ZSHRC_SOURCED: 多重読み込み防止
-  # - NOSYSZSHRC: system zshrc を無効化したいユースケースを尊重
-
-  # environment.etc."zshrc".text = lib.mkForce ''
-  #   if [ -n "$__ETC_ZSHRC_SOURCED" -o -n "$NOSYSZSHRC" ]; then
-  #     return
-  #   fi
-  #   __ETC_ZSHRC_SOURCED=1
-  #   if test -f /etc/zshrc.local; then
-  #     source /etc/zshrc.local
-  #   fi
-  # '';
-
-  # ============================================================
   # System Packages / Fonts
   # ============================================================
   environment.systemPackages = with pkgs; [
