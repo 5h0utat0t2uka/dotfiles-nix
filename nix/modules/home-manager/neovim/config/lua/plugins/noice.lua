@@ -1,4 +1,3 @@
--- lua/plugins/noice.lua
 return {
   {
     "folke/noice.nvim",
@@ -28,7 +27,6 @@ return {
         },
       },
       presets = {
-        -- bottom_search = true,
         command_palette = true,
         long_message_to_split = true,
         inc_rename = false,
@@ -47,7 +45,7 @@ return {
             padding = { 1, 1 },
           },
           win_options = {
-            winblend = 10,        -- 0（不透明）〜 100（完全透明）
+            winblend = 10,
             -- winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
             winhighlight = {
               Normal = "NormalFloat",
@@ -59,7 +57,6 @@ return {
           },
         },
       },
-
       routes = {
         { view = "split", filter = { event = "msg_show", min_height = 10 } },
         { view = "split", filter = { event = "msg_show", min_length = 200 } },

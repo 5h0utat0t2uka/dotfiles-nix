@@ -1,7 +1,7 @@
 return {
   "karb94/neoscroll.nvim",
   opts = {
-    mappings = {                 -- Keys to be mapped to their corresponding default scrolling animation
+    mappings = {
       '<C-u>', '<C-d>',
       '<C-b>', '<C-f>',
       '<C-y>', '<C-e>',

@@ -19,13 +19,15 @@
       export XDG_CACHE_HOME="''${XDG_CACHE_HOME:-$HOME/.cache}"
       export XDG_DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}"
     '';
+    initExtraFirst = ''
+      ABBR_EXPANSION_CURSOR_MARKER='@'
+      ABBR_LINE_CURSOR_MARKER='@'
+    '';
     sessionVariables = {
       SHELL_SESSIONS_DIR = "${config.xdg.cacheHome}/zsh/sessions";
       POWERLEVEL9K_INSTANT_PROMPT_DIR = "${config.xdg.cacheHome}/zsh";
       POWERLEVEL9K_DUMP_DIR = "${config.xdg.cacheHome}/zsh";
       ABBR_SET_EXPANSION_CURSOR = "1";
-      ABBR_EXPANSION_CURSOR_MARKER="@";
-      ABBR_LINE_CURSOR_MARKER="@";
       ABBR_USER_ABBREVIATIONS_FILE = "${config.xdg.configHome}/zsh-abbr/user-abbreviations";
     };
     history = {

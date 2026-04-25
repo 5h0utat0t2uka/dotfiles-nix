@@ -23,7 +23,7 @@ return {
       css = true,
       css_fn = true,
       tailwind = true,
-      mode = "virtualtext", -- "foreground" "virtualtext"
+      mode = "virtualtext",
       virtualtext = "■",
       always_update = false,
     },

@@ -11,21 +11,21 @@ return {
         return 20
       end,
       open_mapping = [[<c-t>]], -- or { [[<c-\>]], [[<c-¥>]] } if you also use a Japanese keyboard.
-      hide_numbers = true, -- hide the number column in toggleterm buffers
+      hide_numbers = true,
       shade_filetypes = {},
       highlights = {},
-      autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
+      autochdir = false,
       shade_terminals = false,
       start_in_insert = true,
-      insert_mappings = false, -- whether or not the open mapping applies in insert mode
-      terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
+      insert_mappings = false,
+      terminal_mappings = true,
       persist_size = true,
-      persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
+      persist_mode = true,
       direction = 'float',
-      close_on_exit = true, -- close the terminal window when the process exits
-      clear_env = false, -- use only environmental variables from `env`, passed to jobstart()
+      close_on_exit = true,
+      clear_env = false,
       shell = vim.o.shell,
-      auto_scroll = true, -- automatically scroll to the bottom on terminal output
+      auto_scroll = true,
       float_opts = {
         border = 'curved',
         title_pos = 'center',

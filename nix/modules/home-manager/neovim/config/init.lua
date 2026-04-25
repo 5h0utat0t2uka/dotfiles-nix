@@ -23,26 +23,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- require('vim._core.ui2').enable({
---   enable = true,
---   msg = {
---     targets = 'cmd',
---     cmd = {
---       height = 1
---     },
---     dialog = {
---       height = 1,
---     },
---     msg = {
---       height = 1,
---       timeout = 10000,
---     },
---     pager = {
---       height = 1,
---     },
---   },
--- })
-
 require("lazy").setup({
   spec = {
     { import = "plugins" },

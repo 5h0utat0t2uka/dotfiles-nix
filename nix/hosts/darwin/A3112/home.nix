@@ -1,4 +1,4 @@
-{ pkgs, config, identity, ... }:
+{ pkgs, identity, ... }:
 
 {
   # Issue: https://github.com/nix-community/home-manager/issues/7935
@@ -36,9 +36,6 @@
     stateVersion = "25.11";
     username = identity.username;
     homeDirectory = identity.homeDirectory;
-    sessionVariables = {
-      NBRC_PATH = "${config.xdg.configHome}/nb/.nbrc";
-    };
     packages = with pkgs; [
       age
       chafa
