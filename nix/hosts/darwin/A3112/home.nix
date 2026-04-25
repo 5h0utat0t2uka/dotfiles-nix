@@ -2,9 +2,9 @@
 
 {
   # Issue: https://github.com/nix-community/home-manager/issues/7935
-  # manual = {
-  #   manpages.enable = false;
-  # };
+  manual = {
+    manpages.enable = false;
+  };
 
   # 一部を除いてドットファイルの実体は chezmoi で管理する前提なので
   # home-manager では生成しない
