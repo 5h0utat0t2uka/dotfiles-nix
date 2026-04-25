@@ -5,6 +5,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
   },
   opts = {
+    finder = {
+      number = true,
+      relativenumber = false,
+    },
     symbol_in_winbar = {
       enable = false,
     },
