@@ -3,8 +3,8 @@ CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 mkdir -p "$CACHE_DIR"
 mkdir -p "$SHELL_SESSIONS_DIR"
 
-export POWERLEVEL9K_INSTANT_PROMPT_DIR="$CACHE_DIR"
-export POWERLEVEL9K_DUMP_DIR="$CACHE_DIR"
+# export POWERLEVEL9K_INSTANT_PROMPT_DIR="$CACHE_DIR"
+# export POWERLEVEL9K_DUMP_DIR="$CACHE_DIR"
 
 
 # Homebrew検出とPATH設定
@@ -16,18 +16,18 @@ export POWERLEVEL9K_DUMP_DIR="$CACHE_DIR"
 # )
 
 # 履歴関連とオプション
-HISTFILE="$CACHE_DIR/.zsh_history"
-HISTSIZE=10000
-SAVEHIST=10000
+# HISTFILE="$CACHE_DIR/.zsh_history"
+# HISTSIZE=10000
+# SAVEHIST=10000
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS
-setopt SHARE_HISTORY
 setopt HIST_VERIFY
+setopt HIST_IGNORE_SPACE
+setopt SHARE_HISTORY
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 setopt INTERACTIVE_COMMENTS
-setopt HIST_IGNORE_SPACE
 
 autoload -Uz add-zsh-hook
 
@@ -182,8 +182,8 @@ export FZF_ALT_C_COMMAND='fd --hidden --exclude .git --exclude node_modules --ty
 # alias lg='lazygit'
 
 # abbr
-export ABBR_SET_EXPANSION_CURSOR=1
-export ABBR_USER_ABBREVIATIONS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/zsh-abbr/user-abbreviations"
+# export ABBR_SET_EXPANSION_CURSOR=1
+# export ABBR_USER_ABBREVIATIONS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/zsh-abbr/user-abbreviations"
 if [[ -r "$ZSH_PLUGIN_DIR/zsh-abbr/zsh-abbr.zsh" ]]; then
   source "$ZSH_PLUGIN_DIR/zsh-abbr/zsh-abbr.zsh"
 fi

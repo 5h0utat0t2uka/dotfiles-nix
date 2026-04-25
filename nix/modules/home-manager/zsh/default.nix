@@ -39,10 +39,22 @@ in
       export XDG_CONFIG_HOME="''${XDG_CONFIG_HOME:-$HOME/.config}"
       export XDG_CACHE_HOME="''${XDG_CACHE_HOME:-$HOME/.cache}"
       export XDG_DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}"
-      export SHELL_SESSIONS_DIR="$XDG_CACHE_HOME/zsh/sessions"
-      export NBRC_PATH="$XDG_CONFIG_HOME/nb/.nbrc"
+      # export SHELL_SESSIONS_DIR="$XDG_CACHE_HOME/zsh/sessions"
+      # export NBRC_PATH="$XDG_CONFIG_HOME/nb/.nbrc"
     '';
     profileExtra = builtins.readFile ./zprofile;
+    sessionVariables = {
+      SHELL_SESSIONS_DIR = "${config.xdg.cacheHome}/zsh/sessions";
+      POWERLEVEL9K_INSTANT_PROMPT_DIR = "${config.xdg.cacheHome}/zsh";
+      POWERLEVEL9K_DUMP_DIR = "${config.xdg.cacheHome}/zsh";
+      ABBR_SET_EXPANSION_CURSOR = "1";
+      ABBR_USER_ABBREVIATIONS_FILE = "${config.xdg.configHome}/zsh-abbr/user-abbreviations";
+    };
+    history = {
+      path = "${config.xdg.cacheHome}/zsh/.zsh_history";
+      size = 10000;
+      save = 10000;
+    };
     autosuggestion = {
       enable = true;
       strategy = [ "history" ];
