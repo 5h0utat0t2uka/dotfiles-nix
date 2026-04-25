@@ -23,8 +23,11 @@
       SHELL_SESSIONS_DIR = "${config.xdg.cacheHome}/zsh/sessions";
       POWERLEVEL9K_INSTANT_PROMPT_DIR = "${config.xdg.cacheHome}/zsh";
       POWERLEVEL9K_DUMP_DIR = "${config.xdg.cacheHome}/zsh";
-      ABBR_SET_EXPANSION_CURSOR = "1";
       ABBR_USER_ABBREVIATIONS_FILE = "${config.xdg.configHome}/zsh-abbr/user-abbreviations";
+      ABBR_SET_EXPANSION_CURSOR = "1";
+      ABBR_SET_LINE_CURSOR = "1";
+      ABBR_EXPANSION_CURSOR_MARKER = "@";
+      ABBR_LINE_CURSOR_MARKER = "@";
     };
     history = {
       path = "${config.xdg.cacheHome}/zsh/.zsh_history";
@@ -68,8 +71,6 @@
         if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
-        ABBR_EXPANSION_CURSOR_MARKER='@'
-        ABBR_LINE_CURSOR_MARKER='@'
       '')
       ''
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
