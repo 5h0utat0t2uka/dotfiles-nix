@@ -24,6 +24,8 @@
       POWERLEVEL9K_INSTANT_PROMPT_DIR = "${config.xdg.cacheHome}/zsh";
       POWERLEVEL9K_DUMP_DIR = "${config.xdg.cacheHome}/zsh";
       ABBR_SET_EXPANSION_CURSOR = "1";
+      ABBR_EXPANSION_CURSOR_MARKER="@";
+      ABBR_LINE_CURSOR_MARKER="@";
       ABBR_USER_ABBREVIATIONS_FILE = "${config.xdg.configHome}/zsh-abbr/user-abbreviations";
     };
     history = {
@@ -44,9 +46,9 @@
         gs = "git status";
         gd = "git diff";
         ga = "git add .";
-        gc = ''git commit -m "%"'';
+        gc = ''git commit -m "@"'';
         gp = "git push origin HEAD";
-        gl = "git log --graph --all --decorate --pretty=format:'%%C(magenta)%%h%%Creset %%C(blue)%%ad%%Creset %%C(green)%%an%%Creset %%s%%C(red)%%d%%Creset' --date=short";
+        gl = "git log --graph --all --decorate --pretty=format:'%C(magenta)%h%Creset %C(blue)%ad%Creset %C(green)%an%Creset %s%C(red)%d%Creset' --date=short";
         nri = "ni";
         nrf = "ni --frozen";
         nrd = "nr dev";
