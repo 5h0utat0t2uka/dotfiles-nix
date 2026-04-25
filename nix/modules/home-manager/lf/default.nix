@@ -31,6 +31,6 @@
         }}
       '';
     };
-    previewer.source = pkgs.writeShellScript "lf-pv" (builtins.readFile ./pv.sh);
+    previewer.source = pkgs.writeShellScript "lf-pv" (builtins.readFile ./bin/preview.sh);
   };
 }

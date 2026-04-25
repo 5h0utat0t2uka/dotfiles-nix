@@ -52,16 +52,15 @@ if [[ -n "$TMUX" ]]; then
       -d "#{pane_current_path}" \
       -E "${SHELL:-/bin/zsh} -l"
   }
-  tmux_update_pane() {
-    # devbox環境変数の状態を毎回同期
-    if [ -n "$DEVBOX_SHELL_ENABLED" ]; then
-      tmux set-environment -g DEVBOX_SHELL_ENABLED "$DEVBOX_SHELL_ENABLED"
-    else
-      tmux set-environment -gu DEVBOX_SHELL_ENABLED 2>/dev/null
-    fi
-    tmux refresh-client -S
-  }
-  add-zsh-hook precmd tmux_update_pane
+  # tmux_update_pane() {
+  #   if [ -n "$DEVBOX_SHELL_ENABLED" ]; then
+  #     tmux set-environment -g DEVBOX_SHELL_ENABLED "$DEVBOX_SHELL_ENABLED"
+  #   else
+  #     tmux set-environment -gu DEVBOX_SHELL_ENABLED 2>/dev/null
+  #   fi
+  #   tmux refresh-client -S
+  # }
+  # add-zsh-hook precmd tmux_update_pane
 fi
 
 # local BREW_PREFIX=""

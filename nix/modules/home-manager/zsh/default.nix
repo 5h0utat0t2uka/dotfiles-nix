@@ -1,4 +1,5 @@
 { config, pkgs, lib, ... }:
+
 {
   xdg.enable = true;
   # - HM が ~/.zshenv(エントリポイント) と $ZDOTDIR/.zshenv を生成。
@@ -87,6 +88,5 @@
   };
   home.packages = with pkgs; [
     zsh-completions
-    # zshPluginLinks
   ];
 }

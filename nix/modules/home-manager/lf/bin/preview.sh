@@ -3,11 +3,9 @@
 file="$1"
 width="${2:-80}"
 height="${3:-24}"
-
 [ -f "$file" ] || exit 0
 
 mime="$(file --mime-type -Lb -- "$file" 2>/dev/null)"
-
 BAT="$(command -v bat 2>/dev/null || command -v batcat 2>/dev/null)"
 CHAFA="$(command -v chafa 2>/dev/null)"
 
@@ -38,7 +36,6 @@ case "$mime" in
     fi
     exec sed -n "1,${height}p" -- "$file"
     ;;
-
   *)
     exec file --brief -- "$file"
     ;;
