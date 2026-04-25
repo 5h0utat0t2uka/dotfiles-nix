@@ -1,8 +1,8 @@
-{ pkgs, lib, identity, ... }:
+{ pkgs, identity, ... }:
 
 let
   username = identity.username;
-  userShell = "${pkgs.zsh}/bin/zsh";
+  # userShell = "${pkgs.zsh}/bin/zsh";
 in
 {
   # ============================================================
@@ -161,19 +161,19 @@ in
   # ============================================================
   # User / Shell
   # ============================================================
-  users.users.${username} = {
-    home = identity.homeDirectory;
-    shell = userShell;
-  };
+  # users.users.${username} = {
+  #   home = identity.homeDirectory;
+  #   shell = userShell;
+  # };
 
-  programs.zsh = {
-    enable = true;
-    promptInit = "";
-    enableCompletion = false;
-    enableGlobalCompInit = false;
-  };
+  # programs.zsh = {
+  #   enable = true;
+  #   promptInit = "";
+  #   enableCompletion = false;
+  #   enableGlobalCompInit = false;
+  # };
 
-  environment.shells = [ pkgs.zsh ];
+  # environment.shells = [ pkgs.zsh ];
 
   # /etc/zshrc を最小化して nix-darwin 標準の初期化を無効化する。
   #
@@ -185,16 +185,16 @@ in
   # 変数の意図:
   # - __ETC_ZSHRC_SOURCED: 多重読み込み防止
   # - NOSYSZSHRC: system zshrc を無効化したいユースケースを尊重
-  environment.etc."zshrc".text = lib.mkForce ''
-    # /etc/zshrc: managed by nix-darwin
-    if [ -n "$__ETC_ZSHRC_SOURCED" -o -n "$NOSYSZSHRC" ]; then
-      return
-    fi
-    __ETC_ZSHRC_SOURCED=1
-    if test -f /etc/zshrc.local; then
-      source /etc/zshrc.local
-    fi
-  '';
+
+  # environment.etc."zshrc".text = lib.mkForce ''
+  #   if [ -n "$__ETC_ZSHRC_SOURCED" -o -n "$NOSYSZSHRC" ]; then
+  #     return
+  #   fi
+  #   __ETC_ZSHRC_SOURCED=1
+  #   if test -f /etc/zshrc.local; then
+  #     source /etc/zshrc.local
+  #   fi
+  # '';
 
   # ============================================================
   # System Packages / Fonts

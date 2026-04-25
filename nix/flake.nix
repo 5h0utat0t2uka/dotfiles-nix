@@ -22,6 +22,7 @@
       url = "github:wezterm/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # zed の最新 (nightly)
     # zed = {
     #   url = "github:zed-industries/zed";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -43,7 +44,6 @@
     # ./hosts/darwin 以下のディレクトリ名を hostKey とする
     # ------------------------------------------------------------
     darwinHostsDir = ./hosts/darwin;
-
     darwinHostKeys =
       lib.attrNames
         (lib.filterAttrs (_name: type: type == "directory")
@@ -71,7 +71,9 @@
         # nix-darwin のシステム定義
         value = darwin.lib.darwinSystem {
           system = identity.system;
-          specialArgs = { inherit identity inputs; };
+          specialArgs = {
+            inherit identity inputs;
+          };
           modules = [
             # ----------------------------------------------------
             # nixpkgs 設定
@@ -113,10 +115,7 @@
               home-manager.extraSpecialArgs = {
                 inherit identity inputs;
               };
-              home-manager.users.${identity.username} = import (
-                darwinHostsDir + "/${hostKey}/home.nix"
-                # darwinHostsDir + "/${hostKey}/users/${identity.username}/default.nix"
-              );
+              home-manager.users.${identity.username} = import (darwinHostsDir + "/${hostKey}/home.nix");
             }
 
             # ----------------------------------------------------
