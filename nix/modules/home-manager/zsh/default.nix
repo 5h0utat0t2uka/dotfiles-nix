@@ -35,14 +35,6 @@ in
     enableCompletion = false;
     dotDir = "${config.xdg.configHome}/zsh";
     defaultKeymap = "emacs";
-    shellAliases = {
-      ".." = "cd ..";
-      vpn = "${config.home.homeDirectory}/Development/scripts/vpn/connect.sh";
-      webp = "${config.home.homeDirectory}/Development/scripts/webp.sh";
-      vim = "nvim";
-      ll = "eza -alo --icons --time-style iso";
-      lg = "lazygit";
-    };
     envExtra = ''
       export XDG_CONFIG_HOME="''${XDG_CONFIG_HOME:-$HOME/.config}"
       export XDG_CACHE_HOME="''${XDG_CACHE_HOME:-$HOME/.cache}"
@@ -51,8 +43,20 @@ in
       export NBRC_PATH="$XDG_CONFIG_HOME/nb/.nbrc"
     '';
     profileExtra = builtins.readFile ./zprofile;
+    autosuggestion = {
+      enable = true;
+      strategy = [ "history" ];
+    };
     syntaxHighlighting = {
       enable = true;
+    };
+    shellAliases = {
+      ".." = "cd ..";
+      vpn = "${config.home.homeDirectory}/Development/scripts/vpn/connect.sh";
+      webp = "${config.home.homeDirectory}/Development/scripts/webp.sh";
+      vim = "nvim";
+      ll = "eza -alo --icons --time-style iso";
+      lg = "lazygit";
     };
     initContent = lib.mkMerge [
       (lib.mkBefore ''

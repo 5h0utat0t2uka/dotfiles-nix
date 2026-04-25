@@ -107,11 +107,11 @@ if [[ -f "$HOME/.config/zsh/.p10k.zsh" ]]; then
 fi
 
 # zsh-autosuggestions
-ZSH_AUTOSUGGEST_STRATEGY=(history)
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=2000
-if [[ -r "$ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
-  source "$ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
-fi
+# ZSH_AUTOSUGGEST_STRATEGY=(history)
+# ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=2000
+# if [[ -r "$ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+#   source "$ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# fi
 
 # fzf
 typeset -a IGNORE_DIRS=(
