@@ -1,32 +1,33 @@
 { pkgs, identity, ... }:
 
 let
-  user = identity.username;
-  home = identity.homeDirectory;
+  username = identity.username;
+  homeDirectory = identity.homeDirectory;
+  modules = "../../../modules";
 in
 
 {
   imports = [
-    ../../../modules/darwin/system.nix
-    ../../../modules/darwin/shell.nix
-    ../../../modules/darwin/homebrew.nix
-    ../../../modules/darwin/launchd.nix
+    "${modules}/darwin/system.nix"
+    "${modules}/darwin/shell.nix"
+    "${modules}/darwin/homebrew.nix"
+    "${modules}/darwin/launchd.nix"
   ];
 
-  home-manager.users.${user} = {
+  home-manager.users.${username} = {
     imports = [
-      ../../../modules/home-manager/ghostty
-      ../../../modules/home-manager/wezterm
-      ../../../modules/home-manager/tmux
-      ../../../modules/home-manager/git
-      ../../../modules/home-manager/zsh
-      # ../../../modules/home-manager/zed
-      ../../../modules/home-manager/neovim
-      ../../../modules/home-manager/direnv
-      ../../../modules/home-manager/aerospace
-      ../../../modules/home-manager/bat
-      ../../../modules/home-manager/lf
-      ../../../modules/home-manager/nb
+      "${modules}/home-manager/ghostty"
+      "${modules}/home-manager/wezterm"
+      "${modules}/home-manager/tmux"
+      "${modules}/home-manager/git"
+      "${modules}/home-manager/zsh"
+      # "${modules}/home-manager/zed"
+      "${modules}/home-manager/neovim"
+      "${modules}/home-manager/direnv"
+      "${modules}/home-manager/aerospace"
+      "${modules}/home-manager/bat"
+      "${modules}/home-manager/lf"
+      "${modules}/home-manager/nb"
     ];
     manual = {
       # NOTE: issue: problem with home-manager manual
@@ -35,8 +36,8 @@ in
     };
     home = {
       stateVersion = "25.11";
-      username = user;
-      homeDirectory = home;
+      username = username;
+      homeDirectory = homeDirectory;
       packages = with pkgs; [
         age
         chafa

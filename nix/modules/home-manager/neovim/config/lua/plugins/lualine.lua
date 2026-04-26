@@ -1,6 +1,5 @@
 return {
   "nvim-lualine/lualine.nvim",
-  -- dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local custom = vim.deepcopy(require("lualine.themes.nord"))
     local colors = {
@@ -46,7 +45,6 @@ return {
             s = math.min(start_col, end_col)
             e = math.max(start_col, end_col)
           end
-
           -- col() は 1-based。charpart は 0-based なので補正
           s = math.max(1, s)
           e = math.max(s, e)
@@ -55,7 +53,6 @@ return {
           )
         end
       end
-
       local parts = {}
       if line_count >= 2 then
         table.insert(parts, string.format("%d lines", line_count))

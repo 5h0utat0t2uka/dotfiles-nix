@@ -30,7 +30,7 @@ return {
         },
         current_line_blame_opts = {
           virt_text = true,
-          virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+          virt_text_pos = 'eol',
           delay = 1000,
           ignore_whitespace = false,
           virt_text_priority = 100,
@@ -38,7 +38,6 @@ return {
         },
         preview_config = {
           border = 'rounded',
-          -- style = 'minimal',
           relative = 'cursor',
           row = 0,
           col = 1,
@@ -50,7 +49,6 @@ return {
             opts.buffer = bufnr
             vim.keymap.set(mode, lhs, rhs, opts)
           end
-
           map('n', '<leader>hp', gs.preview_hunk, { desc = 'Preview hunk' })
           map('n', '<leader>hi', gs.preview_hunk_inline, { desc = 'Preview hunk inline' })
           vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", {
