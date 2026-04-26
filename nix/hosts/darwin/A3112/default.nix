@@ -23,6 +23,7 @@ in
       # ../../../modules/home-manager/zed
       ../../../modules/home-manager/neovim
       ../../../modules/home-manager/direnv
+      ../../../modules/home-manager/lazygit
       ../../../modules/home-manager/aerospace
       ../../../modules/home-manager/bat
       ../../../modules/home-manager/lf
@@ -51,7 +52,6 @@ in
         just
         jq
         libwebp
-        lazygit
         macism
         mise
         ni
