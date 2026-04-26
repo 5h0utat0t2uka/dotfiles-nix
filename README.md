@@ -53,12 +53,26 @@ cd ~/.local/share/chezmoi/scripts
 ## 更新  
 いずれもブランチがクリーンな状態で作業する  
 
-### パッケージの更新
+### `inputs` の更新
 ``` sh
-nix flake update
+# nixpkgs のみ
+just update-pkg
+# nixpkgs, darwin, home-manager など
+just update-all
 
+# チェックとビルド
 just check
 just build
+```
+``` sh
+# 問題があった場合は restore
+git restore flake.lock
+# ビルド後であれば restore 後に再ビルド
+just build
+
+# 問題はなければ
+git add .
+git commit -m "update flake inputs"
 ```
 ``` sh
 # ロックファイル更新した場合はタグ付けしておく
@@ -136,4 +150,9 @@ The following features are enabled:
 * lazy-trees 
 
 Visit https://dtr.mn/features for more information.
+```
+
+``` sh
+git tag -a yyyy-mm-dd -m "Update determinate"
+git push origin --tags
 ```
