@@ -24,6 +24,10 @@
       SHELL_SESSIONS_DIR = "${config.xdg.cacheHome}/zsh/sessions";
       POWERLEVEL9K_INSTANT_PROMPT_DIR = "${config.xdg.cacheHome}/zsh";
       POWERLEVEL9K_DUMP_DIR = "${config.xdg.cacheHome}/zsh";
+      # FIX:
+      # nixpkgs zsh-powerlevel10k gitstatus issue
+      # https://github.com/nixos/nixpkgs/issues/498550?utm_source=chatgpt.com
+      POWERLEVEL9K_DISABLE_GITSTATUS = "true";
       ABBR_USER_ABBREVIATIONS_FILE = "${config.xdg.configHome}/zsh-abbr/user-abbreviations";
       ABBR_SET_EXPANSION_CURSOR = "1";
       ABBR_SET_LINE_CURSOR = "1";
@@ -74,6 +78,11 @@
         fi
       '')
       ''
+        # FIX:
+        # nixpkgs zsh-powerlevel10k gitstatus issue
+        # https://github.com/nixos/nixpkgs/issues/498550?utm_source=chatgpt.com
+        export POWERLEVEL9K_DISABLE_GITSTATUS=true
+
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
         if [[ -f "$HOME/.config/zsh/.p10k.zsh" ]]; then
           source "$HOME/.config/zsh/.p10k.zsh"
