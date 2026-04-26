@@ -8,7 +8,7 @@ check:
   nix flake check {{ "{{flake}}" }}
 
 build:
-  nix build {{ "{{flake}}" }}#darwinConfigurations.{{ "{{hostname}}" }}.system --no-link
+  nix build -L {{ "{{flake}}" }}#darwinConfigurations.{{ "{{hostname}}" }}.system --no-link
 
 switch:
   sudo darwin-rebuild switch --flake {{ "{{flake}}" }}#{{ "{{hostname}}" }}
