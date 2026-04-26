@@ -18,8 +18,8 @@
     ];
     casks = [
       "karabiner-elements"
-      # "ollama"
-      # "zed"
+      "ollama"
+      "zed"
     ];
   };
 }
