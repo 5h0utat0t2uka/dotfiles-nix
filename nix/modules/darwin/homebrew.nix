@@ -18,7 +18,7 @@
     ];
     casks = [
       "karabiner-elements"
-      "ollama"
+      "ollama-app"
       "zed"
     ];
   };
