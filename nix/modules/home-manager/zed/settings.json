@@ -21,83 +21,60 @@
         },
         "constant.comment.todo": {
           "color": "#EBCB8B",
-          "font_style": null,
           "font_weight": 700
         },
         "constant.comment.todo.text": {
-          "color": "#ECEFF4",
-          "font_style": null,
-          "font_weight": null
+          "color": "#ECEFF4"
         },
-        "string.comment.fixme": {
+        "property.comment.fixme": {
           "color": "#BF616A",
-          "font_style": null,
           "font_weight": 700
         },
-        "string.comment.fixme.text": {
-          "color": "#ECEFF4",
-          "font_style": null,
-          "font_weight": null
+        "property.comment.fixme.text": {
+          "color": "#ECEFF4"
         },
-        "string.comment.bug": {
+        "property.comment.bug": {
           "color": "#BF616A",
-          "font_style": null,
           "font_weight": 700
         },
-        "string.comment.bug.text": {
-          "color": "#ECEFF4",
-          "font_style": null,
-          "font_weight": null
+        "property.comment.bug.text": {
+          "color": "#ECEFF4"
         },
-        "property.comment.hack": {
+        "property.comment.error": {
+          "color": "#BF616A",
+          "font_weight": 700
+        },
+        "property.comment.error.text": {
+          "color": "#ECEFF4"
+        },
+        "keyword.comment.hack": {
           "color": "#D08770",
           "font_style": "italic",
           "font_weight": 700
         },
-        "property.comment.hack.text": {
-          "color": "#ECEFF4",
-          "font_style": null,
-          "font_weight": null
+        "keyword.comment.hack.text": {
+          "color": "#ECEFF4"
         },
-        "keyword.comment.note": {
-          "color": "#88C0D0",
-          "font_style": null,
-          "font_weight": 700
-        },
-        "keyword.comment.note.text": {
-          "color": "#ECEFF4",
-          "font_style": null,
-          "font_weight": null
-        },
-        "keyword.comment.info": {
-          "color": "#81A1C1",
-          "font_style": null,
-          "font_weight": 700
-        },
-        "keyword.comment.info.text": {
-          "color": "#ECEFF4",
-          "font_style": null,
-          "font_weight": null
-        },
-        "constant.comment.warn": {
+        "keyword.comment.warn": {
           "color": "#EBCB8B",
-          "font_style": null,
           "font_weight": 700
         },
-        "constant.comment.warn.text": {
-          "color": "#ECEFF4",
-          "font_style": null,
-          "font_weight": null
+        "keyword.comment.warn.text": {
+          "color": "#ECEFF4"
         },
-        "string.comment.error": {
-          "color": "#BF616A",
-          "font_style": null,
+        "string.comment.note": {
+          "color": "#88C0D0",
           "font_weight": 700
         },
-        "string.comment.error.text": {
-          "color": "#ECEFF4",
-          "font_style": null,
-          "font_weight": null
+        "string.comment.note.text": {
+          "color": "#ECEFF4"
+        },
+        "string.comment.info": {
+          "color": "#81A1C1",
+          "font_weight": 700
+        },
+        "string.comment.info.text": {
+          "color": "#ECEFF4"
         }
       }
     }
