@@ -12,7 +12,6 @@
 </div>
 
 ## 設定
-
 1. ホスト名の設定と`CLT`のインストールから`ssh`のキー生成もしくは復元  
 ```sh
 # 設定と確認
@@ -146,9 +145,6 @@ Determinate Nixd daemon version: 3.17.1
 Determinate Nixd client version: 3.17.1 
 You are running the latest version of Determinate Nix. 
 
-The following features are enabled: 
-* lazy-trees 
-
 Visit https://dtr.mn/features for more information.
 ```
 
@@ -156,3 +152,27 @@ Visit https://dtr.mn/features for more information.
 git tag -a yyyy-mm-dd -m "Update determinate"
 git push origin --tags
 ```
+
+## ロールバック  
+更新で問題があった場合以下のコマンドで前世代に戻す  
+``` sh
+sudo /run/current-system/sw/bin/darwin-rebuild --rollback
+```
+
+世代の一覧は下記で確認  
+``` sh
+sudo /run/current-system/sw/bin/darwin-rebuild --list-generations
+
+# 出力例
+48   2026-02-11 15:53:15
+49   2026-02-11 16:07:22
+50   2026-02-11 16:08:22
+51   2026-02-11 16:21:58
+52   2026-02-11 18:03:24   (current)
+```
+
+> [!IMPORTANT]
+> シェルの起動にも問題がある場合、標準の `Terminal.app` を開いて、上部メニューから「Shell > New Command」を選択して`/bin/bash --noprofile --norc`を入力すると`bash`で起動する  
+
+> [!IMPORTANT]
+> `Run inside shell`は無効にする

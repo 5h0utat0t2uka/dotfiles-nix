@@ -8,6 +8,9 @@ check:
   nix flake check {{ "{{flake}}" }}
 
 build:
+  nix build {{ "{{flake}}" }}#darwinConfigurations.{{ "{{hostname}}" }}.system --no-link
+
+switch:
   sudo darwin-rebuild switch --flake {{ "{{flake}}" }}#{{ "{{hostname}}" }}
 
 # 引数に渡されたパッケージのインストール済みのバージョンと、現在の最新バージョンと比較
