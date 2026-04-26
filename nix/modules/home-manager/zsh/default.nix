@@ -25,7 +25,7 @@
       POWERLEVEL9K_INSTANT_PROMPT_DIR = "${config.xdg.cacheHome}/zsh";
       POWERLEVEL9K_DUMP_DIR = "${config.xdg.cacheHome}/zsh";
 
-      # FIXME: nixpkgs zsh-powerlevel10k gitstatus issue
+      # NOTE: issue: nixpkgs zsh-powerlevel10k gitstatus
       # https://github.com/nixos/nixpkgs/issues/498550
       # POWERLEVEL9K_DISABLE_GITSTATUS = "true";
 
@@ -79,8 +79,7 @@
         fi
       '')
       ''
-
-        # FIXME: nixpkgs zsh-powerlevel10k gitstatus issue
+        # NOTE: issue: nixpkgs zsh-powerlevel10k gitstatus
         # https://github.com/nixos/nixpkgs/issues/498550
         # export POWERLEVEL9K_DISABLE_GITSTATUS=true
 
@@ -96,6 +95,7 @@
   xdg.configFile = {
     "zsh/.p10k.zsh".source = ./p10k.zsh;
   };
+
   home.packages = with pkgs; [
     zsh-completions
   ];

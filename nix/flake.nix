@@ -87,7 +87,7 @@
                   (import ./overlays/fonts/shcode-jp-zen-haku.nix)
                   (import ./overlays/tools/tree-sitter-0267.nix)
 
-                  # FIXME: direnv build failure on darwin isuue
+                  # NOTE: issue: direnv build failure on darwin
                   # https://github.com/NixOS/nixpkgs/issues/507531
                   # (_final: prev: {
                   #   direnv = prev.direnv.overrideAttrs (old: {
@@ -124,7 +124,7 @@
               home-manager.extraSpecialArgs = {
                 inherit identity inputs;
               };
-              home-manager.users.${identity.username} = import (darwinHostsDir + "/${hostKey}/home.nix");
+              # home-manager.users.${identity.username} = import (darwinHostsDir + "/${hostKey}/home.nix");
             }
 
             # ----------------------------------------------------
