@@ -2,6 +2,7 @@
 
 {
   programs.zed-editor = {
+    # homebrew で管理する
     enable = false;
     package = pkgs.zed-editor;
     mutableUserSettings = false;
