@@ -18,11 +18,11 @@ check-pkg pkg:
     printf '%s: current=%s latest=%s\n' "{{ "{{pkg}}" }}" "$$current" "$$latest"
 
 # nixpkgs のみ最新バージョンに更新
-update-nixpkgs:
+update-pkg:
   cd {{ "{{flake}}" }} && nix flake update nixpkgs
 
 # nixpkgs, darwin, home-manager など全てを最新バージョンに更新
-update-inputs:
+update-all:
   cd {{ "{{flake}}" }} && nix flake update
 
 gc:
