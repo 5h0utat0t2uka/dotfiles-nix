@@ -13,9 +13,9 @@ build:
 # 引数に渡されたパッケージのインストール済みのバージョンと、現在の最新バージョンと比較
 check-pkg pkg:
   cd {{ "{{flake}}" }} && \
-    current="$$(nix eval --raw .#darwinConfigurations.{{ "{{hostname}}" }}.pkgs.{{ "{{pkg}}" }}.version)" && \
-    latest="$$(nix eval --raw github:NixOS/nixpkgs/nixos-unstable#{{ "{{pkg}}" }}.version)" && \
-    printf '%s: current=%s latest=%s\n' "{{ "{{pkg}}" }}" "$$current" "$$latest"
+    current="$(nix eval --raw .#darwinConfigurations.{{ "{{hostname}}" }}.pkgs.{{ "{{pkg}}" }}.version)" && \
+    latest="$(nix eval --raw github:NixOS/nixpkgs/nixos-unstable#{{ "{{pkg}}" }}.version)" && \
+    printf '%s: current=%s latest=%s\n' "{{ "{{pkg}}" }}" "$current" "$latest"
 
 # nixpkgs のみ最新バージョンに更新
 update-pkg:
