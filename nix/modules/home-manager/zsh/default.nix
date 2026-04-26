@@ -27,7 +27,7 @@
 
       # FIXME: nixpkgs zsh-powerlevel10k gitstatus issue
       # https://github.com/nixos/nixpkgs/issues/498550
-      POWERLEVEL9K_DISABLE_GITSTATUS = "true";
+      # POWERLEVEL9K_DISABLE_GITSTATUS = "true";
 
       ABBR_USER_ABBREVIATIONS_FILE = "${config.xdg.configHome}/zsh-abbr/user-abbreviations";
       ABBR_SET_EXPANSION_CURSOR = "1";
@@ -82,7 +82,7 @@
 
         # FIXME: nixpkgs zsh-powerlevel10k gitstatus issue
         # https://github.com/nixos/nixpkgs/issues/498550
-        export POWERLEVEL9K_DISABLE_GITSTATUS=true
+        # export POWERLEVEL9K_DISABLE_GITSTATUS=true
 
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
         if [[ -f "$HOME/.config/zsh/.p10k.zsh" ]]; then

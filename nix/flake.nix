@@ -89,11 +89,11 @@
 
                   # FIXME: direnv build failure on darwin isuue
                   # https://github.com/NixOS/nixpkgs/issues/507531
-                  (_final: prev: {
-                    direnv = prev.direnv.overrideAttrs (old: {
-                      doCheck = (old.doCheck or true) && !prev.stdenv.isDarwin;
-                    });
-                  })
+                  # (_final: prev: {
+                  #   direnv = prev.direnv.overrideAttrs (old: {
+                  #     doCheck = (old.doCheck or true) && !prev.stdenv.isDarwin;
+                  #   });
+                  # })
 
                 ];
               };
