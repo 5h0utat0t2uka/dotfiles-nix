@@ -86,14 +86,15 @@
                 overlays = [
                   (import ./overlays/fonts/shcode-jp-zen-haku.nix)
                   (import ./overlays/tools/tree-sitter-0267.nix)
-                  # FIX:
-                  # direnv: build failure on darwin isuue
+
+                  # FIXME: direnv build failure on darwin isuue
                   # https://github.com/NixOS/nixpkgs/issues/507531
                   (_final: prev: {
                     direnv = prev.direnv.overrideAttrs (old: {
                       doCheck = (old.doCheck or true) && !prev.stdenv.isDarwin;
                     });
                   })
+
                 ];
               };
             }

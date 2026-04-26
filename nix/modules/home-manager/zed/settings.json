@@ -20,35 +20,40 @@
           "font_style": "normal"
         },
         "constant.comment.todo": {
-          "color": "#EBCB8B",
+          "color": "#2E3440",
+          "background_color": "#EBCB8B",
           "font_weight": 700
         },
         "constant.comment.todo.text": {
           "color": "#ECEFF4"
         },
         "property.comment.fixme": {
-          "color": "#BF616A",
+          "color": "#2E3440",
+          "background_color": "#BF616A",
           "font_weight": 700
         },
         "property.comment.fixme.text": {
           "color": "#ECEFF4"
         },
         "property.comment.bug": {
-          "color": "#BF616A",
+          "color": "#2E3440",
+          "background_color": "#BF616A",
           "font_weight": 700
         },
         "property.comment.bug.text": {
           "color": "#ECEFF4"
         },
         "property.comment.error": {
-          "color": "#BF616A",
+          "color": "#2E3440",
+          "background_color": "#BF616A",
           "font_weight": 700
         },
         "property.comment.error.text": {
           "color": "#ECEFF4"
         },
         "keyword.comment.hack": {
-          "color": "#D08770",
+          "color": "#2E3440",
+          "background_color": "#D08770",
           "font_style": "italic",
           "font_weight": 700
         },
@@ -56,21 +61,24 @@
           "color": "#ECEFF4"
         },
         "keyword.comment.warn": {
-          "color": "#EBCB8B",
+          "color": "#2E3440",
+          "background_color": "#EBCB8B",
           "font_weight": 700
         },
         "keyword.comment.warn.text": {
           "color": "#ECEFF4"
         },
         "string.comment.note": {
-          "color": "#88C0D0",
+          "color": "#2E3440",
+          "background_color": "#88C0D0",
           "font_weight": 700
         },
         "string.comment.note.text": {
           "color": "#ECEFF4"
         },
         "string.comment.info": {
-          "color": "#81A1C1",
+          "color": "#2E3440",
+          "background_color": "#81A1C1",
           "font_weight": 700
         },
         "string.comment.info.text": {

@@ -24,10 +24,11 @@
       SHELL_SESSIONS_DIR = "${config.xdg.cacheHome}/zsh/sessions";
       POWERLEVEL9K_INSTANT_PROMPT_DIR = "${config.xdg.cacheHome}/zsh";
       POWERLEVEL9K_DUMP_DIR = "${config.xdg.cacheHome}/zsh";
-      # FIX:
-      # nixpkgs zsh-powerlevel10k gitstatus issue
+
+      # FIXME: nixpkgs zsh-powerlevel10k gitstatus issue
       # https://github.com/nixos/nixpkgs/issues/498550
       POWERLEVEL9K_DISABLE_GITSTATUS = "true";
+
       ABBR_USER_ABBREVIATIONS_FILE = "${config.xdg.configHome}/zsh-abbr/user-abbreviations";
       ABBR_SET_EXPANSION_CURSOR = "1";
       ABBR_SET_LINE_CURSOR = "1";
@@ -78,8 +79,8 @@
         fi
       '')
       ''
-        # FIX:
-        # nixpkgs zsh-powerlevel10k gitstatus issue
+
+        # FIXME: nixpkgs zsh-powerlevel10k gitstatus issue
         # https://github.com/nixos/nixpkgs/issues/498550
         export POWERLEVEL9K_DISABLE_GITSTATUS=true
 
