@@ -5,5 +5,5 @@ let
   system = prev.stdenv.hostPlatform.system;
 in
 {
-  claude-code = inputs.claude-code.packages.${system}.claude-code;
+  codex = inputs.codex.packages.${system}.default;
 }

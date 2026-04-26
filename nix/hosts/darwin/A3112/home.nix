@@ -23,7 +23,7 @@
     ../../../modules/home-manager/tmux
     ../../../modules/home-manager/git
     ../../../modules/home-manager/zsh
-    ../../../modules/home-manager/zed
+    # ../../../modules/home-manager/zed
     ../../../modules/home-manager/direnv
     ../../../modules/home-manager/neovim
     ../../../modules/home-manager/aerospace
