@@ -1,10 +1,22 @@
 return {
   {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {},
+  },
+  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       vim.lsp.config("*", {
         capabilities = require("blink.cmp").get_lsp_capabilities(),
+      })
+      vim.lsp.config("lua_ls", {
+        settings = {
+          Lua = {
+            workspace = { checkThirdParty = false },
+          },
+        },
       })
       vim.lsp.enable("lua_ls")
       vim.lsp.enable("nixd")
