@@ -43,7 +43,7 @@ return {
       })
       vim.api.nvim_set_hl(0, "IncSearch", {
         fg = "#2E3440",
-        bg = "#88C0D0",
+        bg = "#81A1C1",
         bold = true,
       })
       vim.api.nvim_set_hl(0, "ComplHint", {
@@ -53,6 +53,35 @@ return {
         fg = "#4c566a",
         italic = true,
       })
+      -- Telescope
+      vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#4C566A", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#5E81AC", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#4C566A", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#4C566A", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "TelescopeSelection", {
+        fg = "NONE",
+        bg = "#3B4252",
+        bold = true,
+      })
+      vim.api.nvim_set_hl(0, "TelescopeMatching", {
+        fg = "#81A1C1",
+        bg = "NONE",
+        bold = true,
+      })
+      -- Notify
+      vim.api.nvim_set_hl(0, "NotifyINFOBorder", { fg = "#5E81AC" })
+      vim.api.nvim_set_hl(0, "NotifyERRORBorder", { fg = "#BF616A" })
+      vim.api.nvim_set_hl(0, "NotifyWARNBorder", { fg = "#B48EAD" })
+      vim.api.nvim_set_hl(0, "NotifyINFOIcon", { fg = "#5E81AC" })
+      vim.api.nvim_set_hl(0, "NotifyERRORIcon", { fg = "#BF616A" })
+      vim.api.nvim_set_hl(0, "NotifyWARNIcon", { fg = "#B48EAD" })
+      vim.api.nvim_set_hl(0, "NotifyINFOTitle", { fg = "#5E81AC" })
+      vim.api.nvim_set_hl(0, "NotifyERRORTitle", { fg = "#BF616A" })
+      vim.api.nvim_set_hl(0, "NotifyWARNTitle", { fg = "#B48EAD" })
     end
     apply_custom_highlights()
 

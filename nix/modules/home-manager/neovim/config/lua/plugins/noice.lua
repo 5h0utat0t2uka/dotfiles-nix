@@ -6,6 +6,15 @@ return {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
+    keys = {
+      {
+        "<leader>fn",
+        function()
+          require("telescope").extensions.noice.noice({ initial_mode = "normal" })
+        end,
+        desc = "Noice",
+      },
+    },
     opts = {
       cmdline = {
         format = {
@@ -33,8 +42,8 @@ return {
       },
       views = {
         notify = {
-          replace = true,
-          merge = true,
+          replace = false,
+          merge = false,
         },
         cmdline_popup = {
           position = { row = "50%", col = "50%" },
@@ -69,6 +78,10 @@ return {
     opts = {
       stages = "static",
       timeout = 3000,
+      render = "default",
     },
+    config = function(_, opts)
+      require("notify").setup(opts)
+    end,
   },
 }
