@@ -1,5 +1,3 @@
-{ ... }:
-
 final: prev: {
   shcode-jp-zen-haku = prev.stdenvNoCC.mkDerivation (finalAttrs: {
     pname = "shcode-jp-zen-haku";
