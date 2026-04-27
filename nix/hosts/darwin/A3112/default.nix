@@ -25,6 +25,7 @@ in
       ../../../modules/home-manager/direnv
       ../../../modules/home-manager/lazygit
       ../../../modules/home-manager/aerospace
+      ../../../modules/home-manager/glow
       ../../../modules/home-manager/bat
       ../../../modules/home-manager/lf
       ../../../modules/home-manager/nb
