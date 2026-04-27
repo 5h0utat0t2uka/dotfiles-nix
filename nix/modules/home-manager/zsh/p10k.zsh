@@ -9,8 +9,6 @@
 # your own config based on it.
 #
 # Tip: Looking for a nice color? Here's a one-liner to print colormap.
-#
-#   for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
 
 # Temporarily change options.
 'builtin' 'local' '-a' 'p10k_config_opts'
@@ -31,13 +29,13 @@
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    # =========================[ Line #1 ]=========================
-    # os_icon               # os identifier
+    # =========================[ Line 1 ]=========================
+    # os_icon               os identifier
     host
     dir                     # current directory
-    devbox                  # 追加: devbox
+    # devbox                追加: devbox
     vcs                     # git status
-    # =========================[ Line #2 ]=========================
+    # =========================[ Line 2 ]=========================
     newline                 # \n
     prompt_char             # prompt symbol
   )
@@ -47,76 +45,76 @@
   # automatically hidden when the input line reaches it. Right prompt above the
   # last prompt line gets hidden if it would overlap with left prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    # =========================[ Line #1 ]=========================
+    # =========================[ Line 1 ]=========================
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
-    # virtualenv            # python virtual environment (https://docs.python.org/3/library/venv.html)
-    # anaconda              # conda environment (https://conda.io/)
+    # virtualenv            python virtual environment (https://docs.python.org/3/library/venv.html)
+    # anaconda              conda environment (https://conda.io/)
     pyenv                   # python environment (https://github.com/pyenv/pyenv)
-    # goenv                 # go environment (https://github.com/syndbg/goenv)
+    # goenv                 go environment (https://github.com/syndbg/goenv)
     nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
     nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
     nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
     node_version            # node.js version
-    # direnv                # direnv status (https://direnv.net/)
-    # go_version            # go version (https://golang.org)
-    # rust_version          # rustc version (https://www.rust-lang.org)
-    # dotnet_version        # .NET version (https://dotnet.microsoft.com)
-    # php_version           # php version (https://www.php.net/)
-    # laravel_version       # laravel php framework version (https://laravel.com/)
-    # java_version          # java version (https://www.java.com/)
-    # package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
-    # rbenv                 # ruby version from rbenv (https://github.com/rbenv/rbenv)
-    # rvm                   # ruby version from rvm (https://rvm.io)
-    # fvm                   # flutter version management (https://github.com/leoafarias/fvm)
-    # luaenv                # lua version from luaenv (https://github.com/cehoffman/luaenv)
-    # jenv                  # java version from jenv (https://github.com/jenv/jenv)
-    # plenv                 # perl version from plenv (https://github.com/tokuhirom/plenv)
-    # perlbrew              # perl version from perlbrew (https://github.com/gugod/App-perlbrew)
-    # phpenv                # php version from phpenv (https://github.com/phpenv/phpenv)
-    # scalaenv              # scala version from scalaenv (https://github.com/scalaenv/scalaenv)
-    # haskell_stack         # haskell version from stack (https://haskellstack.org/)
-    # kubecontext           # current kubernetes context (https://kubernetes.io/)
-    # terraform             # terraform workspace (https://www.terraform.io)
-    # terraform_version     # terraform version (https://www.terraform.io)
-    # aws                   # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
-    # aws_eb_env            # aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/)
-    # azure                 # azure account name (https://docs.microsoft.com/en-us/cli/azure)
+    # direnv                direnv status (https://direnv.net/)
+    # go_version            go version (https://golang.org)
+    # rust_version          rustc version (https://www.rust-lang.org)
+    # dotnet_version        .NET version (https://dotnet.microsoft.com)
+    # php_version           php version (https://www.php.net/)
+    # laravel_version       laravel php framework version (https://laravel.com/)
+    # java_version          java version (https://www.java.com/)
+    # package               name@version from package.json (https://docs.npmjs.com/files/package.json)
+    # rbenv                 ruby version from rbenv (https://github.com/rbenv/rbenv)
+    # rvm                   ruby version from rvm (https://rvm.io)
+    # fvm                   flutter version management (https://github.com/leoafarias/fvm)
+    # luaenv                lua version from luaenv (https://github.com/cehoffman/luaenv)
+    # jenv                  java version from jenv (https://github.com/jenv/jenv)
+    # plenv                 perl version from plenv (https://github.com/tokuhirom/plenv)
+    # perlbrew              perl version from perlbrew (https://github.com/gugod/App-perlbrew)
+    # phpenv                php version from phpenv (https://github.com/phpenv/phpenv)
+    # scalaenv              scala version from scalaenv (https://github.com/scalaenv/scalaenv)
+    # haskell_stack         haskell version from stack (https://haskellstack.org/)
+    # kubecontext           current kubernetes context (https://kubernetes.io/)
+    # terraform             terraform workspace (https://www.terraform.io)
+    # terraform_version     terraform version (https://www.terraform.io)
+    # aws                   aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
+    # aws_eb_env            aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/)
+    # azure                 azure account name (https://docs.microsoft.com/en-us/cli/azure)
     gcloud                  # google cloud cli account and project (https://cloud.google.com/)
-    # google_app_cred       # google application credentials (https://cloud.google.com/docs/authentication/production)
-    # toolbox               # toolbox name (https://github.com/containers/toolbox)
-    # context               # user@hostname
+    # google_app_cred       google application credentials (https://cloud.google.com/docs/authentication/production)
+    # toolbox               toolbox name (https://github.com/containers/toolbox)
+    # context               user@hostname
     nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
-    # ranger                # ranger shell (https://github.com/ranger/ranger)
-    # yazi                  # yazi shell (https://github.com/sxyazi/yazi)
-    # nnn                   # nnn shell (https://github.com/jarun/nnn)
-    # lf                    # lf shell (https://github.com/gokcehan/lf)
-    # xplr                  # xplr shell (https://github.com/sayanarijit/xplr)
+    # ranger                ranger shell (https://github.com/ranger/ranger)
+    # yazi                  yazi shell (https://github.com/sxyazi/yazi)
+    # nnn                   nnn shell (https://github.com/jarun/nnn)
+    # lf                    lf shell (https://github.com/gokcehan/lf)
+    # xplr                  xplr shell (https://github.com/sayanarijit/xplr)
     vim_shell               # vim shell indicator (:sh)
-    # midnight_commander    # midnight commander shell (https://midnight-commander.org/)
+    # midnight_commander    midnight commander shell (https://midnight-commander.org/)
     nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
     chezmoi_shell           # chezmoi shell (https://www.chezmoi.io/)
     vpn_ip                  # virtual private network indicator
-    # load                  # CPU load
-    # disk_usage            # disk usage
-    # ram                   # free RAM
-    # swap                  # used swap
-    # todo                  # todo items (https://github.com/todotxt/todo.txt-cli)
-    # timewarrior           # timewarrior tracking status (https://timewarrior.net/)
-    # taskwarrior           # taskwarrior task count (https://taskwarrior.org/)
-    # per_directory_history # Oh My Zsh per-directory-history local/global indicator
-    # cpu_arch              # CPU architecture
+    # load                  CPU load
+    # disk_usage            disk usage
+    # ram                   free RAM
+    # swap                  used swap
+    # todo                  todo items (https://github.com/todotxt/todo.txt-cli)
+    # timewarrior           timewarrior tracking status (https://timewarrior.net/)
+    # taskwarrior           taskwarrior task count (https://taskwarrior.org/)
+    # per_directory_history Oh My Zsh per-directory-history local/global indicator
+    # cpu_arch              CPU architecture
     time                    # current time
-    # battery               # internal battery
-    # =========================[ Line #2 ]=========================
+    # battery               internal battery
+    # =========================[ Line 2 ]=========================
     newline                 # \n
-    # ip                    # ip address and bandwidth usage for a specified network interface
-    # public_ip             # public IP address
-    # proxy                 # system-wide http/https/ftp proxy
-    # wifi                  # wifi speed
-    # example               # example user-defined segment (see prompt_example function below)
+    # ip                    ip address and bandwidth usage for a specified network interface
+    # public_ip             public IP address
+    # proxy                 system-wide http/https/ftp proxy
+    # wifi                  wifi speed
+    # example               example user-defined segment (see prompt_example function below)
   )
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
@@ -339,13 +337,13 @@
   # Simply assigning classes to directories doesn't have any visible effects. It merely gives you an
   # option to define custom colors and icons for different directory classes.
   #
-  #   # Styling for WORK.
+  # Styling for WORK.
   #   typeset -g POWERLEVEL9K_DIR_WORK_VISUAL_IDENTIFIER_EXPANSION='⭐'
   #   typeset -g POWERLEVEL9K_DIR_WORK_FOREGROUND=4
   #   typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=4
   #   typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=4
   #
-  #   # Styling for WORK_NOT_WRITABLE.
+  # Styling for WORK_NOT_WRITABLE.
   #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
   #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND=4
   #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_SHORTENED_FOREGROUND=4
@@ -419,11 +417,8 @@
       res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
     fi
 
-    if [[ -n $VCS_STATUS_TAG
-          # Show tag only if not on a branch.
-          # Tip: To always show tag, delete the next line.
-          && -z $VCS_STATUS_LOCAL_BRANCH  # <-- this line
-        ]]; then
+    # Show tag only if not on a branch.
+    if [[ -n $VCS_STATUS_TAG && -z $VCS_STATUS_LOCAL_BRANCH ]]; then
       local tag=${(V)VCS_STATUS_TAG}
       # If tag name is at most 32 characters long, show it in full.
       # Otherwise show the first 12 … the last 12.
@@ -434,11 +429,13 @@
 
     # Display the current Git commit if there is no branch and no tag.
     # Tip: To always display the current Git commit, delete the next line.
-    [[ -z $VCS_STATUS_LOCAL_BRANCH && -z $VCS_STATUS_TAG ]] &&  # <-- this line
+    if [[ -z $VCS_STATUS_LOCAL_BRANCH && -z $VCS_STATUS_TAG ]]; then
       res+="${meta}@${clean}${VCS_STATUS_COMMIT[1,8]}"
+    fi
 
     # Show tracking branch name if it differs from local branch.
-    if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then
+    local remote_branch=${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH}
+    if [[ -n $remote_branch ]]; then
       res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"
     fi
 
@@ -862,7 +859,7 @@
   #
   # These variables correspond to the last line of the output of `todo.sh -p ls`:
   #
-  #   TODO: 24 of 42 tasks shown
+  # TODO: 24 of 42 tasks shown
   #
   # Here 24 is P9K_TODO_FILTERED_TASK_COUNT and 42 is P9K_TODO_TOTAL_TASK_COUNT.
   #
@@ -1646,7 +1643,7 @@
 
   # Use different colors and icons depending on signal strength ($P9K_WIFI_BARS).
   #
-  #   # Wifi colors and icons for different signal strength levels (low to high).
+  # Wifi colors and icons for different signal strength levels (low to high).
   #   typeset -g my_wifi_fg=(4 4 4 4 4)                                # <-- change these values
   #   typeset -g my_wifi_icon=('WiFi' 'WiFi' 'WiFi' 'WiFi' 'WiFi')     # <-- change these values
   #
@@ -1751,15 +1748,14 @@
   #   [[ -n "$DEVBOX_SHELL_ENABLED" ]] || return
   #   p10k segment -t '%F{7}in %F{1}devbox%f'
   # }
-  function prompt_devbox() {
-    [[ -n "$DEVBOX_SHELL_ENABLED" ]] || return
-    p10k segment -t '%F{7}in %K{1}%F{0} DEVBOX %k%f'
-  }
+  # function prompt_devbox() {
+  #   [[ -n "$DEVBOX_SHELL_ENABLED" ]] || return
+  #   p10k segment -t '%F{7}in %K{1}%F{0} DEVBOX %k%f'
+  # }
 
-  # instant prompt 用（任意）
-  function instant_prompt_devbox() {
-    prompt_devbox
-  }
+  # function instant_prompt_devbox() {
+  #   prompt_devbox
+  # }
 
   # If p10k is already loaded, reload configuration.
   # This works even with POWERLEVEL9K_DISABLE_HOT_RELOAD=true.

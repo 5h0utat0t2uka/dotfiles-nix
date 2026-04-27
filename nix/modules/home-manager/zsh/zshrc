@@ -60,6 +60,12 @@ if [[ -n "$TMUX" ]]; then
   #   tmux refresh-client -S
   # }
   # add-zsh-hook precmd tmux_update_pane
+else
+  tm() {
+    # tmuxセッションのアタッチまたは新規作成
+    local session=${1:-$(printf %08x $RANDOM$RANDOM)}
+    tmux new -s "$session" 2>/dev/null || tmux attach -t "$session"
+  }
 fi
 
 local BREW_PREFIX=""
@@ -163,7 +169,6 @@ lfp() {
   }
   local tmp dir
   tmp="$(mktemp "${TMPDIR:-/tmp}/lfcd.XXXXXX")" || return
-
   tmux display-popup \
     -E \
     -w 80% \
@@ -177,8 +182,7 @@ lfp() {
 }
 
 dff() {
-  # usage:
-  # dff file1.json file2.json, dff app.log app.log.bak
+  # usage: dff file1.json file2.json, dff app.log app.log.bak
   emulate -L zsh
   setopt pipefail
   local file1="$1"
@@ -222,12 +226,6 @@ after_prompt_once() {
   add-zsh-hook -d precmd after_prompt_once
 }
 add-zsh-hook precmd after_prompt_once
-
-tm() {
-  # tmuxセッションのアタッチまたは新規作成
-  local session=${1:-$(printf %08x $RANDOM$RANDOM)}
-  tmux new -s "$session" 2>/dev/null || tmux attach -t "$session"
-}
 
 fzf_command() {
   if [[ -n "$TMUX" ]] && command -v fzf-tmux >/dev/null 2>&1; then

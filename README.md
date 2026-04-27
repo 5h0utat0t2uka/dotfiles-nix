@@ -59,15 +59,17 @@ just update-pkg
 # nixpkgs, darwin, home-manager など
 just update-all
 
-# チェックとビルド
+# チェックとビルド・切り替え
 just check
 just build
+just switch
 ```
 ``` sh
 # 問題があった場合は restore
 git restore flake.lock
-# ビルド後であれば restore 後に再ビルド
+# ビルド後であれば restore 後に再ビルド・切り替え
 just build
+just switch
 
 # 問題はなければ
 git add .
@@ -118,10 +120,11 @@ Upgrading Nix to "/nix/store/rhxidj1q2l9y3v4ssn691l7f69gpayfg-determinate-nix-3.
 Restarting Determinate Nixd...
 ```
 
-4. チェックとビルド
+4. チェックとビルド・切り替え
 ```sh
 just check
 just build
+just switch
 ```
 ``` sh
 nix flake check /Users/shouta/.local/share/chezmoi/nix 
