@@ -37,12 +37,13 @@ __wezterm_set_cwd() {
 add-zsh-hook chpwd __wezterm_set_cwd
 add-zsh-hook precmd __wezterm_set_cwd
 
-ghostty_cursor_blink_block() {
+__ghostty_set_cursor() {
+  # プロンプト表示直前に、点滅ブロックカーソルのエスケープシーケンスを送る
   printf '\e[1 q'
 }
-add-zsh-hook precmd ghostty_cursor_blink_block
+add-zsh-hook precmd __ghostty_set_cursor
 
-if [[ -n "$TMUX" ]]; then
+if [[ -n ${TMUX-} ]]; then
   export FZF_TMUX=1
   export FZF_TMUX_OPTS="-p 80%,70% --margin=0,1"
   tp() {
@@ -51,6 +52,12 @@ if [[ -n "$TMUX" ]]; then
       -d "#{pane_current_path}" \
       -E "${SHELL:-/bin/zsh} -l"
   }
+  tm_refresh_status() {
+    tmux refresh-client -S
+  }
+  add-zsh-hook chpwd tm_refresh_status
+  add-zsh-hook precmd tm_refresh_status
+
   # tmux_update_pane() {
   #   if [ -n "$DEVBOX_SHELL_ENABLED" ]; then
   #     tmux set-environment -g DEVBOX_SHELL_ENABLED "$DEVBOX_SHELL_ENABLED"
@@ -228,7 +235,7 @@ after_prompt_once() {
 add-zsh-hook precmd after_prompt_once
 
 fzf_command() {
-  if [[ -n "$TMUX" ]] && command -v fzf-tmux >/dev/null 2>&1; then
+  if [[ -n ${TMUX-} ]] && command -v fzf-tmux >/dev/null 2>&1; then
     echo "fzf-tmux $FZF_TMUX_OPTS"
   else
     echo "fzf"
