@@ -14,8 +14,8 @@ return {
         return function() require("telescope.builtin")[fn](opts) end
       end
       return {
-        { "<leader>ff", b("find_files", { hidden = false }), desc = "Find files" },
-        { "<leader>fg", b("live_grep"),                      desc = "Live grep" },
+        { "<leader>ff", b("find_files", { hidden = false }), desc = "Files" },
+        { "<leader>fg", b("live_grep"),                      desc = "Grep" },
         { "<leader>fb", b("buffers"),                        desc = "Buffers" },
         { "<leader>fr", b("registers"),                      desc = "Registers" },
         { "<leader>gs", b("git_status"),                     desc = "Git status" },
@@ -28,7 +28,7 @@ return {
               return { "--hidden", "-uu" }
             end,
           })
-        end, desc = "Live grep includes hidden/ignored" },
+        end, desc = "Grep includes hidden/ignored" },
       }
     end,
     config = function(_, opts)

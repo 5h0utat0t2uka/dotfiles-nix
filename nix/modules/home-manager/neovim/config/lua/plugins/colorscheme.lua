@@ -58,6 +58,7 @@ return {
       vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#5E81AC", bg = "NONE" })
       vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#4C566A", bg = "NONE" })
       vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#4C566A", bg = "NONE" })
+      vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = "#5E81AC", bg = "NONE" })
       vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "NONE" })
       vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "NONE" })
       vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = "NONE" })
