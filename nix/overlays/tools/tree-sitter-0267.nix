@@ -1,3 +1,5 @@
+{ ... }:
+
 # NOTE: nixpkgsのtree-sitterのバージョンが`0.26.1`に上がるまでの暫定
 # nixpkgsが追いついたら下記
 # - `nix/overlays/tools/tree-sitter-0267.nix`を削除

@@ -1,3 +1,5 @@
+{ ... }:
+
 final: prev: {
   keifu = prev.rustPlatform.buildRustPackage rec {
     pname = "keifu";

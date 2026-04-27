@@ -1,9 +1,5 @@
 { inputs }:
 
-final: prev:
-let
-  system = prev.stdenv.hostPlatform.system;
-in
-{
-  claude-code = inputs.claude-code.packages.${system}.claude-code;
+final: prev: {
+  claude-code = inputs.claude-code.packages.${prev.stdenv.hostPlatform.system}.default;
 }

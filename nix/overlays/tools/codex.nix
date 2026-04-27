@@ -1,9 +1,5 @@
 { inputs }:
 
-final: prev:
-let
-  system = prev.stdenv.hostPlatform.system;
-in
-{
-  codex = inputs.codex.packages.${system}.default;
+final: prev: {
+  codex = inputs.codex.packages.${prev.stdenv.hostPlatform.system}.default;
 }

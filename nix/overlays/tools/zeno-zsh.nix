@@ -1,3 +1,5 @@
+{ ... }:
+
 final: prev: {
   zeno-zsh = prev.stdenvNoCC.mkDerivation rec {
     pname = "zeno-zsh";

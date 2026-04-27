@@ -1,4 +1,6 @@
-(final: prev: {
+{ ... }:
+
+final: prev: {
   neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (old: {
     version = "0.12.1";
     src = prev.fetchFromGitHub {
@@ -9,4 +11,4 @@
       # hash = lib.fakeHash;
     };
   });
-})
+}

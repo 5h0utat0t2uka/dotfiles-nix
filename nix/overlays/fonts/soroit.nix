@@ -1,4 +1,5 @@
-# nix/overlays/soroit.nix
+{ ... }:
+
 final: prev: {
   soroit-loose-lg = prev.stdenvNoCC.mkDerivation (finalAttrs: {
     pname = "soroit-loose-lg";
