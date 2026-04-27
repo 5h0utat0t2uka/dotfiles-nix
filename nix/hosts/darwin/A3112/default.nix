@@ -47,7 +47,7 @@ in
         fzf
         gh
         gifski
-        glow
+        # glow
         gnupg
         just
         jq

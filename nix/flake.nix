@@ -62,6 +62,7 @@
       let
         identity = identityFor hostKey;
       in
+
       # identity に hostname があること、かつ hostKey と一致することを強制
       assert (identity ? hostname);
       assert (identity.hostname == hostKey);
@@ -109,7 +110,7 @@
                 enable = true;
                 enableRosetta = false;
                 user = identity.username;
-                autoMigrate = identity.hasExistingHomebrew or false;
+                autoMigrate = false;
                 mutableTaps = true;
               };
             })
@@ -124,7 +125,6 @@
               home-manager.extraSpecialArgs = {
                 inherit identity inputs;
               };
-              # home-manager.users.${identity.username} = import (darwinHostsDir + "/${hostKey}/home.nix");
             }
 
             # ----------------------------------------------------

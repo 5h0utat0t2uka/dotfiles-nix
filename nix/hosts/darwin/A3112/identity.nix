@@ -4,5 +4,8 @@ rec {
   username = "shouta";
   homeDirectory = "/Users/${username}";
   flakeRoot = "${homeDirectory}/.local/share/chezmoi/nix";
-  hasExistingHomebrew = false;
+  git = {
+    user.name = "5h0utat0t2uka";
+    user.email = "5h0utat0t2uka@gmail.com";
+  };
 }

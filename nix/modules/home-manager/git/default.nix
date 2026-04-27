@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, identity, ... }:
 
 {
   programs.git = {
@@ -9,8 +9,8 @@
     ];
     settings = {
       user = {
-        name = "5h0utat0t2uka";
-        email = "5h0utat0t2uka@gmail.com";
+        name = identity.git.user.name;
+        email = identity.git.user.email;
       };
       core = {
         editor = "vim";
@@ -36,8 +36,9 @@
         hunk-header-decoration-style = "none";
       };
       ghq = {
-        user = "5h0utat0t2uka";
-        root = "~/Development/repositories";
+        user = identity.git.user.name;
+        root = "${identity.homeDirectory}/Development/repositories";
+        # root = "~/Development/repositories";
       };
     };
   };
