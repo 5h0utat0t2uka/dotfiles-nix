@@ -7,10 +7,10 @@ in
 
 {
   imports = [
-    ../../../modules/darwin/system.nix
-    ../../../modules/darwin/shell.nix
-    ../../../modules/darwin/homebrew.nix
-    ../../../modules/darwin/launchd.nix
+    ../../../modules/nix-darwin/system.nix
+    ../../../modules/nix-darwin/shell.nix
+    ../../../modules/nix-darwin/homebrew.nix
+    ../../../modules/nix-darwin/launchd.nix
   ];
 
   home-manager.users.${username} = {
