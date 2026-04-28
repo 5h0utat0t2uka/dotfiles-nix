@@ -90,7 +90,7 @@
                   (import ./overlays/fonts/shcode-jp-zen-haku.nix)
                   (import ./overlays/tools/tree-sitter-0267.nix)
 
-                  # NOTE: issue: direnv build failure on darwin
+                  # FIXME: issue: direnv build failure on darwin
                   # https://github.com/NixOS/nixpkgs/issues/507531
                   # (_final: prev: {
                   #   direnv = prev.direnv.overrideAttrs (old: {
