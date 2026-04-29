@@ -1,38 +1,25 @@
+
 # nix/modules/home-manager/nixvim/default.nix
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, identity, ... }:
 
 # 移行前
 let
+  configRoot = "${identity.flakeRoot}/modules/home-manager/neovim/config";
+
   nixvimPkg = inputs.nixvim.legacyPackages.${pkgs.stdenv.hostPlatform.system}.makeNixvim {
     imports = [
-      # ./plugins/blink.nix
+      ./plugins/blink.nix
       ./plugins/colorscheme.nix
-      # ./plugins/flash.nix
+      ./plugins/flash.nix
       ./plugins/gitsigns.nix
-      ./plugins/hlchunk.nix
-      ./plugins/key-menu.nix
-      # ./plugins/lspconfig.nix
-      # ./plugins/lspsaga.nix
+      ./plugins/lsp.nix
       ./plugins/lualine.nix
-      # ./plugins/neoscroll.nix
-      ./plugins/noice.nix
-      # ./plugins/nvim-autopairs.nix
-      # ./plugins/nvim-colorizer.nix
-      # ./plugins/nvim-scrollbar.nix
-      # ./plugins/nvim-telescope.nix
-      # ./plugins/nvim-treesitter.nix
-      # ./plugins/nvim-ts-autotag.nix
+      ./plugins/telescope.nix
+      ./plugins/treesitter.nix
       ./plugins/oil.nix
-      # ./plugins/smear-cursor.nix
-      # ./plugins/todo-comments.nix
-      # ./plugins/toggleterm.nix
-      # ./plugins/undo-glow.nix
-      # ./plugins/vim-astro.nix
+      ./plugins/noice.nix
     ];
-    plugins.lz-n = {
-      enable = true;
-      autoLoad = true;
-    };
+
     withPython3 = false;
     withRuby = false;
     globals = {
@@ -40,6 +27,7 @@ let
       maplocalleader = " ";
     };
     opts = {
+      # options.lua 相当
       clipboard = "unnamedplus";
       termguicolors = true;
       ttimeoutlen = 50;
@@ -71,6 +59,7 @@ let
       guicursor = "n-v:block,i:ver50,c:hor50,a:blinkon500-blinkoff500";
       updatetime = 300;
     };
+
     keymaps = [
       { mode = "n"; key = "<S-l>"; action = "<cmd>bnext<cr>"; options.desc = "Next buffer"; }
       { mode = "n"; key = "<S-h>"; action = "<cmd>bprevious<cr>"; options.desc = "Previous buffer"; }
@@ -103,80 +92,153 @@ let
       { mode = "c"; key = "<c-e>"; action = "<end>"; options.desc = "Emacs like end"; }
       { mode = "c"; key = "<M-b>"; action = "<S-Left>"; options.desc = "Word left in cmdline"; }
       { mode = "c"; key = "<M-f>"; action = "<S-Right>"; options.desc = "Word right in cmdline"; }
-      { mode = "n"; key = "<leader>yd"; options.desc = "Yank diagnostic message"; action.__raw = ''
-        function()
-          local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })
-          if #diagnostics == 0 then
-            vim.notify("No diagnostics", vim.log.levels.INFO)
-            return
+      { mode = "n"; key = "<leader>yd"; action.__raw = ''
+          function()
+            local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })
+            if #diagnostics == 0 then
+              vim.notify("No diagnostics", vim.log.levels.INFO)
+              return
+            end
+            local messages = vim.tbl_map(function(d) return d.message end, diagnostics)
+            local text = table.concat(messages, "\n")
+            vim.fn.setreg("+", text)
+            vim.notify("Yanked: " .. text)
           end
-          local messages = vim.tbl_map(function(d) return d.message end, diagnostics)
-          local text = table.concat(messages, "\n")
-          vim.fn.setreg("+", text)
-          vim.notify("Yanked: " .. text)
-        end
-      ''; }
-      { mode = "n"; key = "<Esc>"; options.desc = "Clear search highlight or escape"; action.__raw = ''
-        function()
-          if vim.v.hlsearch == 1 then
-            vim.cmd.nohlsearch()
-          else
-            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+        '';
+        options.desc = "Yank diagnostic message";
+      }
+      { mode = "n"; key = "<Esc>"; action.__raw = ''
+          function()
+            if vim.v.hlsearch == 1 then
+              vim.cmd.nohlsearch()
+            else
+              vim.api.nvim_feedkeys(
+                vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
+                "n",
+                false
+              )
+            end
           end
-        end
-      ''; }
+        '';
+        options.desc = "Clear search highlight or escape";
+      }
     ];
-
     autoCmd = [
       { event = "BufEnter"; callback.__raw = ''
-        function()
-          local matches = vim.fn.getmatches()
-          for _, m in ipairs(matches) do
-            if m.pattern == "\\%u200b" then return end
+          -- detect if the buffer contains a zero-width space character
+          function()
+            local matches = vim.fn.getmatches()
+            for _, m in ipairs(matches) do
+              if m.pattern == "\\%u200b" then
+                return
+              end
+            end
+            vim.fn.matchadd("ErrorMsg", "\\%u200b")
           end
-          vim.fn.matchadd("ErrorMsg", "\\%u200b")
-        end
-      ''; }
+        '';
+      }
       { event = "CursorHold"; callback.__raw = ''
-        function()
-          vim.diagnostic.open_float(nil, {
-            focus = false,
-            scope = "cursor",
-            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-            border = "rounded",
-            source = "if_many",
-          })
-        end
-      ''; }
+          -- show diagnostics under the cursor
+          function()
+            vim.diagnostic.open_float(nil, {
+              focus = false,
+              scope = "cursor",
+              close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+              border = "rounded",
+              source = "if_many",
+            })
+          end
+        '';
+      }
     ];
-    files = {
-      "snippets/html.json".source = ./snippets/html.json;
-      "snippets/package.json".source = ./snippets/package.json;
-    };
+
     extraConfigLua = ''
+      -- switch to English input method on normal mode
       local english_im = "com.apple.inputmethod.Kotoeri.RomajiTyping.Roman"
       vim.api.nvim_create_autocmd("ModeChanged", {
         group = vim.api.nvim_create_augroup("AutoSwitchIMOnNormal", { clear = true }),
         pattern = "*:n*",
-        callback = function() vim.fn.system({ "macism", english_im }) end,
+        callback = function()
+          vim.fn.system({ "macism", english_im })
+        end,
+      })
+
+      vim.opt.runtimepath:prepend("${configRoot}")
+      require("lazy").setup("plugins", {
+        lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
+        change_detection = {
+          enabled = false,
+          notify = false,
+        },
       })
     '';
-    luaLoader.enable = true;
-    performance.byteCompileLua = {
+
+    extraFiles = {
+      "lua/plugins".source = "${configRoot}/lua/plugins";
+      "after/lsp".source = "${configRoot}/after/lsp";
+      "snippets".source = "${configRoot}/snippets";
+      ".luarc.json".source = "${configRoot}/.luarc.json";
+      "lazy-lock.json".source = "${configRoot}/lazy-lock.json";
+    };
+
+    extraPlugins = with pkgs.vimPlugins; [
+      lazy-nvim
+      (nvim-treesitter.withPlugins (p: [
+        p.lua
+        p.vim
+        p.vimdoc
+        p.query
+        p.typescript
+        p.tsx
+        p.json
+        p.javascript
+        p.html
+        p.css
+        p.nix
+        p.astro
+        p.markdown
+        p.markdown_inline
+        p.just
+        p.make
+        p.yaml
+        p.toml
+        p.bash
+        p.zsh
+        p.dockerfile
+        p.gitignore
+        p.regex
+      ]))
+    ];
+
+    # plugins = {
+    #   lualine = {
+    #     enable = true;
+    #   };
+    # };
+
+    # plugins.lz-n.enable = true;
+    luaLoader = {
       enable = true;
-      nvimRuntime = true;
-      configs = true;
-      plugins = true;
+    };
+    performance = {
+      byteCompileLua = {
+        enable = true;
+        nvimRuntime = true;
+        configs = true;
+        plugins = true;
+      };
     };
   };
-
   nixvimCmd = pkgs.writeShellScriptBin "nixvim" ''
     export NVIM_APPNAME=nixvim
     exec ${nixvimPkg}/bin/nvim "$@"
   '';
 in
-
-{ home.packages = [ nixvimCmd ]; }
+{
+  home.packages = [
+    nixvimCmd
+  ];
+}
 
 # 移行後
 # imports = [
