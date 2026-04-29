@@ -5,29 +5,29 @@
 let
   nixvimPkg = inputs.nixvim.legacyPackages.${pkgs.stdenv.hostPlatform.system}.makeNixvim {
     imports = [
-      # ./plugins/blink.nix
+      ./plugins/autopairs.nix
+      ./plugins/blink.nix
       ./plugins/colorscheme.nix
-      # ./plugins/flash.nix
+      ./plugins/colorizer.nix
+      ./plugins/flash.nix
       ./plugins/gitsigns.nix
       ./plugins/hlchunk.nix
       ./plugins/key-menu.nix
-      # ./plugins/lspconfig.nix
-      # ./plugins/lspsaga.nix
+      ./plugins/lspconfig.nix
+      ./plugins/lspsaga.nix
       ./plugins/lualine.nix
-      # ./plugins/neoscroll.nix
+      ./plugins/neoscroll.nix
       ./plugins/noice.nix
-      # ./plugins/nvim-autopairs.nix
-      # ./plugins/nvim-colorizer.nix
-      # ./plugins/nvim-scrollbar.nix
-      # ./plugins/nvim-telescope.nix
-      # ./plugins/nvim-treesitter.nix
-      # ./plugins/nvim-ts-autotag.nix
       ./plugins/oil.nix
-      # ./plugins/smear-cursor.nix
-      # ./plugins/todo-comments.nix
-      # ./plugins/toggleterm.nix
-      # ./plugins/undo-glow.nix
-      # ./plugins/vim-astro.nix
+      ./plugins/scrollbar.nix
+      ./plugins/smear-cursor.nix
+      ./plugins/telescope.nix
+      ./plugins/treesitter.nix
+      ./plugins/todo-comments.nix
+      ./plugins/toggleterm.nix
+      ./plugins/ts-autotag.nix
+      ./plugins/undo-glow.nix
+      ./plugins/vim-astro.nix
     ];
     plugins.lz-n = {
       enable = true;
@@ -74,7 +74,7 @@ let
     keymaps = [
       { mode = "n"; key = "<S-l>"; action = "<cmd>bnext<cr>"; options.desc = "Next buffer"; }
       { mode = "n"; key = "<S-h>"; action = "<cmd>bprevious<cr>"; options.desc = "Previous buffer"; }
-      { mode = "n"; key = "U"; action = "<C-r>"; options = { noremap = true; silent = true; desc = "Redo"; }; }
+      # { mode = "n"; key = "U"; action = "<C-r>"; options = { noremap = true; silent = true; desc = "Redo"; }; }
       { mode = "n"; key = "gk"; action = "<Cmd>tabnew<CR>"; options.desc = "New tab"; }
       { mode = "n"; key = "gh"; action = "<Cmd>tabprevious<CR>"; options.desc = "Previous tab"; }
       { mode = "n"; key = "gl"; action = "<Cmd>tabnext<CR>"; options.desc = "Next tab"; }
@@ -149,7 +149,7 @@ let
         end
       ''; }
     ];
-    files = {
+    extraFiles = {
       "snippets/html.json".source = ./snippets/html.json;
       "snippets/package.json".source = ./snippets/package.json;
     };

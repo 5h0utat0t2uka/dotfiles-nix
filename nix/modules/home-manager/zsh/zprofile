@@ -1,41 +1,89 @@
 # ~/.config/zsh/.zprofile
 # Purpose:
 # - Add $HOME/.local/bin to PATH (user-local binaries like chezmoi)
-# - Initialize Homebrew env via `brew shellenv`
-# - Enforce PATH order: Nix first, Homebrew later (cask-only policy)
+# - Set Homebrew environment without calling `brew shellenv`
+# - Enforce PATH order: Nix first, Homebrew later
 #
-# Note: Nix store PATH entries (/etc/profiles/per-user/$USER/bin,
+# Note:
+# Nix store PATH entries (/etc/profiles/per-user/$USER/bin,
 # /run/current-system/sw/bin) are handled by nix-darwin automatically.
 # We only handle user-local paths and Homebrew here.
 
-typeset -U path
+typeset -U path fpath
+
+remove_path_entry() {
+  local target="$1"
+  local entry
+  local -a next
+
+  next=()
+  for entry in "${path[@]}"; do
+    if [[ "$entry" != "$target" ]]; then
+      next+=("$entry")
+    fi
+  done
+
+  path=("${next[@]}")
+}
+
+prepend_path_entry() {
+  local dir="$1"
+  [[ -d "$dir" ]] || return
+
+  remove_path_entry "$dir"
+  path=("$dir" "${path[@]}")
+}
+
+append_path_entry() {
+  local dir="$1"
+  [[ -d "$dir" ]] || return
+
+  remove_path_entry "$dir"
+  path+=("$dir")
+}
+
+prepend_fpath_entry() {
+  local dir="$1"
+  [[ -d "$dir" ]] || return
+
+  local entry
+  local -a next
+
+  next=()
+  for entry in "${fpath[@]}"; do
+    if [[ "$entry" != "$dir" ]]; then
+      next+=("$entry")
+    fi
+  done
+
+  fpath=("$dir" "${next[@]}")
+}
 
 # User-local binaries (e.g. chezmoi installed via install script)
-path=("$HOME/.local/bin" $path)
+prepend_path_entry "$HOME/.local/bin"
 
 # NIX_PROFILE_PREFIX is static because zshPluginLinks places plugins
 # under /etc/profiles/per-user/$USER/share/zsh/plugins.
 export NIX_PROFILE_PREFIX="/etc/profiles/per-user/$USER"
 
 # Homebrew environment
-if [[ -x /run/current-system/sw/bin/brew ]]; then
-  eval "$(/run/current-system/sw/bin/brew shellenv)"
-elif [[ -x /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+# Managed by nix-homebrew.
+# Do not call `brew shellenv` during zsh startup.
+if [[ -d /opt/homebrew ]]; then
+  export HOMEBREW_PREFIX="/opt/homebrew"
+  export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+  export HOMEBREW_REPOSITORY="/opt/homebrew/Library/.homebrew-is-managed-by-nix"
+
+  # Homebrew-provided zsh completions.
+  prepend_fpath_entry "/opt/homebrew/share/zsh/site-functions"
+
+  # Keep Homebrew behind Nix.
+  append_path_entry "/opt/homebrew/bin"
+  append_path_entry "/opt/homebrew/sbin"
 fi
 
-# --- Final PATH order fix (prefer Nix, keep Homebrew later) ---
+# Prefer Nix profile.
+prepend_path_entry "$NIX_PROFILE_PREFIX/bin"
 
-# Put Nix profile first
-if [[ -d "${NIX_PROFILE_PREFIX}/bin" ]]; then
-  path=("${path[@]:#${NIX_PROFILE_PREFIX}/bin}")
-  path=("${NIX_PROFILE_PREFIX}/bin" $path)
-fi
-
-# Push Homebrew behind Nix (brew is cask-only in this setup)
-path=("${path[@]:#/opt/homebrew/bin}")
-path=("${path[@]:#/opt/homebrew/sbin}")
-path+=("/opt/homebrew/bin" "/opt/homebrew/sbin")
-
-typeset -U path
+typeset -U path fpath
 export PATH

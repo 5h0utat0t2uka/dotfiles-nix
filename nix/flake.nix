@@ -9,6 +9,11 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # FIXME: issue: sigsuspend probe under autoconf (https://github.com/NixOS/nixpkgs/pull/513971)
+    # nixpkgs 0726a0e 付近の zsh 5.9 は aarch64-darwin で sigsuspend probe 誤判定により command substitution が hang する
+    nixpkgs-zsh-fixed.url = "github:NixOS/nixpkgs/a504cf2";
+
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -20,6 +25,11 @@
     };
     wezterm = {
       url = "github:wezterm/wezterm?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # zed の最新 (nightly)
@@ -88,16 +98,43 @@
                   # (import ./overlays/tools/codex { inherit inputs; })
                   # (import ./overlays/tools/claude-code { inherit inputs; })
                   (import ./overlays/fonts/shcode-jp-zen-haku.nix)
-                  (import ./overlays/tools/tree-sitter-0267.nix)
+                  # (import ./overlays/tools/tree-sitter-0267.nix)
 
-                  # FIXME: issue: direnv build failure on darwin
-                  # https://github.com/NixOS/nixpkgs/issues/507531
-                  # (_final: prev: {
-                  #   direnv = prev.direnv.overrideAttrs (old: {
-                  #     doCheck = (old.doCheck or true) && !prev.stdenv.isDarwin;
-                  #   });
-                  # })
+                  # FIXME: issue: sigsuspend probe under autoconf (https://github.com/NixOS/nixpkgs/pull/513971)
+                  (_final: prev:
+                    let
+                      pkgsZshFixed = import inputs.nixpkgs-zsh-fixed {
+                        system = prev.stdenv.hostPlatform.system;
+                        config.allowUnfree = true;
+                      };
+                    in
+                    {
+                      zsh = pkgsZshFixed.zsh;
+                    }
+                  )
 
+                  # FIXME: issue: nixpkgs zsh-powerlevel10k gitstatus (https://github.com/nixos/nixpkgs/issues/498550)
+                  (final: prev:
+                    let
+                      isDarwinArm64 = prev.stdenv.hostPlatform.isDarwin && prev.stdenv.hostPlatform.isAarch64;
+                    in
+                    {
+                      zsh-powerlevel10k = prev.zsh-powerlevel10k.overrideAttrs (old: {
+                        postInstall = (old.postInstall or "") + prev.lib.optionalString isDarwinArm64 ''
+                          mkdir -p "$out/share/zsh-powerlevel10k/gitstatus/usrbin"
+                          ln -sf "${final.gitstatus}/bin/gitstatusd" \
+                            "$out/share/zsh-powerlevel10k/gitstatus/usrbin/gitstatusd-darwin-arm64"
+                        '';
+                      });
+                    }
+                  )
+
+                  # FIXME: issue: direnv build failure on darwin (https://github.com/NixOS/nixpkgs/issues/507531)
+                  (_final: prev: {
+                    direnv = prev.direnv.overrideAttrs (_: {
+                      doCheck = false;
+                    });
+                  })
                 ];
               };
             }

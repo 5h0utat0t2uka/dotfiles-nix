@@ -75,21 +75,45 @@ else
   }
 fi
 
-local BREW_PREFIX=""
-if command -v brew >/dev/null 2>&1; then
-  BREW_PREFIX="$(brew --prefix 2>/dev/null)"
-elif [[ -x /opt/homebrew/bin/brew ]]; then
-  BREW_PREFIX="$(/opt/homebrew/bin/brew --prefix 2>/dev/null)"
-fi
+# local BREW_PREFIX=""
+# if command -v brew >/dev/null 2>&1; then
+#   BREW_PREFIX="$(brew --prefix 2>/dev/null)"
+# elif [[ -x /opt/homebrew/bin/brew ]]; then
+#   BREW_PREFIX="$(/opt/homebrew/bin/brew --prefix 2>/dev/null)"
+# fi
+
+# typeset -U fpath
+# local -a new_fpath=(
+#   "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
+# )
+# if [[ -n "$BREW_PREFIX" ]]; then
+#   new_fpath+=("$BREW_PREFIX/share/zsh/site-functions"(N-/))
+# fi
+# [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
+
+# local BREW_PREFIX="${HOMEBREW_PREFIX:-}"
+# if [[ -z "$BREW_PREFIX" ]]; then
+#   if [[ -d /opt/homebrew ]]; then
+#     BREW_PREFIX="/opt/homebrew"
+#   elif [[ -d /usr/local/Homebrew || -d /usr/local/Cellar ]]; then
+#     BREW_PREFIX="/usr/local"
+#   fi
+# fi
+
+# typeset -U fpath
+# local -a new_fpath=(
+#   "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
+# )
+# if [[ -n "$BREW_PREFIX" ]]; then
+#   new_fpath+=("$BREW_PREFIX/share/zsh/site-functions"(N-/))
+# fi
+# [[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
 
 typeset -U fpath
-local -a new_fpath=(
+fpath=(
   "${NIX_PROFILE_PREFIX:-}/share/zsh/site-functions"(N-/)
+  $fpath
 )
-if [[ -n "$BREW_PREFIX" ]]; then
-  new_fpath+=("$BREW_PREFIX/share/zsh/site-functions"(N-/))
-fi
-[[ -n "$new_fpath" ]] && fpath=($new_fpath $fpath)
 
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$CACHE_DIR/.zcompcache"

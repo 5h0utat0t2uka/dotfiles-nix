@@ -21,6 +21,7 @@ in
       ../../../modules/home-manager/git
       ../../../modules/home-manager/zsh
       # ../../../modules/home-manager/zed
+      ../../../modules/home-manager/nixvim
       ../../../modules/home-manager/neovim
       ../../../modules/home-manager/direnv
       ../../../modules/home-manager/lazygit
@@ -31,8 +32,7 @@ in
       ../../../modules/home-manager/nb
     ];
     manual = {
-      # NOTE: issue: problem with home-manager manual
-      # https://github.com/nix-community/home-manager/issues/7935
+      # FIXME: issue: problem with home-manager manual (https://github.com/nix-community/home-manager/issues/7935)
       manpages.enable = false;
     };
     home = {
@@ -48,7 +48,6 @@ in
         fzf
         gh
         gifski
-        # glow
         gnupg
         just
         jq
@@ -64,7 +63,7 @@ in
         ]))
         pinentry_mac
         ripgrep
-        pkgs."tree-sitter-0267"
+        tree-sitter
         tree
         viu
         wget
