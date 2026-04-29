@@ -1,6 +1,10 @@
 { pkgs, ... }:
+
 {
-  extraPlugins = with pkgs.vimPlugins; [ smear-cursor-nvim ];
+  extraPlugins = with pkgs.vimPlugins; [
+    smear-cursor-nvim
+  ];
+
   extraConfigLua = ''
     require("smear_cursor").setup({
       smear_to_cmd = false,

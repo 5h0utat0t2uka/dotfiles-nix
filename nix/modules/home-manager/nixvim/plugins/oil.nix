@@ -1,56 +1,96 @@
 { pkgs, ... }:
+
 {
-  extraPlugins = with pkgs.vimPlugins; [ oil-nvim oil-git-status-nvim ];
-
-  keymaps = [{
-    mode = "n";
-    key = "-";
-    action.__raw = ''function() require("oil").open(nil, { preview = { split = "belowright" } }) end'';
-    options.desc = "Open parent directory with preview";
-  }];
-
-  extraConfigLua = ''
-    vim.api.nvim_set_hl(0, "OilFloat", { link = "Normal" })
-    vim.api.nvim_set_hl(0, "OilFloatBorder", { link = "Normal" })
-
-    require("oil").setup({
-      default_file_explorer = true,
-      columns = { "permissions", "mtime" },
-      win_options = { signcolumn = "yes:2", number = false, relativenumber = false },
+  plugins.oil = {
+    enable = true;
+    autoLoad = true;
+    settings = {
+      default_file_explorer = true;
+      columns = [
+        "permissions"
+        "mtime"
+      ];
+      win_options = {
+        signcolumn = "yes:2";
+        number = false;
+        relativenumber = false;
+      };
       view_options = {
-        show_hidden = true,
-        is_always_hidden = function(name, _)
-          return name == "node_modules" or name == ".git" or name == ".next" or name == ".DS_Store" or name == "dist"
-        end,
-      },
-      preview_win = {
-        update_on_cursor_moved = true,
-        preview_method = "fast_scratch",
-        disable_preview = function(filename)
-          local f = filename:lower()
-          return f:match("%.png$") ~= nil
-            or f:match("%.jpe?g$") ~= nil
-            or f:match("%.webp$") ~= nil
-            or f:match("%.gif$") ~= nil
-            or f:match("%.avif$") ~= nil
-            or f:match("%.svg$") ~= nil
-            or f:match("%.bmp$") ~= nil
-            or f:match("%.ico$") ~= nil
-            or f:match("%.ds_store$") ~= nil
-        end,
-      },
-      confirmation = {
-        min_width = { 40, 0.4 }, max_width = 0.9,
-        min_height = { 5, 0.1 }, max_height = 0.9,
-        border = "rounded",
-        win_options = { winblend = 0 },
-      },
-      keymaps = {
-        ["q"] = { "actions.close", mode = "n" },
-        ["<C-p>"] = { "actions.preview", opts = { split = "belowright" } },
-      },
-    })
+        show_hidden = true;
 
-    require("oil-git-status").setup({ show_ignored = true })
-  '';
+        is_always_hidden.__raw = ''
+          function(name, _)
+            return name == "node_modules"
+              or name == ".git"
+              or name == ".next"
+              or name == ".DS_Store"
+              or name == "dist"
+          end
+        '';
+      };
+      preview_win = {
+        update_on_cursor_moved = true;
+        preview_method = "fast_scratch";
+        disable_preview.__raw = ''
+          function(filename)
+            local f = filename:lower()
+            return f:match("%.png$") ~= nil
+              or f:match("%.jpe?g$") ~= nil
+              or f:match("%.webp$") ~= nil
+              or f:match("%.gif$") ~= nil
+              or f:match("%.avif$") ~= nil
+              or f:match("%.svg$") ~= nil
+              or f:match("%.bmp$") ~= nil
+              or f:match("%.ico$") ~= nil
+              or f:match("%.ds_store$") ~= nil
+          end
+        '';
+      };
+      confirmation = {
+        min_width = [ 40 0.4 ];
+        max_width = 0.9;
+        min_height = [ 5 0.1 ];
+        max_height = 0.9;
+        border = "rounded";
+        win_options = {
+          winblend = 0;
+        };
+      };
+      keymaps = {
+        "q" = {
+          __unkeyed-1 = "actions.close";
+          mode = "n";
+        };
+        "<C-p>" = {
+          __unkeyed-1 = "actions.preview";
+          opts = {
+            split = "belowright";
+          };
+        };
+      };
+    };
+
+    luaConfig.post = ''
+      require("oil-git-status").setup({
+        show_ignored = true,
+      })
+      vim.keymap.set("n", "-", function()
+        require("oil").open(nil, {
+          preview = {
+            split = "belowright",
+          },
+        })
+      end, {
+        noremap = true,
+        silent = true,
+        desc = "Open parent directory with preview",
+      })
+      vim.api.nvim_set_hl(0, "OilFloat", { link = "Normal" })
+      vim.api.nvim_set_hl(0, "OilFloatBorder", { link = "Normal" })
+    '';
+  };
+
+  extraPlugins = with pkgs.vimPlugins; [
+    oil-git-status-nvim
+  ];
 }

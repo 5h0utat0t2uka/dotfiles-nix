@@ -3,6 +3,14 @@
 {
   plugins.colorizer = {
     enable = true;
+
+    lazyLoad.settings = {
+      event = [
+        "BufReadPost"
+        "BufNewFile"
+      ];
+    };
+
     settings = {
       filetypes = [
         "css"

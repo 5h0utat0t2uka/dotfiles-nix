@@ -1,3 +1,7 @@
+if vim.env.NVIM_APPNAME == "nixvim" then
+  return {}
+end
+
 return {
   "nvim-treesitter/nvim-treesitter",
   lazy = false,

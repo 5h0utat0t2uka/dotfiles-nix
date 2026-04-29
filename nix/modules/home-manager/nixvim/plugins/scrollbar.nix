@@ -10,23 +10,32 @@
   extraConfigLua = ''
     require("scrollbar").setup({
       show = true,
-      handle = { color = "#3b4252" },
+      handle = {
+        color = "#3b4252",
+      },
       marks = {
         Search = { color = "#d08770" },
         Error = { color = "#bf616a" },
-        Warn = { color = "#ebcb8b" },
-        Info = { color = "#88c0d0" },
-        Hint = { color = "#a3be8c" },
-        Misc = { color = "#b48ead" },
+        Warn = { color = "#B48EAD" },
+        Info = { color = "#A3BE8C" },
+        Hint = { color = "#5E81AC" },
+        Misc = { color = "#EBCB8B" },
       },
       handlers = {
         cursor = true,
         diagnostic = true,
-        gitsigns = true,
+        gitsigns = false,
         search = true,
       },
-      excluded_buftypes = { "terminal", "nofile" },
-      excluded_filetypes = { "neo-tree", "help", "dashboard" },
+      excluded_buftypes = {
+        "terminal",
+        "nofile",
+      },
+      excluded_filetypes = {
+        "neo-tree",
+        "help",
+        "dashboard",
+      },
       throttle_ms = 100,
     })
 

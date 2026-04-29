@@ -1,7 +1,11 @@
 { pkgs, ... }:
+
 {
-  extraPlugins = with pkgs.vimPlugins; [ nord-nvim ];
-  extraConfigLuaPre = ''
+  extraPlugins = with pkgs.vimPlugins; [
+    nord-nvim
+  ];
+
+  extraConfigLua = ''
     vim.g.nord_contrast = true
     vim.g.nord_borders = true
     vim.g.nord_disable_background = false
@@ -54,7 +58,10 @@
     apply_custom_highlights()
 
     local group = vim.api.nvim_create_augroup("NordOverrides", { clear = true })
-    vim.api.nvim_create_autocmd("ColorScheme", { group = group, callback = apply_custom_highlights })
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      group = group,
+      callback = apply_custom_highlights,
+    })
     vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
       group = group,
       callback = function(e)

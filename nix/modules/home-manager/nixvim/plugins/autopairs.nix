@@ -4,7 +4,10 @@
   plugins.nvim-autopairs = {
     enable = true;
 
-    # plugins.treesitter.enable = true; に移行済みであること。
+    lazyLoad.settings = {
+      event = "InsertEnter";
+    };
+
     settings = {
       check_ts = true;
     };

@@ -1,70 +1,137 @@
-{ pkgs, ... }:
+{ ... }:
+
 {
-  # lualine から noice.api を参照するため start plugin にしている。
-  extraPlugins = with pkgs.vimPlugins; [ nui-nvim nvim-notify noice-nvim ];
+  plugins.notify = {
+    enable = true;
+    # noice の notify view から使うため lazy しない
+    autoLoad = true;
+    settings = {
+      stages = "static";
+      timeout = 3000;
+      render = "default";
+    };
+  };
 
-  keymaps = [{
-    mode = "n";
-    key = "<leader>fn";
-    action.__raw = ''function() require("telescope").extensions.noice.noice({ initial_mode = "normal" }) end'';
-    options.desc = "Noice";
-  }];
-
-  extraConfigLua = ''
-    require("notify").setup({
-      stages = "static",
-      timeout = 3000,
-      render = "default",
-    })
-
-    require("noice").setup({
+  plugins.noice = {
+    enable = true;
+    autoLoad = true;
+    settings = {
       cmdline = {
         format = {
-          cmdline = { title = "", pattern = "^:", icon = "", lang = "vim" },
-          input = { title = "", icon = "" },
-          search_down = { title = "", kind = "search", pattern = "^/", icon = "", lang = "regex" },
-          search_up = { title = "", kind = "search", pattern = "^%?", icon = "", lang = "regex" },
-          filter = { title = "", pattern = "^:%s*!", icon = "", lang = "bash" },
-          lua = { title = "", pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
-          help = { title = "", pattern = "^:%s*he?l?p?%s+", icon = "" },
-        },
-      },
+          cmdline = {
+            title = "";
+            pattern = "^:";
+            icon = "";
+            lang = "vim";
+          };
+          input = {
+            title = "";
+            icon = "";
+          };
+          search_down = {
+            title = "";
+            kind = "search";
+            pattern = "^/";
+            icon = "";
+            lang = "regex";
+          };
+          search_up = {
+            title = "";
+            kind = "search";
+            pattern = "^%?";
+            icon = "";
+            lang = "regex";
+          };
+          filter = {
+            title = "";
+            pattern = "^:%s*!";
+            icon = "";
+            lang = "bash";
+          };
+          lua = {
+            title = "";
+            pattern = "^:%s*lua%s+";
+            icon = "";
+            lang = "lua";
+          };
+          help = {
+            title = "";
+            pattern = "^:%s*he?l?p?%s+";
+            icon = "";
+          };
+        };
+      };
       lsp = {
         override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-      },
+          "vim.lsp.util.convert_input_to_markdown_lines" = true;
+          "vim.lsp.util.stylize_markdown" = true;
+          # blink.cmp 利用中なので、cmp 用 override は不要。
+          # nvim-cmp を使っていないなら false か削除でよい。
+          "cmp.entry.get_documentation" = false;
+        };
+      };
       presets = {
-        command_palette = true,
-        long_message_to_split = true,
-        inc_rename = false,
-        lsp_doc_border = true,
-      },
+        command_palette = true;
+        long_message_to_split = true;
+        inc_rename = false;
+        lsp_doc_border = true;
+      };
       views = {
-        notify = { replace = false, merge = false },
+        notify = {
+          replace = false;
+          merge = false;
+        };
         cmdline_popup = {
-          position = { row = "50%", col = "50%" },
-          size = { min_width = 60, width = "auto", height = "auto" },
-          border = { style = "rounded", padding = { 1, 1 } },
+          position = {
+            row = "50%";
+            col = "50%";
+          };
+          size = {
+            min_width = 60;
+            width = "auto";
+            height = "auto";
+          };
+          border = {
+            style = "rounded";
+            padding = [ 1 1 ];
+          };
           win_options = {
-            winblend = 10,
+            winblend = 10;
             winhighlight = {
-              Normal = "NormalFloat",
-              FloatBorder = "FloatBorder",
-              Search = "NormalFloat",
-              CurSearch = "NormalFloat",
-              IncSearch = "NormalFloat",
-            },
-          },
-        },
-      },
-      routes = {
-        { view = "split", filter = { event = "msg_show", min_height = 10 } },
-        { view = "split", filter = { event = "msg_show", min_length = 200 } },
-        { filter = { event = "msg_show", kind = "search_count" }, opts = { skip = true } },
-      },
-    })
-  '';
+              Normal = "NormalFloat";
+              FloatBorder = "FloatBorder";
+              Search = "NormalFloat";
+              CurSearch = "NormalFloat";
+              IncSearch = "NormalFloat";
+            };
+          };
+        };
+      };
+      routes = [
+        {
+          view = "split";
+          filter = {
+            event = "msg_show";
+            min_height = 10;
+          };
+        }
+        {
+          view = "split";
+          filter = {
+            event = "msg_show";
+            min_length = 200;
+          };
+        }
+        {
+          filter = {
+            event = "msg_show";
+            kind = "search_count";
+          };
+          opts = {
+            skip = true;
+          };
+        }
+      ];
+    };
+  };
 }

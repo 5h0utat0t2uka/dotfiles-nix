@@ -1,42 +1,189 @@
 { pkgs, ... }:
+
+let
+  undo-glow-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "undo-glow.nvim";
+    version = "unstable-25314a9";
+    src = builtins.fetchGit {
+      url = "https://github.com/y3owk1n/undo-glow.nvim.git";
+      rev = "25314a94cdfd84a3ca62bada1f88ed00982659ac";
+    };
+  };
+
+  undoGlowLua = ''
+    local undo_glow_colors = {
+      undo = { bg = "#567b84" },
+      redo = { bg = "#567b84" },
+      yank = { bg = "#6e596d" },
+      paste = { bg = "#6e596d" },
+      comment = { bg = "#4C566A" },
+      search = { bg = "#8a5c4a" },
+    }
+    local function ug_opts(kind)
+      return {
+        hl_color = undo_glow_colors[kind],
+      }
+    end
+  '';
+in
 {
-  # flash.nvim の s mapping から呼ばれるため start plugin 扱い。
-  extraPlugins = with pkgs.vimPlugins; [ undo-glow-nvim ];
+  extraPlugins = [ undo-glow-nvim ];
+  keymaps = [
+    {
+      mode = "n";
+      key = "u";
+      action.__raw = ''
+        function()
+          require("undo-glow").undo({ hl_color = { bg = "#567b84" } })
+        end
+      '';
+      options = {
+        noremap = true;
+        silent = true;
+        desc = "Undo with highlight";
+      };
+    }
+    {
+      mode = "n";
+      key = "U";
+      action.__raw = ''
+        function()
+          require("undo-glow").redo({ hl_color = { bg = "#567b84" } })
+        end
+      '';
+      options = {
+        noremap = true;
+        silent = true;
+        desc = "Redo with highlight";
+      };
+    }
+    {
+      mode = "n";
+      key = "p";
+      action.__raw = ''
+        function()
+          require("undo-glow").paste_below({ hl_color = { bg = "#6e596d" } })
+        end
+      '';
+      options = {
+        noremap = true;
+        silent = true;
+        desc = "Paste below with highlight";
+      };
+    }
+    {
+      mode = "n";
+      key = "P";
+      action.__raw = ''
+        function()
+          require("undo-glow").paste_above({ hl_color = { bg = "#6e596d" } })
+        end
+      '';
+      options = {
+        noremap = true;
+        silent = true;
+        desc = "Paste above with highlight";
+      };
+    }
+    {
+      mode = [ "n" "x" ];
+      key = "gc";
+      action.__raw = ''
+        function()
+          local pos = vim.fn.getpos(".")
+          vim.schedule(function()
+            vim.fn.setpos(".", pos)
+          end)
+
+          return require("undo-glow").comment({
+            hl_color = { bg = "#4C566A" },
+          })
+        end
+      '';
+      options = {
+        expr = true;
+        noremap = true;
+        silent = true;
+        desc = "Toggle comment with highlight";
+      };
+    }
+    {
+      mode = "o";
+      key = "gc";
+      action.__raw = ''
+        function()
+          require("undo-glow").comment_textobject({
+            hl_color = { bg = "#4C566A" },
+          })
+        end
+      '';
+      options = {
+        noremap = true;
+        silent = true;
+        desc = "Comment textobject with highlight";
+      };
+    }
+    {
+      mode = "n";
+      key = "gcc";
+      action.__raw = ''
+        function()
+          return require("undo-glow").comment_line({
+            hl_color = { bg = "#4C566A" },
+          })
+        end
+      '';
+      options = {
+        expr = true;
+        noremap = true;
+        silent = true;
+        desc = "Toggle comment line with highlight";
+      };
+    }
+  ];
   extraConfigLua = ''
+    ${undoGlowLua}
     require("undo-glow").setup({
-      animation = { enabled = true, duration = 300, animation_type = "fade", window_scoped = true },
-      highlights = {
-        undo  = { hl_color = { bg = "#567b84" } },
-        redo  = { hl_color = { bg = "#567b84" } },
-        yank  = { hl_color = { bg = "#6e596d" } },
-        paste = { hl_color = { bg = "#6e596d" } },
-        comment = { hl_color = { bg = "#4C566A" } },
-        search  = { hl_color = { bg = "#8a5c4a" } },
+      animation = {
+        enabled = true,
+        duration = 300,
+        animation_type = "fade",
+        window_scoped = true,
       },
+      highlights = {
+        undo = { hl_color = undo_glow_colors.undo },
+        redo = { hl_color = undo_glow_colors.redo },
+        yank = { hl_color = undo_glow_colors.yank },
+        paste = { hl_color = undo_glow_colors.paste },
+        comment = { hl_color = undo_glow_colors.comment },
+        search = { hl_color = undo_glow_colors.search },
+      },
+      priority = 2048 * 3,
     })
 
-    local api = require("undo-glow.api")
-    local orig = api.highlight_region_enhanced
-    api.highlight_region_enhanced = function(o)
-      if o.s_row == 0 and o.e_row == 0 and o.e_col == 1 then return end
-      orig(o)
+    local function apply_undo_glow_highlights()
+      vim.api.nvim_set_hl(0, "UgUndo", { bg = undo_glow_colors.undo.bg })
+      vim.api.nvim_set_hl(0, "UgRedo", { bg = undo_glow_colors.redo.bg })
+      vim.api.nvim_set_hl(0, "UgYank", { bg = undo_glow_colors.yank.bg })
+      vim.api.nvim_set_hl(0, "UgPaste", { bg = undo_glow_colors.paste.bg })
+      vim.api.nvim_set_hl(0, "UgComment", { bg = undo_glow_colors.comment.bg })
+      vim.api.nvim_set_hl(0, "UgSearch", { bg = undo_glow_colors.search.bg })
     end
 
-    vim.keymap.set("n", "u", function() require("undo-glow").undo() end, { noremap = true })
-    vim.keymap.set("n", "U", function() require("undo-glow").redo() end, { noremap = true })
-    vim.keymap.set("n", "p", function() require("undo-glow").paste_below() end, { noremap = true })
-    vim.keymap.set("n", "P", function() require("undo-glow").paste_above() end, { noremap = true })
-    vim.keymap.set({ "n", "x" }, "gc", function()
-      local pos = vim.fn.getpos(".")
-      vim.schedule(function() vim.fn.setpos(".", pos) end)
-      return require("undo-glow").comment()
-    end, { desc = "Toggle comment with highlight", expr = true, noremap = true })
-    vim.keymap.set("n", "gcc", function() return require("undo-glow").comment_line() end, { desc = "Toggle comment line with highlight", expr = true, noremap = true })
+    apply_undo_glow_highlights()
+
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      group = vim.api.nvim_create_augroup("UndoGlowHighlights", { clear = true }),
+      callback = apply_undo_glow_highlights,
+    })
 
     vim.api.nvim_create_autocmd("TextYankPost", {
-      desc = "Highlight when yanking (copying) text",
+      group = vim.api.nvim_create_augroup("UndoGlowYank", { clear = true }),
+      desc = "Highlight when yanking text",
       callback = function()
-        if vim.v.event.operator == "y" then require("undo-glow").yank() end
+        if vim.v.event.operator == "y" then
+          require("undo-glow").yank(ug_opts("yank"))
+        end
       end,
     })
   '';

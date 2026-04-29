@@ -4,6 +4,13 @@
   plugins.ts-autotag = {
     enable = true;
 
+    lazyLoad.settings = {
+      event = [
+        "BufReadPre"
+        "BufNewFile"
+      ];
+    };
+
     settings = {
       opts = {
         enable_close = true;
