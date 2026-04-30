@@ -29,6 +29,7 @@ let
       ./plugins/undo-glow.nix
       ./plugins/vim-astro.nix
     ];
+    plugins.web-devicons.enable = false;
     plugins.lz-n = {
       enable = true;
       autoLoad = true;
@@ -38,6 +39,15 @@ let
     globals = {
       mapleader = " ";
       maplocalleader = " ";
+      # パフォーマンス改善
+      loaded_netrw = 1;
+      loaded_netrwPlugin = 1;
+      loaded_netrwSettings = 1;
+      loaded_netrwFileHandlers = 1;
+      loaded_python3_provider = 0;
+      loaded_node_provider = 0;
+      loaded_perl_provider = 0;
+      loaded_ruby_provider = 0;
     };
     opts = {
       clipboard = "unnamedplus";

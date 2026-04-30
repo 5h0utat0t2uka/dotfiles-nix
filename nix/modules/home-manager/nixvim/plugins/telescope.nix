@@ -161,7 +161,6 @@
           "--hidden"
         ];
       };
-
       pickers = {
         find_files = {
           initial_mode = "normal";

@@ -94,7 +94,6 @@
           right = "";
         };
       };
-
       sections.__raw = ''
         {
           lualine_a = {
@@ -227,7 +226,6 @@
           },
         }
       '';
-
       inactive_sections.__raw = ''
         {
           lualine_a = {},

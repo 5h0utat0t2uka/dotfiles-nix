@@ -160,7 +160,6 @@ in
       },
       priority = 2048 * 3,
     })
-
     local function apply_undo_glow_highlights()
       vim.api.nvim_set_hl(0, "UgUndo", { bg = undo_glow_colors.undo.bg })
       vim.api.nvim_set_hl(0, "UgRedo", { bg = undo_glow_colors.redo.bg })
@@ -176,7 +175,6 @@ in
       group = vim.api.nvim_create_augroup("UndoGlowHighlights", { clear = true }),
       callback = apply_undo_glow_highlights,
     })
-
     vim.api.nvim_create_autocmd("TextYankPost", {
       group = vim.api.nvim_create_augroup("UndoGlowYank", { clear = true }),
       desc = "Highlight when yanking text",

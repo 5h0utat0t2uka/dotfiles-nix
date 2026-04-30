@@ -14,36 +14,13 @@
     settings = {
       signs = false;
       keywords = {
-        FIX = { icon = ""; color = "error"; alt = [ "FIXME" "BUG" "FIXIT" "ISSUE" ];
-        };
-        TODO = {
-          icon = "";
-          color = "hint";
-        };
-        HACK = {
-          icon = "";
-          color = "warning";
-        };
-        WARN = {
-          icon = "";
-          color = "warning";
-          alt = [ "WARNING" "XXX" ];
-        };
-        PERF = {
-          icon = "";
-          color = "default";
-          alt = [ "OPTIM" "PERFORMANCE" "OPTIMIZE" ];
-        };
-        NOTE = {
-          icon = "";
-          color = "info";
-          alt = [ "INFO" ];
-        };
-        TEST = {
-          icon = "";
-          color = "test";
-          alt = [ "TESTING" "PASSED" "FAILED" ];
-        };
+        FIX  = { icon = ""; color = "error"; alt = [ "FIXME" "BUG" "FIXIT" "ISSUE" ]; };
+        TODO = { icon = ""; color = "hint"; };
+        HACK = { icon = ""; color = "warning"; };
+        WARN = { icon = ""; color = "warning"; alt = [ "WARNING" "XXX" ]; };
+        PERF = { icon = ""; color = "default"; alt = [ "OPTIM" "PERFORMANCE" "OPTIMIZE" ]; };
+        NOTE = { icon = ""; color = "info"; alt = [ "INFO" ]; };
+        TEST = { icon = ""; color = "test"; alt = [ "TESTING" "PASSED" "FAILED" ]; };
       };
       highlight = {
         keyword = "wide";
