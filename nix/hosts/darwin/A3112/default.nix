@@ -68,6 +68,7 @@ in
         viu
         wget
         zbar
+        zizmor
         zoxide
         nixd
         nil
