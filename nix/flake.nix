@@ -27,16 +27,10 @@
       url = "github:wezterm/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # zed の最新 (nightly)
-    # zed = {
-    #   url = "github:zed-industries/zed";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 
   outputs = {
@@ -46,7 +40,6 @@
     darwin,
     nix-homebrew,
     wezterm,
-    # zed,
     ... } @inputs:
   let
     lib = nixpkgs.lib;
@@ -98,7 +91,6 @@
                   # (import ./overlays/tools/codex { inherit inputs; })
                   # (import ./overlays/tools/claude-code { inherit inputs; })
                   (import ./overlays/fonts/shcode-jp-zen-haku.nix)
-                  # (import ./overlays/tools/tree-sitter-0267.nix)
 
                   # FIXME: issue: sigsuspend probe under autoconf (https://github.com/NixOS/nixpkgs/pull/513971)
                   (_final: prev:

@@ -35,6 +35,9 @@
         providers = {
           snippets = {
             opts = {
+              search_paths.__raw = ''
+                vim.api.nvim_get_runtime_file("snippets", true)
+              '';
               use_label_description = true;
             };
           };
