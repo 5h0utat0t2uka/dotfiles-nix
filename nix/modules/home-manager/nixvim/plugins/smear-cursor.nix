@@ -1,16 +1,26 @@
 { pkgs, ... }:
 
 {
-  extraPlugins = with pkgs.vimPlugins; [
-    smear-cursor-nvim
+  extraPlugins = [
+    {
+      plugin = pkgs.vimPlugins.smear-cursor-nvim;
+      optional = true;
+    }
   ];
-
-  extraConfigLua = ''
-    require("smear_cursor").setup({
-      smear_to_cmd = false,
-      stiffness = 0.5,
-      trailing_stiffness = 0.5,
-      matrix_pixel_threshold = 0.5,
-    })
-  '';
+  plugins.lz-n.plugins = [
+    {
+      __unkeyed-1 = "smear-cursor.nvim";
+      event = "CursorMoved";
+      after = ''
+        function()
+          require("smear_cursor").setup({
+            smear_to_cmd = false,
+            stiffness = 0.5,
+            trailing_stiffness = 0.5,
+            matrix_pixel_threshold = 0.5,
+          })
+        end
+      '';
+    }
+  ];
 }

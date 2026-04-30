@@ -170,8 +170,8 @@ let
     };
   };
 
-  nixvimCmd = pkgs.writeShellScriptBin "nixvim" ''
-    export NVIM_APPNAME=nixvim
+  nixvimCmd = pkgs.writeShellScriptBin "xvim" ''
+    export NVIM_APPNAME=xvim
     exec ${nixvimPkg}/bin/nvim "$@"
   '';
 in

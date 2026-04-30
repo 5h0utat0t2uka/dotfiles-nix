@@ -3,7 +3,7 @@
 {
   plugins.lualine = {
     enable = true;
-    autoLoad = true;
+    lazyLoad.settings.event = "UIEnter";
     luaConfig.pre = ''
       local lualine_custom_theme = vim.deepcopy(require("lualine.themes.nord"))
       local lualine_colors = {

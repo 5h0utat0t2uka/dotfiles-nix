@@ -1,19 +1,19 @@
-{ pkgs, ... }:
-
 {
-  extraPlugins = with pkgs.vimPlugins; [
-    nord-nvim
-  ];
+  colorscheme = "nord";
+  globals.nord_bold = true;
+  colorschemes.nord = {
+    enable = true;
+    autoLoad = true;
+    settings = {
+      contrast = true;
+      borders = true;
+      disable_background = false;
+      italic = false;
+      uniform_diff_background = true;
+    };
+  };
 
   extraConfigLua = ''
-    vim.g.nord_contrast = true
-    vim.g.nord_borders = true
-    vim.g.nord_disable_background = false
-    vim.g.nord_italic = false
-    vim.g.nord_uniform_diff_background = true
-    vim.g.nord_bold = true
-    vim.cmd.colorscheme("nord")
-
     local function apply_custom_highlights()
       vim.api.nvim_set_hl(0, "CursorLine", { bg = "#353B49" })
       vim.api.nvim_set_hl(0, "Visual", { bg = "#544a59" })
@@ -62,6 +62,7 @@
       group = group,
       callback = apply_custom_highlights,
     })
+
     vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
       group = group,
       callback = function(e)

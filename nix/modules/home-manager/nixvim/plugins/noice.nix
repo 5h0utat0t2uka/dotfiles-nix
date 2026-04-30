@@ -3,8 +3,7 @@
 {
   plugins.notify = {
     enable = true;
-    # noice の notify view から使うため lazy しない
-    autoLoad = true;
+    lazyLoad.settings.event = "DeferredUIEnter";
     settings = {
       stages = "static";
       timeout = 3000;
@@ -14,7 +13,7 @@
 
   plugins.noice = {
     enable = true;
-    autoLoad = true;
+    lazyLoad.settings.event = "DeferredUIEnter";
     settings = {
       cmdline = {
         format = {
@@ -65,8 +64,6 @@
         override = {
           "vim.lsp.util.convert_input_to_markdown_lines" = true;
           "vim.lsp.util.stylize_markdown" = true;
-          # blink.cmp 利用中なので、cmp 用 override は不要。
-          # nvim-cmp を使っていないなら false か削除でよい。
           "cmp.entry.get_documentation" = false;
         };
       };

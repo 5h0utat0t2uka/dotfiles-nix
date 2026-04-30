@@ -3,7 +3,25 @@
 {
   plugins.oil = {
     enable = true;
-    autoLoad = true;
+    lazyLoad.settings = {
+      cmd = "Oil";
+      ft = "directory";
+      keys = [
+        {
+          __unkeyed-1 = "-";
+          __unkeyed-2.__raw = ''
+            function()
+              require("oil").open(nil, {
+                preview = {
+                  split = "belowright",
+                },
+              })
+            end
+          '';
+          desc = "Open parent directory with preview";
+        }
+      ];
+    };
     settings = {
       default_file_explorer = true;
       columns = [
@@ -69,28 +87,19 @@
         };
       };
     };
-
     luaConfig.post = ''
+      pcall(vim.cmd.packadd, "oil-git-status.nvim")
       require("oil-git-status").setup({
         show_ignored = true,
-      })
-      vim.keymap.set("n", "-", function()
-        require("oil").open(nil, {
-          preview = {
-            split = "belowright",
-          },
-        })
-      end, {
-        noremap = true,
-        silent = true,
-        desc = "Open parent directory with preview",
       })
       vim.api.nvim_set_hl(0, "OilFloat", { link = "Normal" })
       vim.api.nvim_set_hl(0, "OilFloatBorder", { link = "Normal" })
     '';
   };
-
-  extraPlugins = with pkgs.vimPlugins; [
-    oil-git-status-nvim
+  extraPlugins = [
+    {
+      plugin = pkgs.vimPlugins.oil-git-status-nvim;
+      optional = true;
+    }
   ];
 }

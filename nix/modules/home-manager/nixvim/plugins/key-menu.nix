@@ -11,11 +11,25 @@ let
   };
 in
 {
-  extraPlugins = [ key-menu-nvim ];
-
+  extraPlugins = [
+    {
+      plugin = key-menu-nvim;
+      optional = true;
+    }
+  ];
   extraConfigLua = ''
     vim.o.timeoutlen = 300
-    require("key-menu").set("n", "<Space>")
-    require("key-menu").set("n", "g")
   '';
+  plugins.lz-n.plugins = [
+    {
+      __unkeyed-1 = "key-menu.nvim";
+      event = "DeferredUIEnter";
+      after = ''
+        function()
+          require("key-menu").set("n", "<Space>")
+          require("key-menu").set("n", "g")
+        end
+      '';
+    }
+  ];
 }

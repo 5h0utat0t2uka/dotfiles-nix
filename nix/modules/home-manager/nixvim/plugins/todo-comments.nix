@@ -53,8 +53,8 @@
         error   = [ "#7A3D43" ]; # #BF616A
         warning = [ "#855040" ]; # #D08770
         info    = [ "#4C6478" ]; # #81A1C1
-        hint    = [ "#607A52" ]; # #A3BE8C
-        default = [ "#6E5469" ]; # #B48EAD
+        hint    = [ "#4C6478" ]; # #A3BE8C
+        default = [ "#4C6478" ]; # #B48EAD
         test    = [ "#9A7E4A" ]; # #EBCB8B
       };
     };
@@ -77,10 +77,10 @@
     end
     local todo_colors = {
       FIX = "#7A3D43",
-      TODO = "#607A52",
+      TODO = "#4C6478",
       HACK = "#855040",
       WARN = "#855040",
-      PERF = "#6E5469",
+      PERF = "#4C6478",
       NOTE = "#4C6478",
       TEST = "#9A7E4A",
     }

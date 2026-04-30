@@ -5,7 +5,7 @@
     enable = true;
     lazyLoad.settings = {
       event = [
-        "BufReadPost"
+        "BufReadPre"
         "BufNewFile"
       ];
     };

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   plugins.lazydev = {
@@ -8,16 +8,14 @@
     };
     settings = { };
   };
-
-  extraPlugins = with pkgs.vimPlugins; [
-    nvim-lspconfig
-  ];
-
+  plugins.lsp = {
+    enable = true;
+    autoLoad = true;
+  };
   extraConfigLua = ''
     vim.lsp.config("*", {
       capabilities = require("blink.cmp").get_lsp_capabilities(),
     })
-
     vim.lsp.config("lua_ls", {
       settings = {
         Lua = {
@@ -27,7 +25,6 @@
         },
       },
     })
-
     vim.lsp.enable("lua_ls")
     vim.lsp.enable("nixd")
     vim.lsp.enable("eslint")
