@@ -33,24 +33,14 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    darwin,
-    nix-homebrew,
-    wezterm,
-    ... } @inputs:
+  outputs = { self, nixpkgs, darwin, home-manager, nix-homebrew, wezterm, ... } @inputs:
   let
     lib = nixpkgs.lib;
     # ------------------------------------------------------------
     # ./hosts/darwin 以下のディレクトリ名を hostKey とする
     # ------------------------------------------------------------
     darwinHostsDir = ./hosts/darwin;
-    darwinHostKeys =
-      lib.attrNames
-        (lib.filterAttrs (_name: type: type == "directory")
-          (builtins.readDir darwinHostsDir));
+    darwinHostKeys = lib.attrNames(lib.filterAttrs (_name: type: type == "directory")(builtins.readDir darwinHostsDir));
 
     # ------------------------------------------------------------
     # hostKey から identity を読み込む
@@ -62,109 +52,108 @@
     # - ディレクトリ名と identity.hostname を assert で強制して一致させる
     # ------------------------------------------------------------
     mkDarwinConfig = hostKey:
-      let
-        identity = identityFor hostKey;
-      in
+    let
+      identity = identityFor hostKey;
+    in
+    # identity に hostname があること、かつ hostKey と一致することを強制
+    assert (identity ? hostname);
+    assert (identity.hostname == hostKey);
 
-      # identity に hostname があること、かつ hostKey と一致することを強制
-      assert (identity ? hostname);
-      assert (identity.hostname == hostKey);
-
-      {
-        name = identity.hostname;
-        # nix-darwin のシステム定義
-        value = darwin.lib.darwinSystem {
-          system = identity.system;
-          specialArgs = {
-            inherit identity inputs;
-          };
-          modules = [
-            # ----------------------------------------------------
-            # nixpkgs 設定
-            # ----------------------------------------------------
-            {
-              nixpkgs = {
-                system = identity.system;
-                config.allowUnfree = true;
-                # 直接インストールが必要なパッケージの overlay をここで追加
-                overlays = [
-                  # (import ./overlays/tools/codex { inherit inputs; })
-                  # (import ./overlays/tools/claude-code { inherit inputs; })
-                  (import ./overlays/fonts/shcode-jp-zen-haku.nix)
-
-                  # FIXME: issue: sigsuspend probe under autoconf (https://github.com/NixOS/nixpkgs/pull/513971)
-                  (_final: prev:
-                    let
-                      pkgsZshFixed = import inputs.nixpkgs-zsh-fixed {
-                        system = prev.stdenv.hostPlatform.system;
-                        config.allowUnfree = true;
-                      };
-                    in
-                    {
-                      zsh = pkgsZshFixed.zsh;
-                    }
-                  )
-
-                  # FIXME: issue: nixpkgs zsh-powerlevel10k gitstatus (https://github.com/nixos/nixpkgs/issues/498550)
-                  (final: prev:
-                    let
-                      isDarwinArm64 = prev.stdenv.hostPlatform.isDarwin && prev.stdenv.hostPlatform.isAarch64;
-                    in
-                    {
-                      zsh-powerlevel10k = prev.zsh-powerlevel10k.overrideAttrs (old: {
-                        postInstall = (old.postInstall or "") + prev.lib.optionalString isDarwinArm64 ''
-                          mkdir -p "$out/share/zsh-powerlevel10k/gitstatus/usrbin"
-                          ln -sf "${final.gitstatus}/bin/gitstatusd" \
-                            "$out/share/zsh-powerlevel10k/gitstatus/usrbin/gitstatusd-darwin-arm64"
-                        '';
-                      });
-                    }
-                  )
-
-                  # FIXME: issue: direnv build failure on darwin (https://github.com/NixOS/nixpkgs/issues/507531)
-                  (_final: prev: {
-                    direnv = prev.direnv.overrideAttrs (_: {
-                      doCheck = false;
-                    });
-                  })
-                ];
-              };
-            }
-
-            # ----------------------------------------------------
-            # nix-homebrew 統合
-            # - autoMigrate: 既存 Homebrew がある場合の移行
-            # ----------------------------------------------------
-            nix-homebrew.darwinModules.nix-homebrew
-            ({ identity, ... }: {
-              nix-homebrew = {
-                enable = true;
-                enableRosetta = false;
-                user = identity.username;
-                autoMigrate = false;
-                mutableTaps = true;
-              };
-            })
-
-            # ----------------------------------------------------
-            # home-manager を nix-darwin 経由で統合
-            # ----------------------------------------------------
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit identity inputs;
-              };
-            }
-
-            # ----------------------------------------------------
-            # ホスト入口:
-            # ----------------------------------------------------
-            (darwinHostsDir + "/${hostKey}/default.nix")
-          ];
+    {
+      name = identity.hostname;
+      # nix-darwin のシステム定義
+      value = darwin.lib.darwinSystem {
+        system = identity.system;
+        specialArgs = {
+          inherit identity inputs;
         };
+        modules = [
+          # ----------------------------------------------------
+          # nixpkgs 設定
+          # ----------------------------------------------------
+          {
+            nixpkgs = {
+              system = identity.system;
+              config.allowUnfree = true;
+              # overlay をここで追加
+              overlays = [
+                # (import ./overlays/tools/codex { inherit inputs; })
+                # (import ./overlays/tools/claude-code { inherit inputs; })
+                (import ./overlays/fonts/shcode-jp-zen-haku.nix)
+
+                # FIXME: issue: sigsuspend probe under autoconf (https://github.com/NixOS/nixpkgs/pull/513971)
+                (_final: prev:
+                  let
+                    pkgsZshFixed = import inputs.nixpkgs-zsh-fixed {
+                      system = prev.stdenv.hostPlatform.system;
+                      config.allowUnfree = true;
+                    };
+                  in
+                  {
+                    zsh = pkgsZshFixed.zsh;
+                  }
+                )
+
+                # FIXME: issue: nixpkgs zsh-powerlevel10k gitstatus (https://github.com/nixos/nixpkgs/issues/498550)
+                (final: prev:
+                  let
+                    isDarwinArm64 = prev.stdenv.hostPlatform.isDarwin && prev.stdenv.hostPlatform.isAarch64;
+                  in
+                  {
+                    zsh-powerlevel10k = prev.zsh-powerlevel10k.overrideAttrs (old: {
+                      postInstall = (old.postInstall or "") + prev.lib.optionalString isDarwinArm64 ''
+                        mkdir -p "$out/share/zsh-powerlevel10k/gitstatus/usrbin"
+                        ln -sf "${final.gitstatus}/bin/gitstatusd" \
+                          "$out/share/zsh-powerlevel10k/gitstatus/usrbin/gitstatusd-darwin-arm64"
+                      '';
+                    });
+                  }
+                )
+
+                # FIXME: issue: direnv build failure on darwin (https://github.com/NixOS/nixpkgs/issues/507531)
+                (_final: prev: {
+                  direnv = prev.direnv.overrideAttrs (_: {
+                    doCheck = false;
+                  });
+                })
+              ];
+            };
+          }
+
+          # ----------------------------------------------------
+          # nix-homebrew 統合
+          # - autoMigrate: 既存 Homebrew がある場合の移行
+          # ----------------------------------------------------
+          nix-homebrew.darwinModules.nix-homebrew
+          ({ identity, ... }: {
+            nix-homebrew = {
+              enable = true;
+              enableRosetta = false;
+              user = identity.username;
+              autoMigrate = false;
+              mutableTaps = true;
+            };
+          })
+
+          # ----------------------------------------------------
+          # home-manager を nix-darwin 経由で統合
+          # ----------------------------------------------------
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {
+              inherit identity inputs;
+            };
+          }
+
+          # ----------------------------------------------------
+          # ホスト入口:
+          # ----------------------------------------------------
+          (darwinHostsDir + "/${hostKey}/default.nix")
+        ];
       };
+    };
 
     # ------------------------------------------------------------
     # 全 hostKey について mkDarwinConfig を map して attrset 化
