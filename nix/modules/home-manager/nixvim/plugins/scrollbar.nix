@@ -37,6 +37,25 @@
               gitsigns = false,
               search = true,
             },
+            autocmd = {
+              render = {
+                "BufWinEnter",
+                "TabEnter",
+                "TermEnter",
+                "WinEnter",
+                "CmdwinLeave",
+                "TextChanged",
+                "DiagnosticChanged",
+                "VimResized",
+                "WinScrolled",
+              },
+              clear = {
+                "BufWinLeave",
+                "TabLeave",
+                "TermLeave",
+                "WinLeave",
+              },
+            },
             excluded_buftypes = {
               "terminal",
               "nofile",

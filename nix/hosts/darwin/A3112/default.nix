@@ -20,7 +20,6 @@ in
       ../../../modules/home-manager/tmux
       ../../../modules/home-manager/git
       ../../../modules/home-manager/zsh
-      # ../../../modules/home-manager/zed
       ../../../modules/home-manager/nixvim
       ../../../modules/home-manager/neovim
       ../../../modules/home-manager/direnv

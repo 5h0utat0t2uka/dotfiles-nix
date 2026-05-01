@@ -12,12 +12,12 @@ let
 
   undoGlowLua = ''
     local undo_glow_colors = {
-      undo = { bg = "#567b84" },
-      redo = { bg = "#567b84" },
+      undo = { bg = "#4C566A" },
+      redo = { bg = "#4C566A" },
       yank = { bg = "#6e596d" },
       paste = { bg = "#6e596d" },
       comment = { bg = "#4C566A" },
-      search = { bg = "#8a5c4a" },
+      search = { bg = "#4C566A" },
     }
     local function ug_opts(kind)
       return {
@@ -34,7 +34,7 @@ in
       key = "u";
       action.__raw = ''
         function()
-          require("undo-glow").undo({ hl_color = { bg = "#567b84" } })
+          require("undo-glow").undo({ hl_color = { bg = "#4C566A" } })
         end
       '';
       options = {
@@ -48,7 +48,7 @@ in
       key = "U";
       action.__raw = ''
         function()
-          require("undo-glow").redo({ hl_color = { bg = "#567b84" } })
+          require("undo-glow").redo({ hl_color = { bg = "#4C566A" } })
         end
       '';
       options = {

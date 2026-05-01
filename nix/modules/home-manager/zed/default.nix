@@ -2,7 +2,8 @@
 
 {
   programs.zed-editor = {
-    # homebrew で管理する
+    # 本体は modules/nix-darwin/homebrew.nix で管理する
+    # 設定は chezmoi で管理する
     enable = false;
     package = pkgs.zed-editor;
     mutableUserSettings = false;

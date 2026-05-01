@@ -26,7 +26,7 @@ let
       ./plugins/todo-comments.nix
       ./plugins/toggleterm.nix
       ./plugins/ts-autotag.nix
-      ./plugins/undo-glow.nix
+      # ./plugins/undo-glow.nix
       ./plugins/vim-astro.nix
     ];
     plugins.web-devicons.enable = false;
@@ -39,7 +39,6 @@ let
     globals = {
       mapleader = " ";
       maplocalleader = " ";
-      # パフォーマンス改善
       loaded_netrw = 1;
       loaded_netrwPlugin = 1;
       loaded_netrwSettings = 1;
@@ -84,7 +83,7 @@ let
     keymaps = [
       { mode = "n"; key = "<S-l>"; action = "<cmd>bnext<cr>"; options.desc = "Next buffer"; }
       { mode = "n"; key = "<S-h>"; action = "<cmd>bprevious<cr>"; options.desc = "Previous buffer"; }
-      # { mode = "n"; key = "U"; action = "<C-r>"; options = { noremap = true; silent = true; desc = "Redo"; }; }
+      { mode = "n"; key = "U"; action = "<C-r>"; options = { noremap = true; silent = true; desc = "Redo"; }; }
       { mode = "n"; key = "gk"; action = "<Cmd>tabnew<CR>"; options.desc = "New tab"; }
       { mode = "n"; key = "gh"; action = "<Cmd>tabprevious<CR>"; options.desc = "Previous tab"; }
       { mode = "n"; key = "gl"; action = "<Cmd>tabnext<CR>"; options.desc = "Next tab"; }

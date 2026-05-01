@@ -3,14 +3,12 @@
 {
   plugins.colorizer = {
     enable = true;
-
     lazyLoad.settings = {
       event = [
         "BufReadPost"
         "BufNewFile"
       ];
     };
-
     settings = {
       filetypes = [
         "css"
@@ -22,7 +20,6 @@
         "javascriptreact"
         "typescriptreact"
       ];
-
       user_default_options = {
         names = true;
         RGB = true;
