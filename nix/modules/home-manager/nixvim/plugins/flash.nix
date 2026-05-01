@@ -4,6 +4,7 @@
   plugins.flash = {
     enable = true;
     lazyLoad.settings = {
+      event = "DeferredUIEnter";
       keys = [
         {
           __unkeyed-1 = "s";
@@ -67,6 +68,9 @@
         search = {
           enabled = true;
         };
+        # char = {
+        #   enabled = false;
+        # };
       };
     };
   };
