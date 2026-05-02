@@ -1,9 +1,16 @@
 # nix/modules/home-manager/nixvim/default.nix
-{ pkgs, inputs, ... }:
+{ inputs, ... }:
 
-# 移行前
-let
-  nixvimPkg = inputs.nixvim.legacyPackages.${pkgs.stdenv.hostPlatform.system}.makeNixvim {
+{
+  imports = [
+    inputs.nixvim.homeModules.nixvim
+  ];
+  programs.nixvim = {
+    enable = true;
+    defaultEditor = true;
+    vimAlias = true;
+    viAlias = true;
+    vimdiffAlias = true;
     imports = [
       ./plugins/autopairs.nix
       ./plugins/blink.nix
@@ -28,13 +35,23 @@ let
       ./plugins/ts-autotag.nix
       ./plugins/vim-astro.nix
     ];
+    withPython3 = false;
+    withRuby = false;
+    withNodeJs = false;
+    withPerl = false;
+    luaLoader.enable = true;
+    performance.byteCompileLua = {
+      enable = true;
+      nvimRuntime = true;
+      initLua = true;
+      configs = true;
+      plugins = true;
+    };
     plugins.web-devicons.enable = false;
     plugins.lz-n = {
       enable = true;
       autoLoad = true;
     };
-    withPython3 = false;
-    withRuby = false;
     globals = {
       mapleader = " ";
       maplocalleader = " ";
@@ -134,7 +151,6 @@ let
         end
       ''; }
     ];
-
     autoCmd = [
       { event = "BufEnter"; callback.__raw = ''
         function()
@@ -169,42 +185,5 @@ let
         callback = function() vim.fn.system({ "macism", english_im }) end,
       })
     '';
-    luaLoader.enable = true;
-    performance.byteCompileLua = {
-      enable = true;
-      nvimRuntime = true;
-      initLua = true;
-      configs = true;
-      plugins = true;
-    };
   };
-
-  nixvimCmd = pkgs.writeShellScriptBin "xvim" ''
-    export NVIM_APPNAME=xvim
-    exec ${nixvimPkg}/bin/nvim "$@"
-  '';
-in
-
-{ home.packages = [ nixvimCmd ]; }
-
-# 移行後
-# imports = [
-#   inputs.nixvim.homeModules.nixvim
-# ];
-# {
-#   programs.nixvim = {
-#     enable = true;
-#     defaultEditor = true;
-#     viAlias = true;
-#     vimAlias = true;
-#     colorschemes.nord.enable = true;
-#     opts = {
-#       number = true;
-#       relativenumber = true;
-#     };
-#     globals = {
-#       mapleader = " ";
-#     };
-#     plugins.lualine.enable = true;
-#   };
-# }
+}

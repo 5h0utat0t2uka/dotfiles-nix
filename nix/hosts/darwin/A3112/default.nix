@@ -20,8 +20,9 @@ in
       ../../../modules/home-manager/tmux
       ../../../modules/home-manager/git
       ../../../modules/home-manager/zsh
+      ../../../modules/home-manager/pass
       ../../../modules/home-manager/nixvim
-      ../../../modules/home-manager/neovim
+      # ../../../modules/home-manager/neovim モジュールは残しつつ nixvim に移行する
       ../../../modules/home-manager/direnv
       ../../../modules/home-manager/lazygit
       ../../../modules/home-manager/aerospace
@@ -57,9 +58,6 @@ in
         nmap
         nodejs_24
         pnpm
-        (pass.withExtensions (exts: [
-          exts.pass-otp
-        ]))
         pinentry_mac
         ripgrep
         tree-sitter
