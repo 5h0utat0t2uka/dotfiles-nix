@@ -31,6 +31,9 @@
       symbol_in_winbar = {
         enable = false;
       };
+      implement = {
+        enable = false;
+      };
       lightbulb = {
         enable = false;
         virtual_text = false;
