@@ -26,7 +26,6 @@ let
       ./plugins/todo-comments.nix
       ./plugins/toggleterm.nix
       ./plugins/ts-autotag.nix
-      # ./plugins/undo-glow.nix
       ./plugins/vim-astro.nix
     ];
     plugins.web-devicons.enable = false;
@@ -174,6 +173,7 @@ let
     performance.byteCompileLua = {
       enable = true;
       nvimRuntime = true;
+      initLua = true;
       configs = true;
       plugins = true;
     };
