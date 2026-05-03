@@ -47,15 +47,14 @@
         nrd = "nr dev";
         nrb = "nr build";
         nrs = "nr start";
+        ll = "eza -alo --icons --time-style iso";
+        lg = "lazygit";
       };
     };
     shellAliases = {
       ".." = "cd ..";
       vpn = "${config.home.homeDirectory}/Development/scripts/vpn/connect.sh";
       webp = "${config.home.homeDirectory}/Development/scripts/webp.sh";
-      vim = "nvim";
-      ll = "eza -alo --icons --time-style iso";
-      lg = "lazygit";
     };
     initContent = lib.mkMerge [
       (builtins.readFile ./zshrc)

@@ -12,6 +12,9 @@
     enable = true;
     autoLoad = true;
   };
+  extraPackages = [
+    pkgs.pyright
+  ];
   extraConfigLua = ''
     vim.lsp.config("*", {
       capabilities = require("blink.cmp").get_lsp_capabilities(),
@@ -40,6 +43,17 @@
         nixd = {
           formatting = {
             command = { "nixfmt" },
+          },
+        },
+      },
+    })
+    vim.lsp.config("pyright", {
+      settings = {
+        python = {
+          analysis = {
+            typeCheckingMode = "basic",
+            autoSearchPaths = true,
+            useLibraryCodeForTypes = true,
           },
         },
       },
@@ -94,6 +108,7 @@
     vim.lsp.config("eslint", {})
     vim.lsp.enable("lua_ls")
     vim.lsp.enable("nixd")
+    vim.lsp.enable("pyright")
     vim.lsp.enable("eslint")
     vim.lsp.enable("ts_ls")
     vim.lsp.enable("astro")

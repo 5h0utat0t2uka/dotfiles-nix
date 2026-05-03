@@ -7,9 +7,14 @@
       scan_timeout = 25;
       command_timeout = 500;
       add_newline = true;
+      # format = ''
+      #   [┌─](bold black) $hostname $directory $git_branch$git_status$fill$cmd_duration$nodejs$nix_shell$time
+      #   [└─](bold black) $character
+      # '';
+
       format = ''
-        [┌─](bold bright-black) $hostname $directory $git_branch$git_status$fill$cmd_duration$nodejs$nix_shell$time
-        [└─](bold bright-black) $character
+        [┌─](bold black) $hostname $directory $git_branch$git_status$fill$cmd_duration''${custom.chezmoi}$nodejs$nix_shell$time
+        [└─](bold black) $character
       '';
 
       character = {
@@ -26,6 +31,7 @@
       directory = {
         format = "[$path]($style)";
         style = "blue";
+        read_only = "";
         truncation_length = 6;
         truncation_symbol = "";
         fish_style_pwd_dir_length = 1;
@@ -50,6 +56,20 @@
       cmd_duration = {
         min_time = 3000;
         format = "[$duration](yellow)  ";
+      };
+      custom.chezmoi = {
+        command = "printf ''";
+        when = ''
+          test "''${CHEZMOI:-}" = "1"
+        '';
+        format = "[$output](blue)  ";
+        shell = [ "sh" ];
+      };
+      python = {
+        symbol = " ";
+        version_format = "$raw";
+        format = "[$symbol$version](green)  ";
+        python_binary = "['python', 'python3']";
       };
       bun = {
         symbol = " ";

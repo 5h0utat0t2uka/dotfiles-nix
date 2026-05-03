@@ -26,13 +26,13 @@ setopt INTERACTIVE_COMMENTS
 
 autoload -Uz add-zsh-hook
 
-__wezterm_set_cwd() {
-  command -v wezterm >/dev/null 2>&1 || return
-  [[ -n "$WEZTERM_PANE" ]] || return
-  wezterm set-working-directory "$PWD" >/dev/null 2>&1
-}
-add-zsh-hook chpwd __wezterm_set_cwd
-add-zsh-hook precmd __wezterm_set_cwd
+# __wezterm_set_cwd() {
+#   command -v wezterm >/dev/null 2>&1 || return
+#   [[ -n "$WEZTERM_PANE" ]] || return
+#   wezterm set-working-directory "$PWD" >/dev/null 2>&1
+# }
+# add-zsh-hook chpwd __wezterm_set_cwd
+# add-zsh-hook precmd __wezterm_set_cwd
 
 __ghostty_set_cursor() {
   # プロンプト表示直前に、点滅ブロックカーソルのエスケープシーケンスを送る
@@ -49,11 +49,11 @@ if [[ -n ${TMUX-} ]]; then
       -d "#{pane_current_path}" \
       -E "${SHELL:-/bin/zsh} -l"
   }
-  tm_refresh_status() {
-    tmux refresh-client -S
-  }
-  add-zsh-hook chpwd tm_refresh_status
-  add-zsh-hook precmd tm_refresh_status
+  # tm_refresh_status() {
+  #   tmux refresh-client -S
+  # }
+  # add-zsh-hook chpwd tm_refresh_status
+  # add-zsh-hook precmd tm_refresh_status
 
   # tmux_update_pane() {
   #   if [ -n "$DEVBOX_SHELL_ENABLED" ]; then
@@ -178,7 +178,8 @@ typeset -a _ZO_ADDITIONAL_OPTS=(
   "--preview='eza -al --color=always --group-directories-first -T -L 2 -I \"${(j:|:)IGNORE_PATTERNS}\" -- {2..} 2>/dev/null | { IFS= read -r first_line; echo \"\$first_line\"; echo; cat; }'"
   "--preview-window=wrap"
 )
-export _ZO_FZF_OPTS="${(j: :)FZF_BASE_OPTS} ${(j: :)_ZO_ADDITIONAL_OPTS}"
+# export _ZO_FZF_OPTS="${(j: :)FZF_BASE_OPTS} ${(j: :)_ZO_ADDITIONAL_OPTS}"
+export _ZO_FZF_OPTS="${(j: :)FZF_BASE_OPTS} $(fzf_preview_window_opt) ${(j: :)_ZO_ADDITIONAL_OPTS}"
 export FZF_DEFAULT_OPTS="${(j: :)FZF_BASE_OPTS}"
 export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --exclude node_modules --type f'
 export FZF_ALT_C_COMMAND='fd --hidden --exclude .git --exclude node_modules --type d'
@@ -187,8 +188,8 @@ export FZF_ALT_C_COMMAND='fd --hidden --exclude .git --exclude node_modules --ty
 # __editor_with_ai() {
 #   API_KEY="$(pass show claude.ai/token/nvim | head -n1)" "$@"
 # }
-# nvim-ai() {
-#   __editor_with_ai nvim "$@"
+# vim-ai() {
+#   __editor_with_ai vim "$@"
 # }
 
 lfc() {
@@ -256,7 +257,7 @@ update_zo_opts() {
 add-zsh-hook precmd update_zo_opts
 
 after_prompt_once() {
-  command -v mise   >/dev/null 2>&1 && eval "$(command mise activate zsh)"
+  # command -v mise   >/dev/null 2>&1 && eval "$(command mise activate zsh)"
   command -v zoxide >/dev/null 2>&1 && eval "$(command zoxide init zsh)"
   add-zsh-hook -d precmd after_prompt_once
 }

@@ -16,6 +16,7 @@
       vim
       vimdoc
       query
+      python
       typescript
       tsx
       json

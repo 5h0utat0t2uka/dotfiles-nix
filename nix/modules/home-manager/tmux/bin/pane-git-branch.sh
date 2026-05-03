@@ -1,28 +1,13 @@
 #!/usr/bin/env bash
+set -u
 
-dir="$1"
+dir="${1:-}"
+
 cd "$dir" 2>/dev/null || exit 0
+git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 
-# tmux.conf で定義したカラースキーマ
-# nord3="$(tmux show-environment -g nord3 2>/dev/null | sed 's/^nord3=//')"
-nord0="$(tmux show-environment -g nord0 2>/dev/null | sed 's/^nord0=//')"
-# nord6="$(tmux show-environment -g nord6 2>/dev/null | sed 's/^nord6=//')"
-nord12="$(tmux show-environment -g nord12 2>/dev/null | sed 's/^nord12=//')"
+branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null || true)"
+[[ -n "$branch" ]] || exit 0
 
-# devbox環境変数をチェック（git に関係なく表示）
-# DEVBOX_STATUS="$(tmux show-environment -g DEVBOX_SHELL_ENABLED 2>/dev/null | sed 's/^DEVBOX_SHELL_ENABLED=//')"
-# if [ "$DEVBOX_STATUS" = "1" ]; then
-#   printf '#[fg=%s,bg=%s]%s #[default]' "$nord0" "$nord3" " DEVBOX"
-# fi
-
-# git チェック（git 管理下のみブランチ表示）
-if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-  branch="$(git branch --show-current 2>/dev/null)"
-  if [ -z "$branch" ] || [ "$branch" = "HEAD" ]; then
-    branch="$(git rev-parse --short HEAD 2>/dev/null || echo "")"
-  fi
-  if [ -n "$branch" ]; then
-    upper_branch="$(printf '%s' "$branch" | tr '[:lower:]' '[:upper:]')"
-    printf '#[fg=%s,bg=%s]%s #[default]' "$nord12" "$nord0" "[${upper_branch}]"
-  fi
-fi
+upper_branch="$(printf '%s' "$branch" | tr '[:lower:]' '[:upper:]')"
+printf '[%s]' "$upper_branch"
