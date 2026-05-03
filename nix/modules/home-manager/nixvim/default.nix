@@ -11,6 +11,11 @@
     vimAlias = true;
     viAlias = true;
     vimdiffAlias = true;
+    withPython3 = false;
+    withRuby = false;
+    withNodeJs = false;
+    withPerl = false;
+    luaLoader.enable = true;
     imports = [
       ./plugins/autopairs.nix
       ./plugins/blink.nix
@@ -35,22 +40,17 @@
       ./plugins/ts-autotag.nix
       ./plugins/vim-astro.nix
     ];
-    withPython3 = false;
-    withRuby = false;
-    withNodeJs = false;
-    withPerl = false;
-    luaLoader.enable = true;
+    plugins.web-devicons.enable = false;
+    plugins.lz-n = {
+      enable = true;
+      autoLoad = true;
+    };
     performance.byteCompileLua = {
       enable = true;
       nvimRuntime = true;
       initLua = true;
       configs = true;
       plugins = true;
-    };
-    plugins.web-devicons.enable = false;
-    plugins.lz-n = {
-      enable = true;
-      autoLoad = true;
     };
     globals = {
       mapleader = " ";
