@@ -20,6 +20,7 @@ in
       ../../../modules/home-manager/tmux
       ../../../modules/home-manager/git
       ../../../modules/home-manager/zsh
+      ../../../modules/home-manager/starship
       ../../../modules/home-manager/pass
       ../../../modules/home-manager/nixvim
       # ../../../modules/home-manager/neovim モジュールは残しつつ nixvim に移行する
@@ -53,7 +54,7 @@ in
         jq
         libwebp
         macism
-        mise
+        # mise
         ni
         nmap
         nodejs_24

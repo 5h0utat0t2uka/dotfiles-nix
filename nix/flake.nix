@@ -94,22 +94,6 @@
                   }
                 )
 
-                # FIXME: issue: nixpkgs zsh-powerlevel10k gitstatus (https://github.com/nixos/nixpkgs/issues/498550)
-                (final: prev:
-                  let
-                    isDarwinArm64 = prev.stdenv.hostPlatform.isDarwin && prev.stdenv.hostPlatform.isAarch64;
-                  in
-                  {
-                    zsh-powerlevel10k = prev.zsh-powerlevel10k.overrideAttrs (old: {
-                      postInstall = (old.postInstall or "") + prev.lib.optionalString isDarwinArm64 ''
-                        mkdir -p "$out/share/zsh-powerlevel10k/gitstatus/usrbin"
-                        ln -sf "${final.gitstatus}/bin/gitstatusd" \
-                          "$out/share/zsh-powerlevel10k/gitstatus/usrbin/gitstatusd-darwin-arm64"
-                      '';
-                    });
-                  }
-                )
-
                 # FIXME: issue: direnv build failure on darwin (https://github.com/NixOS/nixpkgs/issues/507531)
                 (_final: prev: {
                   direnv = prev.direnv.overrideAttrs (_: {

@@ -3,9 +3,6 @@ CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 mkdir -p "$CACHE_DIR"
 mkdir -p "$SHELL_SESSIONS_DIR"
 
-# export POWERLEVEL9K_INSTANT_PROMPT_DIR="$CACHE_DIR"
-# export POWERLEVEL9K_DUMP_DIR="$CACHE_DIR"
-
 # Homebrew検出とPATH設定
 # BREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
 # typeset -U path

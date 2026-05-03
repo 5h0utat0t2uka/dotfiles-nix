@@ -2,15 +2,6 @@
 
 {
   xdg.enable = true;
-
-  # - HM が ~/.zshenv(エントリポイント) と $ZDOTDIR/.zshenv を生成。
-  # - envExtra: $ZDOTDIR/.zshenv に埋め込まれる。
-  # - profileExtra: $ZDOTDIR/.zprofile に埋め込まれる。
-  # - initContent: $ZDOTDIR/.zshrc に優先度順に展開される。
-  #   - mkBefore: p10k instant prompt
-  #   - 通常: zshrc-body 本体
-  #   - mkAfter: p10k 本体と .p10k.zsh
-  # - enableCompletion = false: compinit は zshrc-body 側で管理する。
   programs.zsh = {
     enable = true;
     enableCompletion = false;
@@ -24,8 +15,6 @@
     '';
     sessionVariables = {
       SHELL_SESSIONS_DIR = "${config.xdg.cacheHome}/zsh/sessions";
-      POWERLEVEL9K_INSTANT_PROMPT_DIR = "${config.xdg.cacheHome}/zsh";
-      POWERLEVEL9K_DUMP_DIR = "${config.xdg.cacheHome}/zsh";
       ABBR_USER_ABBREVIATIONS_FILE = "${config.xdg.configHome}/zsh-abbr/user-abbreviations";
       ABBR_SET_EXPANSION_CURSOR = "1";
       ABBR_SET_LINE_CURSOR = "1";
@@ -69,24 +58,9 @@
       lg = "lazygit";
     };
     initContent = lib.mkMerge [
-      (lib.mkBefore ''
-        [[ $- != *i* ]] && return
-        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/zsh/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-          source "''${XDG_CACHE_HOME:-$HOME/.cache}/zsh/p10k-instant-prompt-''${(%):-%n}.zsh"
-        fi
-      '')
       (builtins.readFile ./zshrc)
-      (lib.mkAfter ''
-        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-        if [[ -f "$HOME/.config/zsh/.p10k.zsh" ]]; then
-          source "$HOME/.config/zsh/.p10k.zsh"
-        fi
-      '')
     ];
   };
-
-  xdg.configFile."zsh/.p10k.zsh".source = ./p10k.zsh;
-
   home.packages = with pkgs; [
     zsh-completions
   ];
