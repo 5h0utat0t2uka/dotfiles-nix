@@ -39,10 +39,10 @@
       git_status = {
         format = "$all_status$ahead_behind";
         conflicted = "[ =\${count}](bold red)";
-        ahead = "[ \${count}](blue)";
-        behind = "[ \${count}](blue)";
+        ahead = "[ ↑\${count}](blue)";
+        behind = "[ ↓\${count}](red)";
         diverged = "[ \${ahead_count}\${behind_count}](purple)";
-        untracked = "[ ?\${count}](blue)";
+        untracked = "[ ?\${count}](green)";
         stashed = "[ *\${count}](purple)";
         modified = "[ !\${count}](yellow)";
         staged = "[ +\${count}](green)";

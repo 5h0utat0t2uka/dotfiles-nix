@@ -4,29 +4,32 @@ set shell := ["bash", "-euo", "pipefail", "-c"]
 flake := "{{ .chezmoi.sourceDir }}/nix"
 hostname := `scutil --get LocalHostName 2>/dev/null`
 
-check:
-  nix flake check {{ "{{flake}}" }}
+# 1. 最新の nixpkgs-unstable に差し替えてビルド検証
+update-check:
+  nix build -L \
+    --override-input nixpkgs github:NixOS/nixpkgs/nixpkgs-unstable \
+    {{ "{{flake}}" }}#darwinConfigurations.{{ "{{hostname}}" }}.system \
+    --no-link
 
-build:
-  nix build -L {{ "{{flake}}" }}#darwinConfigurations.{{ "{{hostname}}" }}.system --no-link
-
-switch:
-  sudo darwin-rebuild switch --flake {{ "{{flake}}" }}#{{ "{{hostname}}" }}
-
-# 引数に渡されたパッケージのインストール済みのバージョンと、現在の最新バージョンと比較
-check-pkg pkg:
-  cd {{ "{{flake}}" }} && \
-    current="$(nix eval --raw .#darwinConfigurations.{{ "{{hostname}}" }}.pkgs.{{ "{{pkg}}" }}.version)" && \
-    latest="$(nix eval --raw github:NixOS/nixpkgs/nixos-unstable#{{ "{{pkg}}" }}.version)" && \
-    printf '%s: current=%s latest=%s\n' "{{ "{{pkg}}" }}" "$current" "$latest"
-
-# nixpkgs のみ最新バージョンに更新
+# 2. flake.lock の nixpkgs を最新バージョンに更新
 update-pkg:
   cd {{ "{{flake}}" }} && nix flake update nixpkgs
 
-# nixpkgs, darwin, home-manager など全てを最新バージョンに更新
+# 3. flake.lock の全ての input を最新バージョンに更新
 update-all:
   cd {{ "{{flake}}" }} && nix flake update
+
+# 4. 現在の flake.lock で flake の評価と検証
+check:
+  nix flake check {{ "{{flake}}" }}
+
+# 5. 現在の flake.lock のビルドを検証
+check-build:
+  nix build -L {{ "{{flake}}" }}#darwinConfigurations.{{ "{{hostname}}" }}.system --no-link
+
+# 6. 現在の flake.lock でビルドと反映
+switch:
+  sudo darwin-rebuild switch --flake {{ "{{flake}}" }}#{{ "{{hostname}}" }}
 
 gc:
   nix-collect-garbage -d

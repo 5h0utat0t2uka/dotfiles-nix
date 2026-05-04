@@ -35,10 +35,10 @@ autoload -Uz add-zsh-hook
 # add-zsh-hook precmd __wezterm_set_cwd
 
 # プロンプト表示直前に、点滅ブロックカーソルのエスケープシーケンスを送る
-# __ghostty_set_cursor() {
-#   printf '\e[1 q'
-# }
-# add-zsh-hook precmd __ghostty_set_cursor
+__ghostty_reset_cursor() {
+  printf '\e[1 q'
+}
+add-zsh-hook precmd __ghostty_reset_cursor
 
 if [[ -n ${TMUX-} ]]; then
   export FZF_TMUX=1
