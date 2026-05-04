@@ -34,11 +34,11 @@ autoload -Uz add-zsh-hook
 # add-zsh-hook chpwd __wezterm_set_cwd
 # add-zsh-hook precmd __wezterm_set_cwd
 
-__ghostty_set_cursor() {
-  # プロンプト表示直前に、点滅ブロックカーソルのエスケープシーケンスを送る
-  printf '\e[1 q'
-}
-add-zsh-hook precmd __ghostty_set_cursor
+# プロンプト表示直前に、点滅ブロックカーソルのエスケープシーケンスを送る
+# __ghostty_set_cursor() {
+#   printf '\e[1 q'
+# }
+# add-zsh-hook precmd __ghostty_set_cursor
 
 if [[ -n ${TMUX-} ]]; then
   export FZF_TMUX=1
@@ -65,8 +65,8 @@ if [[ -n ${TMUX-} ]]; then
   # }
   # add-zsh-hook precmd tmux_update_pane
 else
+  # tmuxセッションのアタッチまたは新規作成
   tm() {
-    # tmuxセッションのアタッチまたは新規作成
     local session=${1:-$(printf %08x $RANDOM$RANDOM)}
     tmux new -s "$session" 2>/dev/null || tmux attach -t "$session"
   }

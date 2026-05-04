@@ -10,4 +10,4 @@ branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || git rev-parse --s
 [[ -n "$branch" ]] || exit 0
 
 upper_branch="$(printf '%s' "$branch" | tr '[:lower:]' '[:upper:]')"
-printf '[%s]' "$upper_branch"
+printf ' [%s]' "$upper_branch"

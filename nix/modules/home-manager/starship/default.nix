@@ -7,10 +7,6 @@
       scan_timeout = 25;
       command_timeout = 500;
       add_newline = true;
-      # format = ''
-      #   [┌─](bold black) $hostname $directory $git_branch$git_status$fill$cmd_duration$nodejs$nix_shell$time
-      #   [└─](bold black) $character
-      # '';
 
       format = ''
         [┌─](bold black) $hostname $directory $git_branch$git_status$fill$cmd_duration''${custom.chezmoi}$nodejs$nix_shell$time
