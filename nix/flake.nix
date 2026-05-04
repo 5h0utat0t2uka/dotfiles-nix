@@ -9,11 +9,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    # FIXME: issue: sigsuspend probe under autoconf (https://github.com/NixOS/nixpkgs/pull/513971)
-    # nixpkgs 0726a0e 付近の zsh 5.9 は aarch64-darwin で sigsuspend probe 誤判定により command substitution が hang する
-    nixpkgs-zsh-fixed.url = "github:NixOS/nixpkgs/a504cf2";
-
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -80,26 +75,6 @@
                 # (import ./overlays/tools/codex { inherit inputs; })
                 # (import ./overlays/tools/claude-code { inherit inputs; })
                 (import ./overlays/fonts/shcode-jp-zen-haku.nix)
-
-                # FIXME: issue: sigsuspend probe under autoconf (https://github.com/NixOS/nixpkgs/pull/513971)
-                (_final: prev:
-                  let
-                    pkgsZshFixed = import inputs.nixpkgs-zsh-fixed {
-                      system = prev.stdenv.hostPlatform.system;
-                      config.allowUnfree = true;
-                    };
-                  in
-                  {
-                    zsh = pkgsZshFixed.zsh;
-                  }
-                )
-
-                # FIXME: issue: direnv build failure on darwin (https://github.com/NixOS/nixpkgs/issues/507531)
-                (_final: prev: {
-                  direnv = prev.direnv.overrideAttrs (_: {
-                    doCheck = false;
-                  });
-                })
               ];
             };
           }
