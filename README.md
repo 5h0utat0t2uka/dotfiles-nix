@@ -26,7 +26,7 @@ xcode-select --install
 xcode-select -p
 ```
 > [!IMPORTANT]
-> `hostKey`は`nix/hosts/darwin/<hostKey>`のフォルダ名と一致してる必要があある  
+> `hostKey`は`nix/hosts/darwin/<hostKey>`のフォルダ名と一致させる  
 
 2. `Nix`を未インストールの場合は [Determinate](https://docs.determinate.systems) からインストールして確認  
 ```sh
@@ -50,33 +50,55 @@ cd ~/.local/share/chezmoi/scripts
 ```
 
 ## 更新  
-いずれもブランチがクリーンな状態で作業する  
+各 `input` に対する確認と更新のコマンドは下記  
+| 対象 | 確認 | 更新 |
+| --- | --- | --- |
+| `nixpkgs`      | `just check-update-pkg` | `just update-pkg` |
+| `nix-homebrew` | `just check-update-all` | `just update-all` |
+| `home-manager` | `just check-update-all` | `just update-all` |
+| `darwin`       | `just check-update-all` | `just update-all` |
+| `wezterm`      | `just check-update-all` | `just update-all` |
+| `nixvim`       | `just check-update-all` | `just update-all` |
 
-### `inputs` の更新
+### `flake.lcok` の更新を実行
 ``` sh
 # nixpkgs のみ
+just check-update-pkg
 just update-pkg
-# nixpkgs, darwin, home-manager など
-just update-all
 
+# nixpkgs を含むそれ以外も全て
+just check-update-all
+just update-all
+```
+
+### `flake.lcok` 更新後の検証と反映
+
+| 内容 | コマンド |
+| --- | --- |
+| 評価と検証  | `just check`       |
+| ビルドを検証 | `just check-build` |
+| ビルドと反映 | `just switch`      |
+
+``` sh
 # チェックとビルド・切り替え
 just check
-just build
+just check-build
 just switch
 ```
+
 ``` sh
-# 問題があった場合は restore
+# 問題あった場合は restore
 git restore flake.lock
 # ビルド後であれば restore 後に再ビルド・切り替え
 just build
 just switch
 
-# 問題はなければ
+# 問題なければ
 git add .
 git commit -m "update flake inputs"
 ```
 ``` sh
-# ロックファイル更新した場合はタグ付けしておく
+# タグ付けしておく
 git tag -a yyyy-mm-dd -m "Update flake inputs"
 git push origin --tags
 ```
@@ -123,7 +145,7 @@ Restarting Determinate Nixd...
 4. チェックとビルド・切り替え
 ```sh
 just check
-just build
+just check-build
 just switch
 ```
 ``` sh
@@ -147,8 +169,6 @@ determinate-nixd version
 Determinate Nixd daemon version: 3.17.1 
 Determinate Nixd client version: 3.17.1 
 You are running the latest version of Determinate Nix. 
-
-Visit https://dtr.mn/features for more information.
 ```
 
 ``` sh
